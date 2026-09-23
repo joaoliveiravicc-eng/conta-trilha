@@ -1,5 +1,6 @@
 /* Motor da sessão de exercícios: fila de itens, corações, combo, revisão de erros. */
 import { $, el, bindActs } from '../dom.js';
+import { ACORN } from '../components/icons.js';
 import { S, today, curStreak, addXP, addCoins, registerActivity, levelInfo, courseComplete } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { mprog, checkBadges } from '../../engine/gamification.js';
@@ -130,7 +131,7 @@ function finish(){
   const scr = $('#s-result');
   scr.innerHTML = '<div class="center" style="--cc:' + cc + '"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento(mood) + '</div></div><h1>' + title + '</h1><p class="sub">' + sub + '</p>' +
     '<div class="rstats"><div class="rs"><div class="rl">XP</div><div class="rv">+' + xp + '</div></div>' +
-    '<div class="rs"><div class="rl">Moedas</div><div class="rv">+' + coins + '🪙</div></div>' +
+    '<div class="rs"><div class="rl">Bolotas</div><div class="rv">+' + coins + '' + ACORN + '</div></div>' +
     '<div class="rs"><div class="rl">Sequência</div><div class="rv">🔥' + curStreak() + '</div></div></div>' +
     caseHtml + extra.map(e => '<div class="note"><span class="ne">' + e[0] + '</span><span>' + e[1] + '</span></div>').join('') + '</div>' +
     '<div class="foot"><button class="btn primary" data-act="go">Continuar</button></div>';

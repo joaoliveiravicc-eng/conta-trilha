@@ -1,4 +1,5 @@
 import { $, bindActs } from '../dom.js';
+import { ACORN } from '../components/icons.js';
 import { S, addCoins, addXP, registerActivity } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { mprog, checkBadges } from '../../engine/gamification.js';
@@ -54,7 +55,7 @@ export function endBlitz(){
   const badges = checkBadges(); save(); renderTop(); BZ = null;
   const scr = $('#s-result');
   scr.innerHTML = '<div class="center" style="--cc:#B3432B"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento(score >= 8 ? 'cheer' : 'happy') + '</div></div><h1>⚡ ' + score + ' pontos!</h1><p class="sub">' + (isBest ? 'Novo recorde pessoal!' : 'Seu recorde continua sendo ' + S.best.blitz + '.') + '</p>' +
-    '<div class="rstats"><div class="rs"><div class="rl">Acertos</div><div class="rv">' + score + '</div></div><div class="rs"><div class="rl">Moedas</div><div class="rv">+' + coins + '🪙</div></div><div class="rs"><div class="rl">Recorde</div><div class="rv">🏆' + S.best.blitz + '</div></div></div>' +
+    '<div class="rstats"><div class="rs"><div class="rl">Acertos</div><div class="rv">' + score + '</div></div><div class="rs"><div class="rl">Bolotas</div><div class="rv">+' + coins + '' + ACORN + '</div></div><div class="rs"><div class="rl">Recorde</div><div class="rv">🏆' + S.best.blitz + '</div></div></div>' +
     badges.map(b => '<div class="note"><span class="ne">' + b.i + '</span><span>Conquista desbloqueada: ' + b.n + '</span></div>').join('') + '</div>' +
     '<div class="foot"><button class="btn primary" data-act="again">Jogar de novo</button><button class="btn ghost" data-act="out">Sair</button></div>';
   bindActs(scr, { again: startBlitz, out: () => { renderPractice(); go('practice'); } });

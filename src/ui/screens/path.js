@@ -45,7 +45,7 @@ export function lessonSheet(l){
 }
 export function finalSheet(c){
   const ok = courseComplete(c), tro = !!S.trophies[c.id];
-  const h = '<div class="sh-i">' + (tro ? '🏆' : '🏁') + '</div><h3>Teste final: ' + c.title + '</h3><p class="sh-s">10 questões misturadas de toda a trilha e só 3 corações. Passe para ganhar o troféu, XP extra e moedas.</p>';
+  const h = '<div class="sh-i">' + (tro ? '🏆' : '🏁') + '</div><h3>Teste final: ' + c.title + '</h3><p class="sh-s">10 questões misturadas de toda a trilha e só 3 corações. Passe para ganhar o troféu, XP extra e bolotas.</p>';
   if (!ok) return sheet(h + '<p class="sh-s">Conclua todas as lições desta trilha para liberar.</p><button class="btn ghost" data-s="x">Entendi</button>', {});
   sheet(h + '<button class="btn primary" data-s="go">' + (tro ? 'Refazer o teste' : 'Fazer o teste') + '</button><button class="btn ghost" data-s="x">Agora não</button>', { go: () => startFinal(c) });
 }

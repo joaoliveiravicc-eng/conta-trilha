@@ -1,4 +1,5 @@
 import { $, bindActs } from '../dom.js';
+import { ACORN } from '../components/icons.js';
 import { S, today, curStreak, doneCount, levelInfo, applyTheme, fresh, setState } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { sfx } from '../components/sound.js';
@@ -31,7 +32,7 @@ export function renderProfile(){
     '<div class="lvl"><div class="lk2">Nível ' + lv.n + '</div><div class="ln2">' + lv.name + '</div><div class="progress-track"><div class="progress-fill" style="width:' + (lv.pct * 100) + '%"></div></div><div class="lm">' + (lv.to ? S.xp + ' de ' + lv.to + ' XP para ' + lv.next : 'Nível máximo alcançado!') + '</div></div>' +
     '<div class="sgrid">' +
     '<div class="sbox"><span class="se">🔥</span><div><div class="sv">' + curStreak() + '</div><div class="sl">dias seguidos</div></div></div>' +
-    '<div class="sbox"><span class="se">🪙</span><div><div class="sv">' + S.coins + '</div><div class="sl">moedas</div></div></div>' +
+    '<div class="sbox"><span class="se">' + ACORN + '</span><div><div class="sv">' + S.coins + '</div><div class="sl">bolotas</div></div></div>' +
     '<div class="sbox"><span class="se">📚</span><div><div class="sv">' + doneCount() + '/' + TOTAL_LESSONS + '</div><div class="sl">lições concluídas</div></div></div>' +
     '<div class="sbox"><span class="se">🏆</span><div><div class="sv">' + Object.keys(S.trophies).length + '/' + COURSES.length + '</div><div class="sl">troféus</div></div></div></div>' +
     '<h2 class="sec-h">Últimos 7 dias</h2><div class="week">' + bars.map(b => '<div class="wb' + (b.k === today() ? ' today' : '') + '"><div class="wb-v">' + (b.xp || '') + '</div><div class="wb-bar"><div class="' + (b.xp >= S.goal ? 'hit' : '') + '" style="height:' + (b.xp / max * 100) + '%"></div></div><div class="wb-l">' + b.l + '</div></div>').join('') + '</div>' +
@@ -54,7 +55,7 @@ export function renderProfile(){
     goal: b => { S.goal = +b.dataset.g; save(); renderProfile(); toast('Meta diária: ' + S.goal + ' XP'); },
     theme: b => { S.theme = b.dataset.th; applyTheme(); save(); renderProfile(); },
     snd: () => { S.sound = !S.sound; save(); renderProfile(); if (S.sound) sfx.ok(); },
-    reset: () => sheet('<div class="sh-i">⚠️</div><h3>Apagar todo o progresso?</h3><p class="sh-s">XP, lições, troféus, sequência, moedas e conquistas serão zerados. Não dá para desfazer.</p><button class="btn danger" data-s="yes">Apagar tudo</button><button class="btn ghost" data-s="x">Cancelar</button>',
+    reset: () => sheet('<div class="sh-i">⚠️</div><h3>Apagar todo o progresso?</h3><p class="sh-s">XP, lições, troféus, sequência, bolotas e conquistas serão zerados. Não dá para desfazer.</p><button class="btn danger" data-s="yes">Apagar tudo</button><button class="btn ghost" data-s="x">Cancelar</button>',
       { yes: () => {
         const g = S.goal, snd = S.sound, th = S.theme;
         const ns = fresh(); ns.goal = g; ns.sound = snd; ns.theme = th; ns.onboarded = true;
