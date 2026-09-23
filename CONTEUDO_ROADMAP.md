@@ -141,3 +141,17 @@ escrito, ver seção acima):
 O briefing completo (`trilhas.json`, `DESIGN_E_TELAS.md`, etc.) não foi
 copiado para o repositório — só esta síntese. Peça ao usuário se precisar
 consultar os arquivos originais de novo.
+
+## Nota sobre o auto-update do PWA (2026-09-23)
+
+Depois de reportar imagens "feias/bugadas", o usuário provavelmente estava
+vendo o sintoma de um PWA que não se atualizava sozinho (ver
+`project_contatrilha_overview.md`, memória de sessão, pra o diagnóstico
+completo). O fix em `src/main.js` (registro via `virtual:pwa-register` +
+`onRegisteredSW` checando `reg.waiting` imediatamente, de novo em 3s, e a
+cada hora) foi verificado na prática: forçado a passar por 3 deploys
+seguidos nesta mesma sessão, e o mecanismo só ficou realmente confiável no
+terceiro (havia uma corrida onde `reg.waiting` podia só aparecer pouco
+depois do registro terminar, não durante). Este parágrafo em si é o teste
+de verificação do deploy seguinte a este commit — se você está lendo isso
+depois de uma aba antiga se atualizar sozinha, o mecanismo funcionou.
