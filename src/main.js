@@ -31,6 +31,8 @@ if ('serviceWorker' in navigator){
           if (!nw) return;
           nw.addEventListener('statechange', () => { if (nw.state === 'installed' && reg.waiting) doUpdate(); });
         });
+        reg.update().catch(() => {});
+        setTimeout(() => { if (reg.waiting) doUpdate(); }, 3000);
         setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
       }
     });
