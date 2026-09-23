@@ -18,8 +18,21 @@ import { toast } from './ui/components/toast.js';
    ficar preso a um bundle antigo em cache junto com assets novos. ---------- */
 if ('serviceWorker' in navigator){
   import('virtual:pwa-register').then(({ registerSW }) => {
+    let refreshing = false;
+    const doUpdate = () => { if (refreshing) return; refreshing = true; toast('Nova versão disponível, atualizando...'); setTimeout(() => updateSW(true), 900); };
     const updateSW = registerSW({
-      onNeedRefresh(){ toast('Nova versão disponível, atualizando...'); setTimeout(() => updateSW(true), 1200); }
+      immediate: true,
+      onNeedRefresh: doUpdate,
+      onRegisteredSW(url, reg){
+        if (!reg) return;
+        if (reg.waiting) doUpdate();
+        reg.addEventListener('updatefound', () => {
+          const nw = reg.installing;
+          if (!nw) return;
+          nw.addEventListener('statechange', () => { if (nw.state === 'installed' && reg.waiting) doUpdate(); });
+        });
+        setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+      }
     });
   }).catch(() => {});
 }
