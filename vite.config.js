@@ -7,6 +7,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: false,
+      selfDestroying: true,
       includeAssets: ['apple-touch-icon.png'],
       manifest: {
         name: 'ContaTrilha — Contabilidade do zero',

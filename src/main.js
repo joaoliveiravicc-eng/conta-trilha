@@ -12,31 +12,12 @@ import { renderGlossary } from './ui/screens/glossary.js';
 import { renderProfile } from './ui/screens/profile.js';
 import { renderOnb, resetOnb } from './ui/screens/onboarding.js';
 import { primary, quitQuiz, SES, R } from './ui/screens/quiz.js';
-import { toast } from './ui/components/toast.js';
 
-/* ---------- PWA: atualiza sozinho quando sobe uma versão nova, para nunca
-   ficar preso a um bundle antigo em cache junto com assets novos. ---------- */
+/* Sem service worker: o app sempre carrega a versão mais nova do servidor.
+   Remove qualquer worker/cache antigo que tenha ficado instalado no aparelho. */
 if ('serviceWorker' in navigator){
-  import('virtual:pwa-register').then(({ registerSW }) => {
-    let refreshing = false;
-    const doUpdate = () => { if (refreshing) return; refreshing = true; toast('Nova versão disponível, atualizando...'); setTimeout(() => updateSW(true), 900); };
-    const updateSW = registerSW({
-      immediate: true,
-      onNeedRefresh: doUpdate,
-      onRegisteredSW(url, reg){
-        if (!reg) return;
-        if (reg.waiting) doUpdate();
-        reg.addEventListener('updatefound', () => {
-          const nw = reg.installing;
-          if (!nw) return;
-          nw.addEventListener('statechange', () => { if (nw.state === 'installed' && reg.waiting) doUpdate(); });
-        });
-        reg.update().catch(() => {});
-        setTimeout(() => { if (reg.waiting) doUpdate(); }, 3000);
-        setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
-      }
-    });
-  }).catch(() => {});
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
+  if (window.caches) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
 }
 
 /* ---------- eventos globais ---------- */
