@@ -41,7 +41,7 @@ h1,h2,h3{font-family:var(--fd); color:var(--ink); line-height:1.25; margin:0;}
 /* ---------- top bar ---------- */
 #topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:30; background:var(--paper); display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 14px; border-bottom:1px solid var(--line);}
 .brand{display:flex; align-items:center; gap:8px; font-family:var(--fd); font-weight:800; color:var(--ink); font-size:1.02rem; flex:none;}
-.mark{width:30px; height:30px; border-radius:9px; background:var(--ink); color:var(--paper); display:grid; place-items:center; font-size:1rem; flex:none;}
+.mark{width:34px; height:34px; border-radius:9px; object-fit:contain; flex:none; display:block;}
 .stats{display:flex; gap:6px;}
 .pill{display:flex; align-items:center; gap:4px; background:var(--card); border:1px solid var(--line); padding:5px 9px; border-radius:999px; font-weight:700; font-size:.82rem; font-variant-numeric:tabular-nums; white-space:nowrap;}
 .pill.fire{color:var(--red);} .pill.xp{color:var(--gold2);}
@@ -78,6 +78,7 @@ h1,h2,h3{font-family:var(--fd); color:var(--ink); line-height:1.25; margin:0;}
 /* ---------- Bento, o castor ---------- */
 .bento-wrap{flex:none; filter:drop-shadow(0 4px 6px var(--shadow));}
 svg.bento{display:block; width:100%; height:100%;}
+.bento-wrap img.bento-img{display:block; width:100%; height:100%; object-fit:contain;}
 .bento-wrap.xs{width:46px; height:50px;}
 .bento-wrap.sm{width:58px; height:64px;}
 .bento-wrap.md{width:100px; height:110px; margin:0 auto 8px;}
