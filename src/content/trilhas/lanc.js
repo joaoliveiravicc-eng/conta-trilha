@@ -89,6 +89,36 @@ export default {
     {t:"tf", q:"Se o balancete fecha, não existe nenhum erro na contabilidade.", a:false, e:"Erros como usar a conta errada com o valor certo não aparecem no balancete."},
     {t:"mc", q:"Qual é a ordem correta do processo contábil?", o:["Documento, Diário, Razão, Balancete","Razão, Diário, Documento, Balancete","Balancete, Razão, Diário, Documento","Diário, Balancete, Documento, Razão"], a:0, e:"O documento comprova o fato; depois vêm Diário, Razão e Balancete."},
     {t:"tf", q:"Todo lançamento deve estar apoiado em um documento que comprove o fato.", a:true, e:"Sem documento, o registro não tem comprovação."}
+   ]},
+  {id:"lanc6", title:"Despesas antecipadas", icon:"🛡️",
+   learn:[
+    {h:"Pagou antes de usar", b:`<p>Um seguro anual pago à vista cobre 12 meses. Pela competência, ele <b>não</b> vira despesa de uma vez.</p>`},
+    {h:"No pagamento", b:lanc([['D','Seguros a apropriar','12.000'],['C','Bancos','12.000']]) + `<p>Despesa antecipada é um <b>Ativo</b>: o direito de usar o serviço no futuro.</p>`},
+    {h:"A cada mês", b:lanc([['D','Despesa com seguros','1.000'],['C','Seguros a apropriar','1.000']]) + `<p>Esse lançamento mensal se chama <b>apropriação</b>.</p>`},
+    {h:"Outros exemplos", b:ul(['Aluguel pago adiantado','Assinatura anual de software','IPTU pago em cota única'])}
+   ],
+   ex:[
+    {t:"entry", q:"Pagamento à vista, pelo banco, de seguro anual de R$ 12.000.", d:["Seguros a apropriar"], c:["Bancos"], accts:["Seguros a apropriar","Bancos","Despesa com seguros","Capital social"], e:"No pagamento nasce um ativo.", h:"O seguro ainda não foi usado."},
+    {t:"entry", q:"Apropriação do seguro do mês, R$ 1.000.", d:["Despesa com seguros"], c:["Seguros a apropriar"], accts:["Despesa com seguros","Seguros a apropriar","Bancos","Receita de serviços"], e:"A despesa vai ao resultado e o ativo diminui."},
+    {t:"num", q:"Seguro anual de R$ 9.600 pago em 1º de janeiro. Qual o saldo a apropriar após 3 meses?", a:7200, e:"Apropriados 3 × 800 = 2.400; restam 7.200.", u:"R$", h:"Quanto é um mês de seguro?"},
+    {t:"tf", q:"Despesa paga antecipadamente fica inicialmente no Ativo.", a:true, e:"É um direito de receber o serviço."},
+    {t:"mc", q:"Qual regime explica por que o seguro anual não vira despesa de uma vez?", o:["Regime de competência","Regime de caixa","Simples Nacional","Lucro Presumido"], a:0, e:"A despesa acompanha o período de uso."},
+    {t:"expl", q:"Com suas palavras: por que um seguro anual pago em janeiro não é despesa toda em janeiro?", model:"Pelo regime de competência, a despesa é reconhecida no período em que o benefício é usado. Como o seguro cobre 12 meses, ele fica no ativo e vira despesa aos poucos, mês a mês.", k:[["Regime de competência","competenc"],["Cobre vários meses","mes","meses","periodo","ano","12","doze"],["Vira despesa aos poucos","aos pouco","cada mes","mensal","apropri","proporcion","parcel","divid","ao longo"]], e:"Competência + apropriação mensal."}
+   ]},
+  {id:"lanc7", title:"Provisões: férias e 13º", icon:"🏖️",
+   learn:[
+    {h:"O que é provisão", b:`<p>Obrigação que já existe por fatos passados, mas com valor ou data de pagamento incertos. Exemplos: férias e 13º dos empregados, processos trabalhistas prováveis.</p>`},
+    {h:"13º salário", b:`<p>A cada mês trabalhado, o empregado ganha direito a <b>1/12</b> do 13º. A empresa reconhece essa despesa mês a mês.</p>` + eq('Provisão mensal = Salário ÷ 12') + lanc([['D','Despesa com 13º salário','250'],['C','13º salário a pagar','250']])},
+    {h:"Férias", b:`<p>Também 1/12 por mês, mais o <b>terço constitucional</b> (1/3 a mais).</p>` + box('exemplo','Salário de R$ 3.000: férias = 3.000 + 1.000 = R$ 4.000. Por mês: 4.000 ÷ 12 ≈ R$ 333,33.')},
+    {h:"Por que provisionar", b:`<p>Para que cada mês carregue seu custo real (competência) e o Balanço mostre a dívida que já existe.</p>`}
+   ],
+   ex:[
+    {t:"num", q:"Salário de R$ 2.400. Qual a provisão mensal do 13º?", a:200, e:"2.400 ÷ 12 = 200.", u:"R$"},
+    {t:"entry", q:"Provisão mensal do 13º salário, R$ 200.", d:["Despesa com 13º salário"], c:["13º salário a pagar"], accts:["Despesa com 13º salário","13º salário a pagar","Bancos","Salários a pagar"], e:"Reconhece-se a despesa e a obrigação a cada mês."},
+    {t:"num", q:"Salário de R$ 3.600. Qual o valor das férias com o terço constitucional?", a:4800, e:"3.600 + 3.600 ÷ 3 = 4.800.", u:"R$", h:"Some um terço do salário."},
+    {t:"tf", q:"Provisões são obrigações que já existem, mesmo com valor ou data incertos.", a:true, e:"Nascem de fatos passados."},
+    {t:"mc", q:"A provisão de férias atende a qual regime?", o:["Competência","Caixa","Presumido","Nenhum"], a:0, e:"A despesa é do mês trabalhado."},
+    {t:"wr", q:"Qual fração do 13º o empregado ganha por mês trabalhado? (ex: 1/2)", a:["1/12","um doze avos"], e:"Um doze avos (1/12) por mês."}
    ]}
   ]
 };

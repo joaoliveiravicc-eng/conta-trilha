@@ -65,6 +65,20 @@ export default {
     {t:"num", q:"Lucro líquido de R$ 30.000 e PL de R$ 150.000. Qual o ROE?", a:20, s:"%", e:"30.000 ÷ 150.000 = 0,20 = 20%."},
     {t:"mc", q:"Qual índice de liquidez desconsidera os estoques?", o:["Liquidez seca","Liquidez corrente","Liquidez geral","Endividamento"], a:0, e:"A liquidez seca tira os estoques porque eles demoram mais para virar dinheiro."},
     {t:"tf", q:"A análise horizontal compara a evolução de um item ao longo do tempo.", a:true, e:"Horizontal = entre períodos. Vertical = dentro do mesmo período."}
+   ]},
+  {id:"demo5", title:"DMPL, DVA e notas explicativas", icon:"🗒️",
+   learn:[
+    {h:"O conjunto completo", b:`<p>Além de Balanço, DRE e DFC, o conjunto de demonstrações inclui a <b>DMPL</b>, a <b>DRA</b> (resultado abrangente), a <b>DVA</b> (obrigatória para companhias abertas) e as <b>notas explicativas</b>.</p>`},
+    {h:"DMPL", b:`<p>A Demonstração das Mutações do Patrimônio Líquido mostra como cada conta do PL mudou: lucro, dividendos, aumento de capital, reservas.</p>` + tbl(['Movimento','R$'],[['PL inicial','100.000'],['(+) Lucro do ano','30.000'],['(−) Dividendos','(10.000)'],['<b>PL final</b>','<b>120.000</b>']])},
+    {h:"Notas explicativas e DVA", b:ul(['<b>Notas explicativas</b>: detalham critérios e números, como políticas contábeis, estoques e processos judiciais.','<b>DVA</b>: mostra a riqueza gerada e como foi distribuída entre empregados, governo, financiadores e sócios.'])}
+   ],
+   ex:[
+    {t:"match", pairs:[["DMPL","Mudanças no Patrimônio Líquido"],["DVA","Riqueza gerada e distribuída"],["Notas explicativas","Detalham critérios e números"],["DFC","Entradas e saídas de caixa"]], e:"Cada demonstração responde a uma pergunta."},
+    {t:"mc", q:"Qual demonstração mostra dividendos e aumento de capital dentro do PL?", o:["DMPL","DRE","DFC","DVA"], a:0, e:"A DMPL acompanha todas as contas do PL."},
+    {t:"tf", q:"As notas explicativas fazem parte das demonstrações financeiras.", a:true, e:"Sem elas os números perdem contexto."},
+    {t:"num", q:"PL inicial de R$ 100.000, lucro de R$ 30.000 e dividendos de R$ 10.000. Qual o PL final?", a:120000, e:"100.000 + 30.000 − 10.000 = 120.000.", u:"R$"},
+    {t:"mc", q:"A DVA é obrigatória para:", o:["Companhias abertas","Todo MEI","Nenhuma empresa","Só bancos"], a:0, e:"Companhias abertas publicam a DVA."},
+    {t:"wr", q:"Qual a sigla da demonstração das mutações do patrimônio líquido?", a:["dmpl"], e:"DMPL."}
    ]}
   ]
 };

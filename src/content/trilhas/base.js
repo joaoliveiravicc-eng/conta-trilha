@@ -81,6 +81,21 @@ export default {
     {t:"tf", q:"Pelo regime de competência, o aluguel de março pago só em abril é despesa de março.", a:true, e:"A despesa pertence ao mês em que o imóvel foi usado: março."},
     {t:"mc", q:"Receitas de R$ 20.000 e despesas de R$ 26.000 resultam em:", o:["Lucro de R$ 6.000","Prejuízo de R$ 6.000","Lucro de R$ 46.000","Resultado nulo"], a:1, e:"20.000 − 26.000 = −6.000: prejuízo."},
     {t:"fill", q:"Receitas ___ o Patrimônio Líquido e despesas o ___.", o:["aumentam","diminuem","dobram","ignoram"], a:["aumentam","diminuem"], e:"Por isso o resultado (receitas − despesas) altera o PL."}
+   ]},
+  {id:"base5", title:"Plano de contas", icon:"🗂️",
+   learn:[
+    {h:"Organizando as contas", b:`<p>O <b>plano de contas</b> é a lista oficial das contas da empresa, organizada em grupos e com códigos.</p>`},
+    {h:"Códigos em níveis", b:tbl(['Código','Conta'],[['1','Ativo'],['1.1','Ativo Circulante'],['1.1.1','Disponível'],['1.1.1.01','Caixa'],['1.1.1.02','Bancos'],['2','Passivo'],['2.1.1.01','Fornecedores']]) + `<p>Os códigos variam de empresa para empresa; a lógica de níveis é sempre parecida.</p>`},
+    {h:"Sintéticas e analíticas", b:ul(['<b>Sintéticas</b> agrupam outras (ex: Disponível).','<b>Analíticas</b> são o último nível e recebem os lançamentos (ex: Caixa).']) + box('regra','Só contas analíticas recebem lançamentos.')},
+    {h:"Para que serve", b:`<p>Padronizar: todos registram do mesmo jeito, os relatórios saem automaticamente e dá para comparar um mês com outro.</p>`}
+   ],
+   ex:[
+    {t:"mc", q:"O que é o plano de contas?", o:["A lista organizada das contas usadas pela empresa","Um plano de negócios","O orçamento anual","Um tipo de imposto"], a:0, e:"Ele padroniza os registros."},
+    {t:"tf", q:"Contas sintéticas recebem lançamentos diretamente.", a:false, e:"Quem recebe lançamentos são as analíticas."},
+    {t:"ord", q:"Ordene do grupo mais amplo para a conta mais específica:", items:["Ativo","Ativo Circulante","Disponível","Caixa"], e:"Do geral para o detalhe."},
+    {t:"class", q:"Sintética ou analítica?", cats:["Sintética","Analítica"], items:[["Ativo Circulante",0],["Caixa",1],["Disponível",0],["Banco do Bairro S.A.",1],["Passivo Circulante",0]], e:"Analíticas são o último nível."},
+    {t:"wr", q:"Como se chamam as contas do último nível, que recebem os lançamentos?", a:["analiticas","analitica","contas analiticas"], e:"Contas analíticas."},
+    {t:"mc", q:"Qual a principal vantagem de um plano de contas bem feito?", o:["Registros padronizados e relatórios comparáveis","Pagar menos impostos","Dispensar documentos","Eliminar a auditoria"], a:0, e:"Padronização gera informação confiável."}
    ]}
   ]
 };

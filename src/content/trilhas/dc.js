@@ -75,6 +75,20 @@ export default {
     {t:"entry", q:"Pagamento de uma dívida de R$ 1.000 com fornecedor, mais R$ 50 de juros, em dinheiro. Marque todas as contas.", accts:["Fornecedores","Despesa de juros","Caixa","Receita de juros","Estoques"], d:["Fornecedores","Despesa de juros"], c:["Caixa"], e:"Dois débitos (dívida que sai e despesa de juros) e um crédito (Caixa 1.050). Fato misto, 3ª fórmula."},
     {t:"mc", q:"Um lançamento com dois débitos e um crédito é de qual fórmula?", o:["1ª","2ª","3ª","4ª"], a:2, e:"3ª fórmula: vários débitos e um crédito."},
     {t:"tf", q:"Um fato permutativo altera o valor do Patrimônio Líquido.", a:false, e:"Fatos permutativos só trocam valores entre contas; quem altera o PL são os modificativos."}
+   ]},
+  {id:"dc5", title:"Erros e estornos", icon:"↩️",
+   learn:[
+    {h:"Todo mundo erra", b:`<p>Lançou na conta errada ou com o valor errado? Na Contabilidade <b>não se apaga</b>: faz-se um estorno e depois o lançamento correto.</p>` + box('atencao','Rasurar ou apagar registros não é permitido: a contabilidade precisa deixar rastro.')},
+    {h:"O estorno", b:`<p>Estorno é o lançamento original <b>ao contrário</b>.</p>` + box('exemplo','Lançado por engano: D Despesa de aluguel / C Caixa, R$ 500. Era conta de energia.') + `<p>Estorno:</p>` + lanc([['D','Caixa','500'],['C','Despesa de aluguel','500']]) + `<p>Correto:</p>` + lanc([['D','Despesa com energia','500'],['C','Caixa','500']])},
+    {h:"Transferência e complemento", b:ul(['<b>Transferência</b>: corrige de uma vez, debitando a conta certa e creditando a errada.','<b>Complemento</b>: se lançou valor a menor, lança-se só a diferença.']) + lanc([['D','Despesa com energia','500'],['C','Despesa de aluguel','500']])}
+   ],
+   ex:[
+    {t:"mc", q:"Como se corrige um lançamento errado?", o:["Com um estorno e, depois, o lançamento correto","Apagando o lançamento","Rasurando o livro","Ignorando o erro"], a:0, e:"A contabilidade corrige deixando rastro."},
+    {t:"entry", q:"Estorne o lançamento feito por engano: D Despesa de aluguel / C Caixa, R$ 500.", d:["Caixa"], c:["Despesa de aluguel"], accts:["Caixa","Despesa de aluguel","Despesa com energia","Bancos"], e:"O estorno inverte débito e crédito.", h:"Inverta os lados do lançamento original."},
+    {t:"tf", q:"Um estorno é o lançamento original com débito e crédito invertidos.", a:true, e:"Assim os saldos voltam ao que eram."},
+    {t:"num", q:"Uma venda de R$ 1.500 foi lançada como R$ 1.200. Qual o valor do lançamento complementar?", a:300, e:"Falta a diferença: 1.500 − 1.200 = 300.", u:"R$"},
+    {t:"wr", q:"Como se chama o lançamento que anula outro, invertendo débito e crédito?", a:["estorno"], e:"Estorno."},
+    {t:"ew", q:"Uma despesa de energia de R$ 200 foi lançada em Despesa de aluguel. Escreva o lançamento de transferência que corrige direto.", d:["Despesa com energia"], c:["Despesa de aluguel"], e:"Debita-se a conta certa e credita-se a errada.", h:"Qual conta precisa receber o valor?"}
    ]}
   ]
 };
