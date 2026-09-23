@@ -10,14 +10,21 @@ const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 export const supabase = (url && anonKey) ? createClient(url, anonKey) : null;
 
 let cachedUserId = null;
+let cachedEmail = null;
+const listeners = [];
+
+/** Chama fn(event, session) sempre que o estado de login mudar (login, logout, token renovado). */
+export function onAuthChange(fn){ listeners.push(fn); }
 
 export async function initCloud(){
   if (!supabase) return;
   const { data } = await supabase.auth.getSession();
   cachedUserId = data.session ? data.session.user.id : null;
+  cachedEmail = data.session ? data.session.user.email : null;
 }
 
 export function isLoggedIn(){ return !!cachedUserId; }
+export function currentEmail(){ return cachedEmail; }
 
 export async function signInWithEmail(email){
   if (!supabase) throw new Error('Supabase não configurado.');
@@ -28,11 +35,13 @@ export async function signInWithEmail(email){
 export async function signOut(){
   if (!supabase) return;
   await supabase.auth.signOut();
-  cachedUserId = null;
+  cachedUserId = null; cachedEmail = null;
 }
 
-supabase && supabase.auth.onAuthStateChange((_event, session) => {
+supabase && supabase.auth.onAuthStateChange((event, session) => {
   cachedUserId = session ? session.user.id : null;
+  cachedEmail = session ? session.user.email : null;
+  listeners.forEach(fn => fn(event, session));
 });
 
 export async function syncUp(payload){

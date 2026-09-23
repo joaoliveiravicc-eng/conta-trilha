@@ -1,7 +1,7 @@
 /* Ponto de entrada: liga os eventos globais e inicializa o app (localStorage + sync opcional). */
 import { $, $$ } from './ui/dom.js';
 import { S, setState, loadLocal, normalize, applyTheme, LS_KEY } from './engine/state.js';
-import { initCloud, syncDown } from './engine/sync-supabase.js';
+import { initCloud, syncDown, onAuthChange } from './engine/sync-supabase.js';
 import { flush } from './engine/storage.js';
 import { sfx } from './ui/components/sound.js';
 import { go, CUR, closeSheet, renderTop } from './ui/router.js';
@@ -39,17 +39,24 @@ function route(){
   if (!S.onboarded){ resetOnb(S.goal); renderOnb(); go('onb'); }
   else { renderHome(); go('home'); }
 }
+async function mergeCloud(){
+  const cloudData = await syncDown();
+  if (cloudData){
+    const cs = normalize(cloudData);
+    if (cs.xp > S.xp || (cs.xp === S.xp && cs.onboarded && !S.onboarded)){
+      setState(cs); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) {}
+      if (['home', 'onb', 'practice', 'profile', 'glossary', 'path', 'shop'].indexOf(CUR) >= 0) route();
+      return;
+    }
+    if (S.xp > cs.xp || S.onboarded !== cs.onboarded) flush();
+  } else if (S.xp > 0 || S.onboarded) flush();
+  if (CUR === 'profile') renderProfile();
+}
 (async function boot(){
   setState(loadLocal()); route();
-  try {
-    await initCloud();
-    const cloudData = await syncDown();
-    if (cloudData){
-      const cs = normalize(cloudData);
-      if (cs.xp > S.xp || (cs.xp === S.xp && cs.onboarded && !S.onboarded)){
-        setState(cs); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) {}
-        if (['home', 'onb', 'practice', 'profile', 'glossary', 'path', 'shop'].indexOf(CUR) >= 0) route();
-      } else if (S.xp > cs.xp || S.onboarded !== cs.onboarded) flush();
-    } else if (S.xp > 0 || S.onboarded) flush();
-  } catch (e) {}
+  try { await initCloud(); await mergeCloud(); } catch (e) {}
 })();
+onAuthChange((event) => {
+  if (event === 'SIGNED_IN') mergeCloud().catch(() => {});
+  else if (event === 'SIGNED_OUT' && CUR === 'profile') renderProfile();
+});
