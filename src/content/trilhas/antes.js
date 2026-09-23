@@ -130,5 +130,35 @@ export default [
   mc("O que forma o “Disponível” da empresa?",["*Caixa, bancos e aplicações de liquidez imediata","Estoques e máquinas","Fornecedores","Capital social"],"É o dinheiro que pode ser usado agora."),
   wr("Qual conta registra o dinheiro em espécie guardado na empresa?",["caixa"],"Caixa = dinheiro físico."),
   nu("Caixa R$ 800, Bancos R$ 5.200 e aplicação de liquidez imediata R$ 2.000. Qual o disponível?",8000,"800 + 5.200 + 2.000 = 8.000.","R$")
+ ]},
+{id:"antes9", title:"Variação percentual", icon:"📐",
+ learn:[
+  {h:"De um valor para outro", b:`<p>Variação percentual mede o quanto um valor <b>cresceu</b> ou <b>caiu</b> em relação ao ponto de partida.</p>` + eq('Variação % = (Valor novo − Valor antigo) ÷ Valor antigo × 100') + box('exemplo','Vendas foram de R$ 200 para R$ 250: (250 − 200) ÷ 200 = 0,25 = <b>alta de 25%</b>.')},
+  {h:"Quando o valor cai", b:box('exemplo','Despesa foi de R$ 400 para R$ 340: (340 − 400) ÷ 400 = −0,15 = <b>queda de 15%</b>.') + `<p>O sinal negativo mostra que o valor diminuiu. É exatamente essa a conta por trás da <b>análise horizontal</b> das demonstrações.</p>`},
+  {h:"Cuidado com a base", b:`<p>Um erro comum: achar que subir 50% e depois cair 50% volta ao valor original. Não volta!</p>` + box('atencao','R$ 200 sobe 50% → R$ 300. R$ 300 cai 50% → R$ 150. A base da segunda conta mudou.')},
+  {h:"Do percentual para o valor", b:`<p>Se você já sabe a variação percentual, dá para achar o valor novo direto:</p>` + eq('Valor novo = Valor antigo × (1 + variação %)') + box('exemplo','Receita de R$ 80.000 com alta de 12%: 80.000 × 1,12 = <b>R$ 89.600</b>.')}
+ ],
+ ex:[
+  nu("Vendas foram de R$ 400 para R$ 500. Qual foi a variação percentual?",25,"(500 − 400) ÷ 400 = 0,25 = 25%.","%","Divida a diferença pelo valor antigo."),
+  nu("Despesas foram de R$ 600 para R$ 480. Qual a variação percentual? (use o sinal de menos)",-20,"(480 − 600) ÷ 600 = −0,20 = −20%.","%","Uma queda dá variação negativa."),
+  nu("Receita de R$ 50.000 com alta de 10%. Qual o novo valor?",55000,"50.000 × 1,10 = 55.000.","R$","Multiplique por 1,10."),
+  tf("Subir 50% e depois cair 50% sempre volta ao valor original.",false,"A segunda variação incide sobre uma base diferente (maior), então o resultado final é menor que o original."),
+  mc("A fórmula da variação percentual usa como base:",["*O valor antigo (ponto de partida)","Sempre 100","O valor novo","A soma dos dois valores"],"A variação sempre se refere a quanto mudou em relação ao ponto de partida."),
+  nu("Custos foram de R$ 12.000 para R$ 15.000. Qual foi a variação percentual?",25,"(15.000 − 12.000) ÷ 12.000 = 0,25 = 25%.","%")
+ ]},
+{id:"antes10", title:"Médias e estimativas", icon:"📊",
+ learn:[
+  {h:"Média simples", b:`<p>Soma todos os valores e divide pela quantidade deles.</p>` + eq('Média = Soma dos valores ÷ Quantidade de valores') + box('exemplo','Vendas de 3 meses: 100, 140 e 120. Média: (100 + 140 + 120) ÷ 3 = <b>120</b>.')},
+  {h:"Média ponderada", b:`<p>Quando cada valor tem um “peso” diferente, como quantidades diferentes de cada lote de compra.</p>` + eq('Média ponderada = Σ(valor × peso) ÷ Σ(pesos)') + box('exemplo','80 unidades a R$ 5 e 20 unidades a R$ 8: (80×5 + 20×8) ÷ 100 = (400 + 160) ÷ 100 = <b>R$ 5,60</b>.') + box('dica','É exatamente essa conta que usamos no custo médio ponderado do estoque.')},
+  {h:"Estimar antes de calcular", b:`<p>Arredondar os números antes de somar ajuda a <b>conferir</b> se o resultado final faz sentido.</p>` + box('exemplo','347 + 198 ≈ 350 + 200 = 550. Se a conta exata der 1.200, algo está errado.')},
+  {h:"Por que isso importa na Contabilidade", b:`<p>Médias aparecem o tempo todo: custo médio de estoque, estoque médio para giro, prazo médio de recebimento, ticket médio de venda.</p>`}
+ ],
+ ex:[
+  nu("Vendas de 4 semanas: 200, 180, 220 e 240. Qual a média semanal?",210,"(200+180+220+240) ÷ 4 = 840 ÷ 4 = 210.","R$"),
+  nu("60 unidades a R$ 10 e 40 unidades a R$ 15. Qual a média ponderada por unidade?",12,"(60×10 + 40×15) ÷ 100 = (600+600) ÷ 100 = 12.","R$","Pondere pela quantidade de cada lote."),
+  mc("Na média ponderada, o que muda em relação à média simples?",["*Cada valor pesa proporcionalmente à sua quantidade","Todos os valores viram iguais","Só o maior valor conta","O resultado nunca muda"],"Lotes maiores puxam mais a média para o seu preço."),
+  tf("Estimar um resultado antes de calcular com exatidão ajuda a perceber erros grosseiros.",true,"Arredondar os números dá uma ideia da ordem de grandeza esperada."),
+  nu("Estoque inicial de R$ 8.000 e final de R$ 10.000. Qual o estoque médio do período?",9000,"(8.000 + 10.000) ÷ 2 = 9.000.","R$","Estoque médio é a média entre inicial e final."),
+  wr("Quando cada valor tem um peso diferente na conta, a média se chama média ___.",["ponderada"],"Média ponderada.")
  ]}
 ];

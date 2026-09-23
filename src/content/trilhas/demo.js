@@ -79,6 +79,22 @@ export default {
     {t:"num", q:"PL inicial de R$ 100.000, lucro de R$ 30.000 e dividendos de R$ 10.000. Qual o PL final?", a:120000, e:"100.000 + 30.000 − 10.000 = 120.000.", u:"R$"},
     {t:"mc", q:"A DVA é obrigatória para:", o:["Companhias abertas","Todo MEI","Nenhuma empresa","Só bancos"], a:0, e:"Companhias abertas publicam a DVA."},
     {t:"wr", q:"Qual a sigla da demonstração das mutações do patrimônio líquido?", a:["dmpl"], e:"DMPL."}
+   ]},
+  {id:"demo6", title:"Ciclo operacional e financeiro", icon:"🔁",
+   learn:[
+    {h:"Do estoque ao dinheiro de volta", b:`<p>O <b>ciclo operacional</b> é o tempo entre comprar mercadoria (ou matéria-prima) e receber o dinheiro da venda dela.</p>` + eq('Ciclo operacional = Prazo médio de estoque + Prazo médio de recebimento')},
+    {h:"Prazos médios", b:tbl(['Prazo','Fórmula (em dias)'],[['Médio de estoque (PME)','Estoque médio ÷ CMV × 360'],['Médio de recebimento (PMR)','Clientes médio ÷ Receita × 360'],['Médio de pagamento (PMP)','Fornecedores médio ÷ Compras × 360']]) + box('dica','360 é uma convenção comum para simplificar a conta; alguns usam 365.')},
+    {h:"O ciclo financeiro", b:`<p>O <b>ciclo financeiro</b> (ou ciclo de caixa) desconta o tempo que a empresa tem para pagar os fornecedores:</p>` + eq('Ciclo financeiro = Ciclo operacional − PMP') +
+      box('exemplo','PME de 40 dias + PMR de 30 dias = ciclo operacional de 70 dias. Com PMP de 25 dias, o ciclo financeiro é 70 − 25 = <b>45 dias</b> financiados pela própria empresa.')},
+    {h:"Por que isso importa", b:`<p>Quanto <b>maior</b> o ciclo financeiro, mais dinheiro a empresa precisa ter disponível para bancar sua própria operação, antes de o dinheiro do cliente voltar. Reduzir o PME e o PMR, ou negociar um PMP maior, libera caixa.</p>`}
+   ],
+   ex:[
+    {t:"num", q:"Estoque médio de R$ 20.000 e CMV anual de R$ 180.000. Qual o prazo médio de estoque, em dias (base 360)?", a:40, s:"dias", e:"20.000 ÷ 180.000 × 360 = 40 dias."},
+    {t:"num", q:"Clientes médio de R$ 15.000 e receita anual de R$ 180.000. Qual o prazo médio de recebimento, em dias (base 360)?", a:30, s:"dias", e:"15.000 ÷ 180.000 × 360 = 30 dias."},
+    {t:"num", q:"Com PME de 40 dias e PMR de 30 dias, qual o ciclo operacional?", a:70, s:"dias", e:"40 + 30 = 70 dias."},
+    {t:"num", q:"Ciclo operacional de 70 dias e prazo médio de pagamento a fornecedores de 20 dias. Qual o ciclo financeiro?", a:50, s:"dias", e:"70 − 20 = 50 dias que a empresa financia com recursos próprios."},
+    {t:"tf", q:"Quanto maior o ciclo financeiro, menos caixa próprio a empresa precisa para bancar a operação.", a:false, e:"É o contrário: um ciclo financeiro maior exige mais caixa próprio, porque a empresa paga antes de receber."},
+    {t:"mc", q:"Negociar um prazo maior com os fornecedores tende a:", o:["Reduzir o ciclo financeiro","Aumentar o ciclo financeiro","Não afetar o ciclo financeiro","Aumentar o ciclo operacional"], a:0, e:"Um PMP maior é descontado do ciclo operacional, reduzindo o ciclo financeiro."}
    ]}
   ]
 };

@@ -62,6 +62,37 @@ export default {
     {t:"num", q:"CMV anual de R$ 240.000 e estoque médio de R$ 40.000. Quantas vezes o estoque girou?", a:6, s:"vezes", e:"240.000 ÷ 40.000 = 6."},
     {t:"mc", q:"EBITDA é o lucro antes de:", o:["Juros, impostos, depreciação e amortização","Apenas impostos","Custos e despesas","Dividendos"], a:0, e:"Earnings Before Interest, Taxes, Depreciation and Amortization."},
     {t:"mc", q:"Um orçamento flexível:", o:["Ajusta os valores ao volume real de atividade","Nunca muda","Substitui a DRE","É feito só uma vez na vida da empresa"], a:0, e:"Ele recalcula o esperado para o volume que de fato ocorreu."}
+   ]},
+  {id:"cust5", title:"Custeio por absorção x variável", icon:"⚗️",
+   learn:[
+    {h:"Duas formas de custear o produto", b:`<p>Os dois métodos tratam os <b>custos fixos de fábrica</b> de um jeito diferente.</p>`},
+    {h:"Custeio por absorção", b:`<p>Todos os custos de produção — fixos e variáveis — vão para o produto e ficam no estoque até a venda. É o método exigido pela <b>Contabilidade societária e fiscal</b> no Brasil.</p>` + box('exemplo','Custo variável de R$ 10/un + custo fixo de fábrica de R$ 4/un = custo do produto de R$ 14/un.')},
+    {h:"Custeio variável (ou direto)", b:`<p>Só os <b>custos variáveis</b> vão para o produto. Os custos fixos de fábrica viram despesa do período <b>inteira</b>, direto na DRE, não importa quanto foi vendido.</p>` + box('exemplo','Mesmo caso: custo do produto de R$ 10/un pelo variável; o custo fixo de fábrica vai inteiro para a DRE do período.') + box('dica','O custeio variável é muito usado internamente, porque facilita calcular a margem de contribuição.')},
+    {h:"O efeito no lucro", b:`<p>Quando a empresa <b>produz mais do que vende</b>, uma parte do custo fixo fica “presa” no estoque pelo absorção, e o lucro do período fica maior do que pelo variável. Quando vende tudo o que produz, os dois métodos dão o mesmo lucro.</p>` +
+      tbl(['Situação','Absorção x Variável'],[['Produção = Vendas','Lucros iguais'],['Produção > Vendas','Absorção mostra lucro maior'],['Produção < Vendas','Absorção mostra lucro menor']])}
+   ],
+   ex:[
+    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira, direto na DRE","São ignorados","Viram receita"], a:0, e:"É a marca registrada do custeio por absorção: nada de fixo fica de fora do produto."},
+    {t:"mc", q:"Qual método é exigido pela Contabilidade societária e fiscal no Brasil?", o:["Custeio por absorção","Custeio variável","Os dois, à escolha da empresa","Nenhum dos dois"], a:0, e:"O absorção é o método oficial para fins societários e fiscais."},
+    {t:"tf", q:"No custeio variável, os custos fixos de fábrica também entram no custo do produto.", a:false, e:"No variável, só os custos variáveis entram no produto; os fixos vão direto para a DRE do período."},
+    {t:"mc", q:"Se a empresa produziu mais do que vendeu no período, o lucro pelo custeio por absorção tende a ser:", o:["Maior do que pelo custeio variável","Menor do que pelo custeio variável","Sempre igual","Impossível calcular"], a:0, e:"Parte do custo fixo fica no estoque que não foi vendido, reduzindo o custo do período."},
+    {t:"tf", q:"Quando a empresa vende exatamente tudo o que produziu no período, os dois métodos mostram o mesmo lucro.", a:true, e:"Sem estoque final de produção nova, não há custo fixo retido a mais em um método."},
+    {t:"mc", q:"O custeio variável é especialmente útil para calcular:", o:["A margem de contribuição","O valor do ICMS","A depreciação acumulada","O capital social"], a:0, e:"Separar custos variáveis facilita diretamente a conta de margem de contribuição."}
+   ]},
+  {id:"cust6", title:"Formação de preço de venda", icon:"🏷️",
+   learn:[
+    {h:"Partindo do custo", b:`<p>Uma forma comum de precificar é aplicar um <b>mark-up</b> sobre o custo do produto: um multiplicador que cobre despesas, impostos sobre a venda e a margem de lucro desejada.</p>`},
+    {h:"Mark-up divisor", b:eq('Preço de venda = Custo ÷ (1 − soma dos percentuais sobre o preço)') +
+      box('exemplo','Custo de R$ 60. Despesas variáveis de 10%, impostos de 15% e lucro desejado de 15% do preço, total 40%.<br>Preço = 60 ÷ (1 − 0,40) = 60 ÷ 0,60 = <b>R$ 100</b>.')},
+    {h:"Conferindo o resultado", b:box('exemplo','Vendendo a R$ 100: despesas (10) + impostos (15) + lucro (15) = 40. Sobra 100 − 40 − 60 (custo) = <b>0</b>. A conta fecha, porque os percentuais foram todos calculados sobre o preço de venda.')},
+    {h:"Preço não é só matemática", b:`<p>O mark-up dá um ponto de partida, mas o preço final também depende do <b>mercado</b>: o que os concorrentes cobram e quanto o cliente está disposto a pagar. Um preço calculado “certo” pode ser alto demais para vender.</p>` + box('atencao','Cuidado ao confundir margem sobre o <b>custo</b> com margem sobre o <b>preço de venda</b>: são contas diferentes e dão números diferentes.')}
+   ],
+   ex:[
+    {t:"num", q:"Custo de R$ 40. Soma dos percentuais sobre o preço (despesas + impostos + lucro) é 20%. Qual o preço de venda pelo mark-up divisor?", a:50, u:"R$", e:"40 ÷ (1 − 0,20) = 40 ÷ 0,80 = 50."},
+    {t:"num", q:"Custo de R$ 90 e soma dos percentuais sobre o preço de 40%. Qual o preço de venda?", a:150, u:"R$", e:"90 ÷ 0,60 = 150."},
+    {t:"mc", q:"No mark-up divisor, os percentuais de despesas, impostos e lucro incidem sobre:", o:["O preço de venda","O custo do produto","O lucro líquido total da empresa","O capital social"], a:0, e:"Por isso a fórmula divide o custo por (1 − soma dos percentuais), em vez de multiplicar."},
+    {t:"tf", q:"Um preço calculado pelo mark-up sempre garante que o produto vai vender bem no mercado.", a:false, e:"O mark-up é um ponto de partida; a concorrência e a disposição do cliente a pagar também definem o preço."},
+    {t:"tf", q:"Margem sobre o custo e margem sobre o preço de venda são a mesma conta.", a:false, e:"São bases diferentes e dão resultados diferentes; é preciso saber qual está sendo usada."}
    ]}
   ]
 };

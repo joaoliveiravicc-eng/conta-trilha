@@ -3,8 +3,8 @@
 **Ao vivo:** [conta-trilha.vercel.app](https://conta-trilha.vercel.app) — instalável
 como app (PWA) no celular ou no computador direto pelo navegador.
 
-App no estilo Duolingo para aprender Contabilidade do zero, em português. 10 trilhas,
-50 lições, motor de exercícios com ~10 tipos de questão, gamificação (XP, moedas,
+App no estilo Duolingo para aprender Contabilidade do zero, em português. 11 trilhas,
+68 lições, motor de exercícios com ~10 tipos de questão, gamificação (XP, moedas,
 corações, sequência, níveis, badges, missões diárias), 3 estudos de caso completos e
 um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
@@ -39,16 +39,20 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
 ### Como adicionar ou editar uma lição
 
 1. Ache a trilha em `src/content/trilhas/<id>.js` (ids: `antes`, `base`, `dc`, `lanc`,
-   `demo`, `cust`, `trib`, `aud`) ou `vida.js` para "Contabilidade para a Vida".
+   `imob`, `demo`, `cust`, `trib`, `aud`) ou `estoq.js`/`vida.js` para "Estoques e Custo
+   de Mercadorias" e "Contabilidade para a Vida".
 2. Cada lição é um objeto `{ id, title, icon, learn:[...], ex:[...] }`. `learn` são os
    cartões de teoria (use os helpers `T`, `box`, `eq`, `tbl`, `lanc`, `ul`, `ol` de
    `content/render-helpers.js` para formatar). `ex` são os exercícios — use as
    funções-fábrica de `engine/exercises/factories.js` (`mc`, `tf`, `fl`, `mt`, `en`,
    `cl`, `nu`, `wr`, `ew`, `od`, `ep`, `ts`), documentadas ali mesmo.
 3. Para adicionar uma lição totalmente nova a uma trilha, dá pra colocá-la direto no
-   array `lessons` do arquivo da trilha (trilhas `base` a `aud`), ou seguir o padrão
-   de `antes.js`/`vida.js` e depois referenciar o id da lição em `src/content/layout.js`
-   (array `LAYOUT`, dentro de `units`).
+   array `lessons` do arquivo da trilha (trilhas `base` a `aud`/`imob`), ou seguir o
+   padrão de `antes.js`/`vida.js`/`estoq.js` e depois referenciar o id da lição em
+   `src/content/layout.js` (array `LAYOUT`, dentro de `units`). Uma trilha nova precisa
+   também ser importada e listada em `rawCourses` (se exportar `{id,title,...,lessons}`,
+   como `imob.js`) ou em `newLessons` (se exportar só um array de lições, como
+   `antes.js`) dentro de `src/content/index.js`.
 4. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.

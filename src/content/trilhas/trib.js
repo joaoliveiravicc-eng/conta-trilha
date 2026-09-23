@@ -50,6 +50,22 @@ export default {
     {t:"match", pairs:[["CBS","Substitui PIS e Cofins"],["IBS","Substitui ICMS e ISS"],["Imposto Seletivo","Produtos prejudiciais à saúde ou ao meio ambiente"]], e:"Esses são os novos tributos sobre consumo."},
     {t:"mc", q:"Em que ano o novo sistema tributário do consumo estará completo?", o:["2033","2026","2027","2030"], a:0, e:"A transição vai de 2026 a 2033."},
     {t:"entry", q:"Apuração do ICMS devido sobre as vendas do mês, R$ 2.500.", accts:["ICMS sobre vendas","ICMS a recolher","ICMS a recuperar","Caixa"], d:["ICMS sobre vendas"], c:["ICMS a recolher"], e:"O ICMS sobre vendas é dedução da receita (débito) e gera a obrigação de recolher (crédito)."}
+   ]},
+  {id:"trib4", title:"Planejamento tributário: elisão e evasão", icon:"⚖️",
+   learn:[
+    {h:"Pagar menos imposto é crime?", b:`<p>Não necessariamente. Existe uma linha bem definida entre <b>reduzir tributos de forma lícita</b> e <b>sonegar</b>.</p>`},
+    {h:"Elisão fiscal", b:`<p><b>Elisão</b> é a redução <b>lícita</b> da carga tributária, usando os meios previstos ou não vedados pela lei — geralmente feita <b>antes</b> do fato gerador acontecer.</p>` +
+      box('exemplo','Uma empresa simula seu resultado nos dois regimes tributários permitidos para o seu porte e escolhe o Lucro Presumido, porque nesse caso paga legalmente menos do que pagaria no Lucro Real.')},
+    {h:"Evasão fiscal", b:`<p><b>Evasão</b> (sonegação) é reduzir ou não pagar o tributo devido através de meios <b>ilícitos</b>: omitir receita, emitir nota fiscal com valor menor que o real, usar notas frias.</p>` +
+      box('atencao','Sonegação fiscal é crime, previsto na Lei nº 8.137/1990, além de gerar multas e cobrança do tributo devido com juros.')},
+    {h:"O critério central", b:tbl(['','Elisão','Evasão'],[['Meios','Lícitos','Ilícitos'],['Quando','Antes do fato gerador, em regra','Antes ou depois, escondendo o fato'],['Consequência','Economia legítima de tributos','Crime, multa e cobrança retroativa']]) + box('regra','A pergunta que separa as duas: o meio usado para pagar menos imposto é permitido por lei?')}
+   ],
+   ex:[
+    {t:"mc", q:"O que é elisão fiscal?", o:["Reduzir tributos por meios lícitos, previstos ou não vedados por lei","Deixar de emitir nota fiscal","Omitir receita da Receita Federal","Qualquer forma de reduzir imposto, lícita ou não"], a:0, e:"Elisão é sempre por meios legais."},
+    {t:"tf", q:"Escolher, entre dois regimes tributários permitidos para a empresa, aquele que resulta em menos imposto a pagar é elisão fiscal.", a:true, e:"É uma escolha lícita dentro do que a lei permite."},
+    {t:"tf", q:"Emitir uma nota fiscal com valor menor do que o real para pagar menos imposto é elisão fiscal.", a:false, e:"Isso é evasão (sonegação): um meio ilícito, e não apenas uma escolha entre opções legais."},
+    {t:"mc", q:"Sonegação fiscal é:", o:["Crime, além de gerar multa e cobrança do tributo com juros","Apenas uma infração administrativa leve","Permitida se o valor for pequeno","O mesmo que elisão fiscal"], a:0, e:"A Lei nº 8.137/1990 tipifica crimes contra a ordem tributária."},
+    {t:"match", pairs:[["Elisão fiscal","Redução lícita da carga tributária"],["Evasão fiscal","Redução por meios ilícitos, como omitir receita"],["Fato gerador","O evento que faz nascer a obrigação de pagar o tributo"]], e:"O critério central é sempre a licitude do meio usado."}
    ]}
   ]
 };

@@ -3,18 +3,19 @@
 
 export const LAYOUT = [
  {id:"antes", title:"Antes de Tudo", icon:"🧮", color:"#4059AD", desc:"O básico do básico: porcentagem, juros, saldo, empresa e documentos. Para começar do zero absoluto.",
-  units:[["Matemática do dia a dia",["antes1","antes2","antes3","antes4"]],["O mundo dos negócios",["antes5","antes6","antes7","antes8"]]]},
- {id:"base", units:[["O que é Contabilidade",["base1","base2"]],["Equação e resultado",["base3","base4","base5"]]]},
- {id:"dc", units:[["Razonetes e natureza",["dc1","dc2"]],["Lançando de verdade",["dc3","dc4","dc5"]]]},
- {id:"lanc", units:[["Operações comerciais",["lanc1","lanc2","lanc3"]],["Ajustes e livros",["lanc4","lanc6","lanc7","lanc5"]]]},
+  units:[["Matemática do dia a dia",["antes1","antes2","antes3","antes4","antes9","antes10"]],["O mundo dos negócios",["antes5","antes6","antes7","antes8"]]]},
+ {id:"base", units:[["O que é Contabilidade",["base1","base2"]],["Equação e resultado",["base3","base4","base5","base6"]]]},
+ {id:"dc", units:[["Razonetes e natureza",["dc1","dc2"]],["Lançando de verdade",["dc3","dc4","dc5","dc6"]]]},
+ {id:"lanc", units:[["Operações comerciais",["lanc1","lanc2","lanc3","lanc8","lanc9"]],["Ajustes e livros",["lanc4","lanc6","lanc7","lanc5"]]]},
+ {id:"imob", units:[["Bens de uso duradouro",["imob1","imob2","imob3"]],["Intangíveis e avaliação",["imob4","imob5"]]]},
  {id:"estoq", title:"Estoques e Custo de Mercadorias", icon:"📦", color:"#4C7A3F", desc:"Como o estoque vira custo: aquisição, PEPS, custo médio, apuração do CMV e ajustes por perda.",
-  units:[["Do estoque ao CMV",["estoq1","estoq2","estoq3","estoq4","estoq5"]]]},
- {id:"demo", units:[["Balanço e DRE",["demo1","demo2"]],["Caixa, notas e análise",["demo3","demo5","demo4"]]]},
- {id:"cust", units:[["Classificando custos",["cust1","cust2"]],["Decisões",["cust3","cust4"]]]},
- {id:"trib", units:[["Tributos",["trib1","trib2","trib3"]]]},
- {id:"aud", units:[["Fundamentos",["aud1","aud2","aud3"]],["Execução e relatório",["aud4","aud5"]]]},
+  units:[["Do estoque ao CMV",["estoq1","estoq2","estoq3","estoq4","estoq5","estoq6"]]]},
+ {id:"demo", units:[["Balanço e DRE",["demo1","demo2"]],["Caixa, notas e análise",["demo3","demo5","demo4","demo6"]]]},
+ {id:"cust", units:[["Classificando custos",["cust1","cust2","cust5"]],["Decisões",["cust3","cust4","cust6"]]]},
+ {id:"trib", units:[["Tributos",["trib1","trib2","trib3","trib4"]]]},
+ {id:"aud", units:[["Fundamentos",["aud1","aud2","aud3"]],["Execução e relatório",["aud4","aud5","aud6"]]]},
  {id:"vida", title:"Contabilidade para a Vida", icon:"🏠", color:"#C06A1B", desc:"Use o que aprendeu no seu dinheiro: balanço pessoal, orçamento, reserva e dívidas.",
-  units:[["Finanças pessoais",["vida1","vida2","vida3"]]]}
+  units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]]]}
 ];
 
 /**

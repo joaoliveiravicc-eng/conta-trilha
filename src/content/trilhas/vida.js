@@ -39,5 +39,20 @@ export default [
   tf("A reserva de emergência deve ficar em aplicação de fácil resgate.",true,"Imprevisto não espera o vencimento."),
   wr("Como se chama o dinheiro guardado para imprevistos? (três palavras)",["reserva de emergencia"],"Reserva de emergência."),
   ep("Com suas palavras: por que ter uma reserva de emergência?","Para cobrir imprevistos, como perda de renda ou despesas inesperadas, sem precisar se endividar com juros altos.",[["Cobre imprevistos","imprevist","emergenc","inesperad","problema","desempreg","perda","doenc","saude","conserto"],["Evita dívidas e juros","divid","emprestim","juros","endivid","cartao","cheque"]],"Reserva = liquidez para imprevistos.")
+ ]},
+{id:"vida4", title:"Primeiros passos como investidor", icon:"🌱",
+ learn:[
+  {h:"Renda fixa", b:`<p>Você <b>empresta dinheiro</b> (para um banco, uma empresa ou o governo) e sabe, desde o início, a regra de como o rendimento será calculado. O risco costuma ser menor.</p>`},
+  {h:"Renda variável", b:`<p>Você vira <b>sócio</b> de um negócio, como ao comprar ações. O retorno depende do desempenho da empresa e do mercado: pode ganhar mais, mas também pode perder.</p>` + box('dica','Quanto maior o retorno esperado, em geral maior o risco assumido. Não existe almoço grátis.')},
+  {h:"Diversificação", b:`<p>Espalhar os investimentos entre ativos diferentes reduz o risco: se um vai mal, outro pode compensar.</p>` + box('exemplo','Colocar tudo em uma única ação é mais arriscado do que dividir entre várias ações, renda fixa e outros ativos.') + box('regra','“Não coloque todos os ovos na mesma cesta” resume bem a ideia de diversificação.')},
+  {h:"Antes de investir", b:ul(['Primeiro monte a <b>reserva de emergência</b>.','Defina o <b>prazo</b>: dinheiro que você vai precisar em breve pede mais liquidez e menos risco.','Entenda o produto antes de aplicar: taxas, risco e como resgatar.']) + box('atencao','Promessas de retorno muito acima do mercado, com “garantia”, são um sinal clássico de golpe.')}
+ ],
+ ex:[
+  mc("Na renda fixa, o investidor basicamente:",["*Empresta dinheiro e sabe, desde o início, a regra do rendimento","Vira sócio de uma empresa","Nunca sabe como o rendimento será calculado","Só pode aplicar em imóveis"],"Renda fixa é, na essência, um empréstimo com regra conhecida."),
+  mc("Na renda variável, o retorno:",["*Depende do desempenho do negócio e do mercado, podendo ser positivo ou negativo","É sempre fixo e garantido","Nunca pode ser negativo","É definido por lei"],"Por isso se chama variável: o resultado não é conhecido de antemão."),
+  tf("Diversificar investimentos ajuda a reduzir o risco da carteira como um todo.",true,"Se um ativo vai mal, outros podem compensar."),
+  wr("Complete o ditado popular sobre diversificação: não coloque todos os ovos na mesma ___.",["cesta"],"Diversificação é justamente não concentrar tudo em um único lugar."),
+  tf("Uma promessa de retorno muito acima do mercado, com garantia, é um sinal de alerta para possível golpe.",true,"Retorno alto sempre vem acompanhado de mais risco; “garantia” de ganho alto não existe de verdade."),
+  mc("Antes de começar a investir, o primeiro passo recomendado é:",["*Montar a reserva de emergência","Comprar ações de uma única empresa","Pegar empréstimo para investir mais","Ignorar o prazo que vai precisar do dinheiro"],"A reserva protege você de precisar resgatar um investimento de risco no pior momento.")
  ]}
 ];

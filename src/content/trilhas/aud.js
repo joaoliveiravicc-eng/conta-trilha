@@ -78,6 +78,21 @@ export default {
     {t:"mc", q:"O auditor obteve evidências e concluiu que as demonstrações estão erradas de forma generalizada. A opinião é:", o:["Adversa","Abstenção","Com ressalva","Sem ressalva"], a:0, e:"Com evidências e erros generalizados, a opinião é adversa. Abstenção é quando faltam evidências."},
     {t:"mc", q:"Os Principais Assuntos de Auditoria (PAA) são:", o:["Os temas que mais exigiram atenção do auditor","Previsões de lucro da empresa","A lista de clientes do auditor","Os honorários da auditoria"], a:0, e:"Eles dão transparência sobre as áreas mais sensíveis da auditoria."},
     {t:"tf", q:"A abstenção de opinião ocorre quando o auditor não consegue evidência suficiente e os possíveis efeitos são relevantes e generalizados.", a:true, e:"Nesse caso, ele não tem base para opinar."}
+   ]},
+  {id:"aud6", title:"Fraude x erro", icon:"🎭",
+   learn:[
+    {h:"A diferença é a intenção", b:`<p>Uma distorção nas demonstrações pode ser um <b>erro</b> (não intencional) ou uma <b>fraude</b> (intencional, para obter vantagem indevida).</p>`},
+    {h:"Tipos de fraude", b:ul(['<b>Manipulação de resultados</b> (fraudulent financial reporting): inflar receitas, esconder despesas ou dívidas.','<b>Apropriação indevida de ativos</b>: desviar dinheiro ou bens da empresa para uso próprio.']) + box('dica','A fraude de manipulação costuma partir da alta administração; a apropriação de ativos costuma ser de funcionários.')},
+    {h:"O triângulo da fraude", b:tbl(['Elemento','Significado'],[['Pressão','Uma necessidade ou incentivo para cometer a fraude'],['Oportunidade','Controles fracos que permitem agir sem ser percebido'],['Racionalização','A justificativa que a pessoa dá para si mesma']]) + box('exemplo','Um funcionário endividado (pressão), sem segregação de funções no caixa (oportunidade), que pensa “só estou pegando emprestado” (racionalização).')},
+    {h:"O papel do auditor", b:`<p>O auditor é responsável por obter segurança razoável de que as demonstrações estão livres de distorção relevante, <b>seja por erro, seja por fraude</b> — mas a responsabilidade de <b>prevenir e detectar</b> fraudes no dia a dia é da administração, por meio dos controles internos.</p>` +
+      box('atencao','Fraudes costumam ser mais difíceis de detectar do que erros, porque envolvem conluio, documentos forjados e omissões deliberadas.')}
+   ],
+   ex:[
+    {t:"mc", q:"O que diferencia fraude de erro?", o:["A intenção: fraude é deliberada, erro não","O valor envolvido","Quem descobriu o problema","O tipo de empresa"], a:0, e:"Fraude é intencional; erro é não intencional."},
+    {t:"match", pairs:[["Pressão","Uma necessidade ou incentivo para fraudar"],["Oportunidade","Controles fracos que permitem agir sem ser percebido"],["Racionalização","A justificativa que a pessoa dá para si mesma"]], e:"Os três elementos do triângulo da fraude."},
+    {t:"tf", q:"A responsabilidade primária por prevenir e detectar fraudes no dia a dia é da administração da empresa.", a:true, e:"Os controles internos, mantidos pela administração, são a primeira linha de defesa."},
+    {t:"mc", q:"Um funcionário que desvia dinheiro do caixa para uso pessoal comete:", o:["Apropriação indevida de ativos","Manipulação de resultados","Um erro contábil","Uma estimativa incorreta"], a:0, e:"É o desvio de um ativo específico, diferente de maquiar o resultado da empresa toda."},
+    {t:"tf", q:"Fraudes costumam ser mais fáceis de detectar do que erros, porque deixam mais rastros.", a:false, e:"O contrário: fraudes envolvem ocultação deliberada, o que as torna mais difíceis de detectar."}
    ]}
   ]
 };

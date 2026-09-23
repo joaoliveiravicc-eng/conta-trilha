@@ -89,6 +89,25 @@ export default {
     {t:"num", q:"Uma venda de R$ 1.500 foi lançada como R$ 1.200. Qual o valor do lançamento complementar?", a:300, e:"Falta a diferença: 1.500 − 1.200 = 300.", u:"R$"},
     {t:"wr", q:"Como se chama o lançamento que anula outro, invertendo débito e crédito?", a:["estorno"], e:"Estorno."},
     {t:"ew", q:"Uma despesa de energia de R$ 200 foi lançada em Despesa de aluguel. Escreva o lançamento de transferência que corrige direto.", d:["Despesa com energia"], c:["Despesa de aluguel"], e:"Debita-se a conta certa e credita-se a errada.", h:"Qual conta precisa receber o valor?"}
+   ]},
+  {id:"dc6", title:"Encerrando o resultado do período", icon:"🔒",
+   learn:[
+    {h:"Contas que zeram a cada período", b:`<p>Receitas e despesas são contas <b>temporárias</b>: no fim do período, precisam ser <b>zeradas</b> para começar o próximo do zero. Contas de Ativo, Passivo e PL são <b>permanentes</b>: seus saldos seguem para o período seguinte.</p>`},
+    {h:"A conta de apuração", b:`<p>Todo o saldo das contas de receita e de despesa é transferido para uma conta transitória: <b>Apuração do Resultado do Exercício (ARE)</b>.</p>` +
+      lanc([['D','Receita de vendas','50.000'],['C','Apuração do Resultado do Exercício','50.000']]) +
+      lanc([['D','Apuração do Resultado do Exercício','35.000'],['C','CMV e despesas (em conjunto)','35.000']]) +
+      `<p>Receitas são debitadas (elas eram credoras) e despesas são creditadas (elas eram devedoras): cada uma vai a zero.</p>`},
+    {h:"O saldo da apuração é o lucro", b:`<p>Depois de encerradas todas as receitas e despesas, o saldo da ARE mostra o resultado:</p>` + eq('Receitas (50.000) − Despesas (35.000) = Lucro de 15.000') +
+      lanc([['D','Apuração do Resultado do Exercício','15.000'],['C','Lucros acumulados','15.000']]) + `<p>Esse lucro (crédito) vai para uma conta do <b>Patrimônio Líquido</b>, como Lucros acumulados.</p>`},
+    {h:"E se der prejuízo?", b:`<p>Se as despesas superarem as receitas, a ARE fica com saldo devedor, e o lançamento final se inverte: <b>D Lucros ou prejuízos acumulados / C Apuração do Resultado do Exercício</b>. O prejuízo reduz o Patrimônio Líquido.</p>`}
+   ],
+   ex:[
+    {t:"mc", q:"Por que as contas de receita e despesa precisam ser encerradas no fim do período?", o:["Porque são temporárias e devem zerar para o próximo período começar do zero","Porque são contas de Ativo","Porque o Fisco exige a cada semana","Elas nunca são encerradas"], a:0, e:"Diferente de Ativo, Passivo e PL, que são permanentes."},
+    {t:"tf", q:"Ao encerrar uma conta de receita, ela é debitada, pois normalmente tem saldo credor.", a:true, e:"Debitar uma conta credora zera o seu saldo."},
+    {t:"mc", q:"Para onde vai o saldo de todas as contas de receita e despesa no encerramento?", o:["Para a Apuração do Resultado do Exercício","Direto para o Caixa","Para a conta de Clientes","Para o Passivo Circulante"], a:0, e:"A ARE reúne temporariamente todas as receitas e despesas do período."},
+    {t:"num", q:"Depois de encerradas as contas, a Apuração do Resultado do Exercício tem receitas totais de R$ 80.000 e despesas totais de R$ 65.000. Qual o resultado?", a:15000, u:"R$", e:"80.000 − 65.000 = 15.000 de lucro."},
+    {t:"mc", q:"O lucro apurado na ARE é transferido, no fechamento, para:", o:["Uma conta do Patrimônio Líquido, como Lucros acumulados","O Ativo Circulante","O Passivo Não Circulante","A conta Caixa"], a:0, e:"O lucro pertence aos sócios, por isso engorda o PL."},
+    {t:"tf", q:"Se as despesas superarem as receitas na apuração, o resultado reduz o Patrimônio Líquido.", a:true, e:"Um prejuízo diminui o PL, ao contrário do lucro."}
    ]}
   ]
 };

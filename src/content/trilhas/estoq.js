@@ -76,5 +76,23 @@ export default [
   en("Registro de uma perda de estoque por quebra, identificada na contagem física, R$ 350.","Despesa com perdas de estoque","Estoques",["Caixa","Fornecedores"],"A perda reduz o estoque e vira despesa do período."),
   nu("O saldo contábil do estoque é R$ 12.000. A contagem física aponta R$ 11.400. Qual o valor da perda?",600,"12.000 − 11.400 = 600.","R$"),
   tf("Obsolescência (o produto ficou ultrapassado) pode justificar um ajuste do estoque para baixo.",true,"Um produto ultrapassado costuma valer menos do que custou.")
+ ]},
+{id:"estoq6", title:"Estoque na indústria", icon:"🏭",
+ learn:[
+  {h:"Três estoques, não só um", b:`<p>Numa indústria, o estoque passa por <b>três fases</b> antes de virar CMV: matéria-prima, produção em andamento e produto pronto.</p>` +
+    tbl(['Conta','O que é'],[['Matéria-prima (MP)','Insumos ainda não usados na produção'],['Produtos em elaboração (PE)','O que está sendo fabricado agora, com parte do custo já aplicado'],['Produtos acabados (PA)','Já fabricado, pronto para vender']])},
+  {h:"O caminho do custo", b:ol(['A matéria-prima é <b>requisitada</b> para a fábrica: sai de MP e entra em PE.','Mão de obra e outros custos de fábrica também entram em PE.','Quando termina, o custo total sai de PE e entra em PA.','Quando vende, o custo sai de PA e vira <b>CPV</b> (custo dos produtos vendidos), o equivalente ao CMV na indústria.']) +
+    lanc([['D','Produtos em elaboração','8.000'],['C','Matéria-prima','8.000']])},
+  {h:"Do PE ao PA", b:box('exemplo','Um lote consumiu R$ 8.000 de matéria-prima e R$ 5.000 de mão de obra e outros custos de fábrica. Custo total do lote: R$ 13.000.') +
+    lanc([['D','Produtos acabados','13.000'],['C','Produtos em elaboração','13.000']]) + `<p>Só quando o produto está pronto é que o custo migra para Produtos acabados.</p>`},
+  {h:"Comércio x indústria", b:`<p>No comércio, a mercadoria é comprada já pronta: um único estoque. Na indústria, o mesmo dinheiro passa por três contas diferentes até virar produto vendável — por isso o controle de custos da indústria é mais detalhado.</p>`}
+ ],
+ ex:[
+  mc("Em qual conta fica o insumo que a fábrica ainda não usou?",["*Matéria-prima","Produtos em elaboração","Produtos acabados","CPV"],"Matéria-prima é o que ainda está no almoxarifado."),
+  od("Ordene o caminho do custo na indústria, da matéria-prima até a venda:",["Matéria-prima","Produtos em elaboração","Produtos acabados","CPV (custo dos produtos vendidos)"],"O custo passa por MP, PE, PA e só vira CPV quando o produto é vendido."),
+  nu("Um lote consumiu R$ 6.000 de matéria-prima e R$ 4.000 de mão de obra e custos de fábrica. Qual o custo total transferido para Produtos acabados?",10000,"6.000 + 4.000 = 10.000.","R$"),
+  tf("Produtos em elaboração é o estoque do que já está pronto, esperando ser vendido.",false,"O que já está pronto é Produtos acabados. Em elaboração é o que ainda está sendo fabricado."),
+  mt([["Matéria-prima","Insumo ainda não usado na produção"],["Produtos em elaboração","Está sendo fabricado agora"],["Produtos acabados","Pronto para vender"],["CPV","Custo do que já foi vendido"]],"Cada fase do estoque industrial tem seu próprio nome de conta."),
+  wr("Na indústria, como se chama o custo do que foi vendido, equivalente ao CMV do comércio? (sigla)",["cpv"],"CPV: Custo dos Produtos Vendidos.")
  ]}
 ];

@@ -96,6 +96,21 @@ export default {
     {t:"class", q:"Sintética ou analítica?", cats:["Sintética","Analítica"], items:[["Ativo Circulante",0],["Caixa",1],["Disponível",0],["Banco do Bairro S.A.",1],["Passivo Circulante",0]], e:"Analíticas são o último nível."},
     {t:"wr", q:"Como se chamam as contas do último nível, que recebem os lançamentos?", a:["analiticas","analitica","contas analiticas"], e:"Contas analíticas."},
     {t:"mc", q:"Qual a principal vantagem de um plano de contas bem feito?", o:["Registros padronizados e relatórios comparáveis","Pagar menos impostos","Dispensar documentos","Eliminar a auditoria"], a:0, e:"Padronização gera informação confiável."}
+   ]},
+  {id:"base6", title:"Competência x caixa", icon:"🗓️",
+   learn:[
+    {h:"Dois jeitos de contar", b:`<p>Já vimos que receitas e despesas entram <b>quando acontecem</b> (competência). Existe também o <b>regime de caixa</b>, que só registra quando o dinheiro efetivamente entra ou sai.</p>`},
+    {h:"Comparando na prática", b:tbl(['Fato','Regime de competência','Regime de caixa'],[['Venda em dezembro, recebida em janeiro','Receita de dezembro','Receita de janeiro'],['Aluguel de março, pago em abril','Despesa de março','Despesa de abril'],['Conta de luz de maio, paga em maio','Despesa de maio (mesmo mês nos dois)','Despesa de maio']])},
+    {h:"Quem usa cada um", b:ul(['<b>Competência</b>: regra geral da Contabilidade societária no Brasil, obrigatória para a maioria das empresas.','<b>Caixa</b>: permitido em situações específicas, como o MEI e algumas apurações tributárias simplificadas.']) + box('regra','As demonstrações financeiras das empresas seguem o regime de competência, porque ele mostra melhor o desempenho real do período.')},
+    {h:"Por que competência é mais fiel", b:`<p>O regime de caixa pode distorcer o resultado: uma empresa pode parecer lucrativa só porque recebeu adiantado, ou parecer no prejuízo só porque pagou tudo de uma vez.</p>` + box('exemplo','Uma escola recebe a mensalidade de dezembro só em janeiro. Pelo caixa, dezembro parece fraco e janeiro parece ótimo — mas o serviço foi prestado em dezembro.')}
+   ],
+   ex:[
+    {t:"mc", q:"Pelo regime de competência, uma venda feita em dezembro e recebida em janeiro é receita de:", o:["Dezembro","Janeiro","Metade em cada mês","Do mês em que o boleto vence"], a:0, e:"A receita pertence ao mês em que o fato ocorreu, não ao mês do recebimento."},
+    {t:"tf", q:"O regime de caixa registra receitas e despesas só quando o dinheiro entra ou sai de fato.", a:true, e:"É a diferença central entre os dois regimes."},
+    {t:"mc", q:"Qual regime as demonstrações financeiras das empresas seguem, como regra geral, no Brasil?", o:["Competência","Caixa","Metade competência, metade caixa","Depende do dia do mês"], a:0, e:"A competência mostra melhor o desempenho real do período."},
+    {t:"class", q:"Nesta situação, em que mês fica cada despesa pelo regime de COMPETÊNCIA?", cats:["Mês do fato gerador","Mês do pagamento"], items:[["Aluguel de março pago em abril",0],["Salário de junho pago em julho",0],["Conta de telefone de maio paga em maio",0],["Serviço prestado em agosto, cobrado em setembro",0]], e:"Pela competência, tudo vai para o mês em que o fato realmente aconteceu, não para o mês do pagamento."},
+    {t:"tf", q:"O regime de caixa pode fazer um mês parecer mais lucrativo do que realmente foi.", a:true, e:"Um recebimento adiantado, por exemplo, infla o caixa de um mês que na verdade teve pouca atividade."},
+    {t:"wr", q:"Qual regime registra os fatos no momento em que eles acontecem, e não quando o dinheiro se move?", a:["competencia","regime de competencia"], e:"Regime de competência."}
    ]}
   ]
 };

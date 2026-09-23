@@ -119,6 +119,40 @@ export default {
     {t:"tf", q:"Provisões são obrigações que já existem, mesmo com valor ou data incertos.", a:true, e:"Nascem de fatos passados."},
     {t:"mc", q:"A provisão de férias atende a qual regime?", o:["Competência","Caixa","Presumido","Nenhum"], a:0, e:"A despesa é do mês trabalhado."},
     {t:"wr", q:"Qual fração do 13º o empregado ganha por mês trabalhado? (ex: 1/2)", a:["1/12","um doze avos"], e:"Um doze avos (1/12) por mês."}
+   ]},
+  {id:"lanc8", title:"Devoluções e abatimentos", icon:"↪️",
+   learn:[
+    {h:"Quando o cliente devolve", b:`<p>Uma venda pode ser desfeita, total ou parcialmente: o produto veio com defeito, ou não era o que o cliente pediu. Isso é uma <b>devolução de vendas</b>.</p>`},
+    {h:"Duas partes, de novo", b:`<p>A devolução desfaz a venda em espelho: cancela a receita e devolve o custo ao estoque.</p>` +
+      lanc([['D','Devolução de vendas','1.000'],['C','Caixa ou Clientes','1.000']]) + lanc([['D','Estoques','600'],['C','CMV','600']]) +
+      `<p><b>Devolução de vendas</b> é uma conta redutora da receita bruta, e aparece deduzindo a receita bruta na DRE.</p>`},
+    {h:"Abatimento", b:`<p>Diferente da devolução, no <b>abatimento</b> o cliente <b>fica com a mercadoria</b>, mas recebe um desconto por algum problema (um defeito pequeno, um atraso na entrega).</p>` +
+      lanc([['D','Abatimento sobre vendas','100'],['C','Caixa ou Clientes','100']]) + `<p>Não há baixa de estoque, porque o produto não voltou.</p>`},
+    {h:"Na DRE", b:tbl(['Linha','R$'],[['Receita bruta','10.000'],['(−) Devoluções e abatimentos','(300)'],['(=) Receita líquida','9.700']]) + box('dica','Devoluções e abatimentos são deduções da receita bruta, junto com os impostos sobre vendas.')}
+   ],
+   ex:[
+    {t:"entry", q:"Cliente devolve mercadoria vendida por R$ 500, que havia sido paga em dinheiro. Registre o cancelamento da receita.", accts:["Devolução de vendas","Caixa","Estoques","CMV"], d:["Devolução de vendas"], c:["Caixa"], e:"A devolução reduz a receita (débito) e o dinheiro volta ao cliente (crédito em Caixa)."},
+    {t:"entry", q:"O estoque devolvido no exemplo anterior custava R$ 320. Registre o retorno ao estoque.", accts:["Estoques","CMV","Devolução de vendas","Caixa"], d:["Estoques"], c:["CMV"], e:"O produto volta ao estoque (débito) e o custo que havia ido para o resultado é estornado (crédito em CMV)."},
+    {t:"tf", q:"Na devolução de vendas, o estoque também retorna para a empresa.", a:true, e:"Diferente do abatimento, na devolução a mercadoria volta fisicamente."},
+    {t:"tf", q:"No abatimento sobre vendas, o cliente devolve a mercadoria e recebe o dinheiro de volta.", a:false, e:"No abatimento o cliente fica com a mercadoria; só o preço é reduzido."},
+    {t:"mc", q:"Na DRE, devoluções e abatimentos aparecem:", o:["Deduzindo a receita bruta","Somados ao CMV","Como despesa financeira","Não aparecem na DRE"], a:0, e:"Junto com os impostos sobre vendas, formam as deduções da receita bruta."},
+    {t:"mc", q:"Um cliente recebe R$ 80 de desconto por um pequeno defeito, mas fica com o produto. Isso é:", o:["Um abatimento sobre vendas","Uma devolução de vendas","Uma perda de estoque","Uma despesa financeira"], a:0, e:"Não há devolução física da mercadoria: é um abatimento."}
+   ]},
+  {id:"lanc9", title:"Provisão para devedores duvidosos", icon:"🚨",
+   learn:[
+    {h:"Nem todo cliente paga", b:`<p>Quando a empresa vende a prazo, sabe, pela experiência, que uma parte dos clientes não vai pagar. Registrar essa expectativa <b>antes</b> que aconteça é aplicar o princípio da <b>prudência</b>.</p>`},
+    {h:"A provisão", b:`<p>A <b>Provisão para Devedores Duvidosos (PDD)</b>, também chamada de perdas estimadas em créditos de liquidação duvidosa, é uma conta <b>redutora do Ativo</b> (de Clientes).</p>` +
+      lanc([['D','Despesa com devedores duvidosos','2.000'],['C','Provisão para devedores duvidosos','2.000']]) + box('exemplo','Clientes de R$ 100.000, com histórico de 2% de inadimplência: provisão de R$ 2.000.')},
+    {h:"No Balanço", b:tbl(['Conta','R$'],[['Clientes','100.000'],['(−) Provisão para devedores duvidosos','(2.000)'],['<b>Clientes, líquido</b>','<b>98.000</b>']]) + `<p>O Ativo já aparece pelo valor que a empresa realisticamente espera receber.</p>`},
+    {h:"Quando o cliente não paga mesmo", b:`<p>Se depois um cliente específico realmente não paga, a baixa usa a provisão que já existia, sem gerar uma nova despesa:</p>` + lanc([['D','Provisão para devedores duvidosos','500'],['C','Clientes','500']])}
+   ],
+   ex:[
+    {t:"mc", q:"A Provisão para Devedores Duvidosos existe para aplicar qual princípio?", o:["Prudência","Competência","Entidade","Continuidade"], a:0, e:"Reconhecer a perda provável antes que ela se confirme é prudência."},
+    {t:"entry", q:"Constituição da provisão para devedores duvidosos, R$ 2.000, estimada sobre o saldo de Clientes.", accts:["Despesa com devedores duvidosos","Provisão para devedores duvidosos","Clientes","Caixa"], d:["Despesa com devedores duvidosos"], c:["Provisão para devedores duvidosos"], e:"A despesa vai ao resultado; a provisão reduz o Ativo (Clientes)."},
+    {t:"num", q:"Saldo de Clientes de R$ 150.000, com 3% estimados como incobráveis. Qual o valor da provisão?", a:4500, u:"R$", e:"150.000 × 3% = 4.500."},
+    {t:"mc", q:"No Balanço, a Provisão para Devedores Duvidosos aparece:", o:["Reduzindo o saldo de Clientes","Somada ao Passivo","Como despesa financeira","No Patrimônio Líquido"], a:0, e:"É uma conta redutora do Ativo, junto de Clientes."},
+    {t:"tf", q:"Quando um cliente específico não paga e já havia provisão constituída, a baixa gera uma nova despesa.", a:false, e:"A baixa usa a provisão que já existia; a despesa já tinha sido reconhecida antes."},
+    {t:"num", q:"Clientes de R$ 80.000 e provisão de R$ 3.000. Qual o valor líquido de Clientes no Balanço?", a:77000, u:"R$", e:"80.000 − 3.000 = 77.000."}
    ]}
   ]
 };
