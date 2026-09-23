@@ -2,7 +2,7 @@ import { $, bindActs } from '../dom.js';
 import { S, today, nextLesson, doneCount, curStreak, courseComplete, courseUnlocked, lessonsDone } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { pick } from '../../engine/random.js';
-import { COURSES, TIPS } from '../../content/index.js';
+import { COURSES, TIPS, PANELS } from '../../content/index.js';
 import { SAY } from '../../content/dialogues.js';
 import { bento } from '../components/bento.js';
 import { go, sheet, ring, missionCard, claimMission, claimChest } from '../router.js';
@@ -24,7 +24,7 @@ export function renderHome(){
   const bubble = pick(cs >= 3 ? ['Sua sequência de ' + cs + ' dias está incrível! 🔥', SAY.learn[0]] : [pick(TIPS)]);
   s.innerHTML = '<div class="bento-row"><div class="bento-wrap sm">' + bento('idle') + '</div><div class="speech">' + bubble + '</div></div>' +
     '<div class="goal-row">' + ring(Math.min(1, tx / S.goal), hit) + '<div><div class="goal-t">' + (hit ? 'Meta de hoje concluída!' : 'Meta de hoje') + '</div><div class="goal-s">' + tx + ' de ' + S.goal + ' XP</div></div></div>' +
-    cont + missionCard() + '<h2 class="sec-h">Trilhas do curso</h2><div class="course-list">' + COURSES.map(courseRow).join('') + '</div>';
+    cont + missionCard() + '<h2 class="sec-h">Trilhas do curso</h2>' + panelList();
   bindActs(s, {
     cont: () => openLesson(nl),
     final: () => { const c = COURSES.find(c => courseComplete(c) && !S.trophies[c.id]); openPath(c); },
@@ -33,6 +33,16 @@ export function renderHome(){
     chest: claimChest,
     course: b => { const c = COURSES[+b.dataset.i]; if (courseUnlocked(c)) openPath(c); else lockedCourse(c); }
   });
+}
+function panelList(){
+  let n = 0;
+  return PANELS.map(p => {
+    const cs = COURSES.filter(c => c.panel === p.id);
+    if (!cs.length) return '';
+    n++;
+    return '<div class="panel"><div class="panel-head"><div class="panel-num">' + n + '</div><div><div class="panel-t">' + p.title + '</div><div class="panel-d">' + p.desc + '</div></div></div>' +
+      '<div class="course-list">' + cs.map(courseRow).join('') + '</div></div>';
+  }).join('');
 }
 export function courseRow(c){
   const d = lessonsDone(c), n = c.lessons.length, lk = !courseUnlocked(c);

@@ -66,6 +66,54 @@ distribuídas pelas 10 trilhas já existentes, mais uma trilha nova completa:
   jogada ponta a ponta no navegador, testando os tipos `mc`, `num`, `class`,
   `tf` e `entry`.
 
+## Atualização 2026-09-23 (mesmo dia, mais tarde): painéis, revisões e qualidade de imagem
+
+Terceiro pedido do usuário na mesma sessão: "algumas imagens tão feias ou
+bugadas ou com baixo gráfico, melhore e adicione mais aulas e separe os
+cursos por painéis, [...] no Duolingo só de inglês tem 170 passos [...]".
+Três frentes:
+
+1. **Qualidade de imagem.** As imagens do mascote (`public/images/bento/*.png`
+   e `bento-hero.png`) tinham sido exportadas com `sharp({ palette: true })`
+   (PNG indexado, 256 cores) para economizar espaço — isso causava banding
+   visível nos degradês do pelo/sombreamento. Reexportadas sem paletização
+   (`palette: false`, truecolor), maiores em bytes (~2,5 MB de precache total
+   agora, ainda tranquilo para uma PWA) mas nitidamente mais nítidas.
+2. **PWA sem auto-update de verdade era provavelmente a causa real da
+   percepção de "bugado".** `vite-plugin-pwa` com `registerType:'autoUpdate'`
+   e o registro automático (`injectRegister:'auto'`) NÃO recarrega a aba
+   sozinho depois de um novo deploy — o usuário podia estar vendo uma mistura
+   de bundle JS antigo com assets novos (ou vice-versa) até fechar/reabrir o
+   app manualmente. Corrigido: `injectRegister:false` + registro manual via
+   `virtual:pwa-register` em `src/main.js`, que agora mostra um toast e
+   recarrega sozinho quando detecta uma versão nova (`onNeedRefresh`).
+   **Isso é o tipo de bug que só aparece depois de já ter feito pelo menos
+   um deploy anterior — vale lembrar disso se o usuário relatar "imagem
+   errada/antiga" de novo no futuro: pedir pra checar se é reprodutível
+   depois de fechar e reabrir o app, antes de assumir que é o código.**
+3. **Painéis.** `src/content/layout.js` ganhou `export const PANELS` (5
+   grupos: `fund`, `op`, `gestao`, `trib_aud`, `extra`) e cada entrada de
+   `LAYOUT` ganhou um campo `panel`. `src/ui/screens/home.js` (`panelList()`)
+   agora renderiza um cabeçalho colorido por painel antes das trilhas
+   daquele grupo — puramente visual/organizacional, não mexe na lógica de
+   desbloqueio sequencial das trilhas.
+4. **Mais lições, formato "revisão".** Em vez de inventar 11 tópicos novos
+   (arriscado para manter qualidade/precisão em uma passada só), foi
+   adicionada uma lição de **revisão** ao final de cada uma das 11 trilhas
+   (`antes11`, `base7`, `dc7`, `lanc10`, `imob6`, `estoq7`, `demo7`, `cust7`,
+   `trib5`, `aud7`, `vida5`) — 1-2 cartões de resumo + 6 exercícios que
+   recombinam (com números/frases novos) o que já foi ensinado na própria
+   trilha. É o padrão real de "checkpoint" do Duolingo (pouca ou nenhuma
+   teoria nova, só mais prática) e tem risco de erro factual bem menor do
+   que criar conteúdo genuinamente novo. Total: 68 → **79 lições**.
+
+Sobre o "170 passos com 20 lições cada" do Duolingo de inglês: é uma
+referência de escala, não um alvo literal — aquele curso representa anos de
+trabalho de uma equipe grande. Bom ter isso registrado caso o usuário peça
+"mais" de novo: a resposta sustentável é continuar crescendo aos poucos
+(mais revisões, mais trilhas do roadmap abaixo), não tentar replicar a
+escala do Duolingo numa única sessão.
+
 ## Ideias para trilhas futuras (do briefing, ainda não escritas)
 
 Sequência sugerida por menor risco regulatório primeiro (item 1 já foi

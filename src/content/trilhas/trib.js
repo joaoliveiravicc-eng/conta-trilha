@@ -66,6 +66,18 @@ export default {
     {t:"tf", q:"Emitir uma nota fiscal com valor menor do que o real para pagar menos imposto é elisão fiscal.", a:false, e:"Isso é evasão (sonegação): um meio ilícito, e não apenas uma escolha entre opções legais."},
     {t:"mc", q:"Sonegação fiscal é:", o:["Crime, além de gerar multa e cobrança do tributo com juros","Apenas uma infração administrativa leve","Permitida se o valor for pequeno","O mesmo que elisão fiscal"], a:0, e:"A Lei nº 8.137/1990 tipifica crimes contra a ordem tributária."},
     {t:"match", pairs:[["Elisão fiscal","Redução lícita da carga tributária"],["Evasão fiscal","Redução por meios ilícitos, como omitir receita"],["Fato gerador","O evento que faz nascer a obrigação de pagar o tributo"]], e:"O critério central é sempre a licitude do meio usado."}
+   ]},
+  {id:"trib5", title:"Revisão: tributos", icon:"🔄",
+   learn:[
+    {h:"O mapa dos tributos", b:tbl(['Pergunta','Resposta'],[['Imposto, taxa ou contribuição de melhoria?','Taxa tem contrapartida de serviço; contribuição de melhoria vem de obra pública'],['Direto ou indireto?','Direto recai sobre quem paga; indireto é repassado no preço'],['Qual regime?','Simples (pequenas empresas), Presumido (base por %) ou Real (sobre o lucro ajustado)'],['Lícito ou ilícito?','Elisão é legal; evasão (sonegação) é crime']])}
+   ],
+   ex:[
+    {t:"mc", q:"O ICMS é um tributo:", o:["Indireto, embutido no preço","Direto, recai só sobre o dono da empresa","Que não existe mais","Municipal"], a:0, e:"ICMS é repassado ao consumidor no preço: tributo indireto."},
+    {t:"match", pairs:[["Imposto","Sem contrapartida específica"],["Taxa","Paga por um serviço ou fiscalização"],["Contribuição de melhoria","Por obra pública que valoriza o imóvel"]], e:"As três espécies clássicas de tributo."},
+    {t:"tf", q:"No Simples Nacional, vários tributos são pagos numa guia única, o DAS.", a:true, e:"É uma das principais vantagens do regime para pequenas empresas."},
+    {t:"mc", q:"Escolher, entre dois regimes tributários permitidos, o que gera menos imposto a pagar é:", o:["Elisão fiscal","Evasão fiscal","Crime contra a ordem tributária","Impossível de se fazer"], a:0, e:"É uma escolha lícita, dentro do que a lei permite."},
+    {t:"tf", q:"No Lucro Real, uma empresa sem lucro no período ainda paga IRPJ normalmente.", a:false, e:"No Lucro Real, o IRPJ incide sobre o lucro; sem lucro, não há imposto a pagar."},
+    {t:"mc", q:"Emitir uma nota fiscal com valor menor do que o real para pagar menos imposto é:", o:["Evasão fiscal (sonegação), um crime","Elisão fiscal, uma prática legal","Irrelevante para a Contabilidade","Obrigatório em alguns casos"], a:0, e:"É um meio ilícito de reduzir tributo: evasão fiscal."}
    ]}
   ]
 };

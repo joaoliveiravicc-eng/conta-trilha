@@ -82,6 +82,18 @@ export default {
     {t:"tf", q:"Um ativo pode ficar registrado por um valor contábil maior do que o seu valor recuperável, sem qualquer ajuste.", a:false, e:"Pela prudência, quando o valor contábil supera o recuperável, reconhece-se a perda."},
     {t:"mc", q:"Ativos intangíveis de vida útil indefinida, como o goodwill, devem ser testados quanto ao valor recuperável:", o:["Todo ano, com ou sem indício de perda","Só quando a empresa quiser","Nunca, porque não amortizam","Só no ano da compra"], a:0, e:"Por não terem amortização regular, a checagem anual é obrigatória."},
     {t:"tf", q:"Havendo indícios de perda de valor, um bem de vida útil definida também deve ser testado quanto ao valor recuperável, mesmo fora do teste anual obrigatório dos intangíveis de vida indefinida.", a:true, e:"Indícios de perda de valor disparam o teste a qualquer momento, para qualquer tipo de ativo."}
+   ]},
+  {id:"imob6", title:"Revisão: imobilizado e intangíveis", icon:"🔄",
+   learn:[
+    {h:"Do custo à baixa", b:ol(['Reconhecimento: custo total até o bem ficar pronto para uso.','Depreciação: distribui o custo ao longo da vida útil (linear, acelerado ou por unidades produzidas).','Baixa: compara o valor de venda com o valor contábil líquido para achar ganho ou perda.','Impairment: se o valor recuperável cair abaixo do valor contábil, reconhece-se a perda.'])}
+   ],
+   ex:[
+    {t:"num", q:"Equipamento de R$ 25.000, com frete de R$ 1.000 e instalação de R$ 2.000. Qual o custo capitalizado?", a:28000, u:"R$", e:"25.000 + 1.000 + 2.000 = 28.000."},
+    {t:"num", q:"Bem com custo de R$ 60.000, valor residual de R$ 10.000 e vida útil de 5 anos. Qual a depreciação anual pelo método linear?", a:10000, u:"R$", e:"(60.000 − 10.000) ÷ 5 = 10.000."},
+    {t:"num", q:"Máquina com custo de R$ 40.000 e depreciação acumulada de R$ 24.000, vendida por R$ 20.000. Qual o resultado da venda?", a:4000, u:"R$", e:"Valor contábil = 40.000 − 24.000 = 16.000. Resultado = 20.000 − 16.000 = 4.000 de ganho."},
+    {t:"tf", q:"O ágio por rentabilidade futura (goodwill) é amortizado mensalmente, como qualquer outro intangível.", a:false, e:"O goodwill não é amortizado; é testado por impairment todo ano."},
+    {t:"mc", q:"Um ativo com valor contábil de R$ 90.000 e valor recuperável de R$ 65.000 deve:", o:["Reconhecer uma perda por impairment de R$ 25.000","Ser reavaliado para cima","Continuar sem nenhum ajuste","Virar despesa integral imediatamente"], a:0, e:"90.000 − 65.000 = 25.000 de perda, pelo princípio da prudência."},
+    {t:"mc", q:"Terrenos, em geral, sofrem:", o:["Nenhuma depreciação, por terem vida útil indefinida","Depreciação acelerada","Amortização mensal","Exaustão"], a:0, e:"Terrenos não se desgastam com o uso da mesma forma que máquinas e veículos."}
    ]}
   ]
 };

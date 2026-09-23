@@ -93,6 +93,18 @@ export default {
     {t:"tf", q:"A responsabilidade primária por prevenir e detectar fraudes no dia a dia é da administração da empresa.", a:true, e:"Os controles internos, mantidos pela administração, são a primeira linha de defesa."},
     {t:"mc", q:"Um funcionário que desvia dinheiro do caixa para uso pessoal comete:", o:["Apropriação indevida de ativos","Manipulação de resultados","Um erro contábil","Uma estimativa incorreta"], a:0, e:"É o desvio de um ativo específico, diferente de maquiar o resultado da empresa toda."},
     {t:"tf", q:"Fraudes costumam ser mais fáceis de detectar do que erros, porque deixam mais rastros.", a:false, e:"O contrário: fraudes envolvem ocultação deliberada, o que as torna mais difíceis de detectar."}
+   ]},
+  {id:"aud7", title:"Revisão: auditoria", icon:"🔄",
+   learn:[
+    {h:"Do planejamento à opinião", b:ol(['Avaliar <b>risco</b> e definir a <b>materialidade</b>.','Entender e testar os <b>controles internos</b>.','Coletar <b>evidências</b> (inspeção, confirmação, recálculo...).','Emitir o <b>relatório</b>, com opinião sem ressalva, com ressalva, adversa ou abstenção.'])}
+   ],
+   ex:[
+    {t:"mc", q:"A auditoria das demonstrações financeiras oferece:", o:["Segurança razoável, não certeza absoluta","Certeza absoluta de que não há erros","Garantia de lucro futuro","Aprovação do plano de negócios"], a:0, e:"Ela usa testes e amostragem, não examina 100% das transações."},
+    {t:"num", q:"Lucro antes dos impostos de R$ 800.000 e materialidade de 5%. Qual o valor da materialidade?", a:40000, u:"R$", e:"800.000 × 5% = 40.000."},
+    {t:"mc", q:"Segregação de funções significa:", o:["Pessoas diferentes autorizam, registram e guardam os ativos","Uma só pessoa de confiança cuida de tudo","Eliminar toda supervisão","Trocar de contador a cada ano"], a:0, e:"Assim ninguém consegue cometer e esconder um erro ou fraude sozinho."},
+    {t:"match", pairs:[["Confirmação externa","Resposta direta de um terceiro, como um banco"],["Recálculo","Refazer as contas"],["Observação","Ver um processo acontecendo, como a contagem do estoque"]], e:"Cada procedimento produz um tipo de evidência."},
+    {t:"tf", q:"Um parágrafo de ênfase no relatório do auditor muda a opinião emitida.", a:false, e:"A ênfase só destaca algo já divulgado corretamente; a opinião continua a mesma."},
+    {t:"mc", q:"Distorções relevantes e generalizadas nas demonstrações levam a uma opinião:", o:["Adversa","Sem ressalva","Sempre com ressalva","Não é preciso opinar"], a:0, e:"Quando o problema é ao mesmo tempo relevante e espalhado pelas demonstrações, a opinião é adversa."}
    ]}
   ]
 };

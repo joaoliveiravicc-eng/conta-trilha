@@ -12,7 +12,7 @@ import antes from './trilhas/antes.js';
 import vida from './trilhas/vida.js';
 import estoq from './trilhas/estoq.js';
 import EXTRA from './extra.js';
-import { buildCourses } from './layout.js';
+import { buildCourses, PANELS } from './layout.js';
 import { GLOSSARY, GLOSS_ADD } from './glossary.js';
 
 const rawCourses = [base, dc, lanc, demo, cust, trib, aud, imob];
@@ -31,6 +31,7 @@ COURSES.forEach((c, ci) => {
 });
 
 export const TOTAL_LESSONS = COURSES.reduce((a, c) => a + c.lessons.length, 0);
+export { PANELS };
 export const GLOSS = GLOSSARY.concat(GLOSS_ADD).sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));
 
 export { CASES } from './cases.js';

@@ -12,6 +12,17 @@ import { renderGlossary } from './ui/screens/glossary.js';
 import { renderProfile } from './ui/screens/profile.js';
 import { renderOnb, resetOnb } from './ui/screens/onboarding.js';
 import { primary, quitQuiz, SES, R } from './ui/screens/quiz.js';
+import { toast } from './ui/components/toast.js';
+
+/* ---------- PWA: atualiza sozinho quando sobe uma versão nova, para nunca
+   ficar preso a um bundle antigo em cache junto com assets novos. ---------- */
+if ('serviceWorker' in navigator){
+  import('virtual:pwa-register').then(({ registerSW }) => {
+    const updateSW = registerSW({
+      onNeedRefresh(){ toast('Nova versão disponível, atualizando...'); setTimeout(() => updateSW(true), 1200); }
+    });
+  }).catch(() => {});
+}
 
 /* ---------- eventos globais ---------- */
 $('#q-btn').addEventListener('click', primary);

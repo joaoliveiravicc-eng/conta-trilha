@@ -93,6 +93,18 @@ export default {
     {t:"mc", q:"No mark-up divisor, os percentuais de despesas, impostos e lucro incidem sobre:", o:["O preço de venda","O custo do produto","O lucro líquido total da empresa","O capital social"], a:0, e:"Por isso a fórmula divide o custo por (1 − soma dos percentuais), em vez de multiplicar."},
     {t:"tf", q:"Um preço calculado pelo mark-up sempre garante que o produto vai vender bem no mercado.", a:false, e:"O mark-up é um ponto de partida; a concorrência e a disposição do cliente a pagar também definem o preço."},
     {t:"tf", q:"Margem sobre o custo e margem sobre o preço de venda são a mesma conta.", a:false, e:"São bases diferentes e dão resultados diferentes; é preciso saber qual está sendo usada."}
+   ]},
+  {id:"cust7", title:"Revisão: custos e gerencial", icon:"🔄",
+   learn:[
+    {h:"O caminho do gasto", b:ol(['Todo gasto nasce como <b>investimento</b>, <b>custo</b>, <b>despesa</b> ou <b>perda</b>.','Custos podem ser <b>diretos</b> ou <b>indiretos</b>, e <b>fixos</b> ou <b>variáveis</b>.','A <b>margem de contribuição</b> (preço − custo variável) define o <b>ponto de equilíbrio</b>.','O <b>orçamento</b> parte das vendas esperadas e se desdobra em produção, compras e caixa.'])}
+   ],
+   ex:[
+    {t:"class", q:"Classifique cada gasto", cats:["Custo","Despesa","Investimento"], items:[["Matéria-prima consumida",0],["Comissão de vendas",1],["Compra de uma máquina nova",2],["Salário do supervisor de fábrica",0]], e:"Custo é da produção; despesa é de vender/administrar; investimento fica no Ativo."},
+    {t:"num", q:"Preço de venda de R$ 60 e custo variável de R$ 35 por unidade. Qual a margem de contribuição unitária?", a:25, u:"R$", e:"60 − 35 = 25."},
+    {t:"num", q:"Custos fixos de R$ 20.000 e margem de contribuição unitária de R$ 25. Qual o ponto de equilíbrio, em unidades?", a:800, e:"20.000 ÷ 25 = 800."},
+    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira","São ignorados","Viram receita"], a:0, e:"É a diferença central em relação ao custeio variável."},
+    {t:"tf", q:"Se a produção dobra, o custo fixo total também dobra.", a:false, e:"O custo fixo total não muda com o volume; o que cai é o custo fixo por unidade."},
+    {t:"num", q:"Custo de R$ 50 e soma dos percentuais sobre o preço de 50%. Qual o preço de venda pelo mark-up divisor?", a:100, u:"R$", e:"50 ÷ (1 − 0,50) = 50 ÷ 0,50 = 100."}
    ]}
   ]
 };

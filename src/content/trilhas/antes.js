@@ -160,5 +160,20 @@ export default [
   tf("Estimar um resultado antes de calcular com exatidão ajuda a perceber erros grosseiros.",true,"Arredondar os números dá uma ideia da ordem de grandeza esperada."),
   nu("Estoque inicial de R$ 8.000 e final de R$ 10.000. Qual o estoque médio do período?",9000,"(8.000 + 10.000) ÷ 2 = 9.000.","R$","Estoque médio é a média entre inicial e final."),
   wr("Quando cada valor tem um peso diferente na conta, a média se chama média ___.",["ponderada"],"Média ponderada.")
+ ]},
+{id:"antes11", title:"Revisão: matemática financeira", icon:"🔄",
+ learn:[
+  {h:"Sua caixa de ferramentas", b:`<p>Antes de seguir para a Contabilidade de verdade, um resumo rápido do que você já sabe fazer:</p>` +
+    tbl(['Ferramenta','Quando usar'],[['Porcentagem','Impostos, margens, aumentos e descontos'],['Regra de três e rateio','Distribuir um valor no tempo ou entre partes'],['Saldo (+ e −)','Somar entradas e subtrair saídas'],['Juros simples e compostos','O preço do dinheiro no tempo'],['Variação percentual','Comparar um valor novo com o antigo'],['Médias','Custo médio, estoque médio, prazos médios']])},
+  {h:"Um erro comum", b:box('atencao','Aumentar 20% e depois diminuir 20% <b>não</b> volta ao valor original — a segunda conta usa uma base diferente. Isso vale tanto para porcentagem simples quanto para variação percentual.')}
+ ],
+ ex:[
+  nu("Um produto de R$ 300 sobe 20% e depois cai 20%. Qual o valor final?",288,"300 × 1,20 = 360; 360 × 0,80 = 288. Não volta a 300, porque a segunda conta incide sobre uma base maior.","R$","Faça as duas contas em sequência, não de uma vez."),
+  nu("Aluguel anual de R$ 18.000, rateado igualmente pelos 12 meses. Quanto é 1 mês?",1500,"18.000 ÷ 12 = 1.500.","R$"),
+  nu("Juros simples: capital de R$ 4.000 a 1,5% ao mês por 6 meses. Quanto de juros?",360,"4.000 × 0,015 × 6 = 360.","R$"),
+  nu("Vendas foram de R$ 600 para R$ 750. Qual a variação percentual?",25,"(750 − 600) ÷ 600 = 0,25 = 25%.","%"),
+  tf("Um saldo de −R$ 200 é maior do que um saldo de −R$ 500.",true,"Quanto mais próximo de zero (ou positivo), maior o saldo: −200 > −500."),
+  mc("60 unidades a R$ 4 e 40 unidades a R$ 9. Qual a média ponderada por unidade?",["*R$ 6,00","R$ 6,50","R$ 5,00","R$ 13,00"],"(60×4 + 40×9) ÷ 100 = (240+360) ÷ 100 = 6,00."),
+  nu("Um seguro semestral de R$ 3.600 é pago à vista. Quanto corresponde a 2 meses?",1200,"3.600 ÷ 6 × 2 = 1.200.","R$")
  ]}
 ];

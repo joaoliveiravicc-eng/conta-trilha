@@ -94,5 +94,17 @@ export default [
   tf("Produtos em elaboração é o estoque do que já está pronto, esperando ser vendido.",false,"O que já está pronto é Produtos acabados. Em elaboração é o que ainda está sendo fabricado."),
   mt([["Matéria-prima","Insumo ainda não usado na produção"],["Produtos em elaboração","Está sendo fabricado agora"],["Produtos acabados","Pronto para vender"],["CPV","Custo do que já foi vendido"]],"Cada fase do estoque industrial tem seu próprio nome de conta."),
   wr("Na indústria, como se chama o custo do que foi vendido, equivalente ao CMV do comércio? (sigla)",["cpv"],"CPV: Custo dos Produtos Vendidos.")
+ ]},
+{id:"estoq7", title:"Revisão: estoques", icon:"🔄",
+ learn:[
+  {h:"O caminho do estoque", b:tbl(['Etapa','O que acontece'],[['Custo de aquisição','Preço + frete + seguro − desconto incondicional'],['Método de custeio','PEPS ou custo médio ponderado decidem o custo de saída'],['CMV','Estoque inicial + Compras − Estoque final'],['Ajuste','Contagem física pode revelar perda a ajustar']])}
+ ],
+ ex:[
+  nu("Compra de R$ 12.000, frete de R$ 600 e desconto incondicional de R$ 300. Qual o custo de aquisição?",12300,"12.000 + 600 − 300 = 12.300.","R$"),
+  nu("Estoque: 50 un a R$ 6 (lote 1) e 100 un a R$ 9 (lote 2). Pelo PEPS, vendendo 80 un, qual o CMV?",570,"50×6=300 (lote 1 todo) + 30×9=270 (parte do lote 2). CMV = 300+270=570.","R$","Primeiro sai todo o lote mais antigo."),
+  nu("Estoque inicial R$ 10.000, compras R$ 40.000, estoque final R$ 9.000. Qual o CMV?",41000,"10.000 + 40.000 − 9.000 = 41.000.","R$"),
+  tf("O método UEPS é aceito pelas normas contábeis brasileiras.",false,"No Brasil usam-se PEPS ou custo médio ponderado; o UEPS não é aceito."),
+  mc("A contagem física do estoque aponta R$ 8.200, mas o saldo contábil é R$ 8.800. O que isso indica?",["*Uma perda de R$ 600 a ajustar","Um ganho de R$ 600","Que não há nada a fazer","Um erro que se corrige sozinho"],"8.800 − 8.200 = 600 de diferença, tratada como perda de estoque."),
+  wr("Numa indústria, como se chama o estoque do que ainda está sendo fabricado?",["produtos em elaboracao","em elaboracao","produto em elaboracao"],"Produtos em elaboração.")
  ]}
 ];

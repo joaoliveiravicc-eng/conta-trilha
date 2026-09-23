@@ -108,6 +108,18 @@ export default {
     {t:"num", q:"Depois de encerradas as contas, a Apuração do Resultado do Exercício tem receitas totais de R$ 80.000 e despesas totais de R$ 65.000. Qual o resultado?", a:15000, u:"R$", e:"80.000 − 65.000 = 15.000 de lucro."},
     {t:"mc", q:"O lucro apurado na ARE é transferido, no fechamento, para:", o:["Uma conta do Patrimônio Líquido, como Lucros acumulados","O Ativo Circulante","O Passivo Não Circulante","A conta Caixa"], a:0, e:"O lucro pertence aos sócios, por isso engorda o PL."},
     {t:"tf", q:"Se as despesas superarem as receitas na apuração, o resultado reduz o Patrimônio Líquido.", a:true, e:"Um prejuízo diminui o PL, ao contrário do lucro."}
+   ]},
+  {id:"dc7", title:"Revisão: débito e crédito", icon:"🔄",
+   learn:[
+    {h:"A regra de ouro, de novo", b:box('regra','<b>Ativo e Despesa</b> aumentam no DÉBITO.<br><b>Passivo, PL e Receita</b> aumentam no CRÉDITO.') + `<p>Todo lançamento tem débitos e créditos de mesmo valor (partidas dobradas), e no fim do período as contas de resultado são encerradas contra a Apuração do Resultado do Exercício.</p>`}
+   ],
+   ex:[
+    {t:"class", q:"Débito ou crédito para AUMENTAR cada conta?", cats:["Débito","Crédito"], items:[["Caixa",0],["Fornecedores",1],["Receita de vendas",1],["Despesa com aluguel",0],["Capital social",1]], e:"Ativo e despesa aumentam no débito; passivo, PL e receita aumentam no crédito."},
+    {t:"entry", q:"Pagamento de uma conta de energia, R$ 400, em dinheiro.", accts:["Despesa com energia","Caixa","Fornecedores","Receita de vendas"], d:["Despesa com energia"], c:["Caixa"], e:"A despesa aumenta (débito) e o Caixa diminui (crédito)."},
+    {t:"tf", q:"Um fato permutativo, como transferir dinheiro do Caixa para o Banco, altera o Patrimônio Líquido.", a:false, e:"Permutativo só troca valores entre contas do Ativo; quem altera o PL são receitas e despesas."},
+    {t:"num", q:"Uma conta tem débitos de R$ 3.000 e créditos de R$ 4.500. Qual o saldo e de que tipo?", a:1500, u:"R$", e:"4.500 − 3.000 = 1.500, saldo credor (o lado do crédito é maior)."},
+    {t:"mc", q:"Ao encerrar as contas de resultado no fim do período, uma conta de receita é:", o:["Debitada, para zerar seu saldo credor","Creditada de novo","Transferida direto para o Ativo","Ignorada"], a:0, e:"Debitar uma conta que normalmente é credora zera o seu saldo."},
+    {t:"wr", q:"Como se chama o lançamento que corrige um erro invertendo débito e crédito do lançamento original?", a:["estorno"], e:"Estorno."}
    ]}
   ]
 };

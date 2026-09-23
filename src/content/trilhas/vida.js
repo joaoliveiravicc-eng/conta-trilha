@@ -54,5 +54,17 @@ export default [
   wr("Complete o ditado popular sobre diversificação: não coloque todos os ovos na mesma ___.",["cesta"],"Diversificação é justamente não concentrar tudo em um único lugar."),
   tf("Uma promessa de retorno muito acima do mercado, com garantia, é um sinal de alerta para possível golpe.",true,"Retorno alto sempre vem acompanhado de mais risco; “garantia” de ganho alto não existe de verdade."),
   mc("Antes de começar a investir, o primeiro passo recomendado é:",["*Montar a reserva de emergência","Comprar ações de uma única empresa","Pegar empréstimo para investir mais","Ignorar o prazo que vai precisar do dinheiro"],"A reserva protege você de precisar resgatar um investimento de risco no pior momento.")
+ ]},
+{id:"vida5", title:"Revisão: finanças pessoais", icon:"🔄",
+ learn:[
+  {h:"O seu próprio balanço", b:tbl(['Ideia','Na sua vida'],[['Ativo − Passivo = PL','O que você tem menos o que deve'],['Orçamento 50-30-20','Necessidades, desejos e poupança'],['Reserva de emergência','3 a 6 meses de gastos essenciais'],['Diversificação','Não colocar tudo num único investimento']])}
+ ],
+ ex:[
+  nu("Ativo pessoal de R$ 70.000 e dívidas de R$ 25.000. Qual o PL pessoal?",45000,"70.000 − 25.000 = 45.000.","R$"),
+  nu("Renda de R$ 5.000. Pela regra 50-30-20, quanto é reservado para desejos (30%)?",1500,"30% de 5.000 = 1.500.","R$"),
+  cl("Ativo ou passivo pessoal?",["Ativo","Passivo"],"Investimentos:0|Financiamento do carro:1|Dinheiro em conta:0|Fatura do cartão:1","Ativo é o que você tem; passivo é o que você deve."),
+  nu("Gastos essenciais de R$ 3.000 por mês. Quanto seria uma reserva de 4 meses?",12000,"4 × 3.000 = 12.000.","R$"),
+  tf("Diversificar os investimentos ajuda a reduzir o risco da carteira como um todo.",true,"Se um ativo vai mal, outros podem compensar."),
+  mc("Entre uma dívida a 10% ao mês e outra a 2% ao mês, qual quitar primeiro?",["*A de 10% ao mês","A de 2% ao mês","Tanto faz","Nenhuma, ambas esperam"],"Juros mais altos crescem mais rápido; priorize a dívida mais cara.")
  ]}
 ];

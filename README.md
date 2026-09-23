@@ -3,10 +3,11 @@
 **Ao vivo:** [conta-trilha.vercel.app](https://conta-trilha.vercel.app) — instalável
 como app (PWA) no celular ou no computador direto pelo navegador.
 
-App no estilo Duolingo para aprender Contabilidade do zero, em português. 11 trilhas,
-68 lições, motor de exercícios com ~10 tipos de questão, gamificação (XP, moedas,
-corações, sequência, níveis, badges, missões diárias), 3 estudos de caso completos e
-um glossário de termos contábeis. Mascote: Bento, o castor contador.
+App no estilo Duolingo para aprender Contabilidade do zero, em português. 11 trilhas
+(organizadas em 5 painéis temáticos), 79 lições — incluindo uma lição de revisão ao
+final de cada trilha —, motor de exercícios com ~10 tipos de questão, gamificação (XP,
+moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
+completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
 ## Rodando localmente
 
@@ -53,6 +54,15 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
    também ser importada e listada em `rawCourses` (se exportar `{id,title,...,lessons}`,
    como `imob.js`) ou em `newLessons` (se exportar só um array de lições, como
    `antes.js`) dentro de `src/content/index.js`.
+4. Cada trilha do `LAYOUT` tem um `panel` (`fund`, `op`, `gestao`, `trib_aud` ou
+   `extra`, definidos em `PANELS` no topo de `layout.js`) — é só o agrupamento visual
+   das trilhas na tela inicial (`src/ui/screens/home.js`), no estilo das seções do
+   Duolingo. Uma trilha nova precisa apontar para um desses painéis (ou para um novo,
+   adicionado em `PANELS`).
+5. Por padrão, toda trilha termina com uma unidade `"Revisão"` contendo só uma lição
+   que mistura (com números/frases novas, não repetidas) os conceitos já ensinados
+   nas lições anteriores da mesma trilha — o "checkpoint" no estilo Duolingo. Ao
+   acrescentar lições novas a uma trilha, vale considerar atualizar essa revisão.
 4. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.

@@ -111,6 +111,18 @@ export default {
     {t:"class", q:"Nesta situação, em que mês fica cada despesa pelo regime de COMPETÊNCIA?", cats:["Mês do fato gerador","Mês do pagamento"], items:[["Aluguel de março pago em abril",0],["Salário de junho pago em julho",0],["Conta de telefone de maio paga em maio",0],["Serviço prestado em agosto, cobrado em setembro",0]], e:"Pela competência, tudo vai para o mês em que o fato realmente aconteceu, não para o mês do pagamento."},
     {t:"tf", q:"O regime de caixa pode fazer um mês parecer mais lucrativo do que realmente foi.", a:true, e:"Um recebimento adiantado, por exemplo, infla o caixa de um mês que na verdade teve pouca atividade."},
     {t:"wr", q:"Qual regime registra os fatos no momento em que eles acontecem, e não quando o dinheiro se move?", a:["competencia","regime de competencia"], e:"Regime de competência."}
+   ]},
+  {id:"base7", title:"Revisão: os pilares da Contabilidade", icon:"🔄",
+   learn:[
+    {h:"O que você já sabe", b:tbl(['Conceito','Resumo'],[['Patrimônio','Bens + direitos − obrigações'],['Equação fundamental','Ativo = Passivo + PL'],['Resultado','Receitas − Despesas'],['Competência','Registra quando acontece, não quando paga/recebe'],['Plano de contas','Organiza as contas em níveis; só analíticas recebem lançamento']])}
+   ],
+   ex:[
+    {t:"num", q:"Ativo de R$ 180.000 e Passivo de R$ 70.000. Qual o Patrimônio Líquido?", a:110000, u:"R$", e:"180.000 − 70.000 = 110.000."},
+    {t:"class", q:"Bem, direito, obrigação ou nenhum dos três?", cats:["Bem","Direito","Obrigação"], items:[["Veículos",0],["Duplicatas a receber",1],["Empréstimos a pagar",2],["Estoques",0]], e:"Bens você tem, direitos você vai receber, obrigações você vai pagar."},
+    {t:"num", q:"Receitas de R$ 60.000 e despesas de R$ 47.000 no mês. Qual o resultado?", a:13000, u:"R$", e:"60.000 − 47.000 = 13.000 de lucro."},
+    {t:"mc", q:"Uma venda feita em outubro e recebida em novembro é receita de:", o:["Outubro","Novembro","Metade em cada mês","Do mês do boleto"], a:0, e:"Regime de competência: a receita é do mês do fato, não do recebimento."},
+    {t:"tf", q:"Uma conta sintética, como \"Ativo Circulante\", pode receber lançamentos diretamente.", a:false, e:"Só as contas analíticas (o último nível) recebem lançamentos."},
+    {t:"mc", q:"Os sócios integralizam R$ 40.000 em dinheiro na abertura da empresa. O que acontece com o patrimônio?", o:["Ativo e PL aumentam juntos","Só o Ativo aumenta","Só o PL aumenta","Nada muda"], a:0, e:"Entra dinheiro (Ativo) e nasce o Capital Social (PL): os dois lados da equação sobem juntos."}
    ]}
   ]
 };

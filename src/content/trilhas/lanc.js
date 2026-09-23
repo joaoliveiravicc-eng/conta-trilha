@@ -153,6 +153,18 @@ export default {
     {t:"mc", q:"No Balanço, a Provisão para Devedores Duvidosos aparece:", o:["Reduzindo o saldo de Clientes","Somada ao Passivo","Como despesa financeira","No Patrimônio Líquido"], a:0, e:"É uma conta redutora do Ativo, junto de Clientes."},
     {t:"tf", q:"Quando um cliente específico não paga e já havia provisão constituída, a baixa gera uma nova despesa.", a:false, e:"A baixa usa a provisão que já existia; a despesa já tinha sido reconhecida antes."},
     {t:"num", q:"Clientes de R$ 80.000 e provisão de R$ 3.000. Qual o valor líquido de Clientes no Balanço?", a:77000, u:"R$", e:"80.000 − 3.000 = 77.000."}
+   ]},
+  {id:"lanc10", title:"Revisão: lançamentos do dia a dia", icon:"🔄",
+   learn:[
+    {h:"Os lançamentos mais comuns", b:tbl(['Fato','Lançamento típico'],[['Compra de mercadoria a prazo','D Estoques / C Fornecedores'],['Salário do mês (competência)','D Despesa com salários / C Salários a pagar'],['Depreciação do mês','D Despesa de depreciação / C Depreciação acumulada'],['Pagamento antecipado (seguro)','D Seguros a apropriar / C Bancos, depois D Despesa / C Seguros a apropriar'],['Cliente que não vai pagar (estimado)','D Despesa com devedores duvidosos / C Provisão para devedores duvidosos']])}
+   ],
+   ex:[
+    {t:"entry", q:"Compra de mercadorias a prazo, R$ 4.500.", accts:["Estoques","Fornecedores","Caixa","CMV"], d:["Estoques"], c:["Fornecedores"], e:"Estoques aumenta (débito); nasce a dívida com o fornecedor (crédito)."},
+    {t:"num", q:"Salário de R$ 3.600. Qual a provisão mensal do 13º?", a:300, u:"R$", e:"3.600 ÷ 12 = 300."},
+    {t:"entry", q:"Depreciação do mês de um veículo, R$ 600.", accts:["Despesa de depreciação","Depreciação acumulada","Veículos","Caixa"], d:["Despesa de depreciação"], c:["Depreciação acumulada"], e:"Despesa a débito; redutora do Ativo a crédito, sem saída de caixa."},
+    {t:"tf", q:"Um cliente que devolve uma mercadoria também devolve o produto, que volta ao estoque.", a:true, e:"Diferente do abatimento, a devolução traz a mercadoria de volta fisicamente."},
+    {t:"mc", q:"O que a Provisão para Devedores Duvidosos reduz no Balanço?", o:["O saldo de Clientes","O saldo de Caixa","O Passivo Circulante","O Capital Social"], a:0, e:"É uma conta redutora do Ativo, ao lado de Clientes."},
+    {t:"num", q:"Estoque inicial de R$ 6.000, compras de R$ 25.000 e estoque final de R$ 7.500. Qual o CMV?", a:23500, u:"R$", e:"6.000 + 25.000 − 7.500 = 23.500."}
    ]}
   ]
 };

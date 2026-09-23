@@ -95,6 +95,18 @@ export default {
     {t:"num", q:"Ciclo operacional de 70 dias e prazo médio de pagamento a fornecedores de 20 dias. Qual o ciclo financeiro?", a:50, s:"dias", e:"70 − 20 = 50 dias que a empresa financia com recursos próprios."},
     {t:"tf", q:"Quanto maior o ciclo financeiro, menos caixa próprio a empresa precisa para bancar a operação.", a:false, e:"É o contrário: um ciclo financeiro maior exige mais caixa próprio, porque a empresa paga antes de receber."},
     {t:"mc", q:"Negociar um prazo maior com os fornecedores tende a:", o:["Reduzir o ciclo financeiro","Aumentar o ciclo financeiro","Não afetar o ciclo financeiro","Aumentar o ciclo operacional"], a:0, e:"Um PMP maior é descontado do ciclo operacional, reduzindo o ciclo financeiro."}
+   ]},
+  {id:"demo7", title:"Revisão: demonstrações financeiras", icon:"🔄",
+   learn:[
+    {h:"Quem responde o quê", b:tbl(['Demonstração','Pergunta que responde'],[['Balanço Patrimonial','O que a empresa tem e deve, numa data?'],['DRE','Como ela chegou ao lucro, num período?'],['DFC','Por onde o dinheiro entrou e saiu de verdade?'],['Índices','A situação é boa, comparada a quê?'],['DMPL','O que mudou no Patrimônio Líquido?']])}
+   ],
+   ex:[
+    {t:"mc", q:"Qual demonstração é uma \"fotografia\" de uma data, e não de um período?", o:["Balanço Patrimonial","DRE","DFC","DMPL"], a:0, e:"O Balanço mostra a posição numa data; a DRE e a DFC mostram um período."},
+    {t:"num", q:"Receita líquida de R$ 90.000 e CMV de R$ 55.000. Qual o lucro bruto?", a:35000, u:"R$", e:"90.000 − 55.000 = 35.000."},
+    {t:"num", q:"Ativo Circulante de R$ 150.000 e Passivo Circulante de R$ 100.000. Qual a liquidez corrente?", a:1.5, e:"150.000 ÷ 100.000 = 1,5."},
+    {t:"tf", q:"No método indireto da DFC, a depreciação é somada de volta ao lucro líquido.", a:true, e:"Ela reduziu o lucro sem tirar dinheiro do caixa."},
+    {t:"class", q:"Em que atividade da DFC entra cada item?", cats:["Operacional","Investimento","Financiamento"], items:[["Recebimento de clientes",0],["Compra de uma máquina",1],["Pagamento de dividendos",2]], e:"Operacional é o dia a dia; investimento são ativos de longo prazo; financiamento envolve sócios e credores."},
+    {t:"mc", q:"Uma empresa lucrativa pode, ainda assim, ficar sem caixa. Por quê?", o:["Porque lucro é apurado por competência, e caixa depende de recebimentos reais","Porque a DRE sempre mente","Porque isso nunca acontece","Porque o Balanço erra o cálculo"], a:0, e:"Vender tudo a prazo, por exemplo, gera lucro contábil sem entrada imediata de caixa."}
    ]}
   ]
 };
