@@ -1,0 +1,36 @@
+/* Ordem final das trilhas/unidades e a função que monta COURSES a partir do
+   conteúdo bruto (as 7 trilhas originais + as lições novas + os exercícios bônus). */
+
+export const LAYOUT = [
+ {id:"antes", title:"Antes de Tudo", icon:"🧮", color:"#4059AD", desc:"O básico do básico: porcentagem, juros, saldo, empresa e documentos. Para começar do zero absoluto.",
+  units:[["Matemática do dia a dia",["antes1","antes2","antes3","antes4"]],["O mundo dos negócios",["antes5","antes6","antes7","antes8"]]]},
+ {id:"base", units:[["O que é Contabilidade",["base1","base2"]],["Equação e resultado",["base3","base4","base5"]]]},
+ {id:"dc", units:[["Razonetes e natureza",["dc1","dc2"]],["Lançando de verdade",["dc3","dc4","dc5"]]]},
+ {id:"lanc", units:[["Operações comerciais",["lanc1","lanc2","lanc3"]],["Ajustes e livros",["lanc4","lanc6","lanc7","lanc5"]]]},
+ {id:"demo", units:[["Balanço e DRE",["demo1","demo2"]],["Caixa, notas e análise",["demo3","demo5","demo4"]]]},
+ {id:"cust", units:[["Classificando custos",["cust1","cust2"]],["Decisões",["cust3","cust4"]]]},
+ {id:"trib", units:[["Tributos",["trib1","trib2","trib3"]]]},
+ {id:"aud", units:[["Fundamentos",["aud1","aud2","aud3"]],["Execução e relatório",["aud4","aud5"]]]},
+ {id:"vida", title:"Contabilidade para a Vida", icon:"🏠", color:"#C06A1B", desc:"Use o que aprendeu no seu dinheiro: balanço pessoal, orçamento, reserva e dívidas.",
+  units:[["Finanças pessoais",["vida1","vida2","vida3"]]]}
+];
+
+/**
+ * Monta o array final de COURSES na ordem de LAYOUT, juntando:
+ * - rawCourses: as 7 trilhas originais (cada uma já com título/ícone/cor/desc e lessons)
+ * - newLessons: lições soltas (antes*, vida*) que só ganham título/ícone/cor via LAYOUT
+ * - extra: exercícios bônus por id de lição, concatenados ao "ex" de cada lição
+ */
+export function buildCourses(rawCourses, newLessons, extra){
+  const pool = {}, old = {};
+  rawCourses.forEach(c => { old[c.id] = c; c.lessons.forEach(l => pool[l.id] = l); });
+  newLessons.forEach(l => pool[l.id] = l);
+  Object.keys(extra).forEach(id => { pool[id].ex = pool[id].ex.concat(extra[id]); });
+  return LAYOUT.map(L => {
+    const o = old[L.id] || {};
+    const c = { id:L.id, title:L.title || o.title, icon:L.icon || o.icon, color:L.color || o.color, desc:L.desc || o.desc };
+    c.units = L.units.map(u => ({ t:u[0], lessons:u[1].map(id => pool[id]) }));
+    c.lessons = [].concat.apply([], c.units.map(u => u.lessons));
+    return c;
+  });
+}

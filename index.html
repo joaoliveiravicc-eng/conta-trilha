@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ContaTrilha — Contabilidade do zero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Roboto+Slab:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand"><div class="mark">🦫</div><span>ContaTrilha</span></div>
+    <div class="stats">
+      <div class="pill fire" id="pill-streak" title="Dias seguidos"><span>0</span>🔥</div>
+      <div class="pill xp" id="pill-xp" title="XP"><span>0</span>⭐</div>
+      <div class="pill" id="pill-coins" title="Moedas"><span>0</span>🪙</div>
+    </div>
+  </header>
+  <main>
+    <section class="screen" id="s-onb"></section>
+    <section class="screen" id="s-home"></section>
+    <section class="screen" id="s-path"></section>
+    <section class="screen" id="s-learn"></section>
+    <section class="screen" id="s-quiz">
+      <div class="qtop">
+        <button class="icon-btn" id="q-close" aria-label="Sair da lição">✕</button>
+        <div class="qbar"><div id="q-bar" style="width:0%"></div></div>
+        <div id="q-hearts"><span class="hi">❤️</span>5</div>
+        <div class="bento-wrap xs" id="q-bento"></div>
+      </div>
+      <div class="qbody" id="q-body"></div>
+      <div class="foot" id="q-foot">
+        <div class="fb"><div class="fb-t" id="fb-t"></div><div class="fb-b" id="fb-b"></div></div>
+        <button class="btn primary" id="q-btn" disabled>Verificar</button>
+      </div>
+    </section>
+    <section class="screen" id="s-result"></section>
+    <section class="screen" id="s-fail"></section>
+    <section class="screen" id="s-blitz"></section>
+    <section class="screen" id="s-practice"></section>
+    <section class="screen" id="s-shop"></section>
+    <section class="screen" id="s-glossary">
+      <div class="search"><input id="g-search" type="search" placeholder="Buscar termo, ex: depreciação" aria-label="Buscar no glossário"></div>
+      <dl class="gl" id="g-list"></dl>
+    </section>
+    <section class="screen" id="s-profile"></section>
+  </main>
+  <nav id="bottomnav" hidden>
+    <button data-tab="home"><span class="ni">🗺️</span>Aprender</button>
+    <button data-tab="practice"><span class="ni">🏋️</span>Praticar</button>
+    <button data-tab="shop"><span class="ni">🛒</span>Loja</button>
+    <button data-tab="glossary"><span class="ni">📖</span>Glossário</button>
+    <button data-tab="profile"><span class="ni">👤</span>Perfil</button>
+  </nav>
+</div>
+<div id="sheet-root"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<canvas id="confetti"></canvas>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
