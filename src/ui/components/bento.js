@@ -15,8 +15,7 @@ export function bento(mood, equip, cls){
 
 /* Com acessórios: usa a mesma ilustração de referência e sobrepõe as peças da loja. */
 function bentoEquipped(mood, equip, cls){
-  const G = '<g transform="translate(-53 -40) scale(3.8)">';
-  const glasses = equip.glasses ? G + '<g fill="rgba(255,255,255,.18)" stroke="#1C3D5A" stroke-width="2.2"><circle cx="47" cy="47" r="10"/><circle cx="73" cy="47" r="10"/></g><path d="M57 46 Q60 43 63 46" stroke="#1C3D5A" stroke-width="2.2" fill="none"/></g>' : '';
+  const glasses = equip.glasses ? '<g fill="rgba(255,255,255,.14)" stroke="#1C3D5A" stroke-width="6" stroke-linecap="round"><circle cx="139" cy="137" r="27"/><circle cx="231" cy="140" r="27"/><path d="M166 132 Q185 121 204 135" fill="none"/><path d="M112 133 L92 128 M258 137 L278 132" fill="none"/></g>' : '';
   const head = equip.head && HEAD[equip.head] ? '<g transform="translate(-53 -12) scale(3.8)">' + HEAD[equip.head] + '</g>' : '';
   const neck = equip.neck && NECK[equip.neck] ? '<g transform="translate(-53 -68) scale(3.8)">' + NECK[equip.neck] + '</g>' : '';
   return '<span class="bento-eq bento ' + mood + ' ' + (cls || '') + '"><img src="/images/bento/idle.png" alt="Bento, o castor" width="120" height="132"><svg viewBox="0 0 320 419" aria-hidden="true">' + neck + glasses + head + '</svg></span>';
