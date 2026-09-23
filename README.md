@@ -1,7 +1,10 @@
 # ContaTrilha
 
-App no estilo Duolingo para aprender Contabilidade do zero, em português. 9 trilhas,
-45 lições, motor de exercícios com ~10 tipos de questão, gamificação (XP, moedas,
+**Ao vivo:** [conta-trilha.vercel.app](https://conta-trilha.vercel.app) — instalável
+como app (PWA) no celular ou no computador direto pelo navegador.
+
+App no estilo Duolingo para aprender Contabilidade do zero, em português. 10 trilhas,
+50 lições, motor de exercícios com ~10 tipos de questão, gamificação (XP, moedas,
 corações, sequência, níveis, badges, missões diárias), 3 estudos de caso completos e
 um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
@@ -50,10 +53,14 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.
 
-## Sync com Supabase (opcional)
+## Sync com Supabase
 
-Por padrão o progresso fica só no `localStorage` do navegador (igual ao app
-original). Para sincronizar entre dispositivos:
+Já está configurado (projeto `conta-trilha` na conta Supabase de
+joaovitor.s.oliveira@hotmail.com, org "ContaTrilha") e com as chaves
+carregadas no Vercel (Production e Preview). Sem login, o app funciona
+100% só com `localStorage`, igual ao app original.
+
+Para rodar localmente com sync, ou para apontar pra outro projeto Supabase:
 
 1. Crie um projeto no [Supabase](https://supabase.com) e rode a migration em
    `supabase/migrations/0001_progress.sql` (cria a tabela `progress` com RLS).
@@ -66,5 +73,9 @@ funciona normalmente só com `localStorage`.
 
 ## Publicando
 
-`npm run build` gera um site estático em `dist/`, pronto para Vercel, Netlify,
-GitHub Pages ou qualquer host de arquivos estáticos.
+Deploy automático: todo push em `master` no [repositório no
+GitHub](https://github.com/joaoliveiravicc-eng/conta-trilha) gera um novo deploy em
+produção no Vercel (projeto `conta-trilha`, conta `joao`).
+
+`npm run build` gera o site estático em `dist/` caso queira publicar em outro lugar
+(Netlify, GitHub Pages, qualquer host de arquivos estáticos).
