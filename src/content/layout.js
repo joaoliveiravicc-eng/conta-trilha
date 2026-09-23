@@ -7,6 +7,8 @@ export const LAYOUT = [
  {id:"base", units:[["O que é Contabilidade",["base1","base2"]],["Equação e resultado",["base3","base4","base5"]]]},
  {id:"dc", units:[["Razonetes e natureza",["dc1","dc2"]],["Lançando de verdade",["dc3","dc4","dc5"]]]},
  {id:"lanc", units:[["Operações comerciais",["lanc1","lanc2","lanc3"]],["Ajustes e livros",["lanc4","lanc6","lanc7","lanc5"]]]},
+ {id:"estoq", title:"Estoques e Custo de Mercadorias", icon:"📦", color:"#4C7A3F", desc:"Como o estoque vira custo: aquisição, PEPS, custo médio, apuração do CMV e ajustes por perda.",
+  units:[["Do estoque ao CMV",["estoq1","estoq2","estoq3","estoq4","estoq5"]]]},
  {id:"demo", units:[["Balanço e DRE",["demo1","demo2"]],["Caixa, notas e análise",["demo3","demo5","demo4"]]]},
  {id:"cust", units:[["Classificando custos",["cust1","cust2"]],["Decisões",["cust3","cust4"]]]},
  {id:"trib", units:[["Tributos",["trib1","trib2","trib3"]]]},

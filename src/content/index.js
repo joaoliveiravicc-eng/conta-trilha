@@ -9,12 +9,13 @@ import trib from './trilhas/trib.js';
 import aud from './trilhas/aud.js';
 import antes from './trilhas/antes.js';
 import vida from './trilhas/vida.js';
+import estoq from './trilhas/estoq.js';
 import EXTRA from './extra.js';
 import { buildCourses } from './layout.js';
 import { GLOSSARY, GLOSS_ADD } from './glossary.js';
 
 const rawCourses = [base, dc, lanc, demo, cust, trib, aud];
-const newLessons = antes.concat(vida);
+const newLessons = antes.concat(vida, estoq);
 
 export const COURSES = buildCourses(rawCourses, newLessons, EXTRA);
 
