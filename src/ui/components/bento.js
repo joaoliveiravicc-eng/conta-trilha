@@ -1,8 +1,19 @@
-/* Mascote 'Bento', o castor: SVG procedural com estados de humor e roupas equipadas. */
+/* Mascote 'Bento', o castor: ilustração de referência (por humor, sem roupas) quando
+   nada está equipado; SVG procedural (com humor + roupas da loja) caso contrário. */
 import { S } from '../../engine/state.js';
+
+const MOOD_IMG = { idle:1, happy:1, cheer:1, sad:1, think:1, wow:1 };
 
 export function bento(mood, equip, cls){
   mood = mood || 'idle'; equip = equip || S.equip;
+  const noEquip = !equip.glasses && !equip.head && !equip.neck;
+  if (noEquip && MOOD_IMG[mood]){
+    return '<img class="bento-img bento ' + mood + ' ' + (cls || '') + '" src="/images/bento/' + mood + '.png" alt="Bento, o castor" width="120" height="132">';
+  }
+  return bentoSVG(mood, equip, cls);
+}
+
+function bentoSVG(mood, equip, cls){
   const fur = '#A9692E', dark = '#6B4122', light = '#F2CB9B', nose = '#3B2417';
   let eyes, mouth, arms, brows = '';
   const openEye = (x, px, py) => '<circle cx="' + x + '" cy="47" r="8.8" fill="#fff"/><circle cx="' + (x + px) + '" cy="' + (48 + py) + '" r="4.8" fill="' + nose + '"/><circle cx="' + (x + px + 1.6) + '" cy="' + (46.2 + py) + '" r="1.6" fill="#fff"/>';
