@@ -73,6 +73,34 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.
 
+## Corretor inteligente (IA no aparelho)
+
+Respostas escritas passam primeiro pelo corretor comum (`src/engine/exercises/grading.js`):
+ignora maiúsculas, acentos e pontuação, tolera erros de digitação e aceita a resposta dentro
+de uma frase curta. Quando ele recusa, o corretor inteligente (`src/engine/ai/`) dá uma
+segunda olhada, sem internet e sem custo:
+
+- entende sinônimos e palavras da mesma família ("calote" = inadimplência, "checar" = comparar);
+- conhece os opostos da contabilidade (débito × crédito, aumenta × diminui) e as negações
+  ("absoluta não, razoável"), e recusa chutes com dois termos ("fixo ou variável");
+- nas explicações, procura cada ideia da questão também por sinônimos, ancorada na resposta-modelo.
+
+Ele só aceita respostas que as regras recusaram, nunca rebaixa uma resposta aceita. Quando fica
+em dúvida, sugere e a pessoa decide ("Minha resposta estava certa" aprende a resposta).
+
+O conhecimento fica em `src/content/lexicon.js`: conceitos com seus sinônimos (um `~` marca
+termo aproximado, que só gera sugestão) e os pares de opostos. Para ampliar, acrescente termos
+ao conceito certo e rode:
+
+```bash
+npm test                         # inclui as garantias da IA (tests/ai.test.js)
+node tests/ai-eval.mjs           # relatório: regras x regras + IA nas respostas de teste
+node tests/ai-holdout-eval.mjs   # respostas escritas sem olhar a base (mede generalização)
+```
+
+As respostas de teste ficam em `tests/ai-cases.js` e `tests/ai-holdout.js`. Nenhuma resposta
+marcada como errada pode ser aceita ou sugerida.
+
 ## Conta e sincronização
 
 A pessoa cria conta com e-mail e senha (Perfil, avisos na home e no fim das lições, ou

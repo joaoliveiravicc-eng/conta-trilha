@@ -13,7 +13,7 @@ import { SAY } from '../../content/dialogues.js';
 import { COURSES, EX } from '../../content/index.js';
 import { areaForCourse } from '../../content/areas.js';
 import { checkpointRecord, reviewRecord, challengeRecord } from '../../engine/learning.js';
-import { render, answerText } from './quiz-renderers.js';
+import { render, answerText, loadAI } from './quiz-renderers.js';
 import { go, sheet, renderTop } from '../router.js';
 import { openPath } from './path.js';
 import { startLearn } from './learn.js';
@@ -30,6 +30,7 @@ export function startFinal(c){
 }
 export function startSession(o){
   stopClock();
+  if (o.items.some(it => ['wr', 'expl'].includes(it.x.t))) loadAI();
   SES = Object.assign({}, o, { queue:o.items.slice(), total:o.items.length, done:0, first:0, combo:0, maxCombo:0, wrong:{}, cleanKeys:[], phase:'answer', maxHearts:o.hearts, usedHint:false });
   if (o.timeLimit){ SES.deadline = Date.now() + o.timeLimit * 1000; CLOCK = setInterval(tick, 250); }
   go('quiz'); renderItem();
@@ -69,13 +70,19 @@ export function renderItem(){
 }
 export function primary(){
   if (!SES) return;
-  if (SES.phase === 'answer'){ if (!R.ready()) return; const ok = R.check(); resolve(ok); }
+  if (SES.phase === 'answer'){
+    if (!R.ready()) return;
+    let ok = R.check(), ai = null;
+    /* as regras recusaram uma resposta escrita: o corretor inteligente dá uma segunda olhada */
+    if (!ok && R.ai){ ai = R.ai(); if (ai && ai.verdict === 'right') ok = true; }
+    resolve(ok, ai);
+  }
   else nextItem();
 }
-function resolve(ok){
+function resolve(ok, ai){
   if (SES.timeout) return;
   const it = SES.queue[0], x = it.x;
-  SES.phase = 'feedback'; R.reveal(ok);
+  SES.phase = 'feedback'; R.reveal(ok, ai);
   $('#q-body').classList.add('locked');
   const itemHint = S.st.hints > SES.itemHintStart;
   if (itemHint) SES.usedHint = true;
@@ -104,8 +111,9 @@ function resolve(ok){
   const reaction = bentoReaction(ok, SES.combo, SES.hearts, SES.maxHearts);
   $('#fb-bento').innerHTML = bento(reaction.mood, undefined, 'react');
   $('#fb-say').textContent = reaction.say;
-  $('#fb-b').innerHTML = (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '') +
-    (!ok && canContest(x) ? '<button class="link contest" id="fb-contest">Minha resposta estava certa</button>' : '');
+  const aiNote = ai && ai.note ? '<div class="ai-note' + (ai.verdict === 'unsure' ? ' unsure' : '') + '"><span aria-hidden="true">🤖</span> ' + ai.note + '</div>' : '';
+  $('#fb-b').innerHTML = aiNote + (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '') +
+    (!ok && canContest(x) ? '<button class="link contest" id="fb-contest">' + (ai && ai.verdict === 'unsure' ? 'A IA acha que pode estar certa: contar como certa' : 'Minha resposta estava certa') + '</button>' : '');
   const contest = $('#fb-contest'); if (contest) contest.onclick = acceptMine;
   setBtn('Continuar', false);
   save();

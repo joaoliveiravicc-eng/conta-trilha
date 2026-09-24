@@ -6,6 +6,9 @@ import { sfx, buzz } from '../components/sound.js';
 import { S } from '../../engine/state.js';
 import { fmt, parseBR } from '../../engine/format.js';
 import { bestMatchInfo, acctMatchInfo, acceptNote, evalExpl } from '../../engine/exercises/grading.js';
+/* O corretor inteligente fica num arquivo à parte, carregado quando uma sessão começa. */
+let AI = null;
+export function loadAI(){ return AI ? Promise.resolve(AI) : import('../../engine/ai/review.js').then(m => (AI = m)).catch(() => null); }
 import { T } from '../../content/render-helpers.js';
 
 /* ---------- util de render ---------- */
@@ -197,7 +200,13 @@ export function rWR(x, m, on){
   let info = { lvl:0 };
   return {
     ready: () => inp.value.trim() !== '',
-    check(){ info = bestMatchInfo(inp.value, x.a.concat(learned(x.key))); return info.lvl >= 1; },
+    check(){
+      info = bestMatchInfo(inp.value, x.a.concat(learned(x.key)));
+      /* "resposta dentro de uma frase" não vale para chute ("fixo ou variável") nem oposto */
+      if (info.lvl && info.how === 'phrase' && AI && AI.phraseProblem(x, inp.value, learned(x.key))) info = { lvl:0 };
+      return info.lvl >= 1;
+    },
+    ai: () => AI && AI.review(x, inp.value, learned(x.key)),
     reveal(ok){
       inp.disabled = true; w.classList.add(ok ? 'right' : 'wrong');
       const note = ok && acceptNote(info); if (note) mount(m, el('div', 'small muted accept-note', note));
@@ -279,10 +288,13 @@ export function rExpl(x, m, on){
   return {
     ready: () => ta.value.trim().length >= 8,
     check(){ res = evalExpl(ta.value, x); return res.ok; },
-    reveal(){
+    ai: () => AI && AI.review(x, ta.value),
+    reveal(ok, ai){
       ta.disabled = true;
-      const list = x.k.map((g, i) => '<li class="' + (res.hits[i] ? 'hit' : 'miss') + '">' + (res.hits[i] ? '✅' : '⭕') + ' ' + g[0] + '</li>').join('');
-      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">Ideias identificadas (' + res.n + ' de ' + x.k.length + '):</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
+      /* ideias que a IA reconheceu com outras palavras também aparecem marcadas */
+      const hits = (ai && ai.hits) || res.hits, n = hits.filter(Boolean).length;
+      const list = x.k.map((g, i) => '<li class="' + (hits[i] ? 'hit' : 'miss') + '">' + (hits[i] ? '✅' : '⭕') + ' ' + g[0] + '</li>').join('');
+      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">Ideias identificadas (' + n + ' de ' + x.k.length + '):</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
     },
     typed: () => ta.value.trim(),
     learn(){}

@@ -2,10 +2,11 @@
    tolera erro de digitação, aceita a resposta dentro de uma frase curta e palavras
    da mesma família, e checa respostas dissertativas por palavras-chave. */
 import { ALIASES } from '../../content/chart-of-accounts.js';
+import { knownWords } from '../vocab.js';
 
 export function normTxt(s){
   return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/º|°/g, '').replace(/-/g, '')
-    .replace(/[^a-z0-9/%\s]/g, ' ').replace(/\s+/g, ' ').trim();
+    .replace(/[^a-z0-9/%\s]/g, ' ').replace(/\//g, ' / ').replace(/([a-z])(\d)/g, '$1 $2').replace(/(\d)([a-z])/g, '$1 $2').replace(/\s+/g, ' ').trim();
 }
 export const STOP = new Set(['o','a','os','as','de','da','do','das','dos','um','uma','e','em','com','para','por','no','na','nos','nas','ao','aos','se','que','eh','sao','ser']);
 const NEGATION = new Set(['nao','nem','nunca','jamais']);
@@ -28,9 +29,19 @@ export function lev(a, b){
   return d[m][n];
 }
 const tolerance = len => len <= 4 ? 0 : len <= 9 ? 1 : 2;
+/* "adimplência" x "inadimplência", "direto" x "indireto": um prefixo que inverte o
+   sentido não é erro de digitação. */
+const NEG_PREFIX = ['in', 'im', 'i', 'des'];
+function negatedForm(a, b){
+  const [short, long] = a.length < b.length ? [a, b] : [b, a];
+  return short.length >= 4 && long.endsWith(short) && NEG_PREFIX.includes(long.slice(0, long.length - short.length));
+}
 /* Erro de digitação aceitável. Em palavras curtas, a primeira letra precisa bater,
    para não confundir termos diferentes como "caixa" e "baixa". */
-function typo(a, b){ return lev(a, b) <= tolerance(b.length) && (b.length > 6 || a[0] === b[0]); }
+function typo(a, b){
+  if (a.split(' ').some((w, i) => negatedForm(w, b.split(' ')[i] || ''))) return false;
+  return lev(a, b) <= tolerance(b.length) && (b.length > 6 || a[0] === b[0]);
+}
 function commonPrefix(a, b){ let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; }
 /* 2 = mesma palavra, 1 = digitação ou mesma família (conciliar/conciliação), 0 = diferente */
 function wordMatch(w, t){
@@ -85,8 +96,9 @@ export function evalExpl(text, x){
   const hits = x.k.map(g => g.slice(1).some(st => {
     const s = normTxt(st); if (!s) return false;
     if (s.indexOf(' ') >= 0) return t.indexOf(' ' + s) >= 0;
-    /* palavra que começa com o radical, ou com um erro de digitação nele */
-    return words.some(w => w.indexOf(s) === 0 || (s.length >= 5 && w.length >= s.length && lev(w.slice(0, s.length), s) <= 1 && w[0] === s[0]));
+    /* palavra que começa com o radical, ou com um erro de digitação nele (só em palavras
+       que não existem no app: "receita" não é "recebida" escrita errado) */
+    return words.some(w => w.indexOf(s) === 0 || (s.length >= 5 && w.length >= s.length && w[0] === s[0] && lev(w.slice(0, s.length), s) <= 1 && !knownWords().has(w)));
   }));
   const n = hits.filter(Boolean).length, need = x.min || Math.max(1, Math.ceil(x.k.length * 0.6));
   return { hits:hits, ok:n >= need, n:n, need:need };

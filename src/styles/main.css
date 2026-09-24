@@ -741,3 +741,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 @media (prefers-reduced-motion: reduce){ .foot.ok .fb,.foot.bad .fb{animation:none;} }
 /* Em telas de toque, o hover não fica grudado nos botões. */
 @media (hover:none){ .btn.primary:hover:not(:disabled){filter:none;transform:none;} }
+/* Nota do corretor inteligente no painel de retorno */
+.ai-note{margin:2px 0 8px;padding:7px 10px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:.86rem;font-weight:600;line-height:1.35;color:var(--text);}
+.ai-note.unsure{border-color:color-mix(in srgb,var(--gold) 60%,var(--line));}

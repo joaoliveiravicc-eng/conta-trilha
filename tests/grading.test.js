@@ -34,3 +34,11 @@ test('números aceitam unidade escrita junto', () => {
   assert.equal(parseBR('10 dias'), 10); assert.equal(parseBR('1,5x'), 1.5); assert.equal(parseBR('−1.500'), -1500);
   assert.ok(Number.isNaN(parseBR('abc')));
 });
+
+test('erro de digitação só vale para palavra que não existe', () => {
+  assert.equal(evalExpl('a receita da empresa', EX['demo3#7'].x).hits[0], false);
+  assert.equal(evalExpl('conferir o extarto com o sistema e ajustar as diferenças', EX['fj15#3'].x).ok, true);
+  assert.equal(bestMatch('adimplência', ['inadimplência']), 0);
+  assert.equal(bestMatch('desconto condicional', ['desconto incondicional']), 0);
+  assert.equal(bestMatch('municipal/estadual', ['municipal']) >= 1 && bestMatch('municipal/estadual', ['municipal']) !== 2, true);
+});
