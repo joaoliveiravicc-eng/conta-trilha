@@ -33,8 +33,8 @@ export const LAYOUT = [
  {id:"aud", panel:"trib_aud", title:"Auditoria", icon:"🔍", color:"#B3432B", desc:"Auditoria interna e externa, riscos, controles, evidências e o relatório do auditor.", units:[["Fundamentos",["aud1","aud2","aud3"]],["Execução e relatório",["aud4","aud5","aud6"]],["Revisão",["aud7"]]]},
  {id:"vida", panel:"extra", title:"Contabilidade para a Vida", icon:"🏠", color:"#C06A1B", desc:"Use o que aprendeu no seu dinheiro: balanço pessoal, orçamento, reserva e dívidas.",
   units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]],["Revisão",["vida5"]]]},
- {id:"financeirojr", panel:"carreiras", title:"Analista Financeiro Jr", icon:"💼", color:"#146C94", desc:"Do zero ao que a vaga cobra: contas a pagar e a receber, conciliação, fluxo de caixa, indicadores, Excel, retenções e a entrevista.",
-  units:[["Do zero: patrimônio e resultado",["fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6"]],["Conciliação e fluxo de caixa",["fj7","fj8","fj9"]],["Números e ferramentas",["fj10","fj11","fj12"]],["O que a vaga espera de você",["fj13","fj14","fj15"]],["Revisão",["fj16"]]]}
+ {id:"financeirojr", panel:"carreiras", title:"Analista Financeiro Jr", icon:"💼", color:"#146C94", desc:"Do zero ao que a vaga cobra: contas a pagar e a receber, bancos, conciliação, fluxo de caixa, indicadores, Excel, o financeiro de mídia e agro, e a entrevista.",
+  units:[["Do zero: números e patrimônio",["fj0","fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6","fj13"]],["Bancos e tesouraria",["fjb1","fjb2","fj7"]],["Caixa e planejamento",["fj8","fj9","fjc1","fjc2"]],["Números e ferramentas",["fj10","fj11","fj12"]],["Na prática: um grupo de mídia e agro",["fjm1","fjm2","fjm3","fjm4"]],["Pronto para a vaga",["fj14","fj15","fjs1"]],["Revisão",["fj16"]]]}
 ];
 
 /* Unidade 'Aprofundando' no fim de cada trilha. Alunos que já tinham terminado a

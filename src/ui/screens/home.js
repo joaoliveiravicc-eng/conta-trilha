@@ -10,7 +10,7 @@ import { PANELS } from '../../content/layout.js';
 import { areaById, areaForCourse, coursesForArea } from '../../content/areas.js';
 import { SAY } from '../../content/dialogues.js';
 import { bento } from '../components/bento.js';
-import { go, sheet, ring, missionCard, claimMission, claimChest } from '../router.js';
+import { go, sheet, ring, missionCard, claimMission, claimChest, renderTop } from '../router.js';
 
 export function renderHome(){
   const s = $('#s-home'), nl = nextLesson(), tx = S.days[today()] || 0, hit = tx >= S.goal;
@@ -27,7 +27,7 @@ export function renderHome(){
   const bubble = pick(cs >= 3 ? ['Sua sequência de ' + cs + ' dias está incrível! 🔥', SAY.learn[0]] : [pick(TIPS)]);
   s.innerHTML = '<div class="home-top"><div class="bento-row"><div class="bento-wrap sm">' + bento('idle', undefined, 'home-avatar') + '</div><div class="speech">' + bubble + '</div></div>' +
     '<div class="goal-row">' + ring(Math.min(1, tx / S.goal), hit) + '<div><div class="goal-t">' + (hit ? 'Meta de hoje concluída!' : 'Meta de hoje') + '</div><div class="goal-s">' + tx + ' de ' + S.goal + ' XP</div></div></div>' +
-    cont + saveBanner() + '</div><div class="home-missions">' + missionCard() + '</div><div class="home-tracks"><div class="tracks-intro"><div><div class="eyebrow">SEU PERCURSO</div><h1>' + area.title + '</h1><p class="muted">' + area.description + '</p></div><button class="area-change" data-act="areas" aria-label="Trocar área de estudo">' + area.icon + ' Trocar área</button></div><div class="panels-grid">' + panelList(areaCourses) + '</div></div>';
+    cont + newTrackBanner() + saveBanner() + '</div><div class="home-missions">' + missionCard() + '</div><div class="home-tracks"><div class="tracks-intro"><div><div class="eyebrow">SEU PERCURSO</div><h1>' + area.title + '</h1><p class="muted">' + area.description + '</p></div><button class="area-change" data-act="areas" aria-label="Trocar área de estudo">' + area.icon + ' Trocar área</button></div><div class="panels-grid">' + panelList(areaCourses) + '</div></div>';
   bindActs(s, {
     cont: async () => { if (nl) (await import('./learn.js')).openLesson(nl); },
     final: async () => { const c = areaCourses.find(c => courseComplete(c) && !S.trophies[c.id]); if(c) (await import('./path.js')).openPath(c); },
@@ -36,8 +36,18 @@ export function renderHome(){
     claim: b => claimMission(b.dataset.id),
     chest: claimChest,
     save: async () => (await import('./account.js')).openAccount('signup'),
+    newtrack: async () => { const c = COURSES.find(item => item.id === NEW_TRACK); S.area = areaForCourse(NEW_TRACK).id; save(); renderTop(); (await import('./path.js')).openPath(c); },
+    hidenew: () => { S.seen[NEW_TRACK] = true; save(); renderHome(); },
     course: async b => { const c = COURSES[+b.dataset.i]; if (courseUnlocked(c)) (await import('./path.js')).openPath(c); else lockedCourse(c); }
   });
+}
+/* Aviso da trilha nova para quem estuda em outra área e ainda não começou. */
+const NEW_TRACK = 'financeirojr';
+function newTrackBanner(){
+  const c = COURSES.find(item => item.id === NEW_TRACK), area = areaForCourse(NEW_TRACK);
+  if (!c || !area || S.area === area.id || S.seen[NEW_TRACK] || lessonsDone(c)) return '';
+  return '<div class="new-track"><button class="save-banner" data-act="newtrack"><span aria-hidden="true">' + c.icon + '</span><span><b>Novo em ' + area.title + ': ' + c.title + '</b><small>' + c.lessons.length + ' lições, do zero à entrevista. Toque para começar.</small></span><span class="sb-go" aria-hidden="true">›</span></button>' +
+    '<button class="nt-hide" data-act="hidenew">Agora não</button></div>';
 }
 function saveBanner(){
   if (!cloudAvailable() || isLoggedIn() || !doneCount()) return '';

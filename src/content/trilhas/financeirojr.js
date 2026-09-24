@@ -95,7 +95,7 @@ export default [
   tf("Se a diferença é pequena, dá para ajustar o saldo sem investigar.",false,"Diferenças pequenas também podem esconder erros ou fraudes."),
   mc("Um pagamento aparece no sistema com R$ 1.250 e no extrato com R$ 1.520. O mais provável é:",["*Erro de digitação no lançamento","Tarifa bancária","Juros recebidos"],"Números com dígitos trocados costumam ser erro de digitação."),
   wr("Como se chama comparar o extrato do banco com os lançamentos do sistema? (uma palavra)",["conciliação","conciliacao"],"Conciliação bancária."),
-  nu("O extrato mostra saldo de R$ 10.300. Há um cheque de R$ 700 já lançado no sistema que ainda não foi descontado no banco. Qual deve ser o saldo do sistema?",9600,"10.300 − 700 = 9.600. O sistema já tirou o cheque; o banco ainda não.","R$")
+  nu("O extrato mostra saldo de R$ 10.300. Um pagamento de R$ 700, já baixado no sistema, só sai do banco amanhã. Qual deve ser o saldo do sistema hoje?",9600,"10.300 − 700 = 9.600. O sistema já tirou o pagamento; o banco ainda não.","R$")
  ]},
 {id:"fj8", title:"Fluxo de caixa", icon:"💵",
  learn:[
@@ -166,6 +166,7 @@ export default [
  learn:[
   {h:"Os nomes que aparecem nas notas", b:tbl(['Tributo','Sobre o quê','Esfera'],[['ICMS','Circulação de mercadorias','Estadual'],['ISS','Prestação de serviços','Municipal'],['PIS e COFINS','Receita (faturamento)','Federal'],['IRPJ e CSLL','Lucro','Federal']]) + box('atencao','A Reforma Tributária vai substituir aos poucos ICMS, ISS, PIS e COFINS por IBS e CBS, numa transição que vai de 2026 a 2033. Por enquanto, os nomes antigos continuam aparecendo.')},
   {h:"Retenção na fonte", b:`<p>Em muitos serviços, quem <b>paga</b> desconta um tributo e recolhe direto ao governo. O fornecedor recebe menos do que o valor da nota.</p>` + box('exemplo','Nota de serviço de R$ 1.000 com retenção de 5% de ISS: o fornecedor recebe R$ 950, e a empresa recolhe os R$ 50 à prefeitura.')},
+  {h:"As retenções mais comuns", b:tbl(['Retenção','Percentual de referência','Quando aparece'],[['IRRF','1,5% (1% em alguns serviços, como limpeza)','Serviços profissionais, como consultoria e assessoria'],['PIS, COFINS e CSLL (juntos)','4,65% (0,65% + 3% + 1%)','Serviços profissionais, limpeza, vigilância, manutenção'],['INSS','11%','Cessão de mão de obra e empreitada'],['ISS','2% a 5%, conforme o município','Quando a lei da cidade manda o tomador reter']]) + box('atencao','Há exceções e valores mínimos. Fornecedores do Simples Nacional, por exemplo, em geral não sofrem retenção de IRRF nem de PIS, COFINS e CSLL. Na dúvida, confira com o fiscal antes de pagar. Com a Reforma Tributária, PIS e COFINS dão lugar à CBS a partir de 2027 e essas regras vão mudar.')},
   {h:"O que isso muda no contas a pagar", b:ul(['O valor pago ao fornecedor é o líquido, não o total da nota.','O valor retido vira uma obrigação: tributo a recolher, com prazo próprio.','Esquecer de recolher o que foi retido gera multa para a empresa que reteve.'])}
  ],
  ex:[
@@ -173,7 +174,9 @@ export default [
   nu("Nota de R$ 5.000 com retenção de 3% de um tributo. Qual é o valor retido?",150,"3% de 5.000 = 150.","R$"),
   mt([["ICMS","Circulação de mercadorias"],["ISS","Prestação de serviços"],["PIS e COFINS","Receita da empresa"],["IRPJ e CSLL","Lucro"]],"Cada tributo tem sua base."),
   tf("Na retenção na fonte, quem paga a nota desconta o tributo e se responsabiliza por recolhê-lo.",true,"Por isso o valor retido vira uma obrigação de quem pagou."),
-  mc("Um fornecedor reclama que recebeu R$ 950 por uma nota de serviço de R$ 1.000. O mais provável é:",["*Houve retenção de tributo na fonte","O banco cobrou tarifa dele","Houve erro de digitação"],"A diferença de 5% bate com uma retenção de ISS, por exemplo.")
+  mc("Um fornecedor reclama que recebeu R$ 950 por uma nota de serviço de R$ 1.000. O mais provável é:",["*Houve retenção de tributo na fonte","O banco cobrou tarifa dele","Houve erro de digitação"],"A diferença de 5% bate com uma retenção de ISS, por exemplo."),
+  nu("Nota de consultoria de R$ 10.000 com retenção de IRRF de 1,5% e de PIS, COFINS e CSLL de 4,65%, sem ISS retido. Quanto o fornecedor recebe?",9385,"IRRF: 150. PIS, COFINS e CSLL: 465. Líquido: 10.000 − 150 − 465 = 9.385.","R$","Calcule cada retenção sobre os R$ 10.000 e subtraia as duas."),
+  tf("Quando a empresa retém um tributo e não o recolhe no prazo, a multa é dela, não do fornecedor.",true,"Quem retém passa a ser o responsável pelo recolhimento.")
  ]},
 {id:"fj14", title:"Sigilo e LGPD no financeiro", icon:"🔒",
  learn:[
@@ -193,18 +196,157 @@ export default [
   {h:"O que o recrutador procura", b:ul(['Formação em Contabilidade, Administração, Economia ou área próxima. Estar cursando costuma bastar para vaga júnior.','Noção de contas a pagar e a receber, conciliação bancária e fluxo de caixa.','Excel: pelo menos PROCV, SOMASE, filtros e tabela dinâmica.','Organização, atenção a detalhes e cumprimento de prazos.']) + box('dica','Escreva o que você fez com números: “conciliei 3 contas bancárias por mês” diz mais do que “ajudei no financeiro”.')},
   {h:"Perguntas comuns", b:tbl(['Pergunta','O que avaliam'],[['O que é conciliação bancária?','Se você conhece a rotina'],['Qual a diferença entre lucro e caixa?','Se você entende os números'],['Conte uma vez em que encontrou um erro.','Atenção a detalhes'],['Como você organiza tarefas com prazo?','Organização'],['Por que a área financeira?','Interesse real pela função']])},
   {h:"Como responder bem", b:`<p>Para perguntas sobre experiências, use uma estrutura simples: <b>situação</b>, o que você <b>fez</b> e qual foi o <b>resultado</b>. Serve até para exemplos da faculdade, de um estágio ou das finanças da sua família.</p>` + box('regra','Ninguém espera que um júnior saiba tudo. Avaliam se você entende a lógica básica e aprende rápido. Se não souber algo, diga como faria para descobrir.')},
-  {h:"Antes do dia", b:ol(['Pesquise a empresa: o que ela vende, onde atua e como é o setor dela.','Releia a descrição da vaga e relacione cada requisito com esta trilha.','Treine em voz alta: conciliação, lucro x caixa e contas a pagar.','Prepare uma pergunta sobre a rotina da área para fazer no final.'])}
+  {h:"Antes do dia", b:ol(['Pesquise a empresa: o que ela vende, onde atua e como é o setor dela.','Releia a descrição da vaga e relacione cada requisito com esta trilha.','Treine em voz alta: conciliação, lucro x caixa e contas a pagar.','Prepare uma pergunta sobre a rotina da área para fazer no final.'])},
+  {h:"Se a vaga for num grupo de mídia e agro", b:`<p>Grupos como o Grupo Massa, do Paraná, reúnem TV, rádio, portal de notícias, gestão de imóveis e fazendas. Mostre que você entende o que isso significa para o financeiro:</p>` + ul(['<b>Mídia</b>: receita de anunciantes e agências, PI, comissão de agência e cobrança com comprovante de veiculação.','<b>Agro</b>: caixa sazonal, custeio da safra, venda de grãos e gado, contabilidade rural.','<b>Grupo</b>: várias empresas, notas no CNPJ certo, saldos entre empresas e rateios.']) + box('dica','Uma boa pergunta para o final: “Como o financeiro se organiza entre as empresas do grupo? Cada analista cuida de algumas empresas?”')}
  ],
  ex:[
   mc("Numa vaga júnior, o que costuma pesar mais?",["*Entender a lógica básica da rotina e mostrar que aprende rápido","Ter muitos anos de experiência","Saber programar"],"Vagas júnior avaliam base e potencial."),
   tf("No currículo, descrever o que você fez com números concretos é mais forte do que frases genéricas.",true,"Números mostram tamanho e resultado."),
   od("Ordene a estrutura de uma boa resposta sobre experiência:",["Situação","O que você fez","Resultado"],"Contexto, ação e resultado."),
   ep("Treine a pergunta mais comum: o que é conciliação bancária?","É comparar os lançamentos do sistema da empresa com o extrato do banco, item por item, investigar as diferenças e ajustar com documento até os saldos baterem.",[["Compara sistema e banco","compar","confront","extrato","banco","sistema"],["Investiga as diferenças","diferenc","investig","sem par","diverg"],["Ajusta até bater","ajust","bater","saldo","corrig","igual"]],"Treine essa resposta em voz alta até sair natural."),
-  ep("Treine outra pergunta comum: por que uma empresa pode ter lucro e estar sem dinheiro?","Porque o lucro segue a competência: vendas a prazo entram como receita antes de o dinheiro chegar. Além disso, pagamentos de dívidas, compras de bens e estoques tiram dinheiro do caixa sem virar despesa na hora.",[["Vendas a prazo","prazo","ainda nao receb","receber depois","competenc"],["Saídas que não são despesa","divid","emprestim","estoque","maquin","compra","investim"]],"Mostra que você entende a diferença entre DRE e fluxo de caixa.")
+  mc("Numa entrevista para um grupo com TV e fazendas, qual resposta mostra que você pesquisou a empresa?",["*“Imagino que o caixa das fazendas seja sazonal e que a receita da TV venha de anunciantes e agências”","“Não sei o que o grupo faz, mas aprendo rápido”","“Toda empresa é igual no financeiro”"],"Relacionar a rotina do cargo ao negócio da empresa impressiona."),
+  ep("Treine outra pergunta comum: por que uma empresa pode ter lucro e estar sem dinheiro?","Porque o lucro segue a competência: vendas a prazo entram como receita antes de o dinheiro chegar. Além disso, pagamentos de dívidas, compras de bens e estoques tiram dinheiro do caixa sem virar despesa na hora.",[["Receita antes do dinheiro","prazo","depois","competenc","nao receb","ainda nao","receber"],["Dinheiro que sai antes ou sem virar despesa","divid","emprestim","estoque","maquin","compra","investim","pag"]],"Mostra que você entende a diferença entre DRE e fluxo de caixa.")
+ ]},
+{id:"fj0", title:"Porcentagem e juros do dia a dia", icon:"🧮",
+ learn:[
+  {h:"Porcentagem sem medo", b:`<p>Porcentagem é uma fração de 100. Para calcular, transforme em decimal e multiplique.</p>` + eq('15% de R$ 800 = 0,15 × 800 = R$ 120') + tbl(['Situação','Conta'],[['Aumento de 10%','Valor × 1,10'],['Desconto de 10%','Valor × 0,90'],['Variação','(Novo − Antigo) ÷ Antigo']]) + box('exemplo','A conta de energia foi de R$ 800 para R$ 1.000. Variação: 200 ÷ 800 = 25% a mais.')},
+  {h:"Juros simples", b:`<p>Os juros são sempre calculados sobre o valor inicial.</p>` + eq('Juros = Capital × taxa × tempo') + box('exemplo','R$ 1.000 a 2% ao mês por 3 meses: 1.000 × 0,02 × 3 = R$ 60 de juros.')},
+  {h:"Juros compostos", b:`<p>Os juros de cada mês entram na base do mês seguinte: juros sobre juros. É assim que funcionam empréstimos, financiamentos e aplicações.</p>` + eq('Montante = Capital × (1 + taxa)<sup>tempo</sup>') + box('exemplo','R$ 1.000 a 10% ao mês por 2 meses: 1.000 × 1,10 × 1,10 = R$ 1.210. Nos juros simples seriam R$ 1.200.') + box('atencao','A taxa e o tempo precisam estar na mesma unidade: taxa ao mês com prazo em meses.')},
+  {h:"Por que isso cai na vaga", b:`<p>Multa e juros de boletos, desconto para pagar à vista, custo de um empréstimo e variação de despesas de um mês para o outro: tudo isso é porcentagem e juros. Muitos processos seletivos têm uma prova com contas assim.</p>`}
+ ],
+ ex:[
+  nu("Quanto é 15% de R$ 800?",120,"0,15 × 800 = 120.","R$"),
+  nu("Um produto de R$ 250 teve aumento de 8%. Qual é o novo preço?",270,"250 × 1,08 = 270.","R$"),
+  nu("A despesa com frete foi de R$ 4.000 para R$ 5.000. Qual foi a variação percentual?",25,"(5.000 − 4.000) ÷ 4.000 = 25%.","%"),
+  nu("R$ 2.000 a juros simples de 3% ao mês por 4 meses. Quanto de juros?",240,"2.000 × 0,03 × 4 = 240.","R$"),
+  nu("R$ 1.000 a juros compostos de 10% ao mês por 2 meses. Qual é o montante?",1210,"1.000 × 1,1 × 1,1 = 1.210.","R$"),
+  tf("Um aumento de 10% seguido de um desconto de 10% volta exatamente ao preço original.",false,"100 × 1,10 = 110; 110 × 0,90 = 99. O desconto incide sobre uma base maior.")
+ ]},
+{id:"fjb1", title:"Boleto, Pix, TED e cartão", icon:"💳",
+ learn:[
+  {h:"Como o dinheiro entra e sai", b:tbl(['Meio','Quando o dinheiro chega','Observação'],[['Pix','Na hora, qualquer dia e horário','Confira nome e CNPJ do recebedor antes de confirmar'],['TED','No mesmo dia, em horário bancário','Usada para valores altos e pagamentos programados'],['Boleto','Em geral, 1 dia útil depois do pagamento','Tem vencimento, multa e juros próprios'],['Cartão de crédito','Em geral, cerca de 30 dias depois da venda','A operadora cobra uma taxa sobre cada venda']]) + box('dica','O DOC deixou de existir em 2024. Se aparecer numa pergunta, é pegadinha.')},
+  {h:"Anatomia de um boleto", b:ul(['<b>Beneficiário</b>: quem vai receber. Precisa ser o fornecedor da nota.','<b>Pagador</b>: quem deve pagar, com nome e CNPJ.','<b>Linha digitável</b> e código de barras: identificam o boleto.','<b>Vencimento</b>, multa e juros por atraso.']) + box('atencao','Golpe comum: boleto adulterado com o beneficiário trocado. O valor e o vencimento parecem certos, mas o dinheiro vai para outra conta.')},
+  {h:"Cartão: taxa e antecipação", b:`<p>Nas vendas no cartão, a empresa recebe o valor menos a taxa da operadora. Se precisar do dinheiro antes, pode <b>antecipar</b> os recebíveis, pagando um custo a mais.</p>` + box('exemplo','Venda de R$ 1.000 com taxa de 3%: a empresa recebe R$ 970, cerca de 30 dias depois.')}
+ ],
+ ex:[
+  mt([["Pix","Na hora, a qualquer momento"],["TED","No mesmo dia, em horário bancário"],["Boleto","Em geral, 1 dia útil depois"],["Cartão de crédito","Em geral, cerca de 30 dias depois"]],"Cada meio tem seu prazo."),
+  nu("Venda de R$ 2.000 no cartão com taxa de 2,5%. Quanto a empresa recebe?",1950,"2,5% de 2.000 = 50. Recebe 2.000 − 50 = 1.950.","R$"),
+  mc("Num boleto, quem vai receber o dinheiro é o:",["*Beneficiário","Pagador","Banco emissor"],"Confira sempre se o beneficiário é o fornecedor da nota."),
+  tf("O DOC ainda é uma forma comum de transferência entre bancos.",false,"O DOC foi extinto em 2024. Hoje se usa Pix ou TED."),
+  mc("Antecipar os recebíveis do cartão significa:",["*Receber antes do prazo, pagando um custo por isso","Receber mais do que o valor da venda","Cancelar a venda"],"A antecipação troca prazo por dinheiro hoje, com desconto.")
+ ]},
+{id:"fjb2", title:"Rotina bancária no sistema", icon:"🗂️",
+ learn:[
+  {h:"DDA: os boletos em nome da empresa", b:`<p>No <b>DDA</b> (Débito Direto Autorizado), os boletos registrados contra o CNPJ da empresa aparecem sozinhos no internet banking.</p>` + box('dica','Compare o DDA com as notas lançadas. Boleto que chegou por e-mail e não aparece no DDA merece desconfiança.')},
+  {h:"Remessa e retorno", b:`<p>Em vez de pagar boleto por boleto, o sistema da empresa gera um <b>arquivo de remessa</b> com o lote do dia e o envia ao banco. Depois, o banco devolve um <b>arquivo de retorno</b> dizendo o que foi pago ou recebido, e o sistema dá baixa sozinho.</p>` + tbl(['Arquivo','Vai de... para...','Serve para'],[['Remessa','Empresa → banco','Enviar pagamentos ou registrar boletos'],['Retorno','Banco → empresa','Confirmar o que foi pago ou recebido']]) + box('exemplo','Esses arquivos seguem o padrão CNAB da Febraban, com versões de 240 e de 400 posições. Se a vaga pede “CNAB”, é isso.')},
+  {h:"Aprovações e segregação de funções", b:ul(['<b>Alçada</b>: pagamentos acima de um valor precisam da aprovação de um gestor.','<b>Segregação de funções</b>: quem cadastra o fornecedor não é quem aprova o pagamento.','<b>Cadastro de fornecedor</b>: a conta bancária precisa estar em nome do próprio fornecedor, com o mesmo CNPJ.']) + box('regra','Esses controles não são burocracia. Eles evitam erros e fraudes, e auditorias costumam testá-los.')}
+ ],
+ ex:[
+  mc("O arquivo que a empresa envia ao banco com o lote de pagamentos do dia é o de:",["*Remessa","Retorno","Conciliação"],"Remessa vai da empresa ao banco; retorno volta do banco."),
+  mc("O arquivo de retorno serve para:",["*Informar o que foi pago ou recebido, para o sistema dar baixa","Pedir um empréstimo","Cadastrar fornecedores"],"É o retorno que permite a baixa automática dos títulos."),
+  tf("Um boleto recebido por e-mail que não aparece no DDA da empresa merece ser conferido antes do pagamento.",true,"Os boletos registrados no CNPJ da empresa aparecem no DDA."),
+  mc("Qual situação quebra a segregação de funções?",["*A mesma pessoa cadastra o fornecedor e aprova o pagamento dele","Um gestor aprova pagamentos acima da alçada","O analista confere a nota antes de agendar"],"Separar tarefas evita que uma pessoa sozinha consiga desviar dinheiro."),
+  wr("Qual padrão da Febraban define os arquivos de remessa e retorno? (uma palavra)",["cnab"],"CNAB, nas versões de 240 e 400 posições."),
+  od("Ordene o pagamento em lote:",["Aprovar os títulos do dia","Gerar o arquivo de remessa","Enviar ao banco e autorizar","Importar o retorno e conferir as baixas"],"Aprovar, enviar e confirmar.")
+ ]},
+{id:"fjc1", title:"Sobra ou falta de caixa", icon:"🪙",
+ learn:[
+  {h:"Capital de giro", b:`<p>É o dinheiro que sustenta a operação entre pagar fornecedores e receber dos clientes. Quanto mais a empresa espera para receber e menos prazo tem para pagar, mais capital de giro precisa.</p>` + eq('Ciclo financeiro = prazo de estoque + prazo de recebimento − prazo de pagamento') + box('exemplo','Estoque parado por 30 dias, recebimento em 40 e pagamento em 45: ciclo financeiro de 25 dias que a empresa precisa financiar.')},
+  {h:"Quando sobra dinheiro", b:`<p>Dinheiro parado na conta corrente não rende. Seguindo a política da empresa, a sobra costuma ir para aplicações de <b>baixo risco e resgate rápido</b>, como CDB com liquidez diária.</p>`},
+  {h:"Quando falta dinheiro", b:tbl(['Saída','O que é','Custo'],[['Negociar prazo','Pedir mais dias ao fornecedor','Baixo, se houver acordo'],['Antecipar recebíveis','Receber hoje as vendas a prazo, com desconto','Médio'],['Capital de giro bancário','Empréstimo de curto prazo','Médio a alto'],['Cheque especial da empresa','Limite automático na conta','Muito alto']]) + box('regra','O fluxo de caixa projetado mostra a falta com antecedência. Com tempo, dá para escolher a saída mais barata.')}
+ ],
+ ex:[
+  nu("Prazo de estoque de 30 dias, recebimento de 40 e pagamento de 45. Qual é o ciclo financeiro?",25,"30 + 40 − 45 = 25 dias.","dias"),
+  nu("Antecipar R$ 10.000 por 1 mês custa 2% ao mês. Quanto a empresa paga pela antecipação?",200,"2% de 10.000 = 200.","R$"),
+  mc("Sobrou dinheiro no caixa por algumas semanas. O mais indicado é:",["*Aplicar em algo de baixo risco e resgate rápido, seguindo a política da empresa","Deixar parado na conta corrente","Aplicar tudo em ações"],"O dinheiro deve render sem risco de faltar quando for preciso."),
+  mc("Qual forma de cobrir falta de caixa costuma ser a mais cara?",["*Cheque especial da empresa","Negociar prazo com o fornecedor","Antecipar recebíveis"],"O cheque especial tem juros altíssimos. É a última opção."),
+  tf("Aumentar o prazo de pagamento aos fornecedores reduz o ciclo financeiro.",true,"O prazo de pagamento entra subtraindo na conta.")
+ ]},
+{id:"fjc2", title:"Orçamento e fechamento do mês", icon:"🗓️",
+ learn:[
+  {h:"Orçado x realizado", b:`<p>O <b>orçamento</b> é o plano de receitas e despesas. Todo mês, o financeiro compara o que foi planejado com o que aconteceu e explica as diferenças.</p>` + tbl(['Conta','Orçado','Realizado','Variação'],[['Energia','R$ 5.000','R$ 6.000','+R$ 1.000 (+20%)'],['Receita de vendas','R$ 80.000','R$ 72.000','−R$ 8.000 (−10%)']]) + box('dica','Não basta mostrar o número: explique o motivo. “A energia subiu 20% porque a bandeira tarifária foi vermelha” é uma análise.')},
+  {h:"Centros de custo", b:`<p>A conta contábil diz <b>o que</b> foi gasto. O <b>centro de custo</b> diz <b>onde</b>: qual área, unidade ou fazenda. É o que permite saber quanto custa cada parte do negócio.</p>` + box('exemplo','Conta: Combustíveis. Centro de custo: Fazenda A. Assim o diesel da fazenda não se mistura com o do escritório.')},
+  {h:"O checklist do fechamento", b:ol(['Conciliar todas as contas bancárias.','Conferir contas a pagar e a receber em aberto.','Lançar despesas do mês que ainda não foram pagas (provisões).','Conferir os saldos entre empresas do grupo.','Montar os relatórios e explicar as variações.']) + box('atencao','Uma despesa do mês é do mês, mesmo que a conta só chegue depois. Se a energia de março chega em abril, ela é provisionada em março.')}
+ ],
+ ex:[
+  nu("Orçado de R$ 5.000 e realizado de R$ 6.000. Qual foi a variação em %?",20,"(6.000 − 5.000) ÷ 5.000 = 20%.","%"),
+  nu("Receita orçada de R$ 80.000 e realizada de R$ 72.000. Em quantos % ficou abaixo do orçado?",10,"8.000 ÷ 80.000 = 10%.","%"),
+  fl("A conta contábil mostra o que foi gasto; o {centro de custo} mostra onde.",["plano de contas","balancete"],"É a dimensão de área ou unidade."),
+  tf("A energia consumida em março, cuja conta só chega em abril, deve ser registrada como despesa de março.",true,"Pela competência, a despesa é do mês em que houve o consumo."),
+  od("Ordene o fechamento do mês:",["Conciliar os bancos","Conferir títulos em aberto","Lançar as provisões","Montar relatórios e explicar variações"],"Conferir antes de reportar.")
+ ]},
+{id:"fjm1", title:"Receitas de TV e rádio", icon:"📺",
+ learn:[
+  {h:"Como uma emissora ganha dinheiro", b:`<p>TV e rádio vendem <b>espaço publicitário</b>: comerciais, merchandising e patrocínios de programas. Quem compra são os anunciantes, quase sempre por meio de uma <b>agência de publicidade</b>.</p>` + box('dica','Grupos de comunicação também costumam ter receitas de portais de notícias, eventos, licenciamento de marcas e aluguel de imóveis.')},
+  {h:"O PI e a comissão da agência", b:`<p>A venda é formalizada no <b>PI (Pedido de Inserção)</b>, que diz o que vai ao ar, quando e por quanto. A agência costuma ficar com um desconto-padrão, em geral de 20% do valor bruto, e o veículo recebe o restante.</p>` + box('exemplo','Campanha de R$ 50.000 brutos: a agência fica com R$ 10.000 (20%) e a emissora recebe R$ 40.000.')},
+  {h:"Quando é receita e quando se recebe", b:ul(['A receita é reconhecida quando o comercial <b>vai ao ar</b>, não quando o PI é assinado.','Para pagar, anunciantes e agências costumam pedir o <b>comprovante de veiculação</b> (checking).','Uma campanha veiculada em março e paga em maio é receita de março e fica em contas a receber até maio.']) + box('atencao','<b>Permuta</b> é trocar espaço publicitário por produtos ou serviços. Mesmo sem dinheiro, ela precisa ser registrada.')}
+ ],
+ ex:[
+  nu("Campanha de R$ 30.000 brutos, com desconto-padrão de agência de 20%. Quanto a emissora recebe?",24000,"20% de 30.000 = 6.000 para a agência. A emissora recebe 24.000.","R$"),
+  wr("Qual documento formaliza a compra de espaço publicitário? (sigla de duas letras)",["pi","pedido de inserção","pedido de insercao"],"PI, o Pedido de Inserção."),
+  mc("Uma campanha foi ao ar em março, e o anunciante pagou em maio. A receita é de:",["*Março","Maio","Abril"],"A receita acontece com a veiculação."),
+  mc("O anunciante pede um comprovante de que o comercial foi ao ar antes de pagar. Como se chama?",["*Checking (comprovante de veiculação)","Nota de débito","Duplicata"],"É a prova de que o serviço foi prestado."),
+  tf("Uma permuta de espaço publicitário por serviços não precisa ser registrada, porque não envolve dinheiro.",false,"Ela gera receita e despesa (ou ativo) e deve ser registrada.")
+ ]},
+{id:"fjm2", title:"O caixa do agronegócio", icon:"🌾",
+ learn:[
+  {h:"Gasta o ano todo, recebe na colheita", b:`<p>Numa fazenda, as despesas se espalham pelo ano: sementes, fertilizantes, diesel, salários, veterinário. Já a receita se concentra na <b>venda da safra</b> ou dos animais. É a <b>sazonalidade</b>, e o fluxo de caixa precisa prever os meses de aperto.</p>` + tbl(['Unidade','Equivale a'],[['Saca (soja, milho, café)','60 kg'],['Arroba (gado)','15 kg']])},
+  {h:"Como a safra é financiada", b:tbl(['Instrumento','O que é'],[['Custeio agrícola','Crédito rural para pagar os gastos da safra, quitado depois da colheita'],['CPR (Cédula de Produto Rural)','O produtor recebe hoje e se compromete a entregar produto ou pagar no futuro'],['Barter','Troca de insumos por parte da produção futura']])},
+  {h:"Particularidades do agro", b:ul(['Gado e lavouras em formação são <b>ativos biológicos</b>. Depois da colheita, o grão vira <b>estoque</b>.','Na venda da produção pode incidir o <b>Funrural</b>, e muitas vezes quem compra desconta e recolhe.','O preço varia com o mercado. Por isso a empresa acompanha cotações e pode vender parte da safra antecipadamente.']) + box('exemplo','Venda de 2.000 sacas de soja a R$ 125 (preço fictício): receita de R$ 250.000.')}
+ ],
+ ex:[
+  nu("Venda de 2.000 sacas de soja a R$ 125 por saca. Qual é a receita?",250000,"2.000 × 125 = 250.000.","R$"),
+  nu("Um boi de 18 arrobas vendido a R$ 300 por arroba. Qual é o valor da venda?",5400,"18 × 300 = 5.400.","R$"),
+  nu("Uma saca tem 60 kg. Quantas sacas há em 12.000 kg de milho?",200,"12.000 ÷ 60 = 200.","sacas"),
+  mc("Por que o fluxo de caixa de uma fazenda precisa de atenção especial?",["*As despesas se espalham pelo ano e a receita se concentra na venda da safra","A fazenda não tem despesas","A receita entra igual todos os meses"],"É a sazonalidade do agro."),
+  mt([["Custeio agrícola","Crédito para os gastos da safra"],["CPR","Promessa de entregar produto ou pagar no futuro"],["Barter","Insumos trocados por produção"],["Ativo biológico","Gado e lavoura em formação"]],"Termos do financeiro rural."),
+  tf("Depois de colhida, a soja deixa de ser ativo biológico e passa a ser estoque.",true,"O produto colhido é estoque até ser vendido.")
+ ]},
+{id:"fjm3", title:"Um grupo, várias empresas", icon:"🏛️",
+ learn:[
+  {h:"Cada CNPJ, suas contas", b:`<p>Um grupo reúne várias empresas com os mesmos donos: emissoras, rádios, fazendas, imobiliária. Cada uma tem o próprio CNPJ, conta bancária, contabilidade e tributos.</p>` + box('atencao','A nota fiscal precisa estar no CNPJ da empresa que usou o serviço, e o pagamento deve sair da conta dessa mesma empresa.')},
+  {h:"Quando uma empresa paga pela outra", b:`<p>Se a Rádio paga uma conta da Fazenda, nasce um saldo entre as duas: a Rádio tem a receber e a Fazenda tem a pagar. São as operações <b>intercompany</b>. O mesmo vale para empréstimos entre empresas do grupo (<b>mútuo</b>).</p>` + lanc([['D','Mútuo a receber (na Rádio)','20.000'],['C','Bancos (na Rádio)','20.000']]) + lanc([['D','Bancos (na Fazenda)','20.000'],['C','Mútuo a pagar (na Fazenda)','20.000']]) + box('dica','No fechamento, os saldos precisam bater: o que uma tem a receber, a outra tem a pagar, com o mesmo valor. Em mútuos pode haver IOF; o fiscal orienta.')},
+  {h:"Despesas compartilhadas", b:`<p>Serviços usados por todas as empresas, como TI, jurídico ou o próprio financeiro, costumam ser <b>rateados</b> por um critério definido, como número de funcionários ou faturamento.</p>` + box('exemplo','TI de R$ 30.000 dividida entre três empresas com 50, 30 e 20 funcionários: R$ 15.000, R$ 9.000 e R$ 6.000.')}
+ ],
+ ex:[
+  mc("A Rádio emprestou R$ 20.000 à Fazenda, do mesmo grupo. Na Rádio, esse valor fica como:",["*Mútuo a receber (Ativo)","Mútuo a pagar (Passivo)","Receita de serviços"],"Quem empresta tem um direito a receber."),
+  tf("Na conciliação intercompany, o saldo a receber de uma empresa deve ser igual ao saldo a pagar da outra.",true,"São os dois lados da mesma operação."),
+  nu("Despesa de TI de R$ 30.000 rateada por funcionários. A empresa com 30 de um total de 100 funcionários recebe quanto?",9000,"30 ÷ 100 = 30%. 30% de 30.000 = 9.000.","R$"),
+  mc("Chegou uma nota de manutenção da Fazenda emitida no CNPJ da Emissora. O que fazer?",["*Pedir ao fornecedor que corrija a nota para o CNPJ certo antes de pagar","Pagar pela Emissora e esquecer","Pagar pelas duas empresas"],"A despesa e o pagamento precisam ser da empresa que usou o serviço."),
+  en("Na Fazenda: recebeu no banco R$ 20.000 emprestados pela Rádio, do mesmo grupo.","Bancos","Mútuo a pagar",["Receita de vendas","Mútuo a receber"],"Entra dinheiro e surge uma dívida com a outra empresa do grupo.")
+ ]},
+{id:"fjm4", title:"Um dia no financeiro", icon:"📋",
+ learn:[
+  {h:"Segunda-feira, 8h", b:`<p>Você chega e encontra: saldo de R$ 60.000, títulos de R$ 85.000 vencendo hoje, um e-mail “urgente” de fornecedor com conta bancária nova e um depósito de R$ 12.000 no extrato sem identificação.</p>` + box('dica','Respire. Um bom analista organiza a fila antes de sair pagando.')},
+  {h:"Quando o dinheiro não dá para tudo", b:ol(['Avise o gestor na hora, com o número: faltam R$ 25.000.','Proponha a ordem: folha e tributos costumam vir primeiro, porque o atraso gera multas pesadas e riscos maiores.','Depois, fornecedores essenciais para a operação.','Para o restante, negocie prazo ou veja a saída mais barata no fluxo de caixa.']) + box('regra','Quem decide o que fica para depois é o gestor. Seu papel é levar os números e uma proposta.')},
+  {h:"O resto da fila", b:ul(['<b>Conta bancária nova por e-mail</b>: não altere o cadastro. Confirme por um telefone que você já conhecia.','<b>Depósito sem identificação</b>: procure títulos em aberto com o mesmo valor e fale com o comercial antes de dar baixa.','<b>No fim do dia</b>: concilie o banco e atualize o fluxo de caixa.'])}
+ ],
+ ex:[
+  nu("Saldo de R$ 60.000 e títulos de R$ 85.000 vencendo hoje. Quanto falta?",25000,"85.000 − 60.000 = 25.000.","R$"),
+  mc("O dinheiro do dia não cobre todos os pagamentos. Qual é a primeira atitude?",["*Avisar o gestor com os números e uma proposta de prioridade","Pagar os primeiros da lista até acabar o saldo","Deixar para resolver amanhã"],"A decisão é do gestor, mas a informação e a proposta são suas."),
+  mc("Normalmente, o que costuma ser priorizado quando falta caixa?",["*Folha de pagamento e tributos","Brindes para clientes","Assinaturas de revistas"],"Atrasar salários e tributos gera multas e riscos maiores."),
+  mc("Um e-mail pede para trocar a conta bancária de um fornecedor antes do pagamento de hoje. O que fazer?",["*Confirmar com o fornecedor por um contato já conhecido antes de mudar o cadastro","Trocar e pagar","Responder o e-mail perguntando se é verdade"],"Responder ao mesmo e-mail pode confirmar o golpe."),
+  mc("Entrou R$ 12.000 no extrato sem identificação. O melhor caminho é:",["*Procurar títulos em aberto com esse valor e confirmar com o comercial antes da baixa","Dar baixa no primeiro cliente que deve R$ 12.000","Lançar como receita de outros"],"Baixar no cliente errado gera cobrança indevida em outro."),
+  od("Ordene o fim do dia:",["Confirmar os pagamentos feitos","Conciliar o banco","Atualizar o fluxo de caixa","Avisar pendências ao gestor"],"Fechar o dia com os números em ordem.")
+ ]},
+{id:"fjs1", title:"Simulado: prova técnica", icon:"📝",
+ learn:[
+  {h:"Como costuma ser a prova", b:ul(['Contas rápidas: porcentagem, juros, variações e prazos médios.','Conceitos: conciliação, competência x caixa, circulante, retenções.','Excel: qual função usar e o que uma fórmula faz.','Casos curtos: o que você faria numa situação do dia a dia.']) + box('dica','Leia a pergunta duas vezes e confira a unidade: mês ou dia, % ou R$, bruto ou líquido.')},
+  {h:"Estratégia", b:ol(['Faça primeiro as questões que você sabe.','Nas contas, estime antes de calcular para perceber erros grandes.','Nos casos, mostre o raciocínio: conferir, avisar e documentar.'])}
+ ],
+ ex:[
+  nu("Boleto de R$ 4.000 pago com 1 mês de atraso: multa de 2% e juros de 1% ao mês. Quanto se paga no total?",4120,"Multa: 80. Juros: 40. Total: 4.000 + 80 + 40 = 4.120.","R$"),
+  nu("R$ 5.000 a juros compostos de 2% ao mês por 2 meses. Qual é o montante?",5202,"5.000 × 1,02 × 1,02 = 5.202.","R$"),
+  nu("Contas a receber de R$ 45.000 e vendas a prazo de R$ 135.000 no mês de 30 dias. Qual é o prazo médio de recebimento?",10,"(45.000 ÷ 135.000) × 30 = 10 dias.","dias"),
+  nu("Ativo circulante de R$ 72.000 e passivo circulante de R$ 48.000. Qual é a liquidez corrente?",1.5,"72.000 ÷ 48.000 = 1,5.","vezes"),
+  nu("Nota de serviço de R$ 8.000 com retenção de ISS de 5%. Quanto o fornecedor recebe?",7600,"5% de 8.000 = 400. 8.000 − 400 = 7.600.","R$"),
+  mc("A fórmula =SOMASE(B:B;\"Fazenda A\";C:C) faz o quê?",["*Soma a coluna C nas linhas em que a coluna B é “Fazenda A”","Conta quantas vezes aparece “Fazenda A”","Procura “Fazenda A” em outra tabela"],"SOMASE soma com condição."),
+  mc("Venda a prazo feita em junho e recebida em agosto. Em qual mês é receita e em qual mês entra no caixa?",["*Receita em junho; caixa em agosto","Receita e caixa em agosto","Receita e caixa em junho"],"Competência para o resultado, caixa para o dinheiro."),
+  tf("Na conciliação bancária, uma tarifa que aparece só no extrato deve ser lançada no sistema.",true,"É uma despesa real que faltava registrar.")
  ]},
 {id:"fj16", title:"Revisão: Analista Financeiro Jr", icon:"🔄",
  learn:[
-  {h:"O que você viu nesta trilha", b:tbl(['Tema','Em uma frase'],[['Patrimônio','Ativo = Passivo + PL'],['Contas a pagar','Conferir antes de pagar, na data certa'],['Contas a receber','Registrar, dar baixa e cobrar quem atrasa'],['Conciliação','Sistema e extrato, item por item'],['Fluxo de caixa','Saldo inicial + entradas − saídas'],['Indicadores','Liquidez, margem e prazos médios'],['Rotina','Excel, retenções e cuidado com dados pessoais']])}
+  {h:"O que você viu nesta trilha", b:tbl(['Tema','Em uma frase'],[['Patrimônio','Ativo = Passivo + PL'],['Contas a pagar','Conferir antes de pagar, na data certa'],['Contas a receber','Registrar, dar baixa e cobrar quem atrasa'],['Conciliação','Sistema e extrato, item por item'],['Fluxo de caixa','Saldo inicial + entradas − saídas'],['Indicadores','Liquidez, margem e prazos médios'],['Bancos','Pix, TED, boleto, DDA, remessa e retorno'],['Planejamento','Capital de giro, orçado x realizado e fechamento'],['Mídia e agro','PI e comissão de agência; safra, custeio e sazonalidade'],['Rotina','Excel, retenções e cuidado com dados pessoais']])}
  ],
  ex:[
   nu("Ativo de R$ 180.000 e Passivo de R$ 70.000. Qual é o PL?",110000,"180.000 − 70.000 = 110.000.","R$"),
@@ -215,6 +357,10 @@ export default [
   tf("Uma empresa pode ter lucro no mês e o caixa diminuir no mesmo mês.",true,"Vendas a prazo geram lucro antes de gerar dinheiro."),
   nu("Ativo circulante de R$ 90.000 e passivo circulante de R$ 45.000. Qual é a liquidez corrente?",2,"90.000 ÷ 45.000 = 2.","vezes"),
   nu("Nota de serviço de R$ 3.000 com retenção de 5% de ISS. Quanto o fornecedor recebe?",2850,"5% de 3.000 = 150. 3.000 − 150 = 2.850.","R$"),
-  mc("Para somar só os títulos vencidos numa planilha, a função mais direta é:",["*SOMASE","PROCV","MÉDIA"],"SOMASE soma o que atende a uma condição.")
+  mc("Para somar só os títulos vencidos numa planilha, a função mais direta é:",["*SOMASE","PROCV","MÉDIA"],"SOMASE soma o que atende a uma condição."),
+  nu("R$ 2.000 a juros compostos de 10% ao mês por 2 meses. Qual é o montante?",2420,"2.000 × 1,1 × 1,1 = 2.420.","R$"),
+  mc("O arquivo que o banco devolve informando o que foi pago é o de:",["*Retorno","Remessa","DDA"],"Remessa vai; retorno volta."),
+  nu("Campanha de R$ 40.000 brutos com desconto-padrão de agência de 20%. Quanto a emissora recebe?",32000,"40.000 × 0,80 = 32.000.","R$"),
+  mc("Por que o caixa de uma fazenda é sazonal?",["*Os gastos se espalham pelo ano e a receita vem na venda da safra","Porque fazendas não têm despesas","Porque a receita é igual todo mês"],"É preciso planejar os meses de aperto.")
  ]}
 ];
