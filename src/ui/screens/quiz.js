@@ -51,7 +51,7 @@ function setBtn(txt, dis){ const b = $('#q-btn'); b.textContent = txt; b.disable
 function bentoQuiz(mood){ const w = $('#q-bento'); if (w) w.innerHTML = bento(mood); }
 export function renderItem(){
   const it = SES.queue[0], x = it.x, body = $('#q-body'), foot = $('#q-foot');
-  SES.phase = 'answer'; foot.className = 'foot';
+  SES.phase = 'answer'; foot.className = 'foot'; body.classList.remove('locked'); SES.undo = null;
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   body.innerHTML = '';
@@ -76,6 +76,7 @@ function resolve(ok){
   if (SES.timeout) return;
   const it = SES.queue[0], x = it.x;
   SES.phase = 'feedback'; R.reveal(ok);
+  $('#q-body').classList.add('locked');
   const itemHint = S.st.hints > SES.itemHintStart;
   if (itemHint) SES.usedHint = true;
   if (ok){
@@ -88,6 +89,7 @@ function resolve(ok){
     if (x.t === 'wr' || x.t === 'ew' || x.t === 'expl'){ S.st.writes++; mprog('writes', 1); }
     SES.queue.shift(); sfx.ok(); bentoQuiz('happy');
   } else {
+    SES.undo = { wasWrong:!!SES.wrong[it.key], mistakes:S.mistakes[it.key], combo:SES.combo, hearts:SES.hearts, hint:itemHint };
     if (SES.maxHearts < 99) SES.hearts--;
     SES.wrong[it.key] = true;
     S.mistakes[it.key] = (S.mistakes[it.key] || 0) + 1;
@@ -102,8 +104,37 @@ function resolve(ok){
   const reaction = bentoReaction(ok, SES.combo, SES.hearts, SES.maxHearts);
   $('#fb-bento').innerHTML = bento(reaction.mood, undefined, 'react');
   $('#fb-say').textContent = reaction.say;
-  $('#fb-b').innerHTML = (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '');
+  $('#fb-b').innerHTML = (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '') +
+    (!ok && canContest(x) ? '<button class="link contest" id="fb-contest">Minha resposta estava certa</button>' : '');
+  const contest = $('#fb-contest'); if (contest) contest.onclick = acceptMine;
   setBtn('Continuar', false);
+  save();
+}
+/* Respostas escritas podem ser contestadas: o corretor automático pode não reconhecer
+   um jeito diferente de dizer a mesma coisa. Nos testes (final, selos, desafios) não. */
+const STRICT = ['final', 'unlock', 'jump', 'checkpoint', 'challenge'];
+function canContest(x){ return ['wr', 'ew', 'expl'].includes(x.t) && !STRICT.includes(SES.kind) && !!R.learn && !!SES.undo; }
+function acceptMine(){
+  const u = SES.undo; if (!u || SES.phase !== 'feedback') return;
+  SES.undo = null;
+  const it = SES.queue.pop(), x = it.x;
+  SES.hearts = u.hearts;
+  if (u.wasWrong) SES.wrong[it.key] = true; else delete SES.wrong[it.key];
+  if (u.mistakes) S.mistakes[it.key] = u.mistakes; else delete S.mistakes[it.key];
+  SES.done++;
+  if (!u.wasWrong && !u.hint){ SES.first++; SES.cleanKeys.push(it.key); }
+  SES.combo = u.combo + 1; SES.maxCombo = Math.max(SES.maxCombo, SES.combo); mprog('combo', SES.combo);
+  if (x.t === 'ew'){ S.st.entries++; mprog('entries', 1); }
+  S.st.writes++; mprog('writes', 1);
+  R.learn();
+  sfx.ok(); bentoQuiz('happy');
+  $('#q-hearts').innerHTML = heartsHtml();
+  $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
+  $('#q-foot').className = 'foot ok';
+  $('#fb-t').innerHTML = '✅ Combinado: contei como certa';
+  $('#fb-bento').innerHTML = bento('happy', undefined, 'react');
+  $('#fb-say').textContent = x.t === 'expl' ? 'Boa! Compare com a resposta-modelo.' : 'Anotado! Na próxima, aceito essa resposta.';
+  $('#fb-b').innerHTML = '<div class="fb-ans">Resposta de referência: ' + answerText(x) + '</div>' + x.e;
   save();
 }
 /* O Bento reage a cada resposta: comemora sequências e consola nos erros. */

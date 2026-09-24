@@ -5,10 +5,17 @@ import { shuffle } from '../../engine/random.js';
 import { sfx, buzz } from '../components/sound.js';
 import { S } from '../../engine/state.js';
 import { fmt, parseBR } from '../../engine/format.js';
-import { bestMatch, acctMatch, evalExpl } from '../../engine/exercises/grading.js';
+import { bestMatchInfo, acctMatchInfo, acceptNote, evalExpl } from '../../engine/exercises/grading.js';
 import { T } from '../../content/render-helpers.js';
 
 /* ---------- util de render ---------- */
+/* Respostas que a pessoa marcou como certas ("Minha resposta estava certa"): passam a valer para aquela questão. */
+const learned = id => (id && S.accepted && S.accepted[id]) || [];
+function learn(id, value){
+  const v = String(value || '').trim(); if (!id || !v) return;
+  S.accepted = S.accepted || {}; const list = S.accepted[id] = S.accepted[id] || [];
+  if (!list.includes(v)) list.push(v);
+}
 export function hintRow(x, onUsed){
   if (!x.h) return null;
   const wrap = el('div', 'hintrow');
@@ -187,14 +194,16 @@ export function rWR(x, m, on){
   m.appendChild(w);
   const hr = hintRow(x); if (hr) m.appendChild(hr);
   setTimeout(() => { try { inp.focus({ preventScroll:true }); } catch (e) {} }, 60);
-  let lvl = 0;
+  let info = { lvl:0 };
   return {
     ready: () => inp.value.trim() !== '',
-    check(){ lvl = bestMatch(inp.value, x.a); return lvl >= 1; },
+    check(){ info = bestMatchInfo(inp.value, x.a.concat(learned(x.key))); return info.lvl >= 1; },
     reveal(ok){
       inp.disabled = true; w.classList.add(ok ? 'right' : 'wrong');
-      if (ok && lvl === 1) mount(m, el('div', 'small muted', 'Aceitei com uma pequena diferença de digitação. ✓'));
-    }
+      const note = ok && acceptNote(info); if (note) mount(m, el('div', 'small muted accept-note', note));
+    },
+    typed: () => inp.value.trim(),
+    learn(){ learn(x.key, inp.value); w.classList.remove('wrong'); w.classList.add('right'); }
   };
 }
 export function rEW(x, m, on){
@@ -211,14 +220,24 @@ export function rEW(x, m, on){
   const hr = hintRow(x); if (hr) m.appendChild(hr);
   setTimeout(() => { try { rd.inp.focus({ preventScroll:true }); } catch (e) {} }, 60);
   let dOk = false, cOk = false;
+  const side = (inp, canon, id) => {
+    const info = acctMatchInfo(inp.value, canon);
+    return info.lvl >= 1 || learned(id).some(v => acctMatchInfo(inp.value, v).lvl >= 1);
+  };
   return {
     ready: () => rd.inp.value.trim() !== '' && rc.inp.value.trim() !== '',
-    check(){ dOk = acctMatch(rd.inp.value, x.d[0]) >= 1; cOk = acctMatch(rc.inp.value, x.c[0]) >= 1; return dOk && cOk; },
+    check(){ dOk = side(rd.inp, x.d[0], x.key && x.key + '#d'); cOk = side(rc.inp, x.c[0], x.key && x.key + '#c'); return dOk && cOk; },
     reveal(){
       rd.inp.disabled = true; rc.inp.disabled = true;
       rd.box.classList.add(dOk ? 'right' : 'wrong'); rc.box.classList.add(cOk ? 'right' : 'wrong');
       if (!dOk) rd.wrap.appendChild(el('div', 'ewans', 'Resposta: ' + x.d[0]));
       if (!cOk) rc.wrap.appendChild(el('div', 'ewans', 'Resposta: ' + x.c[0]));
+    },
+    typed: () => rd.inp.value.trim() + ' / ' + rc.inp.value.trim(),
+    learn(){
+      if (!dOk && x.key) learn(x.key + '#d', rd.inp.value);
+      if (!cOk && x.key) learn(x.key + '#c', rc.inp.value);
+      [rd.box, rc.box].forEach(b => { b.classList.remove('wrong'); b.classList.add('right'); });
     }
   };
 }
@@ -264,7 +283,9 @@ export function rExpl(x, m, on){
       ta.disabled = true;
       const list = x.k.map((g, i) => '<li class="' + (res.hits[i] ? 'hit' : 'miss') + '">' + (res.hits[i] ? '✅' : '⭕') + ' ' + g[0] + '</li>').join('');
       mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">Ideias identificadas (' + res.n + ' de ' + x.k.length + '):</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
-    }
+    },
+    typed: () => ta.value.trim(),
+    learn(){}
   };
 }
 export function rTsal(x, m, on){
