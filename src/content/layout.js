@@ -12,7 +12,8 @@ export const PANELS = [
  {id:"op", title:"Operações do dia a dia", desc:"Os lançamentos que toda empresa faz: compras, vendas, bens duradouros e estoque."},
  {id:"gestao", title:"Análise e Gestão", desc:"Ler as demonstrações e usar custos para decidir."},
  {id:"trib_aud", title:"Tributos e Auditoria", desc:"Como a empresa paga tributos e como ela é auditada."},
- {id:"extra", title:"Extras", desc:"Leve o que aprendeu para a sua própria vida financeira."}
+ {id:"extra", title:"Extras", desc:"Leve o que aprendeu para a sua própria vida financeira."},
+ {id:"carreiras", title:"Carreiras", desc:"Trilhas montadas para uma vaga: do zero ao que a rotina e a entrevista cobram."}
 ];
 
 export const LAYOUT = [
@@ -31,7 +32,9 @@ export const LAYOUT = [
  {id:"trib", panel:"trib_aud", title:"Tributos no Brasil", icon:"🧾", color:"#8A5A2B", desc:"Tipos de tributos, regimes tributários e a Reforma Tributária do consumo.", units:[["Tributos",["trib1","trib2","trib3","trib4"]],["Revisão",["trib5"]]]},
  {id:"aud", panel:"trib_aud", title:"Auditoria", icon:"🔍", color:"#B3432B", desc:"Auditoria interna e externa, riscos, controles, evidências e o relatório do auditor.", units:[["Fundamentos",["aud1","aud2","aud3"]],["Execução e relatório",["aud4","aud5","aud6"]],["Revisão",["aud7"]]]},
  {id:"vida", panel:"extra", title:"Contabilidade para a Vida", icon:"🏠", color:"#C06A1B", desc:"Use o que aprendeu no seu dinheiro: balanço pessoal, orçamento, reserva e dívidas.",
-  units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]],["Revisão",["vida5"]]]}
+  units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]],["Revisão",["vida5"]]]},
+ {id:"financeirojr", panel:"carreiras", title:"Analista Financeiro Jr", icon:"💼", color:"#146C94", desc:"Do zero ao que a vaga cobra: contas a pagar e a receber, conciliação, fluxo de caixa, indicadores, Excel, retenções e a entrevista.",
+  units:[["Do zero: patrimônio e resultado",["fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6"]],["Conciliação e fluxo de caixa",["fj7","fj8","fj9"]],["Números e ferramentas",["fj10","fj11","fj12"]],["O que a vaga espera de você",["fj13","fj14","fj15"]],["Revisão",["fj16"]]]}
 ];
 
 /* Unidade 'Aprofundando' no fim de cada trilha. Alunos que já tinham terminado a

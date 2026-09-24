@@ -3,8 +3,8 @@
 **Ao vivo:** [conta-trilha.vercel.app](https://conta-trilha.vercel.app) — instalável
 como app (PWA) no celular ou no computador direto pelo navegador.
 
-App no estilo Duolingo para aprender Contabilidade do zero, em português. 5 áreas,
-12 trilhas e 191 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
+App no estilo Duolingo para aprender Contabilidade do zero, em português. 6 áreas (incluindo Carreiras),
+13 trilhas e 207 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
 "Na prática" com negócios e situações reais, oficinas e desafios relâmpago), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.

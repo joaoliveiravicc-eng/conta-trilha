@@ -5,7 +5,7 @@ export const WORKSHOP_IDS = {
   antes:['oficina-antes'], base:['oficina-base'], dc:['oficina-dc'], lanc:['oficina-lanc'],
   digital:[], imob:['oficina-imob','oficina-imob-leasing'], estoq:['oficina-estoq'],
   demo:['oficina-demo'], cust:['oficina-cust'], trib:['oficina-trib'],
-  aud:['oficina-aud'], vida:['oficina-vida'],
+  aud:['oficina-aud'], vida:['oficina-vida'], financeirojr:[],
 };
 
 export const COURSE_CATALOG = LAYOUT.map(course => {
