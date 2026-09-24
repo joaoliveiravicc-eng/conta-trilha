@@ -96,12 +96,25 @@ function resolve(ok){
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   const foot = $('#q-foot'); foot.className = 'foot ' + (ok ? 'ok' : 'bad');
-  let title = ok ? '✅ ' + pick(PRAISE) : '❌ ' + pick(SAY.bad);
+  let title = ok ? '✅ ' + pick(PRAISE) : '❌ Não foi dessa vez';
   if (ok && [3, 5, 8, 12].indexOf(SES.combo) >= 0) title = '🔥 ' + SES.combo + ' seguidas! ' + pick(PRAISE);
   $('#fb-t').innerHTML = title;
+  const reaction = bentoReaction(ok, SES.combo, SES.hearts, SES.maxHearts);
+  $('#fb-bento').innerHTML = bento(reaction.mood, undefined, 'react');
+  $('#fb-say').textContent = reaction.say;
   $('#fb-b').innerHTML = (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '');
   setBtn('Continuar', false);
   save();
+}
+/* O Bento reage a cada resposta: comemora sequências e consola nos erros. */
+const SAY_OK = ['Você está pegando o jeito!', 'Tô gostando de ver!', 'Tronco por tronco, a represa sobe!', 'Esse você dominou!', 'Sabia que você ia acertar!'];
+const SAY_COMBO = ['Que sequência! Você está voando!', 'Ninguém te segura hoje!', 'Isso é que é ritmo!'];
+const SAY_BAD = ['Quase! Leia a explicação comigo.', 'Errar faz parte. Vamos entender juntos.', 'Opa! Olha só a resposta certa.'];
+const SAY_LAST = ['Cuidado: só resta um coração!', 'Último coração. Respira e lê com calma.'];
+function bentoReaction(ok, combo, hearts, maxHearts){
+  if (ok) return combo >= 3 ? { mood:'cheer', say:pick(SAY_COMBO) } : { mood:'happy', say:pick(SAY_OK) };
+  if (maxHearts < 99 && hearts === 1) return { mood:'wow', say:pick(SAY_LAST) };
+  return { mood:'sad', say:pick(SAY_BAD) };
 }
 function nextItem(){
   if (SES.hearts <= 0) return failScreen();
@@ -195,8 +208,13 @@ function finish(){
   checkBadges().forEach(b => extra.push([b.i, 'Conquista desbloqueada: ' + b.n]));
   save(); renderTop();
   const cc = s.course ? s.course.color : (s.caseObj ? s.caseObj.color : 'var(--ink)');
+  const ratio = s.total ? s.first / s.total : 1;
+  let say = '';
+  if (s.total && perfect){ mood = 'cheer'; say = pick(['Perfeito! Tudo certo de primeira! 🎉', 'Uau, nenhum erro! Estou orgulhoso!', 'Gabaritou! Que orgulho, parceiro!']); }
+  else if (s.total && ratio < 0.6){ mood = 'think'; say = pick(['Foi puxado, mas você terminou. Vamos revisar os erros?', 'Hoje foi difícil. Os erros viraram revisão para amanhã.', 'Não desanima: é errando que a represa fica firme.']); }
+  else if (s.total){ say = pick(['Mandou bem! Poucos erros.', 'Bom trabalho! Continue assim.', 'Mais um tronco na represa!']); }
   const scr = $('#s-result');
-  scr.innerHTML = '<div class="center" style="--cc:' + cc + '"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento(mood) + '</div></div><h1>' + title + '</h1><p class="sub">' + sub + '</p>' +
+  scr.innerHTML = '<div class="center result-' + (perfect ? 'perfect' : ratio < 0.6 ? 'tough' : 'good') + '" style="--cc:' + cc + '"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento(mood) + '</div></div>' + (say ? '<div class="result-say">' + say + '</div>' : '') + '<h1>' + title + '</h1><p class="sub">' + sub + '</p>' +
     '<div class="rstats"><div class="rs"><div class="rl">XP</div><div class="rv">+' + xp + '</div></div>' +
     '<div class="rs"><div class="rl">Bolotas</div><div class="rv">+' + coins + '' + ACORN + '</div></div>' +
     '<div class="rs"><div class="rl">Sequência</div><div class="rv">🔥' + curStreak() + '</div></div></div>' +

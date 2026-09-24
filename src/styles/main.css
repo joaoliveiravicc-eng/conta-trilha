@@ -701,3 +701,23 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .continue[data-act="cont"] .k,.continue[data-act="cont"] .s{opacity:1;}
 .continue[data-act="cont"] .play{background:#10230C;color:var(--green);}
 .continue[data-act="cont"]::before{background:rgba(255,255,255,.18);}
+
+/* Reação do Bento na faixa de resposta. */
+.foot.ok .fb,.foot.bad .fb{display:flex; gap:12px; align-items:flex-start;}
+.fb-bento{width:84px; height:79px; flex:none; margin-top:-4px;}
+.fb-text{min-width:0; flex:1;}
+.fb-say{position:relative; display:inline-block; font-size:.82rem; font-weight:700; color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:12px; padding:5px 10px; margin-bottom:6px;}
+.fb-say:empty{display:none;}
+.fb-say::before{content:""; position:absolute; left:-6px; top:10px; width:10px; height:10px; background:var(--card); border-left:1px solid var(--line); border-bottom:1px solid var(--line); transform:rotate(45deg);}
+.fb-bento .bento.happy .b-rig{animation:bhop .7s ease-in-out 2;}
+.fb-bento .bento.cheer .b-rig{animation:bhop .55s ease-in-out 3;}
+.fb-bento .bento.sad .b-rig{animation:bshakeb .45s ease-in-out 2;}
+.fb-bento .bento.wow .b-rig{animation:bwow .6s ease-out 1;}
+@keyframes bshakeb{0%,100%{transform:translateX(0)}25%{transform:translateX(-18px) rotate(-3deg)}75%{transform:translateX(18px) rotate(3deg)}}
+@media (max-width:380px){ .fb-bento{width:64px; height:60px;} }
+/* Campos de texto já mostram o foco pela borda: sem o quadrado verde por cima. */
+.numwrap input:focus,.numwrap input:focus-visible,.explta:focus-visible,.search input:focus-visible,.acct-field input:focus-visible,#g-search:focus-visible{outline:none;}
+.result-say{position:relative; display:inline-block; max-width:320px; margin:4px auto 10px; padding:9px 14px; border-radius:16px; background:var(--card); border:1px solid var(--line); font-weight:700; font-size:.9rem; color:var(--ink); box-shadow:0 2px 0 var(--line);}
+.result-say::before{content:""; position:absolute; top:-7px; left:50%; width:12px; height:12px; background:var(--card); border-left:1px solid var(--line); border-top:1px solid var(--line); transform:translateX(-50%) rotate(45deg);}
+.result-perfect .bento .b-rig{animation:bhop .55s ease-in-out 4 !important;}
+.result-tough .bento .b-head{transform-box:view-box; transform-origin:680px 700px; animation:btilt 2.4s ease-in-out infinite;}
