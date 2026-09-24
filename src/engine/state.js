@@ -2,7 +2,7 @@
    xp/streak/coins/lições concluídas para decidir o que está desbloqueado. */
 import { COURSES } from '../content/index.js';
 import { ALL_LESSON_IDS } from '../content/catalog.js';
-import { DEEPEN_IDS } from '../content/layout.js';
+import { LATER_IDS } from '../content/layout.js';
 import { AREAS, areaForCourse, coursesForArea } from '../content/areas.js';
 import { mprog } from './gamification.js';
 import { toast } from '../ui/components/toast.js';
@@ -11,7 +11,7 @@ export const LS_KEY = 'contatrilha_v2';
 export const LS_OLD = 'contatrilha_progress_v1';
 
 export function fresh(){
-  return { v:5, area:null, xp:0, streak:0, lastActive:null, done:{}, perfect:{}, trophies:{}, unlocked:{}, mistakes:{}, days:{}, goal:30, sound:true, onboarded:false,
+  return { v:6, area:null, xp:0, streak:0, lastActive:null, done:{}, perfect:{}, trophies:{}, unlocked:{}, mistakes:{}, days:{}, goal:30, sound:true, onboarded:false,
     badges:{}, checkpoints:{}, challenges:{}, repetition:{}, lessons:0, reviews:0, coins:0, freezes:0, boostUntil:0, owned:{}, equip:{ head:null, neck:null, body:null },
     daily:{ date:null, ms:[], chest:false }, best:{ blitz:0 }, cases:{}, st:{ correct:0, entries:0, writes:0, hints:0, coins:0, marathons:0 }, theme:'auto', usedFreeze:0 };
 }
@@ -30,8 +30,8 @@ export function normalize(d){
   });
   if (!Array.isArray(s.daily.ms)) s.daily = { date:null, ms:[], chest:false };
   if (s.area && !AREAS.some(area => area.id === s.area)) s.area = null;
-  if ((+d.v || 0) < 5) keepUnlockedAfterDeepen(s);
-  s.v = 5;
+  if ((+d.v || 0) < 6) keepUnlockedAfterDeepen(s);
+  s.v = 6;
   return s;
 }
 
@@ -40,7 +40,7 @@ function keepUnlockedAfterDeepen(s){
   AREAS.forEach(area => area.courseIds.forEach((id, i) => {
     if (i === 0) return;
     const previous = COURSES.find(c => c.id === area.courseIds[i - 1]);
-    if (previous && previous.lessons.every(l => l.optional || DEEPEN_IDS.has(l.id) || s.done[l.id])) s.unlocked[id] = true;
+    if (previous && previous.lessons.every(l => l.optional || LATER_IDS.has(l.id) || s.done[l.id])) s.unlocked[id] = true;
   }));
 }
 

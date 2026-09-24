@@ -4,8 +4,8 @@
 como app (PWA) no celular ou no computador direto pelo navegador.
 
 App no estilo Duolingo para aprender Contabilidade do zero, em português. 5 áreas,
-12 trilhas e 145 lições (cada trilha termina com revisão, oficina e a unidade
-"Aprofundando"), motor de exercícios com ~10 tipos de questão, gamificação (XP,
+12 trilhas e 191 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
+"Na prática" com negócios e situações reais, oficinas e desafios relâmpago), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
@@ -65,7 +65,11 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
    acrescentar lições novas a uma trilha, vale considerar atualizar essa revisão.
 6. A unidade "Aprofundando" de cada trilha fica em `src/content/trilhas/aprofundar-*.js`
    e é registrada em `DEEPEN` (`src/content/layout.js`).
-7. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
+7. Unidades "Na prática" ficam em `PRACTICE` (`src/content/layout.js`). As histórias de
+   lançamentos (padaria, loja, salão, oficina) são geradas em `src/content/scenarios.js`
+   a partir dos fatos do mês, que o próprio módulo confere (partidas dobradas, saldos e
+   balanço); as demais estão em `src/content/trilhas/pratica-temas.js`.
+8. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.
 

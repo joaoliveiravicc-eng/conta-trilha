@@ -689,7 +689,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 @media(prefers-reduced-motion:reduce){.area-card{transition:none;}.area-card:hover{transform:none;}}
 @media (max-width:420px){
   table{font-size:.78rem;}
-  th,td{padding:7px 6px; overflow-wrap:anywhere; hyphens:auto;}
+  th,td{padding:7px 6px; overflow-wrap:break-word; hyphens:auto;}
   th{font-size:.72rem;}
 }
 .ln .acc{min-width:0; overflow-wrap:anywhere;}

@@ -53,6 +53,24 @@ export const DEEPEN = {
 export const DEEPEN_IDS = new Set(Object.values(DEEPEN).flat());
 LAYOUT.forEach(course => { if (DEEPEN[course.id]) course.units.push(['Aprofundando', DEEPEN[course.id]]); });
 
+/* Unidades "Na prática": o mesmo assunto ao longo de um negócio ou situação da vida real. */
+export const PRACTICE = {
+ antes:[['Na prática: a barraca da feira',["feira1","feira2","feira3","feira4"]]],
+ base:[['Na prática: um mês no salão de beleza',["salao1","salao2","salao3","salao4"]]],
+ dc:[['Na prática: a padaria da Dona Rosa',["padaria1","padaria2","padaria3","padaria4","padaria5"]]],
+ lanc:[['Na prática: loja de roupas no shopping',["lojamoda1","lojamoda2","lojamoda3","lojamoda4","lojamoda5"]],['Na prática: a oficina mecânica',["oficina1","oficina2","oficina3","oficina4"]]],
+ digital:[['Na prática: um dia no escritório contábil',["escritorio1","escritorio2","escritorio3"]]],
+ imob:[['Na prática: a frota da transportadora',["frota1","frota2","frota3"]]],
+ estoq:[['Na prática: o supermercado',["mercado1","mercado2","mercado3","mercado4"]]],
+ demo:[['Na prática: os números da farmácia',["farmacia1","farmacia2","farmacia3"]]],
+ cust:[['Na prática: a hamburgueria do Beto',["burger1","burger2","burger3","burger4"]]],
+ aud:[['Na prática: auditando uma loja de roupas',["audloja1","audloja2","audloja3"]]],
+ vida:[['Na prática: o primeiro emprego',["emprego1","emprego2","emprego3","emprego4"]]]
+};
+LAYOUT.forEach(course => (PRACTICE[course.id] || []).forEach(unit => course.units.push(unit)));
+/* Lições acrescentadas depois do lançamento: não bloqueiam quem já tinha terminado a trilha. */
+export const LATER_IDS = new Set([...DEEPEN_IDS, ...Object.values(PRACTICE).flat().flatMap(u => u[1])]);
+
 /**
  * Monta o array final de COURSES na ordem de LAYOUT, juntando:
  * - rawCourses: as 7 trilhas originais (cada uma já com título/ícone/cor/desc e lessons)
