@@ -14,7 +14,7 @@ export function resetOnb(goal, area){ ONB = { step:0, goal:goal || 30, area:area
 export function renderOnb(){
   const s = $('#s-onb'); let h = '', btns = '';
   if (ONB.step === 0){
-    h = '<div class="bento-wrap xl center-b"><img class="bento-img bento-hero-wave" src="/images/bento-hero.png" alt="Bento, o castor, acenando com uma calculadora e um livro"></div><h1>Oi, eu sou o Bento!</h1><p class="lead">Vou te ensinar Contabilidade do absoluto zero, um passo de cada vez — como construir uma represa: tronco por tronco.</p><p class="lead">Teoria explicada com calma, exercícios variados, dicas quando você travar e revisão automática dos seus erros.</p>';
+    h = '<div class="bento-wrap xl center-b">' + bento('idle', {}) + '</div><h1>Oi, eu sou o Bento!</h1><p class="lead">Vou te ensinar Contabilidade do absoluto zero, um passo de cada vez — como construir uma represa: tronco por tronco.</p><p class="lead">Teoria explicada com calma, exercícios variados, dicas quando você travar e revisão automática dos seus erros.</p>';
     btns = '<button class="btn primary" data-act="n">Vamos começar</button>';
   } else if (ONB.step === 1){
     h = '<h1>O que você quer estudar?</h1><p class="lead">Escolha uma área para começar. Depois você poderá trocar quando quiser.</p><div class="onb-area-list">' +

@@ -90,7 +90,8 @@
 .shop-card{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid var(--line);background:var(--card);border-radius:16px;min-width:0;transition:transform .18s,border-color .18s,background .18s;}
 .shop-card.selected{border-color:var(--green);background:var(--greenp);}
 .sc-prev{height:94px;width:100%;display:grid;place-items:center;border-radius:12px;background:var(--soft);overflow:hidden;}
-.sc-prev .bento-wrap{width:72px;height:82px;}
+.sc-prev{position:relative;}
+.sc-prev .bento-stage{position:absolute;inset:4px;width:auto;height:auto;}
 .sc-n{font-size:.82rem;font-weight:700;line-height:1.35;min-height:2.3em;margin:2px 0 0;}
 .sc-desc{font-size:.7rem;line-height:1.4;color:var(--muted);min-height:2.8em;}
 .shop-card .seqbtn{margin-top:auto;}
@@ -119,7 +120,7 @@ body.modal-open{overflow:hidden;}
   .course-metrics{gap:12px;}
   .course-metrics>span{flex:1;}
   .shop-preview{gap:10px;padding:12px;}
-  .shop-preview .bento-wrap.lg{width:120px;height:132px;margin:0;}
+  .shop-preview .bento-wrap.lg{width:140px;height:132px;margin:0;}
   .shop-current{font-size:.73rem;}
   .shop-card{padding:9px;}
   .sc-prev{height:84px;}
@@ -127,15 +128,27 @@ body.modal-open{overflow:hidden;}
 
 /* O castor permanece no lugar: quem se move são as quatro poses do passo. */
 .bento-stage{display:block;position:relative;width:100%;height:100%;}
-.bento-stage .bento-art,.bento-eq .bento-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
-.bento-overlay{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
-.bento-walk{position:absolute;left:50%;top:0;height:100%;aspect-ratio:3/4;transform:translateX(-50%);background-image:var(--bento-sheet,url('/images/bento/walk-sheet.webp'));background-repeat:no-repeat;background-size:400% 100%;background-position:0 0;animation:bento-step .92s steps(1,end) infinite;}
-@keyframes bento-step{
-  0%,100%{background-position:0 0;}
-  25%{background-position:33.333% 0;}
-  50%{background-position:66.667% 0;}
-  75%{background-position:100% 0;}
-}
+.bento-stage .bsvg{display:block;width:100%;height:100%;overflow:visible;}
+.bsvg .b-rig{transform-box:view-box;transform-origin:700px 1100px;}
+.bsvg .b-tail{transform-box:view-box;transform-origin:440px 960px;animation:btail 2.6s ease-in-out infinite;}
+.bsvg .b-eye{transform-box:fill-box;transform-origin:center;animation:bblink 5s infinite;}
+.bento.idle .b-rig{animation:bbreath 2.8s ease-in-out infinite;}
+.bento.idle .b-arm-r,.bento.happy .b-arm-r,.bento.cheer .b-arm-r{transform-box:view-box;transform-origin:880px 760px;animation:bwave 1.6s ease-in-out infinite;}
+.bento.cheer .b-arm-l{transform-box:view-box;transform-origin:520px 790px;animation:bwavel 1.6s ease-in-out infinite;}
+.bento.happy .b-rig,.bento.cheer .b-rig{animation:bhop .9s ease-in-out infinite;}
+.bento.think .b-head{transform-box:view-box;transform-origin:680px 700px;animation:btilt 3s ease-in-out infinite;}
+.bento.sad .b-rig{animation:bsag 3s ease-in-out infinite;}
+.bento.wow .b-rig{animation:bwow .6s ease-out 1;}
+@keyframes btail{0%,100%{transform:rotate(0)}50%{transform:rotate(5deg)}}
+@keyframes bblink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes bbreath{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.01)}}
+@keyframes bwave{0%,100%{transform:rotate(0)}50%{transform:rotate(-16deg)}}
+@keyframes bwavel{0%,100%{transform:rotate(0)}50%{transform:rotate(14deg)}}
+@keyframes bhop{0%,100%{transform:translateY(0)}40%{transform:translateY(-40px)}70%{transform:translateY(0) scaleY(.97)}}
+@keyframes btilt{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg)}}
+@keyframes bsag{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes bwow{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.bsvg *{animation:none !important;}}
 @media(hover:hover){
   .learning-unit{transition:border-color .18s,box-shadow .18s;}
   .learning-unit:hover{border-color:color-mix(in srgb,var(--green) 38%,var(--line));box-shadow:0 7px 24px -20px var(--shadow);}
@@ -149,4 +162,3 @@ body.modal-open{overflow:hidden;}
   .learning-unit summary{min-height:72px;}
   .checkpoint-card{min-height:68px;}
 }
-@media(prefers-reduced-motion:reduce){.bento-walk{animation:none;background-position:0 0;}}
