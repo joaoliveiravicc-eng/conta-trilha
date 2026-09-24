@@ -5,8 +5,8 @@ import { fresh, normalize, setState, S, courseComplete, courseUnlocked, lessonUn
 import { checkpointId, unitComplete, checkpointItems, checkpointRecord, reviewRecord, dueLessons, spacedItems } from '../src/engine/learning.js';
 
 test('currículo: referências, chaves persistidas e respostas válidas',()=>{
-  assert.equal(COURSES.length,12);
-  assert.equal(TOTAL_LESSONS,191);
+  assert.equal(COURSES.length,13);
+  assert.equal(TOTAL_LESSONS,207);
   const ids=new Set(), keys=new Set(); let workshops=0, questions=0;
   for(const c of COURSES){
     assert.ok(c.goals.length>=2);

@@ -12,6 +12,7 @@ import antes from './trilhas/antes.js';
 import vida from './trilhas/vida.js';
 import estoq from './trilhas/estoq.js';
 import digital from './trilhas/digital.js';
+import financeiroJr from './trilhas/financeirojr.js';
 import deepenFund from './trilhas/aprofundar-fund.js';
 import deepenOp from './trilhas/aprofundar-op.js';
 import deepenGestao from './trilhas/aprofundar-gestao.js';
@@ -28,7 +29,7 @@ const layouts = AREAS.flatMap(area => area.courseIds).map(id => LAYOUT.find(cour
 
 const built = buildCourses(
   [base, dc, lanc, demo, cust, trib, aud, imob],
-  antes.concat(vida, estoq, digital, deepenFund, deepenOp, deepenGestao, practiceThemes, SCENARIO_LESSONS),
+  antes.concat(vida, estoq, digital, financeiroJr, deepenFund, deepenOp, deepenGestao, practiceThemes, SCENARIO_LESSONS),
   extra, layouts
 );
 built.forEach(course => course.lessons.forEach(lesson => {

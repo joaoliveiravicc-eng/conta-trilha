@@ -15,6 +15,9 @@ export const AREAS = [
   { id:'vida', icon:'🏠', title:'Finanças pessoais', short:'Vida', color:'#BD7132',
     description:'Patrimônio pessoal, orçamento, dívidas e planejamento.',
     courseIds:['vida'] },
+  { id:'carreiras', icon:'💼', title:'Carreiras', short:'Carreiras', color:'#146C94',
+    description:'Preparação para vagas: Analista Financeiro Jr, do zero à entrevista.',
+    courseIds:['financeirojr'] },
 ];
 
 export const DEFAULT_AREA = 'fundamentos';

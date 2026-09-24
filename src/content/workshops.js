@@ -14,7 +14,8 @@ export const COURSE_GOALS = {
   cust:['Distinguir custos e despesas','Usar margem para avaliar decisões'],
   trib:['Entender apuração e obrigações','Conferir bases, créditos e documentos'],
   aud:['Relacionar riscos a procedimentos','Sustentar conclusões com evidências'],
-  vida:['Organizar patrimônio e orçamento','Projetar compromissos e imprevistos']
+  vida:['Organizar patrimônio e orçamento','Projetar compromissos e imprevistos'],
+  financeirojr:['Executar a rotina de contas a pagar, a receber e conciliação','Explicar lucro, caixa e indicadores numa entrevista']
 };
 
 export const WORKSHOPS = [
