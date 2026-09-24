@@ -4,18 +4,18 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 
 export default [
 /* ---------------- Rotina Contábil Digital ---------------- */
-{id:"digitalx1", title:"Plano de contas no sistema", icon:"🗂️",
+{id:"digitalx1", title:"Módulos integrados do ERP", icon:"🔗",
  learn:[
-  {h:"Códigos e níveis", b:`<p>No sistema, cada conta tem um <b>código</b> que mostra onde ela está na estrutura.</p>` + tbl(['Código','Conta','Tipo'],[['1','Ativo','Sintética'],['1.1','Ativo circulante','Sintética'],['1.1.01','Disponível','Sintética'],['1.1.01.001','Caixa','Analítica'],['1.1.01.002','Bancos','Analítica']])},
-  {h:"Sintética x analítica", b:`<p>Lançamentos vão só nas contas <b>analíticas</b> (o último nível). As <b>sintéticas</b> apenas somam as de baixo.</p>` + box('dica','Um plano de contas bem feito evita contas genéricas como “Diversos”, que escondem o que aconteceu.')}
+  {h:"Um fato, vários módulos", b:`<p>No ERP, uma venda nasce no módulo <b>comercial</b>, gera a nota no <b>fiscal</b>, a baixa no <b>estoque</b>, o título no <b>financeiro</b> e o lançamento na <b>contabilidade</b>.</p>` + ol(['Pedido de venda','Nota fiscal emitida','Estoque baixado','Conta a receber criada','Lançamento contábil gerado'])},
+  {h:"Integração exige cadastro certo", b:box('atencao','Se o cadastro do produto aponta a conta errada, todas as vendas daquele produto vão para a conta errada. Revise os cadastros que alimentam a integração.')}
  ],
  ex:[
-  tf("Lançamentos são feitos nas contas sintéticas, como 'Ativo circulante'.",false,"Lança-se nas analíticas; as sintéticas somam."),
-  mc("A conta '1.1.01.002 Bancos' é:",["*Analítica","Sintética","De resultado","Redutora"],"É o último nível: recebe lançamentos."),
-  cl("Sintética ou analítica?",["Sintética","Analítica"],"Ativo circulante:0|Caixa:1|Passivo:0|Fornecedores nacionais:1|Disponível:0","Sintética agrupa; analítica recebe lançamentos."),
-  fl("As contas que apenas somam as de nível inferior são chamadas {sintéticas}.",["analíticas","redutoras"],"Elas não recebem lançamento direto."),
-  tf("Usar muito uma conta 'Diversos' prejudica a análise.",true,"Fica impossível saber o que aconteceu."),
-  od("Ordene do nível mais amplo ao mais detalhado:",["Ativo","Ativo circulante","Disponível","Bancos"],"Do grupo para a conta analítica.")
+  od("Ordene o caminho de uma venda no ERP:",["Pedido de venda","Emissão da nota fiscal","Baixa do estoque","Conta a receber no financeiro","Lançamento na contabilidade"],"Da venda ao registro contábil."),
+  mt([["Comercial","Pedido do cliente"],["Fiscal","Nota fiscal"],["Estoque","Baixa da mercadoria"],["Financeiro","Título a receber"]],"Cada módulo, sua parte."),
+  tf("Um erro no cadastro de um produto pode afetar todas as vendas dele na contabilidade.",true,"A integração repete o cadastro."),
+  mc("A vantagem principal da integração entre módulos é:",["*Registrar o fato uma vez e reaproveitar os dados","Dispensar a conferência","Eliminar a nota fiscal","Aumentar o estoque"],"Menos digitação, menos erro."),
+  tf("Com o ERP integrado, a contabilidade não precisa mais conferir nada.",false,"Conciliações e revisões continuam necessárias."),
+  fl("A baixa da mercadoria vendida acontece no módulo de {estoque}.",["folha","ponto"],"Controle das quantidades.")
  ]},
 {id:"digitalx2", title:"Centro de custo", icon:"🎯",
  learn:[
@@ -30,18 +30,18 @@ export default [
   fl("A conta contábil mostra o que foi gasto; o {centro de custo} mostra onde.",["plano de contas","balancete"],"Dimensão de área."),
   mc("Um gestor quer saber quanto a filial Norte gastou. O que ajuda?",["*Lançamentos com centro de custo por filial","Somar só o caixa","Olhar só o Balanço","Contar os funcionários"],"Centro de custo separa por área.")
  ]},
-{id:"digitalx3", title:"Regras de conciliação automática", icon:"🤖",
+{id:"digitalx3", title:"Indicadores e painéis", icon:"📊",
  learn:[
-  {h:"Extrato importado", b:`<p>Muitos sistemas importam o extrato do banco e sugerem o lançamento com base em <b>regras</b>: “se a descrição contém TARIFA, lançar em Despesas bancárias”.</p>`},
-  {h:"Automação com conferência", b:ul(['Regras resolvem o repetitivo.','Itens sem regra vão para uma lista de pendências.','Alguém revisa amostras e as pendências.']) + box('atencao','Uma regra errada classifica errado todos os lançamentos parecidos. Revise sempre que criar ou mudar uma regra.')}
+  {h:"Números que viram decisão", b:`<p>Um painel (dashboard) reúne poucos indicadores que mostram a saúde do negócio: faturamento, margem, caixa, contas a receber vencidas.</p>` + box('dica','Bom indicador tem definição clara, fonte confiável e é acompanhado com frequência.')},
+  {h:"Cuidados", b:ul(['Mesmo nome, mesma fórmula em todos os relatórios.','Dados do painel conciliados com a contabilidade.','Poucos indicadores, bem escolhidos, valem mais que dezenas.'])}
  ],
  ex:[
-  tf("Depois que a regra existe, não é preciso revisar mais nada.",false,"Erros de regra se repetem em escala."),
-  mc("Um débito com descrição 'PIX FORNEC ABC' sem regra cadastrada deve:",["*Ir para pendências e ser analisado","Ser lançado como receita","Ser apagado","Ser ignorado"],"O que a regra não cobre, uma pessoa analisa."),
-  od("Ordene a rotina:",["Importar o extrato","Aplicar as regras","Analisar as pendências","Revisar uma amostra","Fechar a conciliação"],"Automatiza primeiro, revisa depois."),
-  tf("Uma regra mal configurada pode gerar dezenas de erros iguais.",true,"Automação amplia acertos e erros."),
-  mt([["Tarifa bancária","Despesa bancária"],["Rendimento de aplicação","Receita financeira"],["Recebimento de cliente","Baixa de Clientes"],["Pagamento a fornecedor","Baixa de Fornecedores"]],"Exemplos de regras por descrição."),
-  mc("Qual o benefício principal das regras?",["*Ganhar tempo no que se repete e focar nas exceções","Eliminar a contabilidade","Dispensar documentos","Evitar o banco"],"Automação libera tempo para análise.")
+  nu("Contas a receber de R$ 80.000, das quais R$ 12.000 estão vencidas. Qual o % vencido?",15,"12.000 ÷ 80.000 = 15%.","%"),
+  tf("Um painel com dezenas de indicadores é sempre melhor.",false,"Poucos e bem definidos ajudam mais a decidir."),
+  mc("O faturamento do painel não bate com a DRE. O que fazer?",["*Conciliar as fontes antes de usar o número","Usar o maior","Ignorar a DRE","Apagar o painel"],"Número sem conciliação não sustenta decisão."),
+  cl("Bom indicador para um painel mensal?",["Sim","Não"],"Margem bruta do mês:0|Saldo de caixa:0|Cor preferida do gerente:1|Recebíveis vencidos:0|Número de cadeiras do escritório:1","Precisa ajudar a decidir."),
+  nu("Receita do mês de R$ 250.000 e lucro bruto de R$ 75.000. Margem bruta em %?",30,"75.000 ÷ 250.000 = 30%.","%"),
+  fl("O painel que reúne indicadores do negócio também é chamado de {dashboard}.",["balancete","razonete"],"Visão rápida para decidir.")
  ]},
 {id:"digitalx4", title:"Dados pessoais e segurança", icon:"🔒",
  learn:[
@@ -125,18 +125,18 @@ export default [
   fl("No sistema {periódico}, o estoque é contado no fim do período.",["permanente","automático"],"CMV calculado por diferença."),
   cl("Permanente ou periódico?",["Permanente","Periódico"],"Baixa do estoque a cada venda no sistema:0|CMV por EI + compras − EF:1|Saldo disponível a qualquer momento:0|Contagem só no fechamento:1","Registro contínuo x cálculo no fim.")
  ]},
-{id:"estoqx2", title:"O custo de aquisição", icon:"🚚",
+{id:"estoqx2", title:"Ponto de pedido e estoque de segurança", icon:"📦",
  learn:[
-  {h:"O que entra no custo", b:`<p>O custo do estoque inclui o preço e os gastos para trazê-lo à condição de venda.</p>` + tbl(['Item','No custo?'],[['Preço de compra','Sim'],['Frete e seguro até a empresa','Sim'],['Desconto dado na própria nota','Reduz o custo'],['Tributos que a empresa recupera como crédito','Não'],['Frete para entregar ao cliente','Não: é despesa de venda']])},
-  {h:"Exemplo", b:box('exemplo','Preço R$ 10.000, frete de compra R$ 600, desconto na nota R$ 400: custo = 10.000 + 600 − 400 = <b>R$ 10.200</b>.')}
+  {h:"Quando comprar de novo", b:`<p>Pedir cedo demais prende dinheiro; tarde demais, falta mercadoria. O <b>ponto de pedido</b> diz em que nível de estoque fazer a compra.</p>` + eq('Ponto de pedido = Consumo diário × Prazo de entrega + Estoque de segurança')},
+  {h:"Exemplo", b:box('exemplo','A loja vende 20 unidades por dia, o fornecedor entrega em 5 dias e mantém-se 40 de segurança: 20 × 5 + 40 = <b>140 unidades</b>. Quando o estoque chegar a 140, faz-se o pedido.') + box('dica','O estoque de segurança protege contra atrasos e picos de venda.')}
  ],
  ex:[
-  nu("Preço R$ 20.000, frete de compra R$ 1.000, seguro do transporte R$ 200. Custo do estoque?",21200,"20.000 + 1.000 + 200 = 21.200.","R$"),
-  nu("Preço R$ 15.000 com desconto incondicional de R$ 1.500 na nota e frete de R$ 500. Custo?",14000,"15.000 − 1.500 + 500 = 14.000.","R$"),
-  cl("Entra no custo do estoque?",["Entra","Não entra"],"Frete para trazer a mercadoria:0|Frete para entregar ao cliente:1|Seguro do transporte na compra:0|Tributo recuperável como crédito:1|Preço de compra:0","Só o que traz a mercadoria até a condição de venda."),
-  tf("O frete para entregar a mercadoria ao cliente faz parte do custo do estoque.",false,"É despesa de venda."),
-  mc("Tributos que a empresa pode recuperar como crédito:",["*Não entram no custo do estoque","Sempre entram no custo","Viram receita","São despesa de juros"],"Serão compensados, então não são custo."),
-  fl("Desconto concedido na própria nota {reduz} o custo do estoque.",["aumenta","não altera"],"Paga-se menos pela mercadoria.")
+  nu("Consumo de 30 unidades por dia, prazo de entrega de 4 dias e estoque de segurança de 50. Ponto de pedido?",170,"30 × 4 + 50 = 170.","unidades"),
+  nu("Consumo de 12 por dia e prazo de 10 dias, sem estoque de segurança. Ponto de pedido?",120,"12 × 10 = 120.","unidades"),
+  tf("O estoque de segurança protege contra atrasos do fornecedor.",true,"É uma folga."),
+  mc("Estoque de segurança muito alto tende a:",["*Prender dinheiro em mercadoria parada","Aumentar o caixa","Eliminar os custos","Aumentar o giro"],"Mais estoque, mais recursos parados."),
+  nu("Ponto de pedido de 200, consumo de 25 por dia e prazo de 6 dias. Qual o estoque de segurança?",50,"200 − 25 × 6 = 50.","unidades"),
+  fl("Ponto de pedido = consumo diário × prazo de entrega + estoque de {segurança}.",["giro","venda"],"Folga contra imprevistos.")
  ]},
 {id:"estoqx3", title:"Giro do estoque", icon:"🔄",
  learn:[

@@ -16,6 +16,7 @@ import deepenFund from './trilhas/aprofundar-fund.js';
 import deepenOp from './trilhas/aprofundar-op.js';
 import deepenGestao from './trilhas/aprofundar-gestao.js';
 import extra from './extra.js';
+import expand from './expand.js';
 import { enrichCourses } from './workshops.js';
 import { AREAS } from './areas.js';
 import { buildCourses, LAYOUT } from './layout.js';
@@ -23,11 +24,17 @@ import { TOTAL_LESSONS } from './catalog.js';
 
 const layouts = AREAS.flatMap(area => area.courseIds).map(id => LAYOUT.find(course => course.id === id));
 
-export const COURSES = enrichCourses(buildCourses(
+const built = buildCourses(
   [base, dc, lanc, demo, cust, trib, aud, imob],
   antes.concat(vida, estoq, digital, deepenFund, deepenOp, deepenGestao),
   extra, layouts
-));
+);
+built.forEach(course => course.lessons.forEach(lesson => {
+  const more = expand[lesson.id]; if (!more) return;
+  if (more.learn) lesson.learn = lesson.learn.concat(more.learn);
+  if (more.ex) lesson.ex = lesson.ex.concat(more.ex);
+}));
+export const COURSES = enrichCourses(built);
 
 export const EX = {};
 COURSES.forEach((course, courseIndex) => {

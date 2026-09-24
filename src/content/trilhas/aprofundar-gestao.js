@@ -4,18 +4,18 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 
 export default [
 /* ---------------- Demonstrações Financeiras ---------------- */
-{id:"demox1", title:"A DRE linha a linha", icon:"🪜",
+{id:"demox1", title:"Lucro não é caixa", icon:"🔍",
  learn:[
-  {h:"De cima para baixo", b:tbl(['Linha','Exemplo'],[['Receita bruta','100.000'],['(−) Deduções (devoluções, tributos sobre vendas)','(15.000)'],['= Receita líquida','85.000'],['(−) CMV','(45.000)'],['= Lucro bruto','40.000'],['(−) Despesas operacionais','(22.000)'],['= Resultado antes dos tributos sobre o lucro','18.000'],['(−) Tributos sobre o lucro','(4.000)'],['= Lucro líquido','14.000']])},
-  {h:"O que cada degrau mostra", b:ul(['<b>Lucro bruto</b>: quanto sobra da venda depois do custo do que foi vendido.','<b>Despesas operacionais</b>: vender, administrar, financiar.','<b>Lucro líquido</b>: o que sobra para os sócios.'])}
+  {h:"Por que o lucro e o caixa diferem", b:tbl(['Item','Afeta o lucro?','Afeta o caixa?'],[['Venda a prazo','Sim, no mês da venda','Só no recebimento'],['Depreciação','Sim (despesa)','Não'],['Compra de estoque à vista','Só quando vendido (CMV)','Sim, na compra'],['Pagamento de empréstimo (principal)','Não','Sim']])},
+  {h:"Do lucro ao caixa", b:box('exemplo','Lucro de R$ 50.000. Depreciação de R$ 10.000 (não saiu dinheiro): soma. Clientes a receber aumentaram R$ 25.000 (vendeu e não recebeu): subtrai. Caixa das operações: 50 + 10 − 25 = <b>R$ 35.000</b>.')}
  ],
  ex:[
-  nu("Receita bruta 200.000; deduções 30.000. Qual a receita líquida?",170000,"200.000 − 30.000 = 170.000.","R$"),
-  nu("Receita líquida 170.000; CMV 90.000. Qual o lucro bruto?",80000,"170.000 − 90.000 = 80.000.","R$"),
-  nu("Lucro bruto 80.000; despesas operacionais 50.000; tributos sobre o lucro 7.000. Lucro líquido?",23000,"80.000 − 50.000 − 7.000 = 23.000.","R$"),
-  od("Ordene as linhas da DRE:",["Receita bruta","Receita líquida","Lucro bruto","Resultado antes dos tributos sobre o lucro","Lucro líquido"],"Das vendas até o que sobra."),
-  mc("Devoluções de vendas aparecem na DRE como:",["*Dedução da receita bruta","Despesa administrativa","CMV","Receita financeira"],"Reduzem a receita."),
-  tf("Lucro bruto já considera as despesas administrativas.",false,"Lucro bruto = receita líquida − custo das vendas.")
+  tf("A depreciação reduz o lucro, mas não tira dinheiro do caixa no período.",true,"É uma despesa sem saída de caixa."),
+  nu("Lucro 40.000; depreciação 8.000; aumento de clientes a receber 12.000. Caixa das operações?",36000,"40 + 8 − 12 = 36 mil.","R$"),
+  cl("Afeta o lucro, o caixa ou os dois (no momento do fato)?",["Só o lucro","Só o caixa","Os dois"],"Depreciação do mês:0|Pagamento do principal de empréstimo:1|Venda à vista:2|Venda a prazo:0|Compra de máquina à vista:1","Competência x movimento de dinheiro."),
+  mc("Uma empresa lucrativa ficou sem caixa. Uma causa possível é:",["*Vender muito a prazo e demorar a receber","Ter depreciação alta","Ter margem alta","Pagar pouco imposto"],"O lucro está em clientes, não no banco."),
+  nu("Lucro 20.000; depreciação 5.000; estoques aumentaram 9.000. Caixa das operações?",16000,"20 + 5 − 9 = 16 mil.","R$"),
+  fl("Aumento de clientes a receber {reduz} o caixa em relação ao lucro.",["aumenta","não altera"],"Vendeu e ainda não recebeu.")
  ]},
 {id:"demox2", title:"Margens", icon:"📐",
  learn:[
@@ -166,18 +166,18 @@ export default [
  ]},
 
 /* ---------------- Auditoria ---------------- */
-{id:"audx1", title:"Materialidade", icon:"🔎",
+{id:"audx1", title:"Papéis de trabalho", icon:"🗃️",
  learn:[
-  {h:"O que é relevante", b:`<p>Uma distorção é <b>material</b> quando, sozinha ou somada a outras, poderia mudar a decisão de quem usa as demonstrações.</p>` + box('exemplo','Erro de R$ 500 numa empresa que fatura R$ 50 milhões dificilmente muda decisões. O mesmo erro numa empresa que fatura R$ 20 mil pode mudar.')},
-  {h:"Valor e natureza", b:ul(['Pelo <b>valor</b>: o tamanho em relação ao todo.','Pela <b>natureza</b>: um erro pequeno pode ser material se envolver fraude ou quebra de contrato.'])}
+  {h:"O que o auditor documenta", b:`<p>Os <b>papéis de trabalho</b> registram o que foi planejado, os procedimentos feitos, a evidência obtida e as conclusões. São a prova de que a auditoria foi feita.</p>` + ul(['Objetivo do teste','Amostra e documentos examinados','Resultados e exceções encontradas','Conclusão e quem revisou'])},
+  {h:"Por que importa", b:box('regra','O que não está documentado é tratado como não feito. Um revisor experiente deve entender o trabalho só pelos papéis.')}
  ],
  ex:[
-  tf("Uma distorção pequena em valor nunca é material.",false,"Pela natureza (ex.: fraude), pode ser."),
-  mc("Materialidade é definida pensando em:",["*Quem usa as demonstrações e suas decisões","O gosto do auditor","O tamanho do escritório","O número de funcionários"],"O foco é a decisão do usuário."),
-  cl("Tende a ser material?",["Sim","Não"],"Erro de R$ 2 milhões em lucro de R$ 3 milhões:0|Diferença de R$ 3 num balanço de R$ 10 milhões:1|Pagamento pequeno, mas desviado pelo diretor:0|Arredondamento de centavos:1","Valor relativo e natureza."),
-  fl("Distorção que pode mudar a decisão do usuário é {material}.",["imaterial","contábil"],"Conceito de materialidade."),
-  tf("Várias distorções pequenas somadas podem ser materiais.",true,"Considera-se o conjunto."),
-  mc("Um erro de R$ 50 mil numa empresa com lucro de R$ 60 mil é, provavelmente:",["*Material","Irrelevante","Impossível","Uma receita"],"Representa quase todo o lucro.")
+  tf("Se o procedimento não foi documentado, considera-se que não foi feito.",true,"A documentação comprova o trabalho."),
+  mc("Os papéis de trabalho servem principalmente para:",["*Registrar procedimentos, evidências e conclusões da auditoria","Substituir a contabilidade da empresa","Guardar só o relatório final","Calcular impostos"],"São a trilha do trabalho do auditor."),
+  od("Ordene o que um papel de trabalho costuma registrar:",["Objetivo do teste","Amostra selecionada","Resultados e exceções","Conclusão","Revisão"],"Do objetivo à revisão."),
+  tf("Um revisor deveria conseguir entender o trabalho só lendo os papéis.",true,"Esse é o padrão de qualidade."),
+  cl("Deve constar no papel de trabalho?",["Sim","Não"],"Documentos examinados:0|Exceções encontradas:0|Opinião pessoal sobre os funcionários, sem relação com o teste:1|Conclusão do teste:0","Registre o que sustenta a conclusão."),
+  fl("A documentação da auditoria é feita nos papéis de {trabalho}.",["parede","caixa"],"Registro do que foi feito.")
  ]},
 {id:"audx2", title:"Amostragem", icon:"🎲",
  learn:[
@@ -192,18 +192,18 @@ export default [
   tf("Deixar o cliente escolher a amostra é uma boa prática.",false,"Compromete a independência e a representatividade."),
   fl("A amostra precisa {representar} a população para a conclusão valer.",["ignorar","substituir"],"Senão a conclusão é enviesada.")
  ]},
-{id:"audx3", title:"Tipos de opinião", icon:"📝",
+{id:"audx3", title:"Eventos subsequentes", icon:"📆",
  learn:[
-  {h:"O que o auditor pode dizer", b:tbl(['Opinião','Quando'],[['Sem ressalva (não modificada)','Demonstrações apresentadas adequadamente'],['Com ressalva','Distorção material, mas não generalizada'],['Adversa','Distorção material e generalizada'],['Abstenção','Não obteve evidência suficiente, com efeito possivelmente generalizado']])},
-  {h:"Leitura rápida", b:box('dica','Pense em duas perguntas: o problema é material? Ele se espalha pelas demonstrações todas? As respostas levam ao tipo de opinião.')}
+  {h:"Depois da data do balanço", b:`<p>Fatos que acontecem entre a data das demonstrações e a data da sua autorização podem exigir ajuste ou divulgação.</p>` + tbl(['Tipo','Exemplo','Tratamento'],[['Evidencia algo que já existia na data','Cliente que já estava em dificuldade entra em falência','Ajustar as demonstrações'],['Surge depois da data','Incêndio na fábrica em janeiro','Não ajustar; divulgar se relevante']])},
+  {h:"Papel do auditor", b:`<p>O auditor procura esses eventos até a data do relatório: lê atas, conversa com a administração e acompanha processos.</p>`}
  ],
  ex:[
-  mt([["Sem ressalva","Tudo adequado em todos os aspectos relevantes"],["Com ressalva","Problema material, mas localizado"],["Adversa","Problema material e generalizado"],["Abstenção","Faltou evidência para opinar"]],"Os quatro desfechos."),
-  mc("O auditor não conseguiu acesso aos registros principais da empresa. Provável opinião:",["*Abstenção de opinião","Sem ressalva","Com ressalva","Adversa"],"Falta de evidência generalizada."),
-  mc("Estoques estão superavaliados em valor material, e o resto das demonstrações está adequado. Opinião:",["*Com ressalva","Adversa","Abstenção","Sem ressalva"],"Material, mas localizado."),
-  tf("Opinião adversa indica que as demonstrações, no conjunto, não estão adequadas.",true,"Distorção material e generalizada."),
-  tf("Opinião sem ressalva garante que não existe nenhum erro nas demonstrações.",false,"É segurança razoável, não absoluta."),
-  fl("Quando a distorção é material e generalizada, a opinião é {adversa}.",["com ressalva","sem ressalva"],"O conjunto está distorcido.")
+  mc("Balanço em 31/12. Em fevereiro, um cliente que já não pagava desde novembro tem a falência decretada. Tratamento:",["*Ajustar: a condição já existia na data do balanço","Ignorar","Só divulgar","Registrar como receita"],"Evidencia uma perda que já existia."),
+  mc("Balanço em 31/12. Uma enchente destrói o estoque em março. Tratamento:",["*Não ajustar; divulgar em nota se relevante","Ajustar o estoque de 31/12","Ignorar sempre","Registrar em dezembro"],"A causa surgiu depois da data."),
+  tf("Eventos após a data do balanço nunca afetam as demonstrações.",false,"Alguns exigem ajuste; outros, divulgação."),
+  cl("Ajustar ou apenas divulgar?",["Ajustar","Divulgar"],"Sentença confirma processo que já existia em 31/12:0|Incêndio em janeiro:1|Venda de estoque abaixo do custo logo após a data, mostrando perda que já existia:0|Aquisição de outra empresa em fevereiro:1","A condição existia na data do balanço?"),
+  tf("O auditor procura eventos subsequentes até a data do seu relatório.",true,"Leitura de atas, entrevistas e processos."),
+  fl("Eventos que revelam condições já existentes na data do balanço exigem {ajuste}.",["divulgação apenas","nada"],"Refletem a situação daquela data.")
  ]},
 {id:"audx4", title:"Independência e ética", icon:"⚖️",
  learn:[
