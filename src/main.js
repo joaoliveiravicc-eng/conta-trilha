@@ -17,13 +17,14 @@ const screen = {
   profile: () => import('./ui/screens/profile.js'),
 };
 
-/* PWA: funciona offline, mas se atualiza sozinho. Uma versão nova é aplicada na
-   hora, ou assim que a pessoa sai da lição em andamento, sem precisar limpar cache. */
+/* PWA: funciona offline e se atualiza sozinho. O service worker novo assume na
+   hora; a página recarrega assim que a pessoa não estiver no meio de uma lição. */
 const BUSY = ['onb', 'learn', 'quiz', 'blitz', 'result', 'fail'];
-let pendingUpdate = false;
-const updateSW = registerSW({
+let pendingReload = false;
+const reloadWhenFree = () => { if (pendingReload && BUSY.indexOf(CUR) < 0) location.reload(); };
+registerSW({
   immediate: true,
-  onNeedRefresh(){ pendingUpdate = true; applyUpdate(); },
+  onNeedReload(){ pendingReload = true; reloadWhenFree(); },
   onRegisteredSW(url, reg){
     if (!reg) return;
     const check = () => reg.update().catch(() => {});
@@ -31,8 +32,9 @@ const updateSW = registerSW({
     setInterval(check, 30 * 60 * 1000);
   },
 });
-function applyUpdate(){ if (pendingUpdate && BUSY.indexOf(CUR) < 0) updateSW(true); }
-setInterval(applyUpdate, 2000);
+setInterval(reloadWhenFree, 2000);
+/* Um pedaço do app de uma versão anterior deixou de existir no servidor. */
+window.addEventListener('vite:preloadError', () => location.reload());
 
 let installPrompt = null;
 window.addEventListener('beforeinstallprompt', event => {

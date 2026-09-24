@@ -5,8 +5,8 @@ export default defineConfig({
   server: { port: 5173 },
   plugins: [
     VitePWA({
-      registerType: 'prompt',
-      injectRegister: 'auto',
+      registerType: 'autoUpdate',
+      injectRegister: false,
       includeAssets: ['apple-touch-icon.png'],
       manifest: {
         name: 'ContaTrilha — Contabilidade do zero',
@@ -31,6 +31,8 @@ export default defineConfig({
         // aluno mora em localStorage/Supabase, não neste cache.
         globPatterns: ['**/*.{js,css,html,png,svg,webp,woff2,json,webmanifest}'],
         navigateFallback: '/index.html',
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
