@@ -75,3 +75,5 @@ export const GLOSS_ADD = [
  ["Conta analítica","Conta de último nível, que recebe lançamentos."],
  ["Reserva de emergência","Dinheiro guardado para imprevistos, em aplicação de fácil resgate."]
 ];
+
+export const GLOSS = GLOSSARY.concat(GLOSS_ADD).sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));

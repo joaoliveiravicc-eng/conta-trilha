@@ -3,7 +3,8 @@ import { S, courseUnlocked } from '../../engine/state.js';
 import { fmt } from '../../engine/format.js';
 import { shuffle } from '../../engine/random.js';
 import { tbl } from '../../content/render-helpers.js';
-import { CASES, COURSES } from '../../content/index.js';
+import { COURSES } from '../../content/index.js';
+import { CASES } from '../../content/cases.js';
 import { CHART } from '../../content/chart-of-accounts.js';
 import { sheet } from '../router.js';
 import { startSession } from './quiz.js';
@@ -32,12 +33,13 @@ export function caseBalanceteHTML(cs){
   return '<div class="card" style="margin-top:14px;text-align:left"><div class="sec-h" style="margin:0 0 10px">📒 Balanço da sua empresa</div>' + tbl(['Ativo', 'R$', 'Passivo e PL', 'R$'], rows) +
     '<div class="small muted" style="padding:0 2px 2px">Receitas de R$ ' + fmt(receitaT) + ' menos despesas de R$ ' + fmt(despesaT) + ' = lucro de R$ ' + fmt(lucro) + '. Seus lançamentos fecharam certinho: Ativo = Passivo + PL!</div></div>';
 }
-export function renderCases(root){
-  root.innerHTML = CASES.map(cs => {
+export function renderCases(root, activeCourses = COURSES){
+  const visible = CASES.filter(cs => activeCourses.some(c => c.id === cs.req));
+  root.innerHTML = visible.length ? visible.map(cs => {
     const req = COURSES.find(c => c.id === cs.req), un = req && courseUnlocked(req);
     const done = !!S.cases[cs.id];
     return '<button class="pcard" data-act="case" data-id="' + cs.id + '" ' + (un ? '' : 'disabled') + '><div class="pe" style="background:' + cs.color + '22">' + cs.icon + '</div><div><div class="pt">' + cs.title + (done ? ' ✓' : '') + '</div><div class="ps">' + (un ? (cs.ev.length + ' lançamentos para registrar' + (done ? ' · concluído' : '')) : ('Libera após a trilha ' + (req ? req.title : ''))) + '</div></div></button>';
-  }).join('');
+  }).join('') : '<p class="small muted">Os casos desta área aparecem aqui conforme você avança.</p>';
   bindActs(root, { case: b => openCase(CASES.find(c => c.id === b.dataset.id)) });
 }
 export function openCase(cs){

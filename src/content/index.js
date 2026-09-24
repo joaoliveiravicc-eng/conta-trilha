@@ -1,5 +1,5 @@
-/* Monta o currículo final: as 7 trilhas originais + as lições novas (antes/vida) +
-   os exercícios bônus, na ordem definida em layout.js. */
+/* Monta o currículo completo na ordem das áreas (areas.js). Tudo é carregado de
+   uma vez: conquistas, revisão e desbloqueio entre trilhas precisam do catálogo inteiro. */
 import base from './trilhas/base.js';
 import dc from './trilhas/dc.js';
 import lanc from './trilhas/lanc.js';
@@ -11,32 +11,35 @@ import imob from './trilhas/imob.js';
 import antes from './trilhas/antes.js';
 import vida from './trilhas/vida.js';
 import estoq from './trilhas/estoq.js';
-import EXTRA from './extra.js';
-import { buildCourses, PANELS } from './layout.js';
-import { GLOSSARY, GLOSS_ADD } from './glossary.js';
+import digital from './trilhas/digital.js';
+import extra from './extra.js';
+import { enrichCourses } from './workshops.js';
+import { AREAS } from './areas.js';
+import { buildCourses, LAYOUT } from './layout.js';
+import { TOTAL_LESSONS } from './catalog.js';
 
-const rawCourses = [base, dc, lanc, demo, cust, trib, aud, imob];
-const newLessons = antes.concat(vida, estoq);
+const layouts = AREAS.flatMap(area => area.courseIds).map(id => LAYOUT.find(course => course.id === id));
 
-export const COURSES = buildCourses(rawCourses, newLessons, EXTRA);
+export const COURSES = enrichCourses(buildCourses(
+  [base, dc, lanc, demo, cust, trib, aud, imob],
+  antes.concat(vida, estoq, digital),
+  extra, layouts
+));
 
-/* Anota cada trilha/unidade/lição com seu índice (idx) e uma referência de volta
-   (course/unit), e monta o índice EX (chave "licaoId#n" -> {x,l,c}) usado pela
-   revisão de erros. Precisa rodar uma vez, depois que COURSES está montado. */
 export const EX = {};
-COURSES.forEach((c, ci) => {
-  c.idx = ci;
-  c.units.forEach((u, ui) => { u.idx = ui; u.course = c; u.lessons.forEach(l => { l.unit = u; }); });
-  c.lessons.forEach((l, li) => { l.idx = li; l.course = c; l.ex.forEach((x, xi) => { x.key = l.id + '#' + xi; EX[x.key] = { x:x, l:l, c:c }; }); });
+COURSES.forEach((course, courseIndex) => {
+  course.idx = courseIndex;
+  course.units.forEach((unit, unitIndex) => {
+    unit.idx = unitIndex; unit.course = course;
+    unit.lessons.forEach(lesson => { lesson.unit = unit; });
+  });
+  course.lessons.forEach((lesson, lessonIndex) => {
+    lesson.idx = lessonIndex; lesson.course = course;
+    lesson.ex.forEach((exercise, exerciseIndex) => {
+      exercise.key = lesson.id + '#' + exerciseIndex;
+      EX[exercise.key] = { x:exercise, l:lesson, c:course };
+    });
+  });
 });
 
-export const TOTAL_LESSONS = COURSES.reduce((a, c) => a + c.lessons.length, 0);
-export { PANELS };
-export const GLOSS = GLOSSARY.concat(GLOSS_ADD).sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));
-
-export { CASES } from './cases.js';
-export { TIPS } from './tips.js';
-export { BADGES } from './badges.js';
-export { MPOOL } from './missions.js';
-export { OUTFITS } from './shop-items.js';
-export { CHART, GROUP_NAME, ALIASES, ENTRY_TPL } from './chart-of-accounts.js';
+export { TOTAL_LESSONS };

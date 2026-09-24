@@ -1,6 +1,8 @@
 /* Estado do jogador: formato, normalização, e as funções puras que leem
    xp/streak/coins/lições concluídas para decidir o que está desbloqueado. */
 import { COURSES } from '../content/index.js';
+import { ALL_LESSON_IDS } from '../content/catalog.js';
+import { AREAS, areaForCourse, coursesForArea } from '../content/areas.js';
 import { mprog } from './gamification.js';
 import { toast } from '../ui/components/toast.js';
 
@@ -8,8 +10,8 @@ export const LS_KEY = 'contatrilha_v2';
 export const LS_OLD = 'contatrilha_progress_v1';
 
 export function fresh(){
-  return { v:3, xp:0, streak:0, lastActive:null, done:{}, perfect:{}, trophies:{}, unlocked:{}, mistakes:{}, days:{}, goal:30, sound:true, onboarded:false,
-    badges:{}, lessons:0, reviews:0, coins:0, freezes:0, boostUntil:0, owned:{}, equip:{ glasses:true, head:null, neck:null },
+  return { v:4, area:null, xp:0, streak:0, lastActive:null, done:{}, perfect:{}, trophies:{}, unlocked:{}, mistakes:{}, days:{}, goal:30, sound:true, onboarded:false,
+    badges:{}, checkpoints:{}, repetition:{}, lessons:0, reviews:0, coins:0, freezes:0, boostUntil:0, owned:{}, equip:{ glasses:true, head:null, neck:null, body:null },
     daily:{ date:null, ms:[], chest:false }, best:{ blitz:0 }, cases:{}, st:{ correct:0, entries:0, writes:0, hints:0, coins:0, marathons:0 }, theme:'auto', usedFreeze:0 };
 }
 
@@ -26,6 +28,8 @@ export function normalize(d){
     else if (s[k] === null || typeof v === typeof s[k]) s[k] = v;
   });
   if (!Array.isArray(s.daily.ms)) s.daily = { date:null, ms:[], chest:false };
+  if (s.area && !AREAS.some(area => area.id === s.area)) s.area = null;
+  s.v = 4;
   return s;
 }
 
@@ -69,11 +73,23 @@ export function boostOn(){ return Date.now() < S.boostUntil; }
 export function addXP(n){ if (boostOn()) n *= 2; S.xp += n; const t = today(); S.days[t] = (S.days[t] || 0) + n; mprog('xp', n); return n; }
 export function addCoins(n){ S.coins += n; S.st.coins += n; return n; }
 export const lessonsDone = c => c.lessons.filter(l => S.done[l.id]).length;
-export const courseComplete = c => lessonsDone(c) === c.lessons.length;
-export const courseUnlocked = c => c.idx === 0 || courseComplete(COURSES[c.idx - 1]) || !!S.unlocked[c.id] || lessonsDone(c) > 0;
-export const lessonUnlocked = l => l.idx === 0 ? courseUnlocked(l.course) : !!S.done[l.course.lessons[l.idx - 1].id];
+export const courseComplete = c => c.lessons.filter(l => !l.optional).every(l => S.done[l.id]);
+export const courseUnlocked = c => {
+  const area = areaForCourse(c.id);
+  const position = area?.courseIds.indexOf(c.id) ?? 0;
+  const previous = position > 0 ? COURSES.find(item => item.id === area.courseIds[position - 1]) : null;
+  return !previous || courseComplete(previous) || !!S.unlocked[c.id] || lessonsDone(c) > 0;
+};
+export const lessonUnlocked = l => {
+  if (S.done[l.id]) return true;
+  if (l.optional) {
+    const previousRequired = l.course.lessons.slice(0, l.idx).filter(item => !item.optional).at(-1);
+    return !previousRequired || !!S.done[previousRequired.id];
+  }
+  return l.idx === 0 ? courseUnlocked(l.course) : !!S.done[l.course.lessons[l.idx - 1].id];
+};
 export function nextLesson(){
-  for (const c of COURSES){ if (!courseUnlocked(c)) continue; for (const l of c.lessons){ if (!S.done[l.id] && lessonUnlocked(l)) return l; } }
+  for (const c of coursesForArea(COURSES, S.area)){ if (!courseUnlocked(c)) continue; for (const l of c.lessons){ if (!l.optional && !S.done[l.id] && lessonUnlocked(l)) return l; } }
   return null;
 }
-export const doneCount = () => Object.keys(S.done).filter(id => COURSES.some(c => c.lessons.some(l => l.id === id))).length;
+export const doneCount = () => Object.keys(S.done).filter(id => ALL_LESSON_IDS.has(id)).length;

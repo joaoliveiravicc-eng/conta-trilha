@@ -8,6 +8,7 @@ import { sfx } from './components/sound.js';
 import { toast } from './components/toast.js';
 import { confetti } from './components/confetti.js';
 import { renderHome } from './screens/home.js';
+import { areaById } from '../content/areas.js';
 
 export let CUR = 'home';
 export const TAB_OF = { home:'home', path:'home', practice:'practice', shop:'shop', glossary:'glossary', profile:'profile' };
@@ -22,6 +23,9 @@ export function go(name){
   CUR = name; window.scrollTo(0, 0);
 }
 export function renderTop(){
+  const area = areaById(S.area);
+  $('#area-switch-icon').textContent = area.icon;
+  $('#area-switch').setAttribute('aria-label', 'Área atual: ' + area.title + '. Escolher outra área');
   $('#pill-streak span').textContent = curStreak();
   $('#pill-streak').classList.toggle('dim', curStreak() === 0);
   $('#pill-xp span').textContent = S.xp;

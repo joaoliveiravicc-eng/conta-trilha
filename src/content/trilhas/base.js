@@ -52,8 +52,8 @@ export default {
     {h:"A equação fundamental", b:eq('Ativo = Passivo + Patrimônio Líquido') +
       `<p>Leia assim: tudo o que a empresa tem (Ativo) veio de algum lugar. Ou veio de terceiros (Passivo) ou veio dos donos (PL). Por isso os dois lados sempre se equilibram.</p>` +
       tbl(['Ativo','Passivo + PL'],[['Caixa 20.000','Fornecedores 30.000'],['Estoques 25.000','Capital social 50.000'],['Fornos 35.000',''],['<b>Total 80.000</b>','<b>Total 80.000</b>']])},
-    {h:"Situações possíveis", b:tbl(['Situação','Resultado'],[['Ativo maior que Passivo','PL positivo (situação saudável)'],['Ativo igual ao Passivo','PL igual a zero'],['Ativo menor que Passivo','PL negativo']]) +
-      box('atencao','PL negativo é chamado de <b>passivo a descoberto</b>: mesmo vendendo tudo, a empresa não pagaria todas as dívidas.')}
+    {h:"Situações possíveis", b:tbl(['Situação','Resultado'],[['Ativo maior que Passivo','PL positivo'],['Ativo igual ao Passivo','PL igual a zero'],['Ativo menor que Passivo','PL negativo']]) +
+      box('atencao','PL negativo é chamado de <b>passivo a descoberto</b>: os passivos superam os ativos pelos valores contábeis. PL positivo, sozinho, não garante dinheiro disponível nem boa saúde financeira. Os valores de venda dos ativos também podem ser diferentes dos valores registrados.')}
    ],
    ex:[
     {t:"num", q:"Uma empresa tem Ativo de R$ 100.000 e Passivo de R$ 40.000. Qual é o Patrimônio Líquido?", a:60000, u:"R$", e:"PL = Ativo − Passivo = 100.000 − 40.000 = 60.000."},
@@ -126,4 +126,3 @@ export default {
    ]}
   ]
 };
-

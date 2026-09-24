@@ -1,6 +1,9 @@
 /* Itens compráveis na loja para vestir o Bento. */
 
 export const OUTFITS = [
+  {id:'blazer', slot:'body', n:'Blazer do contador', d:'Arrumado para fechar o mês.', p:180},
+  {id:'moletom', slot:'body', n:'Moletom da represa', d:'Conforto para estudar sem pressa.', p:140},
+  {id:'auditor', slot:'body', n:'Terno do auditor', d:'Elegante para examinar cada detalhe.', p:220},
   {id:'viseira', slot:'head', n:'Viseira de contador', p:60},
   {id:'bone', slot:'head', n:'Boné', p:60},
   {id:'gravata', slot:'neck', n:'Gravata', p:50},

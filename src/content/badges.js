@@ -1,6 +1,6 @@
 /* Definições das 18 conquistas. 't' é o predicado testado contra o estado do jogador (ver engine/gamification.js: checkBadges). */
 import { OUTFITS } from './shop-items.js';
-import { COURSES, TOTAL_LESSONS } from './index.js';
+import { ALL_COURSE_IDS, TOTAL_LESSONS } from './catalog.js';
 import { doneCount } from '../engine/state.js';
 
 export const BADGES = [
@@ -21,5 +21,5 @@ export const BADGES = [
   {id:'xp2000', i:'🌟', n:'2.000 XP', d:'Acumule 2.000 XP', t:s => s.xp >= 2000},
   {id:'trophy', i:'🏆', n:'Primeiro troféu', d:'Passe em um teste final', t:s => Object.keys(s.trophies).length >= 1},
   {id:'style', i:'🎩', n:'Castor estiloso', d:'Compre uma roupa para o Bento', t:s => OUTFITS.some(o => s.owned[o.id])},
-  {id:'all', i:'👑', n:'Formado(a)', d:'Todos os troféus', t:s => COURSES.every(c => s.trophies[c.id])}
+  {id:'all', i:'👑', n:'Formado(a)', d:'Todos os troféus', t:s => ALL_COURSE_IDS.every(id => s.trophies[id])}
 ];

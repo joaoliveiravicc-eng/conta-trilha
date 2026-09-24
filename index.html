@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ContaTrilha — Contabilidade do zero</title>
 <meta name="description" content="Aprenda contabilidade do zero, no ritmo de um jogo: trilhas, exercícios e revisão automática dos seus erros.">
-<meta name="theme-color" content="#1E8A4C">
+<meta name="theme-color" content="#58CC02">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,20 +16,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Roboto+Slab:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/src/styles/main.css">
+<link rel="stylesheet" href="/src/styles/learning.css">
 </head>
 <body>
 <div id="app">
   <header id="topbar">
-    <div class="brand"><img class="mark" src="/images/bento-face.png" alt="Bento, o castor"><span>ContaTrilha</span></div>
+    <button class="brand" id="area-switch" type="button" aria-label="Escolher área de estudo"><img class="mark" src="/images/bento-face.png" alt=""><span>ContaTrilha</span><span id="area-switch-icon" class="brand-area" aria-hidden="true">📘</span><span class="brand-chevron" aria-hidden="true">⌄</span></button>
     <div class="stats">
       <div class="pill fire" id="pill-streak" title="Dias seguidos"><span>0</span>🔥</div>
       <div class="pill xp" id="pill-xp" title="XP"><span>0</span><i class="xpl">XP</i></div>
       <div class="pill" id="pill-coins" title="Bolotas"><span>0</span></div>
+      <button class="pwa-install" id="pwa-install" type="button" hidden>Instalar</button>
     </div>
   </header>
   <main>
     <section class="screen" id="s-onb"></section>
     <section class="screen" id="s-home"></section>
+    <section class="screen" id="s-areas"></section>
     <section class="screen" id="s-path"></section>
     <section class="screen" id="s-learn"></section>
     <section class="screen" id="s-quiz">
@@ -57,11 +60,11 @@
     <section class="screen" id="s-profile"></section>
   </main>
   <nav id="bottomnav" hidden>
-    <button data-tab="home"><span class="ni">🗺️</span>Aprender</button>
-    <button data-tab="practice"><span class="ni">🏋️</span>Praticar</button>
-    <button data-tab="shop"><span class="ni">🛒</span>Loja</button>
-    <button data-tab="glossary"><span class="ni">📖</span>Glossário</button>
-    <button data-tab="profile"><span class="ni">👤</span>Perfil</button>
+    <button data-tab="home"><span class="ni" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg></span>Aprender</button>
+    <button data-tab="practice"><span class="ni" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 9v6M3 10v4m15-5v6m3-5v4M6 12h12"/></svg></span>Praticar</button>
+    <button data-tab="shop"><span class="ni" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h16l-1 12H5L4 8Zm4 0a4 4 0 0 1 8 0"/></svg></span>Loja</button>
+    <button data-tab="glossary"><span class="ni" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5zM4 16h16"/></svg></span>Glossário</button>
+    <button data-tab="profile"><span class="ni" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>Perfil</button>
   </nav>
 </div>
 <div id="sheet-root"></div>

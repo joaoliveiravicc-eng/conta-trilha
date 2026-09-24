@@ -1,6 +1,6 @@
 import { $ } from '../dom.js';
 import { normTxt } from '../../engine/exercises/grading.js';
-import { GLOSS } from '../../content/index.js';
+import { GLOSS } from '../../content/glossary.js';
 
 export function renderGlossary(q){
   q = normTxt(q || '');
