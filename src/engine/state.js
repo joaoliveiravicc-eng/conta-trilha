@@ -12,7 +12,7 @@ export const LS_OLD = 'contatrilha_progress_v1';
 
 export function fresh(){
   return { v:5, area:null, xp:0, streak:0, lastActive:null, done:{}, perfect:{}, trophies:{}, unlocked:{}, mistakes:{}, days:{}, goal:30, sound:true, onboarded:false,
-    badges:{}, checkpoints:{}, repetition:{}, lessons:0, reviews:0, coins:0, freezes:0, boostUntil:0, owned:{}, equip:{ head:null, neck:null, body:null },
+    badges:{}, checkpoints:{}, challenges:{}, repetition:{}, lessons:0, reviews:0, coins:0, freezes:0, boostUntil:0, owned:{}, equip:{ head:null, neck:null, body:null },
     daily:{ date:null, ms:[], chest:false }, best:{ blitz:0 }, cases:{}, st:{ correct:0, entries:0, writes:0, hints:0, coins:0, marathons:0 }, theme:'auto', usedFreeze:0 };
 }
 

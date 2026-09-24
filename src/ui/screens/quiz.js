@@ -12,7 +12,7 @@ import { confetti } from '../components/confetti.js';
 import { SAY } from '../../content/dialogues.js';
 import { COURSES, EX } from '../../content/index.js';
 import { areaForCourse } from '../../content/areas.js';
-import { checkpointRecord, reviewRecord } from '../../engine/learning.js';
+import { checkpointRecord, reviewRecord, challengeRecord } from '../../engine/learning.js';
 import { render, answerText } from './quiz-renderers.js';
 import { go, sheet, renderTop } from '../router.js';
 import { openPath } from './path.js';
@@ -29,24 +29,40 @@ export function startFinal(c){
   startSession({ kind:'final', course:c, items:shuffle(pool).slice(0, 10), hearts:3 });
 }
 export function startSession(o){
+  stopClock();
   SES = Object.assign({}, o, { queue:o.items.slice(), total:o.items.length, done:0, first:0, combo:0, maxCombo:0, wrong:{}, cleanKeys:[], phase:'answer', maxHearts:o.hearts, usedHint:false });
+  if (o.timeLimit){ SES.deadline = Date.now() + o.timeLimit * 1000; CLOCK = setInterval(tick, 250); }
   go('quiz'); renderItem();
+}
+let CLOCK = null;
+function stopClock(){ if (CLOCK){ clearInterval(CLOCK); CLOCK = null; } }
+function heartsHtml(){
+  const hearts = SES.maxHearts >= 99 ? '<span class="free-practice">Sem limite</span>' : '<span class="hi">❤️</span>' + SES.hearts;
+  if (!SES.deadline) return hearts;
+  const left = Math.max(0, Math.ceil((SES.deadline - Date.now()) / 1000));
+  return hearts + '<span class="q-clock' + (left <= 15 ? ' low' : '') + '">⏱ ' + Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') + '</span>';
+}
+function tick(){
+  if (!SES || !SES.deadline){ stopClock(); return; }
+  $('#q-hearts').innerHTML = heartsHtml();
+  if (Date.now() >= SES.deadline){ stopClock(); SES.timeout = true; failScreen(); }
 }
 function setBtn(txt, dis){ const b = $('#q-btn'); b.textContent = txt; b.disabled = !!dis; }
 function bentoQuiz(mood){ const w = $('#q-bento'); if (w) w.innerHTML = bento(mood); }
 export function renderItem(){
   const it = SES.queue[0], x = it.x, body = $('#q-body'), foot = $('#q-foot');
   SES.phase = 'answer'; foot.className = 'foot';
-  $('#q-hearts').innerHTML = SES.maxHearts >= 99 ? '<span class="free-practice">Sem limite</span>' : '<span class="hi">❤️</span>' + SES.hearts;
+  $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   body.innerHTML = '';
-  body.appendChild(el('div','session-context', '<span>'+ (SES.kind==='checkpoint'?'Desafio · '+SES.unit.t:SES.kind==='spaced'?'Revisão do dia':SES.lesson?SES.lesson.title:SES.kind==='final'?'Teste final':'Prática') +'</span><span>'+SES.done+' de '+SES.total+' concluídas</span>'));
+  body.appendChild(el('div','session-context', '<span>'+ (SES.kind==='challenge'?'⚡ Desafio · sem dicas':SES.kind==='checkpoint'?'Selo · '+SES.unit.t:SES.kind==='spaced'?'Revisão do dia':SES.lesson?SES.lesson.title:SES.kind==='final'?'Teste final':'Prática') +'</span><span>'+SES.done+' de '+SES.total+' concluídas</span>'));
   bentoQuiz('idle');
   const retry = !!SES.wrong[it.key];
   body.appendChild(el('div', 'qk', (SAY.quiz[x.t] || 'Responda:') + (retry ? ' <span class="tagnew">Tente de novo</span>' : '')));
   const mountEl = el('div'); body.appendChild(mountEl);
   const startedHint = S.st.hints; SES.itemHintStart = startedHint;
   R = render(x, mountEl, () => { if (SES.phase === 'answer') $('#q-btn').disabled = !R.ready(); }, () => { if (SES.phase === 'answer') resolve(true); });
+  if (SES.noHints) mountEl.querySelectorAll('.hintrow').forEach(h => h.remove());
   if (S.st.hints > startedHint) SES.usedHint = true;
   setBtn(R.auto ? 'Forme todos os pares' : 'Verificar', true);
   window.scrollTo(0, 0);
@@ -57,6 +73,7 @@ export function primary(){
   else nextItem();
 }
 function resolve(ok){
+  if (SES.timeout) return;
   const it = SES.queue[0], x = it.x;
   SES.phase = 'feedback'; R.reveal(ok);
   const itemHint = S.st.hints > SES.itemHintStart;
@@ -76,7 +93,7 @@ function resolve(ok){
     S.mistakes[it.key] = (S.mistakes[it.key] || 0) + 1;
     SES.combo = 0; SES.queue.push(SES.queue.shift()); sfx.bad(); buzz(); bentoQuiz('sad');
   }
-  $('#q-hearts').innerHTML = SES.maxHearts >= 99 ? '<span class="free-practice">Sem limite</span>' : '<span class="hi">❤️</span>' + SES.hearts;
+  $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   const foot = $('#q-foot'); foot.className = 'foot ' + (ok ? 'ok' : 'bad');
   let title = ok ? '✅ ' + pick(PRAISE) : '❌ ' + pick(SAY.bad);
@@ -94,13 +111,14 @@ function nextItem(){
 export function quitQuiz(){
   sheet('<div class="sh-i">🤔</div><h3>Sair agora?</h3><p class="sh-s">O progresso desta sessão será perdido. Os erros já registrados continuam na sua revisão.</p>' +
     '<button class="btn primary" data-s="stay">Continuar estudando</button><button class="btn ghost" data-s="quit">Sair</button>',
-    { quit: () => { const s = SES; SES = null; exitTo(s); } });
+    { quit: () => { const s = SES; stopClock(); SES = null; exitTo(s); } });
 }
 function exitTo(s){
-  if (s && s.course && ['lesson','final','checkpoint'].includes(s.kind)) openPath(s.course);
+  if (s && s.course && ['lesson','final','checkpoint','challenge'].includes(s.kind)) openPath(s.course);
   else { renderPractice(); go('practice'); }
 }
 function finish(){
+  stopClock();
   const s = SES, perfect = s.first === s.total, before = S.days[today()] || 0, lvBefore = levelInfo(S.xp).n;
   let xp = 0, coins = 0, title = '', sub = '', emoji = '🎉', mood = 'cheer', extra = [], caseHtml = '';
   if (s.kind === 'lesson'){
@@ -124,6 +142,17 @@ function finish(){
     extra.push([passed ? '✓' : '↻', passed ? 'Selo conquistado. Retome esta etapa quando quiser reforçar.' : 'O selo pede pelo menos 80%. Reveja os pontos abaixo e tente novamente.']);
     const revisit = [...new Set(s.items.filter(it=>!s.cleanKeys.includes(it.key)).map(it=>EX[it.key]?.l).filter(Boolean))];
     caseHtml = revisit.length ? '<div class="result-review"><h2>Vale retomar</h2>'+revisit.map(l=>'<button class="btn ghost" data-act="theory" data-id="'+l.id+'">'+l.title+' →</button>').join('')+'</div>' : '';
+  } else if (s.kind === 'challenge'){
+    const previous = S.challenges[s.challengeId], firstPass = !previous?.passed, firstCrown = perfect && !previous?.perfect;
+    S.challenges[s.challengeId] = challengeRecord(previous, perfect, today());
+    xp = (firstPass ? 20 : 6) + s.first + (firstCrown ? 10 : 0);
+    coins = (firstPass ? 15 : 3) + (firstCrown ? 15 : 0);
+    mprog('practice', 1);
+    title = perfect ? 'Desafio lendário!' : 'Desafio vencido!';
+    sub = perfect ? 'Tudo certo de primeira, sem dicas e dentro do tempo.' : s.first + ' de ' + s.total + ' de primeira. Acerte tudo de primeira para ganhar a coroa.';
+    emoji = perfect ? '👑' : '⚡';
+    if (firstCrown) extra.push(['👑', 'Coroa conquistada neste desafio.']);
+    else if (!perfect) extra.push(['🎯', 'Tente de novo quando quiser: a coroa pede zero erros.']);
   } else if (s.kind === 'final'){
     const firstT = !S.trophies[s.course.id];
     xp = (firstT ? 25 : 10) + s.first; coins = firstT ? 30 : 12; S.trophies[s.course.id] = today();
@@ -170,8 +199,9 @@ function finish(){
   if (s.kind !== 'checkpoint' || s.first / s.total >= 0.8){ sfx.win(); confetti(); }
 }
 export function failScreen(){
+  stopClock();
   const s = SES, scr = $('#s-fail');
-  scr.innerHTML = '<div class="center"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento('sad') + '</div></div><h1>Acabaram os corações</h1><p class="sub">Errar faz parte do aprendizado. As questões que você errou foram para a sua revisão. Revise a teoria e tente de novo.</p></div>' +
+  scr.innerHTML = '<div class="center"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento('sad') + '</div></div><h1>' + (s.timeout ? 'O tempo acabou' : 'Acabaram os corações') + '</h1><p class="sub">' + (s.kind === 'challenge' ? 'Desafios são para testar seus limites. Revise as lições da etapa e tente de novo: não há limite de tentativas.' : 'Errar faz parte do aprendizado. As questões que você errou foram para a sua revisão. Revise a teoria e tente de novo.') + '</p></div>' +
     '<div class="foot">' + (s.kind === 'lesson' ? '<button class="btn primary" data-act="th">Rever a teoria</button>' : '') +
     '<button class="btn ' + (s.kind === 'lesson' ? 'ghost' : 'primary') + '" data-act="re">Tentar de novo</button><button class="btn ghost" data-act="out">Sair</button></div>';
   SES = null;

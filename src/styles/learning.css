@@ -182,3 +182,24 @@ body.modal-open{overflow:hidden;}
 .save-banner small{display:block;color:var(--muted);font-size:.8rem;line-height:1.35;}
 .save-banner .sb-go{margin-left:auto;font-size:1.4rem;color:var(--green2);font-weight:700;}
 .center .save-banner{max-width:420px;margin:14px auto 0;}
+/* ---------- desafios no caminho ---------- */
+.challenge-row{display:flex;align-items:center;gap:14px;width:calc(100% - 16px);margin:6px 8px;padding:12px;text-align:left;border-radius:14px;min-height:68px;border:2px dashed color-mix(in srgb,var(--gold) 55%,var(--line));background:color-mix(in srgb,var(--goldp) 55%,transparent);color:var(--text);}
+.challenge-row.ready{border-style:solid;border-color:var(--gold);background:var(--goldp);box-shadow:0 3px 0 color-mix(in srgb,var(--gold) 45%,transparent);animation:chpulse 2.4s ease-in-out infinite;}
+.challenge-row.won{border-style:solid;border-color:color-mix(in srgb,var(--gold) 60%,var(--line));}
+.challenge-row.crown{border-style:solid;border-color:var(--gold);background:linear-gradient(135deg,var(--goldp),color-mix(in srgb,var(--gold) 22%,var(--goldp)));}
+.challenge-row.locked{opacity:.7;}
+.challenge-row .lesson-state{color:var(--gold2);font-weight:700;}
+.challenge-marker{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:12px;background:var(--gold);color:#fff;font-size:1.1rem;transform:rotate(45deg);}
+.challenge-row.locked .challenge-marker{background:var(--line);}
+.challenge-marker i{font-style:normal;transform:rotate(-45deg);line-height:1;}
+.challenge-rules{list-style:none;padding:0;margin:10px 0 12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:left;}
+.challenge-rules li{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.82rem;font-weight:600;}
+.q-clock{margin-left:10px;font-weight:800;font-variant-numeric:tabular-nums;}
+.q-clock.low{color:var(--red);animation:chpulse 1s ease-in-out infinite;}
+@keyframes chpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+@media(prefers-reduced-motion:reduce){.challenge-row.ready,.q-clock.low{animation:none;}}
+@media(max-width:560px){
+  .challenge-row{flex-wrap:wrap;column-gap:12px;row-gap:6px;padding:12px 10px;width:calc(100% - 8px);margin:6px 4px;}
+  .challenge-row .lesson-description{flex:1 1 calc(100% - 60px);}
+  .challenge-row .lesson-state{margin-left:52px;flex-basis:calc(100% - 52px);}
+}

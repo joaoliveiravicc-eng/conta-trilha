@@ -39,3 +39,25 @@ export function spacedItems(lessons){
   return shuffle(lessons.flatMap(l => shuffle(l.ex.filter(x => x.t !== 'expl')).slice(0,2)))
     .map(x => ({key:x.key,x}));
 }
+
+/* Desafios opcionais no caminho: um a cada duas lições de uma etapa. Mais difíceis que a
+   lição: 3 corações, sem dicas e com tempo. Acertar tudo de primeira vale a coroa. */
+export const CHALLENGE_SECONDS_PER_ITEM = 25;
+export const challengeId = lesson => 'desafio:' + lesson.id;
+export function challengeSpots(unit){
+  if (unit.lessons.length < 2 || unit.lessons.some(l => l.optional)) return [];
+  const spots = [];
+  unit.lessons.forEach((l, i) => { if ((i + 1) % 2 === 0) spots.push({ after:i, id:challengeId(l), lessons:unit.lessons.slice(0, i + 1) }); });
+  return spots;
+}
+export function challengeItems(lessons, size = 8){
+  const pools = lessons.map(l => shuffle(l.ex.filter(x => x.t !== 'expl')));
+  const picked = [];
+  for (let round = 0; picked.length < size && pools.some(p => p.length); round++){
+    for (let i = pools.length - 1; i >= 0 && picked.length < size; i--){ const x = pools[i].shift(); if (x) picked.push(x); }
+  }
+  return shuffle(picked).map(x => ({ key:x.key, x }));
+}
+export function challengeRecord(previous, perfect, date){
+  return { passed:true, perfect:!!previous?.perfect || perfect, attempts:(previous?.attempts || 0) + 1, last:date };
+}

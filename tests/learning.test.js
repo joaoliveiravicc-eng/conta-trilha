@@ -113,3 +113,22 @@ test('unidade nova não bloqueia a próxima trilha de quem já tinha terminado a
   assert.equal(courseUnlocked(base),false);
   assert.ok(antes.units.at(-1).t.startsWith('Oficina') || antes.units.some(u=>u.t==='Aprofundando'));
 });
+
+test('desafios no caminho: a cada duas lições, com perguntas das lições anteriores',async()=>{
+  const { challengeSpots, challengeItems, challengeRecord } = await import('../src/engine/learning.js');
+  let total=0;
+  for(const c of COURSES) for(const u of c.units){
+    const spots=challengeSpots(u); total+=spots.length;
+    if(u.lessons.some(l=>l.optional)) assert.equal(spots.length,0);
+    for(const sp of spots){
+      assert.equal((sp.after+1)%2,0);
+      const items=challengeItems(sp.lessons);
+      assert.ok(items.length>=5 && items.length<=8);
+      assert.equal(new Set(items.map(i=>i.key)).size,items.length);
+      assert.ok(items.every(i=>sp.lessons.some(l=>l.ex.includes(i.x)) && i.x.t!=='expl'));
+    }
+  }
+  assert.ok(total>=50, 'desafios: '+total);
+  const r1=challengeRecord(null,false,'2026-09-24'), r2=challengeRecord(r1,true,'2026-09-25'), r3=challengeRecord(r2,false,'2026-09-26');
+  assert.deepEqual([r1.perfect,r2.perfect,r3.perfect,r3.attempts],[false,true,true,3]);
+});

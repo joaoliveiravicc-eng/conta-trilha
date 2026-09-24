@@ -21,5 +21,8 @@ export const BADGES = [
   {id:'xp2000', i:'🌟', n:'2.000 XP', d:'Acumule 2.000 XP', t:s => s.xp >= 2000},
   {id:'trophy', i:'🏆', n:'Primeiro troféu', d:'Passe em um teste final', t:s => Object.keys(s.trophies).length >= 1},
   {id:'style', i:'🎩', n:'Castor estiloso', d:'Compre uma roupa para o Bento', t:s => OUTFITS.some(o => s.owned[o.id])},
+  {id:'dare1', i:'⚡', n:'Encarou o desafio', d:'Vença um desafio relâmpago da trilha', t:s => Object.values(s.challenges || {}).some(c => c.passed)},
+  {id:'crown1', i:'💎', n:'Lendário', d:'Ganhe a coroa em um desafio (zero erros)', t:s => Object.values(s.challenges || {}).some(c => c.perfect)},
+  {id:'dare10', i:'🔥', n:'Desafiante', d:'Vença 10 desafios relâmpago', t:s => Object.values(s.challenges || {}).filter(c => c.passed).length >= 10},
   {id:'all', i:'👑', n:'Formado(a)', d:'Todos os troféus', t:s => ALL_COURSE_IDS.every(id => s.trophies[id])}
 ];
