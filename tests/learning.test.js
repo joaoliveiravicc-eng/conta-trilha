@@ -6,7 +6,7 @@ import { checkpointId, unitComplete, checkpointItems, checkpointRecord, reviewRe
 
 test('currículo: referências, chaves persistidas e respostas válidas',()=>{
   assert.equal(COURSES.length,13);
-  assert.equal(TOTAL_LESSONS,207);
+  assert.equal(TOTAL_LESSONS,217);
   const ids=new Set(), keys=new Set(); let workshops=0, questions=0;
   for(const c of COURSES){
     assert.ok(c.goals.length>=2);

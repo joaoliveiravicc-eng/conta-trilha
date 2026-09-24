@@ -15,7 +15,7 @@ export const COURSE_GOALS = {
   trib:['Entender apuração e obrigações','Conferir bases, créditos e documentos'],
   aud:['Relacionar riscos a procedimentos','Sustentar conclusões com evidências'],
   vida:['Organizar patrimônio e orçamento','Projetar compromissos e imprevistos'],
-  financeirojr:['Executar a rotina de contas a pagar, a receber e conciliação','Explicar lucro, caixa e indicadores numa entrevista']
+  financeirojr:['Executar a rotina de contas a pagar, a receber, bancos e conciliação','Planejar o caixa e explicar lucro, caixa e indicadores','Aplicar a rotina a um grupo de mídia e agro, e se sair bem na entrevista']
 };
 
 export const WORKSHOPS = [

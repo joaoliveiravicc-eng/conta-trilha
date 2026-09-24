@@ -4,7 +4,7 @@
 como app (PWA) no celular ou no computador direto pelo navegador.
 
 App no estilo Duolingo para aprender Contabilidade do zero, em português. 6 áreas (incluindo Carreiras),
-13 trilhas e 207 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
+13 trilhas e 217 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
 "Na prática" com negócios e situações reais, oficinas e desafios relâmpago), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
