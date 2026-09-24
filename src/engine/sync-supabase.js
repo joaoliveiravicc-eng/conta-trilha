@@ -32,12 +32,42 @@ export async function initCloud(){
   return initializing;
 }
 
+export function cloudAvailable(){ return !!(url && anonKey); }
 export function isLoggedIn(){ return !!cachedUserId; }
 export function currentEmail(){ return cachedEmail; }
 
-export async function signInWithEmail(email){
-  if (!supabase) throw new Error('Supabase não configurado.');
-  const { error } = await supabase.auth.signInWithOtp({ email });
+function need(){ if (!supabase) throw new Error('offline'); }
+
+/** Cria a conta. Devolve true se já entrou; false se o Supabase pediu confirmação por e-mail. */
+export async function signUp(email, password){
+  need();
+  const { data, error } = await supabase.auth.signUp({ email, password, options:{ emailRedirectTo: location.origin } });
+  if (error) throw error;
+  if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) throw new Error('already_registered');
+  return !!data.session;
+}
+
+export async function signIn(email, password){
+  need();
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+}
+
+export async function sendPasswordReset(email){
+  need();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: location.origin });
+  if (error) throw error;
+}
+
+export async function updatePassword(password){
+  need();
+  const { error } = await supabase.auth.updateUser({ password });
+  if (error) throw error;
+}
+
+export async function resendConfirmation(email){
+  need();
+  const { error } = await supabase.auth.resend({ type:'signup', email, options:{ emailRedirectTo: location.origin } });
   if (error) throw error;
 }
 

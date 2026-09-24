@@ -3,6 +3,7 @@ import { $, $$ } from './ui/dom.js';
 import { S, setState, loadLocal, normalize, applyTheme, LS_KEY } from './engine/state.js';
 import { initCloud, syncDown, onAuthChange } from './engine/sync-supabase.js';
 import { flush } from './engine/storage.js';
+import { mergeProgress } from './engine/merge.js';
 import { sfx } from './ui/components/sound.js';
 import { go, CUR, closeSheet, renderTop } from './ui/router.js';
 import { renderHome } from './ui/screens/home.js';
@@ -90,15 +91,12 @@ async function route(){
 async function mergeCloud(){
   const cloudData = await syncDown();
   if (cloudData){
-    const cs = normalize(cloudData);
-    if (cs.xp > S.xp || (cs.xp === S.xp && cs.onboarded && !S.onboarded)){
-      if (!cs.area && S.area) cs.area = S.area;
-      setState(cs); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) {}
-      if (['home', 'onb', 'areas', 'practice', 'profile', 'glossary', 'path', 'shop'].indexOf(CUR) >= 0) await route();
-      return;
-    }
-    if (S.xp > cs.xp || S.onboarded !== cs.onboarded) flush();
-  } else if (S.xp > 0 || S.onboarded) flush();
+    const merged = normalize(mergeProgress(JSON.parse(JSON.stringify(S)), normalize(cloudData)));
+    setState(merged); try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) {}
+    renderTop();
+    if (['home', 'onb', 'areas', 'practice', 'profile', 'glossary', 'path', 'shop'].indexOf(CUR) >= 0) await route();
+  }
+  if (S.xp > 0 || S.onboarded) await flush();
   if (CUR === 'profile') (await screen.profile()).renderProfile();
 }
 (async function boot(){
@@ -107,5 +105,9 @@ async function mergeCloud(){
 })();
 onAuthChange((event) => {
   if (event === 'SIGNED_IN') mergeCloud().catch(() => {});
-  else if (event === 'SIGNED_OUT' && CUR === 'profile') screen.profile().then(({renderProfile}) => renderProfile());
+  else if (event === 'PASSWORD_RECOVERY') import('./ui/screens/account.js').then(({ openAccount }) => openAccount('newpass'));
+  else if (event === 'SIGNED_OUT'){ renderTop(); if (CUR === 'profile') screen.profile().then(({renderProfile}) => renderProfile()); else if (CUR === 'home') renderHome(); }
 });
+/* Ao sair do app, grava imediatamente (local e nuvem) em vez de esperar o atraso normal. */
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+window.addEventListener('pagehide', () => flush());

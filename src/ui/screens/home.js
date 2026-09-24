@@ -1,4 +1,5 @@
 import { $, bindActs } from '../dom.js';
+import { cloudAvailable, isLoggedIn } from '../../engine/sync-supabase.js';
 import { S, today, nextLesson, doneCount, curStreak, courseComplete, courseUnlocked, lessonsDone } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { pick } from '../../engine/random.js';
@@ -25,7 +26,7 @@ export function renderHome(){
   const bubble = pick(cs >= 3 ? ['Sua sequência de ' + cs + ' dias está incrível! 🔥', SAY.learn[0]] : [pick(TIPS)]);
   s.innerHTML = '<div class="home-top"><div class="bento-row"><div class="bento-wrap sm">' + bento('idle', undefined, 'home-avatar') + '</div><div class="speech">' + bubble + '</div></div>' +
     '<div class="goal-row">' + ring(Math.min(1, tx / S.goal), hit) + '<div><div class="goal-t">' + (hit ? 'Meta de hoje concluída!' : 'Meta de hoje') + '</div><div class="goal-s">' + tx + ' de ' + S.goal + ' XP</div></div></div>' +
-    cont + '</div><div class="home-missions">' + missionCard() + '</div><div class="home-tracks"><div class="tracks-intro"><div><div class="eyebrow">SEU PERCURSO</div><h1>' + area.title + '</h1><p class="muted">' + area.description + '</p></div><button class="area-change" data-act="areas" aria-label="Trocar área de estudo">' + area.icon + ' Trocar área</button></div><div class="panels-grid">' + panelList(areaCourses) + '</div></div>';
+    cont + saveBanner() + '</div><div class="home-missions">' + missionCard() + '</div><div class="home-tracks"><div class="tracks-intro"><div><div class="eyebrow">SEU PERCURSO</div><h1>' + area.title + '</h1><p class="muted">' + area.description + '</p></div><button class="area-change" data-act="areas" aria-label="Trocar área de estudo">' + area.icon + ' Trocar área</button></div><div class="panels-grid">' + panelList(areaCourses) + '</div></div>';
   bindActs(s, {
     cont: async () => { if (nl) (await import('./learn.js')).openLesson(nl); },
     final: async () => { const c = areaCourses.find(c => courseComplete(c) && !S.trophies[c.id]); if(c) (await import('./path.js')).openPath(c); },
@@ -33,8 +34,13 @@ export function renderHome(){
     areas: async () => (await import('./areas.js')).openAreas(),
     claim: b => claimMission(b.dataset.id),
     chest: claimChest,
+    save: async () => (await import('./account.js')).openAccount('signup'),
     course: async b => { const c = COURSES[+b.dataset.i]; if (courseUnlocked(c)) (await import('./path.js')).openPath(c); else lockedCourse(c); }
   });
+}
+function saveBanner(){
+  if (!cloudAvailable() || isLoggedIn() || !doneCount()) return '';
+  return '<button class="save-banner" data-act="save"><span aria-hidden="true">☁️</span><span><b>Salve seu progresso</b><small>Hoje ele está só neste aparelho. Crie uma conta grátis.</small></span><span class="sb-go" aria-hidden="true">›</span></button>';
 }
 function panelList(areaCourses){
   let n = 0;

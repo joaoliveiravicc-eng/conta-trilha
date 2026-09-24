@@ -1,5 +1,6 @@
 /* Motor da sessão de exercícios: fila de itens, corações, combo, revisão de erros. */
 import { $, el, bindActs } from '../dom.js';
+import { cloudAvailable, isLoggedIn } from '../../engine/sync-supabase.js';
 import { ACORN } from '../components/icons.js';
 import { S, today, curStreak, addXP, addCoins, registerActivity, levelInfo, courseComplete } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
@@ -160,10 +161,11 @@ function finish(){
     '<div class="rstats"><div class="rs"><div class="rl">XP</div><div class="rv">+' + xp + '</div></div>' +
     '<div class="rs"><div class="rl">Bolotas</div><div class="rv">+' + coins + '' + ACORN + '</div></div>' +
     '<div class="rs"><div class="rl">Sequência</div><div class="rv">🔥' + curStreak() + '</div></div></div>' +
-    caseHtml + extra.map(e => '<div class="note"><span class="ne">' + e[0] + '</span><span>' + e[1] + '</span></div>').join('') + '</div>' +
+    caseHtml + extra.map(e => '<div class="note"><span class="ne">' + e[0] + '</span><span>' + e[1] + '</span></div>').join('') +
+    (cloudAvailable() && !isLoggedIn() ? '<button class="save-banner" data-act="save"><span aria-hidden="true">☁️</span><span><b>Não perca este progresso</b><small>Crie uma conta grátis para guardar suas lições.</small></span><span class="sb-go" aria-hidden="true">›</span></button>' : '') + '</div>' +
     '<div class="foot"><button class="btn primary" data-act="go">Continuar</button></div>';
   SES = null;
-  bindActs(scr, { go: () => exitTo(s), theory: b => { const l=COURSES.flatMap(c=>c.lessons).find(l=>l.id===b.dataset.id); if(l) startLearn(l,'review'); } });
+  bindActs(scr, { save: async () => (await import('./account.js')).openAccount('signup'), go: () => exitTo(s), theory: b => { const l=COURSES.flatMap(c=>c.lessons).find(l=>l.id===b.dataset.id); if(l) startLearn(l,'review'); } });
   go('result');
   if (s.kind !== 'checkpoint' || s.first / s.total >= 0.8){ sfx.win(); confetti(); }
 }

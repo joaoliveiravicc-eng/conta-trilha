@@ -88,3 +88,18 @@ test('revisão diária só seleciona conteúdo concluído e vencido',()=>{
   assert.equal(items.length,2);
   items.forEach(it=>assert.equal(EX[it.key].l,a));
 });
+
+test('juntar progresso de dois aparelhos não perde lições nem compras',async()=>{
+  const { mergeProgress } = await import('../src/engine/merge.js');
+  const a={xp:120,coins:30,done:{l1:true,l2:true},owned:{bone:true},checkpoints:{u1:{best:.5,passed:false}},repetition:{l1:{stage:1,last:'2026-09-01',due:'2026-09-04'}},days:{'2026-09-20':30},area:'fundamentos',onboarded:true,equip:{head:'bone'}};
+  const b={xp:80,coins:90,done:{l3:true},owned:{blazer:true},checkpoints:{u1:{best:.9,passed:true}},repetition:{l1:{stage:2,last:'2026-09-05',due:'2026-09-12'}},days:{'2026-09-20':10,'2026-09-21':40},area:'gestao',onboarded:true};
+  const m=mergeProgress(a,b);
+  assert.deepEqual(Object.keys(m.done).sort(),['l1','l2','l3']);
+  assert.equal(m.xp,120); assert.equal(m.coins,90);
+  assert.ok(m.owned.bone && m.owned.blazer);
+  assert.deepEqual(m.checkpoints.u1,{best:.9,passed:true});
+  assert.equal(m.repetition.l1.stage,2);
+  assert.deepEqual(m.days,{'2026-09-20':30,'2026-09-21':40});
+  assert.equal(m.area,'fundamentos'); assert.equal(m.equip.head,'bone');
+  assert.equal(mergeProgress(a,null),a);
+});

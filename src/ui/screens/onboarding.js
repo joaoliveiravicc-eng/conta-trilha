@@ -1,4 +1,5 @@
 import { $, bindActs } from '../dom.js';
+import { cloudAvailable } from '../../engine/sync-supabase.js';
 import { S } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { sfx } from '../components/sound.js';
@@ -15,7 +16,7 @@ export function renderOnb(){
   const s = $('#s-onb'); let h = '', btns = '';
   if (ONB.step === 0){
     h = '<div class="bento-wrap xl center-b">' + bento('idle', {}) + '</div><h1>Oi, eu sou o Bento!</h1><p class="lead">Vou te ensinar Contabilidade do absoluto zero, um passo de cada vez — como construir uma represa: tronco por tronco.</p><p class="lead">Teoria explicada com calma, exercícios variados, dicas quando você travar e revisão automática dos seus erros.</p>';
-    btns = '<button class="btn primary" data-act="n">Vamos começar</button>';
+    btns = '<button class="btn primary" data-act="n">Vamos começar</button>' + (cloudAvailable() ? '<button class="btn ghost" data-act="login">Já tenho conta</button>' : '');
   } else if (ONB.step === 1){
     h = '<h1>O que você quer estudar?</h1><p class="lead">Escolha uma área para começar. Depois você poderá trocar quando quiser.</p><div class="onb-area-list">' +
       AREAS.map(area => '<button class="area-card' + (ONB.area === area.id ? ' selected' : '') + '" data-act="area" data-id="' + area.id + '" style="--area:' + area.color + '"><span class="area-icon" aria-hidden="true">' + area.icon + '</span><span class="area-copy"><strong>' + area.title + '</strong><span>' + area.description + '</span></span><span class="area-arrow" aria-hidden="true">' + (ONB.area === area.id ? '✓' : '→') + '</span></button>').join('') + '</div>';
@@ -36,6 +37,7 @@ export function renderOnb(){
     n: () => { if (ONB.step === 1 && !ONB.area) return; ONB.step++; renderOnb(); window.scrollTo(0, 0); },
     b: () => { ONB.step--; renderOnb(); },
     area: b => { ONB.area = b.dataset.id; sfx.tap(); renderOnb(); },
+    login: async () => (await import('./account.js')).openAccount('signin'),
     g: b => { ONB.goal = +b.dataset.g; sfx.tap(); renderOnb(); },
     start: () => { finishOnb(); openLesson(coursesForArea(COURSES, ONB.area)[0].lessons[0]); },
     home: () => { finishOnb(); renderHome(); go('home'); }

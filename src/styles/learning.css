@@ -162,3 +162,23 @@ body.modal-open{overflow:hidden;}
   .learning-unit summary{min-height:72px;}
   .checkpoint-card{min-height:68px;}
 }
+/* ---------- conta ---------- */
+.acct-form{display:grid;gap:10px;text-align:left;margin-top:6px;}
+.acct-field{display:grid;gap:4px;font-size:.82rem;font-weight:600;color:var(--muted);}
+.acct-field input{font:inherit;font-size:1rem;color:var(--text);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 13px;width:100%;}
+.acct-field input:focus{outline:none;border-color:var(--green);}
+.acct-error{min-height:1.2em;margin:0;color:var(--red);font-size:.84rem;font-weight:600;}
+.acct-links{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 14px;margin-top:10px;}
+.acct-card{margin:0 16px;display:grid;gap:10px;}
+.acct-card .btn + .btn{margin-top:0;}
+.acct-state{display:flex;gap:10px;align-items:flex-start;}
+.acct-state > span{font-size:1.3rem;line-height:1;}
+.acct-state b{display:block;color:var(--text);}
+.acct-state div span{display:block;font-size:.84rem;color:var(--muted);word-break:break-all;}
+.acct-actions{display:flex;justify-content:flex-end;gap:12px;}
+.save-banner{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:13px 14px;text-align:left;border-radius:16px;border:2px solid color-mix(in srgb,var(--green) 45%,var(--line));background:var(--greenp);color:var(--text);box-shadow:0 3px 0 color-mix(in srgb,var(--green) 35%,var(--line));}
+.save-banner > span:first-child{font-size:1.5rem;line-height:1;}
+.save-banner b{display:block;}
+.save-banner small{display:block;color:var(--muted);font-size:.8rem;line-height:1.35;}
+.save-banner .sb-go{margin-left:auto;font-size:1.4rem;color:var(--green2);font-weight:700;}
+.center .save-banner{max-width:420px;margin:14px auto 0;}
