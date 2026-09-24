@@ -1,6 +1,6 @@
 import { $, bindActs } from '../dom.js';
 import { S, lessonsDone, lessonUnlocked, courseComplete } from '../../engine/state.js';
-import { checkpointId, unitComplete, checkpointItems, challengeSpots, challengeItems, CHALLENGE_SECONDS_PER_ITEM } from '../../engine/learning.js';
+import { checkpointId, unitComplete, checkpointItems, challengeSpots, challengeItems, sampleItems, CHALLENGE_SECONDS_PER_ITEM } from '../../engine/learning.js';
 import { COURSES } from '../../content/index.js';
 import { areaForCourse } from '../../content/areas.js';
 import { go, sheet } from '../router.js';
@@ -25,6 +25,7 @@ export function renderPath(){
     const score = S.checkpoints[checkpointId(u)];
     return `<details class="learning-unit ${completed ? 'complete' : ''}" ${current ? 'open' : ''}>
       <summary><span class="unit-index">${completed ? '✓' : u.idx + 1}</span><span class="unit-summary"><span class="eyebrow">ETAPA ${u.idx + 1}</span><strong>${u.t}</strong><span class="muted small">${count} de ${u.lessons.length} lições concluídas</span></span><span class="unit-expand" aria-hidden="true">⌄</span></summary>
+      ${jumpHtml(c, u)}
       <div class="lesson-roadmap">${u.lessons.map((l, li) => {
         const done = !!S.done[l.id], unlocked = lessonUnlocked(l), active = l === next;
         return `<button class="lesson-row ${done ? 'completed' : ''} ${active ? 'current' : ''} ${unlocked ? '' : 'locked'}" data-act="lesson" data-i="${l.idx}">
@@ -49,7 +50,8 @@ export function renderPath(){
     back: () => { renderHome(); go('home'); }, resume: () => openLesson(next),
     lesson: b => lessonSheet(c.lessons[+b.dataset.i]),
     checkpoint: b => checkpointSheet(c, c.units[+b.dataset.u]), final: () => finalSheet(c),
-    challenge: b => challengeSheet(c, c.units[+b.dataset.u], +b.dataset.after)
+    challenge: b => challengeSheet(c, c.units[+b.dataset.u], +b.dataset.after),
+    jump: b => jumpSheet(c, c.units[+b.dataset.u])
   });
 }
 
@@ -73,6 +75,23 @@ export function challengeSheet(c, u, after){
   if (!ready) return sheet(h + '<p class="sh-s">Conclua as lições acima para liberar este desafio.</p><button class="btn ghost" data-s="x">Entendi</button>', {});
   sheet(h + '<button class="btn primary" data-s="go">Aceitar o desafio</button><button class="btn ghost" data-s="x">Agora não</button>', {
     go: () => startSession({ kind:'challenge', course:c, unit:u, challengeId:spot.id, items, hearts:3, noHints:true, timeLimit:secs })
+  });
+}
+
+function skippable(c, u){
+  if (u.idx === 0 || u.lessons.some(l => l.optional) || lessonUnlocked(u.lessons[0])) return null;
+  const skip = c.units.filter(x => x.idx < u.idx && !x.lessons.some(l => l.optional)).flatMap(x => x.lessons).filter(l => !S.done[l.id]);
+  return skip.length ? skip : null;
+}
+function jumpHtml(c, u){
+  return skippable(c, u) ? '<button class="jump-card" data-act="jump" data-u="' + u.idx + '"><span aria-hidden="true">⏩</span><span><strong>Já sabe isso? Pule para cá</strong><span>Teste com 10 questões das etapas anteriores</span></span></button>' : '';
+}
+export function jumpSheet(c, u){
+  const skip = skippable(c, u); if (!skip) return;
+  const pool = c.units.filter(x => x.idx < u.idx && !x.lessons.some(l => l.optional)).flatMap(x => x.lessons);
+  sheet('<div class="sh-i" aria-hidden="true">⏩</div><h3>Pular para “' + u.t + '”</h3><p class="sh-s">10 questões das etapas anteriores, com 3 corações e sem dicas. Passando, ' + skip.length + ' lições ficam concluídas e você começa direto nesta etapa.</p>' +
+    '<button class="btn primary" data-s="go">Fazer o teste</button><button class="btn ghost" data-s="x">Agora não</button>', {
+    go: () => startSession({ kind:'jump', course:c, skipLessons:skip, items:sampleItems(pool, 10), hearts:3, noHints:true })
   });
 }
 

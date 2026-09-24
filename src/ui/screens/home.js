@@ -2,6 +2,7 @@ import { $, bindActs } from '../dom.js';
 import { cloudAvailable, isLoggedIn } from '../../engine/sync-supabase.js';
 import { S, today, nextLesson, doneCount, curStreak, courseComplete, courseUnlocked, lessonsDone } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
+import { challengeSpots } from '../../engine/learning.js';
 import { pick } from '../../engine/random.js';
 import { COURSES } from '../../content/index.js';
 import { TIPS } from '../../content/tips.js';
@@ -58,13 +59,18 @@ export function courseRow(c, number = c.idx + 1){
   return '<button class="crow' + (lk ? ' locked' : '') + '" data-act="course" data-i="' + c.idx + '" style="--cc:' + c.color + '">' +
     '<div class="badge">' + (lk ? '🔒' : c.icon) + '<span class="num">' + number + '</span></div>' +
     '<div class="ci"><div class="ct">' + c.title + (S.trophies[c.id] ? ' 🏆' : '') + '</div><div class="cs">' + c.desc + '</div>' +
-    '<span class="course-preview-meta">'+c.units.length+' etapas · '+c.units.length+' desafios'+(workshops ? ' · '+workshops+' '+(workshops === 1 ? 'oficina prática' : 'oficinas práticas') : '')+'</span>' +
+    '<span class="course-preview-meta">'+c.units.length+' etapas · '+c.units.flatMap(u => challengeSpots(u)).length+' desafios ⚡'+(workshops ? ' · '+workshops+' '+(workshops === 1 ? 'oficina prática' : 'oficinas práticas') : '')+'</span>' +
     '<div class="progress-track"><div class="progress-fill" style="width:' + (d / n * 100) + '%"></div></div>' +
     '<div class="cm"><span>' + d + ' de ' + n + ' lições</span><span>' + (lk ? 'Bloqueada' : (d === n ? 'Concluída' : '')) + '</span></div></div><div class="chev">›</div></button>';
 }
 export function lockedCourse(c){
   const area = areaForCourse(c.id), previous = COURSES.find(item => item.id === area?.courseIds[area.courseIds.indexOf(c.id) - 1]);
-  sheet('<div class="sh-i">🔒</div><h3>' + c.title + '</h3><p class="sh-s">Esta trilha é liberada quando você conclui “' + (previous?.title || 'a etapa anterior') + '”. Se já conhece o assunto, pode liberar agora.</p>' +
-    '<button class="btn primary" data-s="un">Liberar mesmo assim</button><button class="btn ghost" data-s="x">Voltar</button>',
-    { un: async () => { S.unlocked[c.id] = true; save(); (await import('./path.js')).openPath(c); } });
+  sheet('<div class="sh-i">🔒</div><h3>' + c.title + '</h3><p class="sh-s">Esta trilha é liberada quando você conclui “' + (previous?.title || 'a etapa anterior') + '”. Já conhece o assunto? Faça um teste rápido: 10 questões da trilha anterior, com 3 corações.</p>' +
+    (previous ? '<button class="btn primary" data-s="test">Fazer o teste e liberar</button>' : '') +
+    '<button class="btn ghost" data-s="un">Liberar sem teste</button><button class="btn ghost" data-s="x">Voltar</button>',
+    {
+      test: async () => { const [{ startSession }, { sampleItems }] = await Promise.all([import('./quiz.js'), import('../../engine/learning.js')]);
+        startSession({ kind:'unlock', course:c, items:sampleItems(previous.lessons.filter(l => !l.optional), 10), hearts:3 }); },
+      un: async () => { S.unlocked[c.id] = true; save(); (await import('./path.js')).openPath(c); }
+    });
 }

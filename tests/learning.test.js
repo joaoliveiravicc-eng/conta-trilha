@@ -132,3 +132,11 @@ test('desafios no caminho: a cada duas lições, com perguntas das lições ante
   const r1=challengeRecord(null,false,'2026-09-24'), r2=challengeRecord(r1,true,'2026-09-25'), r3=challengeRecord(r2,false,'2026-09-26');
   assert.deepEqual([r1.perfect,r2.perfect,r3.perfect,r3.attempts],[false,true,true,3]);
 });
+
+test('teste para pular sorteia de todas as lições, sem repetir',async()=>{
+  const { sampleItems } = await import('../src/engine/learning.js');
+  const lessons=COURSES.find(c=>c.id==='antes').lessons.filter(l=>!l.optional);
+  const seen=new Set();
+  for(let i=0;i<40;i++){ const items=sampleItems(lessons,10); assert.equal(items.length,10); assert.equal(new Set(items.map(x=>x.key)).size,10); items.forEach(it=>seen.add(it.key.split('#')[0])); }
+  assert.ok(seen.size>=lessons.length-1, 'lições cobertas: '+seen.size);
+});

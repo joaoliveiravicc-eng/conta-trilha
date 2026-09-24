@@ -203,3 +203,10 @@ body.modal-open{overflow:hidden;}
   .challenge-row .lesson-description{flex:1 1 calc(100% - 60px);}
   .challenge-row .lesson-state{margin-left:52px;flex-basis:calc(100% - 52px);}
 }
+.challenge-row.locked{opacity:1;background:var(--soft);border-color:var(--line);}
+.challenge-row.locked .lesson-state{color:var(--muted);font-weight:600;}
+.challenge-row.locked .lesson-description strong{color:var(--text);}
+.jump-card{display:flex;align-items:center;gap:12px;width:calc(100% - 16px);margin:4px 8px 8px;padding:11px 12px;text-align:left;border-radius:12px;border:2px solid color-mix(in srgb,var(--ink) 25%,var(--line));background:var(--soft);color:var(--text);}
+.jump-card > span:first-child{font-size:1.3rem;}
+.jump-card strong{display:block;font-size:.88rem;}
+.jump-card span span{display:block;font-size:.76rem;color:var(--muted);}

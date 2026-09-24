@@ -61,3 +61,5 @@ export function challengeItems(lessons, size = 8){
 export function challengeRecord(previous, perfect, date){
   return { passed:true, perfect:!!previous?.perfect || perfect, attempts:(previous?.attempts || 0) + 1, last:date };
 }
+/* Amostra de todas as lições (sem privilegiar as últimas): testes para pular e liberar. */
+export const sampleItems = (lessons, size = 10) => challengeItems(shuffle(lessons.slice()), size);

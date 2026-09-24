@@ -687,3 +687,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 @media(max-width:480px){.tracks-intro{align-items:flex-start;}.tracks-intro h1{font-size:1.17rem;}.area-change{font-size:.67rem;padding:7px 8px;}.brand{gap:5px;}.brand-area{width:23px;height:23px;}}
 @media(max-width:360px){.brand>span:not(.brand-area):not(.brand-chevron){display:none;}.brand .brand-area,.brand .brand-chevron{display:inline-grid;}}
 @media(prefers-reduced-motion:reduce){.area-card{transition:none;}.area-card:hover{transform:none;}}
+@media (max-width:420px){
+  table{font-size:.78rem;}
+  th,td{padding:7px 6px; overflow-wrap:anywhere; hyphens:auto;}
+  th{font-size:.72rem;}
+}
+.ln .acc{min-width:0; overflow-wrap:anywhere;}
+.ln .val{flex:none;}
+@media (max-width:420px){ .lanc{padding:8px 10px;} .ln{gap:8px;} }
+/* Legibilidade: verde vivo como fundo pede texto escuro; texto verde usa o tom escuro. */
+.eyebrow{color:var(--green2);}
+.continue[data-act="cont"]{color:#10230C;}
+.continue[data-act="cont"] .k,.continue[data-act="cont"] .s{opacity:1;}
+.continue[data-act="cont"] .play{background:#10230C;color:var(--green);}
+.continue[data-act="cont"]::before{background:rgba(255,255,255,.18);}
