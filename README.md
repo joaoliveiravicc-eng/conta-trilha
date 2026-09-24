@@ -3,9 +3,9 @@
 **Ao vivo:** [conta-trilha.vercel.app](https://conta-trilha.vercel.app) — instalável
 como app (PWA) no celular ou no computador direto pelo navegador.
 
-App no estilo Duolingo para aprender Contabilidade do zero, em português. 11 trilhas
-(organizadas em 5 painéis temáticos), 79 lições — incluindo uma lição de revisão ao
-final de cada trilha —, motor de exercícios com ~10 tipos de questão, gamificação (XP,
+App no estilo Duolingo para aprender Contabilidade do zero, em português. 5 áreas,
+12 trilhas e 145 lições (cada trilha termina com revisão, oficina e a unidade
+"Aprofundando"), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
@@ -63,9 +63,17 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
    que mistura (com números/frases novas, não repetidas) os conceitos já ensinados
    nas lições anteriores da mesma trilha — o "checkpoint" no estilo Duolingo. Ao
    acrescentar lições novas a uma trilha, vale considerar atualizar essa revisão.
-4. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
+6. A unidade "Aprofundando" de cada trilha fica em `src/content/trilhas/aprofundar-*.js`
+   e é registrada em `DEEPEN` (`src/content/layout.js`).
+7. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.
+
+## Conta e sincronização
+
+A pessoa cria conta com e-mail e senha (Perfil, avisos na home e no fim das lições, ou
+"Já tenho conta" na entrada). Ao entrar, o progresso do aparelho é somado ao da nuvem
+(`src/engine/merge.js`): lições, compras e conquistas nunca são apagadas.
 
 ## Sync com Supabase
 

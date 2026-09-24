@@ -34,6 +34,25 @@ export const LAYOUT = [
   units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]],["Revisão",["vida5"]]]}
 ];
 
+/* Unidade 'Aprofundando' no fim de cada trilha. Alunos que já tinham terminado a
+   trilha antes dela existir continuam com a próxima trilha liberada (ver normalize). */
+export const DEEPEN = {
+ antes:["antesx1","antesx2","antesx3","antesx4"],
+ base:["basex1","basex2","basex3","basex4"],
+ dc:["dcx1","dcx2","dcx3","dcx4"],
+ lanc:["lancx1","lancx2","lancx3","lancx4"],
+ digital:["digitalx1","digitalx2","digitalx3","digitalx4"],
+ imob:["imobx1","imobx2","imobx3","imobx4"],
+ estoq:["estoqx1","estoqx2","estoqx3","estoqx4"],
+ demo:["demox1","demox2","demox3","demox4"],
+ cust:["custx1","custx2","custx3","custx4"],
+ trib:["tribx1","tribx2","tribx3","tribx4"],
+ aud:["audx1","audx2","audx3","audx4"],
+ vida:["vidax1","vidax2","vidax3","vidax4"]
+};
+export const DEEPEN_IDS = new Set(Object.values(DEEPEN).flat());
+LAYOUT.forEach(course => { if (DEEPEN[course.id]) course.units.push(['Aprofundando', DEEPEN[course.id]]); });
+
 /**
  * Monta o array final de COURSES na ordem de LAYOUT, juntando:
  * - rawCourses: as 7 trilhas originais (cada uma já com título/ícone/cor/desc e lessons)

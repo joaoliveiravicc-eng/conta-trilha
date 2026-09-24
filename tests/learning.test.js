@@ -6,7 +6,7 @@ import { checkpointId, unitComplete, checkpointItems, checkpointRecord, reviewRe
 
 test('currículo: referências, chaves persistidas e respostas válidas',()=>{
   assert.equal(COURSES.length,12);
-  assert.equal(TOTAL_LESSONS,97);
+  assert.equal(TOTAL_LESSONS,145);
   const ids=new Set(), keys=new Set(); let workshops=0, questions=0;
   for(const c of COURSES){
     assert.ok(c.goals.length>=2);
@@ -102,4 +102,14 @@ test('juntar progresso de dois aparelhos não perde lições nem compras',async(
   assert.deepEqual(m.days,{'2026-09-20':30,'2026-09-21':40});
   assert.equal(m.area,'fundamentos'); assert.equal(m.equip.head,'bone');
   assert.equal(mergeProgress(a,null),a);
+});
+
+test('unidade nova não bloqueia a próxima trilha de quem já tinha terminado a anterior',()=>{
+  const antes=COURSES.find(c=>c.id==='antes'), base=COURSES.find(c=>c.id==='base');
+  const done={}; antes.lessons.filter(l=>!l.optional && !/x\d$/.test(l.id)).forEach(l=>done[l.id]=true);
+  setState(normalize({v:4,done,area:'fundamentos',onboarded:true}));
+  assert.equal(courseUnlocked(base),true);
+  setState(normalize({v:5,done:{},area:'fundamentos',onboarded:true}));
+  assert.equal(courseUnlocked(base),false);
+  assert.ok(antes.units.at(-1).t.startsWith('Oficina') || antes.units.some(u=>u.t==='Aprofundando'));
 });
