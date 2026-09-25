@@ -77,3 +77,14 @@ test('IA: explica o erro com o glossário quando a resposta é outro conceito', 
   assert.equal(r.verdict, 'wrong');
   assert.match(r.note, /Receitas e despesas|dinheiro/i);
 });
+
+test('IA: explica a opção errada escolhida sem confundir termos parecidos', async () => {
+  const { meaning } = await import('../src/engine/ai/review.js');
+  assert.equal(meaning('Receita', 'Adiantamento de clientes é classificado como:').name, 'Receita');
+  assert.match(meaning('Crédito').def, /Lado direito/);
+  assert.equal(meaning('No Patrimônio Líquido').name, 'Patrimônio Líquido (PL)');
+  assert.equal(meaning('Caixa', 'Onde fica registrado o dinheiro em espécie?'), null);
+  assert.equal(meaning('Caixa', 'Qual regime reconhece a receita quando o dinheiro entra?').name, 'Regime de caixa');
+  assert.equal(meaning('R$ 500'), null);
+  assert.equal(meaning('Nada muda'), null);
+});

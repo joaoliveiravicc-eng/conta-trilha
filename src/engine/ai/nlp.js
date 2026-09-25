@@ -1,6 +1,8 @@
 /* Processamento de texto em português para o corretor inteligente: radical das
    palavras (stemmer leve), negação e localização dos conceitos da base de conhecimento. */
 import { normTxt, lev } from '../exercises/grading.js';
+import { stem } from '../stem.js';
+export { stem };
 import { CONCEPTS, OPPOSITES, CONTEXT_OPPOSITES, OPPOSITE_WORDS } from '../../content/lexicon.js';
 import { knownWords as contentWords } from '../vocab.js';
 
@@ -32,29 +34,6 @@ const SUBORD = new Set(['quando', 'porque', 'pois', 'caso', 'enquanto', 'embora'
 /* Verbos auxiliares são transparentes para a negação: em "não pode ter vínculo", o negado é "vínculo". */
 const AUX = new Set(['pode', 'podem', 'poder', 'deve', 'devem', 'ter', 'tem', 'teve', 'tinha', 'precisa', 'precisam', 'precisar', 'precisando', 'consegue', 'conseguem', 'esta', 'estao', 'estar', 'fica', 'ficar', 'seja', 'sejam', 'vai', 'vao', 'dar', 'da', 'haver', 'houver'].map(w => w));
 
-/* Radical leve: tira plural, gênero e terminações verbais/nominais comuns, mantendo
-   pelo menos 3 letras. "receber", "recebimento" e "recebido" viram "receb";
-   "receita" vira "receit". Não mexe em -dor ("devedor", "contador"), para não
-   juntar "contador" com "conta". */
-const SUFFIXES = ['amentos', 'imentos', 'amento', 'imento', 'acoes', 'icoes', 'ucoes', 'acao', 'icao', 'ucao',
-  'arios', 'arias', 'ario', 'ariam', 'eriam', 'iriam', 'arao', 'erao', 'irao', 'aria', 'eria', 'iria',
-  'ando', 'endo', 'indo', 'ados', 'adas', 'idos', 'idas', 'ado', 'ada', 'ido', 'ida', 'aram', 'eram', 'iram', 'avam', 'ava', 'amos', 'emos',
-  'imos', 'ar', 'er', 'ir', 'am', 'em', 'ou', 'eu', 'iu', 'oes', 'aes', 'ais', 'eis', 'ois', 'es', 'as', 'os', 'is', 'a', 'o', 'e', 's'];
-const stemCache = new Map();
-export function stem(word){
-  const w = normTxt(word);
-  if (w.length <= 3 || /\d/.test(w)) return w;
-  if (stemCache.has(w)) return stemCache.get(w);
-  let s = w;
-  if (/veis$/.test(s)) s = s.slice(0, -4) + 'vel';                    /* recebíveis → recebível */
-  else if (/[dr]ores$/.test(s)) s = s.slice(0, -2);                  /* credores → credor */
-  else if (s.endsWith('ns')) s = s.slice(0, -2) + 'm';               /* bens → bem */
-  else for (const suf of SUFFIXES){ if (s.endsWith(suf) && s.length - suf.length >= 3){ s = s.slice(0, -suf.length); break; } }
-  if (/[dr]ora$/.test(w)) s = w.slice(0, -1);                         /* devedora → devedor */
-  if (/vel$/.test(w)) s = w;                                          /* comparável fica inteiro */
-  stemCache.set(w, s);
-  return s;
-}
 /* Dois radicais equivalentes: iguais ou com um erro de digitação (palavras maiores). */
 export function sameStem(a, b){
   if (a === b) return true;

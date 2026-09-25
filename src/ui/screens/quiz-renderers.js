@@ -39,6 +39,14 @@ export function optionsUI(labels, order, wrapCls, on){
   return { wrap:wrap, btns:btns, get sel(){ return sel; }, lock(){ locked = true; btns.forEach(b => b.disabled = true); } };
 }
 
+/* O que significa a opção errada que a pessoa escolheu (termo do glossário ou da base de
+   conhecimento), para ela perceber a diferença. Só com o corretor inteligente carregado. */
+function meaningOf(chosen, right, context){
+  if (!AI || !AI.meaning) return null;
+  for (const c of chosen){ if (!c || right.includes(c)) continue; const m = AI.meaning(c, context); if (m) return m; }
+  return null;
+}
+
 /* ---------- renderizadores por tipo ---------- */
 export function rMC(x, m, on){
   m.appendChild(el('div', 'qq', x.q));
@@ -48,6 +56,7 @@ export function rMC(x, m, on){
   return {
     ready: () => ui.sel !== null, check: () => ui.sel === x.a,
     reveal(){ ui.lock(); ui.btns.forEach((b, k) => { const oi = order[k]; if (oi === x.a) b.classList.add('right'); else if (oi === ui.sel) b.classList.add('wrong'); }); },
+    whyNot: () => meaningOf([x.o[ui.sel]], [x.o[x.a]], x.q),
     key(n){ if (ui.btns[n - 1]) ui.btns[n - 1].click(); }
   };
 }
@@ -86,7 +95,8 @@ export function rFill(x, m, on){
   return {
     ready: () => filled.every(v => v !== null),
     check: () => filled.every((ci, i) => opts[ci] === x.a[i]),
-    reveal(){ locked = true; chips.forEach(c => c.disabled = true); blanks.forEach((b, i) => b.classList.add(opts[filled[i]] === x.a[i] ? 'right' : 'wrong')); }
+    reveal(){ locked = true; chips.forEach(c => c.disabled = true); blanks.forEach((b, i) => b.classList.add(opts[filled[i]] === x.a[i] ? 'right' : 'wrong')); },
+    whyNot: () => meaningOf(filled.map((ci, i) => opts[ci] === x.a[i] ? null : opts[ci]), x.a, x.q)
   };
 }
 export function rMatch(x, m, on, auto){
@@ -305,7 +315,7 @@ export function rExpl(x, m, on){
   };
 }
 export function rTsal(x, m, on){
-  m.appendChild(el('div', 'qq', 'Qual é o saldo desta conta?'));
+  m.appendChild(el('div', 'qq', 'Qual é o saldo desta conta: devedor ou credor, e de quanto?'));
   mount(m, el('div', '', T(x.name, x.deb.map(v => 'R$ ' + fmt(v)), x.cred.map(v => 'R$ ' + fmt(v)))));
   const seg = el('div', 'seg tsseg'); let side = null;
   const bd = el('button', '', 'Devedor'), bc = el('button', '', 'Credor');
@@ -340,6 +350,13 @@ export function answerText(x){
     case 'class': return 'Veja as correções destacadas acima.';
     default: return '';
   }
+}
+
+/* Resposta completa para a revisão no fim da sessão (sem depender da tela da questão). */
+export function reviewAnswer(x){
+  if (x.t === 'class') return x.items.map(it => it[0] + ': ' + x.cats[it[1]]).join(' · ');
+  if (x.t === 'match') return x.pairs.map(p => p[0] + ' → ' + p[1]).join(' · ');
+  return answerText(x);
 }
 
 /* ---------- índice de exercícios (para revisão/prática) já criado em EX na Parte A ---------- */

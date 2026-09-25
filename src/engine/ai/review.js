@@ -248,6 +248,35 @@ export function coverage(x){
   return {};
 }
 
+/* O que significa uma opção (de múltipla escolha ou de lacuna) que a pessoa escolheu:
+   um termo do glossário ou um único conceito da base que cubra a opção inteira.
+   Um nome com palavras a mais só vale se elas estiverem no enunciado: "Caixa", numa
+   questão sobre contas, não é "Regime de caixa". Devolve { name, def } ou null. */
+const nameForms = name => [name, name.replace(/\s*\(.*?\)/g, ''), (name.match(/\((.*?)\)/) || [])[1]].filter(Boolean).map(normAns);
+function fits(name, n, ctx){
+  const forms = nameForms(name);
+  if (forms.includes(n)) return 2;
+  const words = n.split(' ');
+  return forms.some(f => { const fw = f.split(' '); return words.every(w => fw.includes(w)) && fw.every(w => words.includes(w) || ctx.has(w)); }) ? 1 : 0;
+}
+export function meaning(text, context = ''){
+  const n = normAns(text); if (!n) return null;
+  const ctx = new Set(normAns(String(context).replace(/<[^>]+>/g, ' ')).split(' '));
+  let best = null, lvl = 0;
+  GLOSS.forEach(([name, def]) => { const f = fits(name, n, ctx); if (f > lvl){ lvl = f; best = name + ': ' + def; } });
+  let d = best || '';
+  if (!d){
+    const a = analyze(text), strong = a.matches.filter(m => !m.weak && !m.neg);
+    const content = a.tokens.map((t, i) => t.stop ? -1 : i).filter(i => i >= 0);
+    if (strong.length === 1 && content.every(i => i >= strong[0].start && i < strong[0].end)){
+      const g = definition(strong[0].id), gname = g.slice(0, g.indexOf(': '));
+      d = g && fits(gname, n, ctx) ? g : (DEFINITIONS[strong[0].id] || '');
+    }
+  }
+  const cut = d.indexOf(': ');
+  return cut > 0 ? { name:d.slice(0, cut), def:d.slice(cut + 2) } : null;
+}
+
 /* Ponto de entrada: decide qual revisão usar pelo tipo de questão. */
 export function review(x, input, extra = []){
   if (!input || !String(input).trim()) return { verdict:'none' };

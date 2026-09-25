@@ -289,6 +289,7 @@ tr:last-child td{border-bottom:none;}
 .seg button.right{border-color:var(--green); background:var(--green); color:#fff;}
 .seg button.wrong{border-color:var(--red); background:var(--red); color:#fff;}
 .seg.tsseg button{flex:1; padding:12px 6px; font-size:.9rem;}
+.seg.tsseg{margin-bottom:12px;}
 .crow2.r{border-color:var(--green);} .crow2.w{border-color:var(--red);}
 .numwrap{display:flex; align-items:center; gap:10px; background:var(--card); border:2px solid var(--line); border-radius:16px; padding:6px 16px; box-shadow:0 3px 0 var(--line); margin-bottom:10px;}
 .numwrap:focus-within{border-color:var(--ink2);}

@@ -21,7 +21,7 @@ export function renderHome(){
       '<div class="t">' + nl.icon + ' ' + nl.title + '</div><div class="s">' + nl.course.title + ' · lição ' + (nl.idx + 1) + ' de ' + nl.course.lessons.length + '</div><div class="play">▶</div></button>';
   } else {
     const pend = areaCourses.filter(c => courseComplete(c) && !S.trophies[c.id]);
-    cont = '<button class="continue alldone" data-act="' + (pend.length ? 'final' : 'prac') + '"><div class="k">Lições essenciais concluídas</div><div class="t">' + (pend.length ? '🏆 Conquiste os troféus' : '🏋️ Mantenha a prática') + '</div><div class="s">' + (pend.length ? pend.length + ' teste(s) final(is) disponível(is)' : 'Retome revisões, oficinas e desafios') + '</div><div class="play">▶</div></button>';
+    cont = '<button class="continue alldone" data-act="' + (pend.length ? 'final' : 'prac') + '"><div class="k">Lições essenciais concluídas</div><div class="t">' + (pend.length ? '🏆 Conquiste os troféus' : '🏋️ Mantenha a prática') + '</div><div class="s">' + (pend.length ? (pend.length === 1 ? '1 teste final disponível' : pend.length + ' testes finais disponíveis') : 'Retome revisões, oficinas e desafios') + '</div><div class="play">▶</div></button>';
   }
   const cs = curStreak();
   const bubble = pick(cs >= 3 ? ['Sua sequência de ' + cs + ' dias está incrível! 🔥', SAY.learn[0]] : [pick(TIPS)]);

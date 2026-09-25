@@ -225,7 +225,6 @@ export function enrichCourses(courses){
     });
     c.lessons.forEach(l => {
       l.minutes = Math.max(4, Math.ceil(l.learn.length * 0.8 + l.ex.length * 0.55));
-      l.goal = l.goal || 'Praticar: ' + l.title.toLocaleLowerCase('pt-BR') + '.';
     });
   });
   return courses;
