@@ -3,6 +3,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, ew, od, ep, ts } from '../../engine/exe
 
 export default [
 {id:"estoq1", title:"Reconhecimento de estoques", icon:"📦",
+ recap:["Estoque é o que a empresa tem para vender ou consumir: mercadorias, matéria-prima e produtos.", "Fica no Ativo Circulante e vira CMV na DRE quando sai.", "Periódico: apura o CMV no fechamento. Permanente: atualiza o custo a cada compra e venda."],
  learn:[
   {h:"O que é estoque", b:`<p><b>Estoque</b> é o conjunto de bens que a empresa tem para <b>vender</b> ou <b>consumir</b> na sua atividade: mercadorias para revenda, matéria-prima, produtos em processo, produtos acabados.</p>`},
   {h:"Por que fica no Ativo", b:`<p>Enquanto não é vendido ou usado, o estoque ainda vai gerar um benefício futuro: dinheiro na venda, ou um produto pronto. Por isso é um <b>bem</b>, e fica no <b>Ativo Circulante</b>.</p>` + box('exemplo','As prateleiras cheias de uma loja de roupas são estoque: dinheiro "guardado" na forma de mercadoria.')},
@@ -18,6 +19,7 @@ export default [
   cl("O item é estoque ou não?",["Estoque","Não é estoque"],"Mercadorias para revenda:0|Computador do escritório:1|Matéria-prima:0|Dinheiro em caixa:1","Estoque é o que a empresa vai vender ou consumir na atividade.")
  ]},
 {id:"estoq2", title:"Custo de aquisição", icon:"🧾",
+ recap:["Custo de aquisição = preço + fretes e seguros − descontos incondicionais.", "Desconto financeiro não reduz o custo: vira receita financeira à parte.", "Imposto recuperável não entra no custo do estoque."],
  learn:[
   {h:"O que entra no custo", b:eq('Custo de aquisição = Preço da compra + Fretes e seguros − Descontos incondicionais') + `<p>Tudo o que é gasto para deixar o estoque pronto e disponível entra no custo.</p>`},
   {h:"Descontos incondicionais x financeiros", b:ul(['<b>Incondicional</b>: já vem abatido na nota, reduz o custo do estoque.','<b>Financeiro</b> (por pagamento antecipado, por exemplo): não reduz o custo, vira <b>receita financeira</b> à parte.']) + box('atencao','Só o desconto incondicional entra na conta de custo do estoque.')},
@@ -33,6 +35,7 @@ export default [
   nu("Compra de R$ 15.000, frete de R$ 1.200, sem descontos. Qual o custo de aquisição?",16200,"15.000 + 1.200 = 16.200.","R$")
  ]},
 {id:"estoq3", title:"Métodos de custeio: PEPS e custo médio", icon:"🔄",
+ recap:["Com preços diferentes ao longo do tempo, é preciso uma regra para decidir o custo que sai.", "PEPS: o lote mais antigo sai primeiro. Custo médio: mistura todos os custos numa média.", "Com preços subindo, o PEPS dá CMV menor e estoque final maior."],
  learn:[
   {h:"Por que existem métodos", b:`<p>Quando a empresa compra o mesmo item por preços diferentes ao longo do tempo, precisa de uma regra para decidir que custo "sai" quando vende.</p>`},
   {h:"PEPS: primeiro que entra, primeiro que sai", b:`<p>Considera que o lote mais <b>antigo</b> é vendido primeiro.</p>` + box('exemplo','Estoque: 100 un a R$ 10 (lote 1) + 200 un a R$ 13 (lote 2) = 300 un, R$ 3.600.') + `<p>Vendendo 250 un pelo PEPS: saem as 100 do lote 1 (R$ 1.000) + 150 do lote 2 (R$ 1.950) = <b>CMV R$ 2.950</b>. Sobram 50 un do lote 2 = <b>estoque final R$ 650</b>.</p>`},
@@ -48,6 +51,7 @@ export default [
   mt([["PEPS","O lote mais antigo sai primeiro"],["Custo médio","Mistura todos os custos numa média"],["Preços subindo","O PEPS dá um CMV menor"],["UEPS","Não é aceito no Brasil"]],"Cada método muda o valor do CMV e do estoque final.")
  ]},
 {id:"estoq4", title:"Apurando o CMV", icon:"🧮",
+ recap:["CMV = estoque inicial + compras − estoque final, no inventário periódico.", "O estoque final de um período é o estoque inicial do seguinte.", "O CMV é deduzido da receita de vendas para chegar ao lucro bruto."],
  learn:[
   {h:"A fórmula do inventário periódico", b:eq('CMV = Estoque Inicial + Compras − Estoque Final') + `<p>É a forma mais simples de descobrir quanto custou o que foi vendido no período.</p>`},
   {h:"De onde vem cada número", b:ul(['<b>Estoque Inicial (EI)</b>: o saldo no começo do período (era o Estoque Final do período anterior).','<b>Compras</b>: tudo o que foi comprado no período, pelo custo de aquisição.','<b>Estoque Final (EF)</b>: a contagem física ao fim do período, valorizada pelo método de custeio escolhido.'])},
@@ -63,6 +67,7 @@ export default [
   wr("Qual a sigla da conta que recebe o custo do que foi vendido?",["cmv"],"CMV: Custo das Mercadorias Vendidas.")
  ]},
 {id:"estoq5", title:"Perdas e ajustes de estoque", icon:"⚠️",
+ recap:["Compare a contagem física com o saldo contábil e ajuste a diferença.", "Perdas comuns: quebra, furto, vencimento e obsolescência.", "Se o valor de mercado cair abaixo do custo, ajusta-se o estoque para baixo. A perda é despesa."],
  learn:[
   {h:"Inventário físico x contábil", b:`<p>De tempos em tempos, a empresa faz uma <b>contagem física</b> do estoque e compara com o saldo que está nos registros contábeis. Se os números não baterem, há uma diferença a ajustar.</p>`},
   {h:"Perdas comuns", b:ul(['Quebra ou avaria no manuseio','Furto ou roubo','Vencimento ou deterioração','Obsolescência (o produto ficou ultrapassado)'])},
@@ -78,6 +83,7 @@ export default [
   tf("Obsolescência (o produto ficou ultrapassado) pode justificar um ajuste do estoque para baixo.",true,"Um produto ultrapassado costuma valer menos do que custou.")
  ]},
 {id:"estoq6", title:"Estoque na indústria", icon:"🏭",
+ recap:["Na indústria, o estoque passa por três fases: matéria-prima, produção em andamento e produto acabado.", "Mão de obra e outros custos de fábrica entram na produção em andamento.", "No comércio há um estoque só, porque a mercadoria já vem pronta."],
  learn:[
   {h:"Três estoques, não só um", b:`<p>Numa indústria, o estoque passa por <b>três fases</b> antes de virar CMV: matéria-prima, produção em andamento e produto pronto.</p>` +
     tbl(['Conta','O que é'],[['Matéria-prima (MP)','Insumos ainda não usados na produção'],['Produtos em elaboração (PE)','O que está sendo fabricado agora, com parte do custo já aplicado'],['Produtos acabados (PA)','Já fabricado, pronto para vender']])},
@@ -96,6 +102,7 @@ export default [
   wr("Na indústria, como se chama o custo do que foi vendido, equivalente ao CMV do comércio? (sigla)",["cpv"],"CPV: Custo dos Produtos Vendidos.")
  ]},
 {id:"estoq7", title:"Revisão: estoques", icon:"🔄",
+ recap:["O caminho: custo de aquisição, método de custeio, CMV e efeito na DRE.", "PEPS dá CMV pelo lote antigo; o custo médio usa a média de todos os lotes.", "O CMV é o custo do que foi vendido e reduz o lucro bruto."],
  learn:[
   {h:"O caminho do estoque", b:tbl(['Etapa','O que acontece'],[['Custo de aquisição','Preço + frete + seguro − desconto incondicional'],['Método de custeio','PEPS ou custo médio ponderado decidem o custo de saída'],['CMV','Estoque inicial + Compras − Estoque final'],['Ajuste','Contagem física pode revelar perda a ajustar']])}
  ],

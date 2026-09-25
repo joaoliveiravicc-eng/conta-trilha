@@ -3,6 +3,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, ew, od, ep, ts } from '../../engine/exe
 
 export default [
 {id:"vida1", title:"Seu balanço pessoal", icon:"🧍",
+ recap:["A lógica do Balanço vale para você: Ativo − Passivo = Patrimônio Líquido pessoal.", "Ativo: dinheiro, investimentos, carro e imóvel. Passivo: cartão, financiamento e empréstimos.", "Carro e eletrônicos perdem valor: use um valor realista, não o preço pago."],
  learn:[
   {h:"Você também tem um Balanço", b:`<p>A mesma lógica das empresas funciona para você:</p>` + tbl(['Grupo','Exemplos pessoais'],[['Ativo','Dinheiro, conta, investimentos, carro, imóvel'],['Passivo','Fatura do cartão, financiamento, empréstimos'],['Patrimônio líquido','O que sobra: Ativo − Passivo']])},
   {h:"Fazendo o seu", b:box('exemplo','Conta R$ 3.000 + investimentos R$ 7.000 + carro R$ 30.000 = Ativo R$ 40.000. Financiamento R$ 18.000 + cartão R$ 2.000 = Passivo R$ 20.000. PL pessoal: <b>R$ 20.000</b>.') + box('dica','Faça seu balanço pessoal uma vez por ano e compare: seu PL está crescendo?')}
@@ -15,6 +16,7 @@ export default [
   ep("Com suas palavras: o que é o patrimônio líquido de uma pessoa?","É o valor de tudo o que a pessoa tem (bens, dinheiro, investimentos) menos tudo o que ela deve (dívidas). É o quanto sobraria se pagasse todas as dívidas.",[["O que você tem","tem","bens","dinheiro","investim","ativo","possu"],["Menos o que você deve","deve","divida","passivo","obrigac","emprestim"],["É a diferença","menos","subtra","diferenc","sobr","descont","tirando"]],"PL pessoal = Ativo − Passivo.")
  ]},
 {id:"vida2", title:"Orçamento pessoal", icon:"📋",
+ recap:["Salário é receita; aluguel, mercado e lazer são despesas; a sobra é o seu “lucro”.", "Regra 50-30-20: 50% necessidades, 30% desejos e 20% para poupar, investir ou quitar dívidas.", "Compra no cartão em março é gasto de março, mesmo que a fatura vença em abril."],
  learn:[
   {h:"Receitas e despesas da casa", b:`<p>Seu salário é receita; aluguel, mercado e lazer são despesas. A sobra é o seu “lucro”, que pode virar investimento.</p>` + ul(['<b>Fixas</b>: quase não mudam (aluguel, internet).','<b>Variáveis</b>: mudam todo mês (mercado, lazer).'])},
   {h:"A regra 50-30-20", b:tbl(['Fatia','Para quê'],[['50%','Necessidades (moradia, comida, contas)'],['30%','Desejos (lazer, compras)'],['20%','Poupar, investir ou quitar dívidas']]) + box('dica','É um ponto de partida, não uma lei. Ajuste para sua realidade.')},
@@ -28,6 +30,7 @@ export default [
   od("Ordene os passos para montar um orçamento:",["Somar a renda do mês","Listar as despesas fixas","Estimar as variáveis","Definir quanto poupar","Acompanhar e ajustar"],"Primeiro o que entra, depois o que sai, depois o plano.")
  ]},
 {id:"vida3", title:"Reserva e dívidas", icon:"🛟",
+ recap:["Reserva de emergência: de 3 a 6 meses de gastos essenciais, numa aplicação de alta liquidez.", "Em geral, quite primeiro as dívidas com maior taxa de juros, como cheque especial e rotativo.", "A reserva é a sua liquidez imediata, como o caixa de uma empresa."],
  learn:[
   {h:"Reserva de emergência", b:`<p>Dinheiro guardado para imprevistos: perda de renda, saúde, conserto. Uma referência comum é ter de <b>3 a 6 meses</b> dos seus gastos essenciais, numa aplicação de alta liquidez.</p>`},
   {h:"Dívidas caras primeiro", b:`<p>Cheque especial e rotativo do cartão têm juros altíssimos. Em geral, vale quitar primeiro as dívidas com <b>maior taxa</b>.</p>` + box('exemplo','Dívida A a 12% ao mês e dívida B a 2% ao mês: priorize a A.')},
@@ -41,6 +44,7 @@ export default [
   ep("Com suas palavras: por que ter uma reserva de emergência?","Para cobrir imprevistos, como perda de renda ou despesas inesperadas, sem precisar se endividar com juros altos.",[["Cobre imprevistos","imprevist","emergenc","inesperad","problema","desempreg","perda","doenc","saude","conserto"],["Evita dívidas e juros","divid","emprestim","juros","endivid","cartao","cheque"]],"Reserva = liquidez para imprevistos.")
  ]},
 {id:"vida4", title:"Primeiros passos como investidor", icon:"🌱",
+ recap:["Renda fixa: você empresta dinheiro e sabe, desde o início, a regra do rendimento.", "Renda variável: você vira sócio de um negócio, e o retorno pode ser positivo ou negativo.", "Diversificar reduz o risco. Antes de investir, monte a reserva e defina o prazo."],
  learn:[
   {h:"Renda fixa", b:`<p>Você <b>empresta dinheiro</b> (para um banco, uma empresa ou o governo) e sabe, desde o início, a regra de como o rendimento será calculado. O risco costuma ser menor.</p>`},
   {h:"Renda variável", b:`<p>Você vira <b>sócio</b> de um negócio, como ao comprar ações. O retorno depende do desempenho da empresa e do mercado: pode ganhar mais, mas também pode perder.</p>` + box('dica','Quanto maior o retorno esperado, em geral maior o risco assumido. Não existe almoço grátis.')},
@@ -56,6 +60,7 @@ export default [
   mc("Antes de começar a investir, o primeiro passo recomendado é:",["*Montar a reserva de emergência","Comprar ações de uma única empresa","Pegar empréstimo para investir mais","Ignorar o prazo que vai precisar do dinheiro"],"A reserva protege você de precisar resgatar um investimento de risco no pior momento.")
  ]},
 {id:"vida5", title:"Revisão: finanças pessoais", icon:"🔄",
+ recap:["Ativo − Passivo = PL vale para a sua vida; o orçamento 50-30-20 organiza o mês.", "A reserva de emergência cobre de 3 a 6 meses de gastos essenciais.", "Plano em 4 passos: balanço, orçamento, reserva e dívidas caras e, só então, investir diversificando."],
  learn:[
   {h:"O seu próprio balanço", b:tbl(['Ideia','Na sua vida'],[['Ativo − Passivo = PL','O que você tem menos o que deve'],['Orçamento 50-30-20','Necessidades, desejos e poupança'],['Reserva de emergência','3 a 6 meses de gastos essenciais'],['Diversificação','Não colocar tudo num único investimento']])}
  ],

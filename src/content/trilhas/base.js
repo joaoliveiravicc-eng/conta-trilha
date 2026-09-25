@@ -5,7 +5,8 @@ export default {
   desc:"Para quem nunca estudou Contabilidade: o que ela é, o que é patrimônio e como se mede o lucro.",
   lessons:[
   {id:"base1", title:"Para que serve a Contabilidade", icon:"📒",
-   learn:[
+   recap:["A Contabilidade registra, classifica, resume e interpreta os fatos de uma empresa.", "Sócios, bancos, governo, gestores e fornecedores usam a informação para decidir.", "O dinheiro da empresa não se mistura com o dinheiro do dono."],
+ learn:[
     {h:"Bem-vindo(a)! 👋", b:`<p>Contabilidade é a <b>linguagem dos negócios</b>. Ela registra tudo o que acontece com o dinheiro, os bens e as dívidas de uma empresa para que as pessoas tomem boas decisões.</p>` +
       box('exemplo', 'Dona Ana abriu uma padaria. Ela quer saber: estou ganhando dinheiro? Quanto devo aos fornecedores? Posso contratar mais alguém? A Contabilidade responde a todas essas perguntas.')},
     {h:"O que a Contabilidade faz", b:`<p>O trabalho acontece em quatro etapas, sempre nesta ordem:</p>` +
@@ -24,7 +25,8 @@ export default {
     {t:"mc", q:"Qual destes é um fato que a Contabilidade registra?", o:["A venda de um bolo por R$ 50","O dono ficar feliz com o movimento","Um cliente elogiar o pão","A previsão do tempo"], a:0, e:"Registram-se fatos que afetam o patrimônio e podem ser medidos em dinheiro."}
    ]},
   {id:"base2", title:"Bens, direitos e obrigações", icon:"🧺",
-   learn:[
+   recap:["Patrimônio é o conjunto de bens, direitos e obrigações.", "Bens a empresa possui, direitos ela tem a receber e obrigações ela deve pagar.", "Dinheiro no banco é um direito da empresa contra o banco."],
+ learn:[
     {h:"Patrimônio", b:`<p><b>Patrimônio</b> é o conjunto de <b>bens</b>, <b>direitos</b> e <b>obrigações</b> de uma empresa. Vamos ver cada parte.</p>` +
       box('exemplo','A padaria tem fornos (bem), tem vendas a prazo para receber (direito) e deve para o moinho que vende farinha (obrigação).')},
     {h:"Bens", b:`<p>Coisas que a empresa <b>possui</b> e que podem ser medidas em dinheiro.</p>` +
@@ -45,7 +47,8 @@ export default {
     {t:"match", pairs:[["Dinheiro em caixa","Bem numerário"],["Duplicatas a receber","Direito"],["Empréstimos a pagar","Obrigação"],["Marca registrada","Bem intangível"]], e:"Bens podem ser tangíveis (caixa, máquinas) ou intangíveis (marcas)."}
    ]},
   {id:"base3", title:"A equação patrimonial", icon:"⚖️",
-   learn:[
+   recap:["Bens e direitos formam o Ativo; as obrigações formam o Passivo.", "Ativo − Passivo = Patrimônio Líquido, a parte que pertence aos donos.", "Ativo = Passivo + PL: o que a empresa tem veio de terceiros ou dos donos."],
+ learn:[
     {h:"Ativo e Passivo", b:`<p>Os <b>bens e direitos</b> formam o <b>Ativo</b>: tudo o que a empresa tem.</p><p>As <b>obrigações</b> formam o <b>Passivo</b>: tudo o que ela deve a terceiros.</p>`},
     {h:"Patrimônio Líquido", b:`<p>A diferença entre o que a empresa tem e o que ela deve é a parte que realmente pertence aos donos: o <b>Patrimônio Líquido (PL)</b>.</p>` + eq('Ativo − Passivo = PL') +
       box('exemplo','A padaria tem R$ 80.000 em ativos e deve R$ 30.000. O PL é R$ 50.000.')},
@@ -65,7 +68,8 @@ export default {
     {t:"class", q:"Em que grupo fica cada conta?", cats:["Ativo","Passivo","PL"], items:[["Caixa",0],["Capital social",2],["Fornecedores",1],["Estoques",0],["Empréstimos a pagar",1],["Reservas de lucros",2]], e:"Capital social e reservas pertencem aos sócios, por isso ficam no PL."}
    ]},
   {id:"base4", title:"Receitas, despesas e resultado", icon:"📈",
-   learn:[
+   recap:["Receita aumenta o Patrimônio Líquido; despesa o diminui.", "Receitas − despesas = resultado: lucro se positivo, prejuízo se negativo.", "Competência: receitas e despesas entram quando acontecem, não quando o dinheiro se move."],
+ learn:[
     {h:"Receita", b:`<p><b>Receita</b> é o valor que a empresa ganha com a sua atividade: vender produtos, prestar serviços, receber juros de aplicações.</p><p>Receita <b>aumenta</b> o Patrimônio Líquido.</p>`},
     {h:"Despesa", b:`<p><b>Despesa</b> é o consumo de recursos para funcionar e gerar receitas: aluguel, salários, energia, propaganda.</p><p>Despesa <b>diminui</b> o Patrimônio Líquido.</p>`},
     {h:"Resultado: lucro ou prejuízo", b:eq('Receitas − Despesas = Resultado') + `<p>Se o resultado é positivo, é <b>lucro</b>. Se é negativo, é <b>prejuízo</b>. O lucro aumenta o PL: é a recompensa dos donos.</p>` +
@@ -83,7 +87,8 @@ export default {
     {t:"fill", q:"Receitas ___ o Patrimônio Líquido e despesas o ___.", o:["aumentam","diminuem","dobram","ignoram"], a:["aumentam","diminuem"], e:"Por isso o resultado (receitas − despesas) altera o PL."}
    ]},
   {id:"base5", title:"Plano de contas", icon:"🗂️",
-   learn:[
+   recap:["O plano de contas é a lista organizada, em grupos e com códigos, das contas da empresa.", "Contas sintéticas agrupam; só as analíticas recebem lançamentos.", "Ele padroniza os registros e permite comparar meses e empresas."],
+ learn:[
     {h:"Organizando as contas", b:`<p>O <b>plano de contas</b> é a lista oficial das contas da empresa, organizada em grupos e com códigos.</p>`},
     {h:"Códigos em níveis", b:tbl(['Código','Conta'],[['1','Ativo'],['1.1','Ativo Circulante'],['1.1.1','Disponível'],['1.1.1.01','Caixa'],['1.1.1.02','Bancos'],['2','Passivo'],['2.1.1.01','Fornecedores']]) + `<p>Os códigos variam de empresa para empresa; a lógica de níveis é sempre parecida.</p>`},
     {h:"Sintéticas e analíticas", b:ul(['<b>Sintéticas</b> agrupam outras (ex: Disponível).','<b>Analíticas</b> são o último nível e recebem os lançamentos (ex: Caixa).']) + box('regra','Só contas analíticas recebem lançamentos.')},
@@ -98,7 +103,8 @@ export default {
     {t:"mc", q:"Qual a principal vantagem de um plano de contas bem feito?", o:["Registros padronizados e relatórios comparáveis","Pagar menos impostos em todos os períodos","Dispensar os documentos que comprovam os fatos","Eliminar a necessidade de auditoria externa"], a:0, e:"Padronização gera informação confiável."}
    ]},
   {id:"base6", title:"Competência x caixa", icon:"🗓️",
-   learn:[
+   recap:["Competência registra quando o fato acontece; caixa, só quando o dinheiro entra ou sai.", "A competência é a regra geral no Brasil; o caixa é para casos como o MEI.", "O regime de caixa pode distorcer o resultado do mês."],
+ learn:[
     {h:"Dois jeitos de contar", b:`<p>Já vimos que receitas e despesas entram <b>quando acontecem</b> (competência). Existe também o <b>regime de caixa</b>, que só registra quando o dinheiro efetivamente entra ou sai.</p>`},
     {h:"Comparando na prática", b:tbl(['Fato','Regime de competência','Regime de caixa'],[['Venda em dezembro, recebida em janeiro','Receita de dezembro','Receita de janeiro'],['Aluguel de março, pago em abril','Despesa de março','Despesa de abril'],['Conta de luz de maio, paga em maio','Despesa de maio (mesmo mês nos dois)','Despesa de maio']])},
     {h:"Quem usa cada um", b:ul(['<b>Competência</b>: regra geral da Contabilidade societária no Brasil, obrigatória para a maioria das empresas.','<b>Caixa</b>: permitido em situações específicas, como o MEI e algumas apurações tributárias simplificadas.']) + box('regra','As demonstrações financeiras das empresas seguem o regime de competência, porque ele mostra melhor o desempenho real do período.')},
@@ -113,7 +119,8 @@ export default {
     {t:"wr", q:"Qual regime registra os fatos no momento em que eles acontecem, e não quando o dinheiro se move?", a:["competencia","regime de competencia"], e:"Regime de competência."}
    ]},
   {id:"base7", title:"Revisão: os pilares da Contabilidade", icon:"🔄",
-   learn:[
+   recap:["Patrimônio = bens + direitos − obrigações, e Ativo = Passivo + PL.", "Resultado = receitas − despesas, pelo regime de competência.", "Um fato pode mudar o patrimônio sem mudar o resultado, como comprar uma máquina a prazo."],
+ learn:[
     {h:"O que você já sabe", b:tbl(['Conceito','Resumo'],[['Patrimônio','Bens + direitos − obrigações'],['Equação fundamental','Ativo = Passivo + PL'],['Resultado','Receitas − Despesas'],['Competência','Registra quando acontece, não quando paga/recebe'],['Plano de contas','Organiza as contas em níveis; só analíticas recebem lançamento']])}
    ],
    ex:[

@@ -5,6 +5,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 export default [
 /* ---------------- Antes de Tudo ---------------- */
 {id:"antesx1", title:"Descontos e aumentos em sequência", icon:"🏷️",
+ recap:["Percentuais em sequência se multiplicam, não se somam: 10% + 10% dá 21%.", "Desconto de 20% e mais 10% dá 28% de desconto total, não 30%.", "Aumentar 50% e depois descontar 50% deixa o preço abaixo do original."],
  learn:[
   {h:"10% + 10% não é 20%", b:`<p>Quando um percentual é aplicado <b>sobre o resultado</b> de outro, os efeitos se multiplicam, não se somam.</p>` + eq('Aumento de 10% e depois mais 10%: 100 × 1,10 × 1,10 = 121') + `<p>O aumento total foi de <b>21%</b>, não 20%.</p>`},
   {h:"Desconto em cima de desconto", b:box('exemplo','Produto de R$ 200 com 20% de desconto e mais 10% no caixa: 200 × 0,80 × 0,90 = <b>R$ 144</b>. O desconto total foi de 28%, não 30%.') + box('atencao','Um aumento de 50% seguido de um desconto de 50% não volta ao preço original: 100 × 1,5 × 0,5 = 75.')}
@@ -18,6 +19,7 @@ export default [
   fl("Percentuais aplicados em sequência se {multiplicam}, não se somam.",["somam","anulam"],"Cada um incide sobre o resultado anterior.")
  ]},
 {id:"antesx2", title:"Vale mais agora ou depois?", icon:"⏳",
+ recap:["R$ 1.000 hoje valem mais que R$ 1.000 daqui a um ano, porque o dinheiro de hoje pode render.", "Para comparar valores, traga-os para a mesma data.", "Compare propostas levando o dinheiro de hoje ao valor futuro, com a taxa que ele rende."],
  learn:[
   {h:"O dinheiro tem valor no tempo", b:`<p>R$ 1.000 hoje valem mais que R$ 1.000 daqui a um ano, porque o dinheiro de hoje pode render. Para comparar valores em datas diferentes, traga-os para a mesma data.</p>` + eq('Valor futuro = Valor hoje × (1 + taxa)') + eq('Valor hoje = Valor futuro ÷ (1 + taxa)')},
   {h:"Comparando propostas", b:box('exemplo','Um cliente oferece R$ 1.000 hoje ou R$ 1.080 daqui a um ano. Se o dinheiro rende 10% ao ano, R$ 1.000 hoje virariam R$ 1.100 em um ano: receber hoje é melhor.') + box('dica','É a mesma ideia de um desconto para pagamento à vista: compare com quanto o dinheiro renderia.')}
@@ -31,6 +33,7 @@ export default [
   fl("Para comparar valores em datas diferentes, é preciso trazê-los para a mesma {data}.",["moeda","conta"],"Valor do dinheiro no tempo.")
  ]},
 {id:"antesx3", title:"Lendo o extrato bancário", icon:"🏧",
+ recap:["No extrato, crédito é dinheiro que entrou e débito é dinheiro que saiu, do ponto de vista do banco.", "Na empresa, dinheiro que entra no banco é débito em Bancos.", "Os dois lados estão certos: só mudam o ponto de vista."],
  learn:[
   {h:"O extrato é o olhar do banco", b:`<p>No extrato, <b>crédito</b> significa dinheiro que entrou na sua conta e <b>débito</b>, dinheiro que saiu. É o registro do ponto de vista do banco: para ele, o seu saldo é uma dívida com você.</p>` + tbl(['Data','Histórico','Valor'],[['02','PIX recebido — Cliente A','+ 1.500'],['03','Tarifa pacote','− 35'],['05','Boleto pago — Fornecedor','− 800']])},
   {h:"Não confunda os lados", b:box('atencao','Na contabilidade da empresa, dinheiro que entra no banco é <b>débito</b> na conta Bancos (ativo aumenta). No extrato, o banco mostra como crédito. Os dois estão certos, cada um do seu ponto de vista.')}
@@ -44,6 +47,7 @@ export default [
   fl("No extrato, dinheiro que sai da conta aparece como {débito}.",["crédito","saldo"],"Saída do ponto de vista do banco.")
  ]},
 {id:"antesx4", title:"Fluxo de caixa simples", icon:"💧",
+ recap:["Saldo final = saldo inicial + entradas − saídas.", "Projetar o caixa mostra com antecedência quando vai faltar dinheiro.", "Sabendo antes, dá para antecipar uma cobrança ou negociar um prazo."],
  learn:[
   {h:"Entradas, saídas e saldo", b:`<p>O fluxo de caixa acompanha o dinheiro que <b>entra</b> e que <b>sai</b>, dia a dia ou mês a mês.</p>` + eq('Saldo final = Saldo inicial + Entradas − Saídas')},
   {h:"Projetar evita susto", b:tbl(['Semana','Entradas','Saídas','Saldo'],[['Início','—','—','1.000'],['1','2.000','1.500','1.500'],['2','500','2.200','−200']]) + box('dica','Na semana 2 faltaria dinheiro. Sabendo antes, dá para antecipar uma cobrança ou adiar um pagamento.')}
@@ -59,6 +63,7 @@ export default [
 
 /* ---------------- Primeiros Passos ---------------- */
 {id:"basex1", title:"A empresa não é o dono", icon:"🏢",
+ recap:["O patrimônio da empresa é separado do patrimônio dos sócios: é o princípio da entidade.", "Gasto pessoal do sócio pago pela empresa é retirada, não despesa.", "Separar mostra se o negócio dá lucro de verdade."],
  learn:[
   {h:"Princípio da entidade", b:`<p>O patrimônio da empresa é separado do patrimônio dos sócios. A contabilidade da empresa registra só o que é <b>da empresa</b>.</p>` + box('exemplo','O dono paga a escola do filho com o dinheiro da empresa. Isso não é despesa da empresa: é uma retirada do sócio.')},
   {h:"Por que separar", b:ul(['Mostra se o negócio dá lucro de verdade.','Evita misturar dívidas pessoais com as da empresa.','Facilita crédito, impostos e decisões.'])}
@@ -72,6 +77,7 @@ export default [
   mc("A melhor prática para um pequeno empreendedor é:",["*Ter conta bancária separada para a empresa","Usar a mesma conta para tudo","Não registrar retiradas","Pagar despesas pessoais pela empresa e lançar como despesa"],"Conta separada facilita a separação.")
  ]},
 {id:"basex2", title:"Continuidade e prudência", icon:"🧭",
+ recap:["Continuidade: supõe-se que a empresa continuará operando, por isso os bens são depreciados ao longo do uso.", "Prudência: diante de incerteza, não superestimar ativos e receitas nem subestimar passivos e despesas.", "Prudência não é esconder lucro."],
  learn:[
   {h:"Continuidade", b:`<p>Em regra, as demonstrações são preparadas supondo que a empresa <b>vai continuar operando</b>. Por isso uma máquina é registrada pelo custo e depreciada ao longo do uso, e não pelo valor que renderia num leilão amanhã.</p>`},
   {h:"Prudência", b:`<p>Diante de incerteza, a contabilidade age com <b>cautela</b>: não superestima ativos e receitas nem subestima passivos e despesas.</p>` + box('atencao','Prudência não é esconder lucro. É não inflar números com base em otimismo.')}
@@ -85,6 +91,7 @@ export default [
   cl("Atitude prudente ou não?",["Prudente","Não prudente"],"Reconhecer perda provável com cliente:0|Registrar venda que ainda não aconteceu:1|Revisar estoque obsoleto:0|Ignorar dívida já assumida:1","Prudência evita números inflados.")
  ]},
 {id:"basex3", title:"Quem usa a informação", icon:"👥",
+ recap:["Usuários internos e externos querem respostas diferentes da mesma contabilidade.", "A informação útil é relevante e representa fielmente a realidade.", "Ajuda também ser comparável, verificável, tempestiva e compreensível."],
  learn:[
   {h:"Usuários internos e externos", b:tbl(['Usuário','O que quer saber'],[['Sócios e investidores','A empresa dá retorno?'],['Bancos','Ela consegue pagar o empréstimo?'],['Fornecedores','Vai pagar em dia?'],['Governo','Quanto de tributo é devido?'],['Gestores (internos)','Onde cortar custos e investir?']])},
   {h:"Informação útil", b:`<p>Para ajudar decisões, a informação precisa ser <b>relevante</b> e representar <b>fielmente</b> a realidade. Também ajuda ser comparável, verificável, tempestiva e compreensível.</p>`}
@@ -98,6 +105,7 @@ export default [
   tf("A contabilidade serve só para pagar impostos.",false,"Ela informa sócios, bancos, gestores e outros.")
  ]},
 {id:"basex4", title:"Custo histórico e valor justo", icon:"🧾",
+ recap:["Custo histórico é o valor pago na aquisição; valor justo é o preço de uma venda entre partes independentes.", "O custo histórico é objetivo, tem documento e é verificável.", "Custo histórico não significa ignorar perdas."],
  learn:[
   {h:"Por quanto registrar?", b:tbl(['Base','O que é','Exemplo'],[['Custo histórico','O valor pago na aquisição','Máquina comprada por R$ 80.000'],['Valor justo','Preço que seria recebido numa venda entre partes independentes','Ações cotadas em bolsa']]) + `<p>A maioria dos ativos operacionais, como máquinas e estoques, parte do <b>custo</b>. Alguns ativos, como certos instrumentos financeiros, são medidos a valor justo.</p>`},
   {h:"Por que o custo é tão usado", b:ul(['É objetivo: há documento comprovando.','É verificável por terceiros.','Não depende de estimativas de mercado a cada dia.']) + box('dica','Custo histórico não significa ignorar perdas: se o bem perder valor, reconhece-se a perda.')}
@@ -113,6 +121,7 @@ export default [
 
 /* ---------------- Débito e Crédito ---------------- */
 {id:"dcx1", title:"Lançamentos compostos", icon:"🧩",
+ recap:["Um fato pode envolver três ou mais contas.", "A regra continua: soma dos débitos = soma dos créditos.", "Exemplo: compra de R$ 10.000 com R$ 4.000 à vista e R$ 6.000 a prazo."],
  learn:[
   {h:"Mais de duas contas", b:`<p>Um fato pode envolver três ou mais contas. A regra continua: <b>soma dos débitos = soma dos créditos</b>.</p>` + box('exemplo','Compra de mercadoria de R$ 10.000: R$ 4.000 à vista e R$ 6.000 a prazo.') + lanc([['D','Estoques','10.000'],['C','Caixa','4.000'],['C','Fornecedores','6.000']])},
   {h:"Conferindo", b:eq('Débitos: 10.000 &nbsp;=&nbsp; Créditos: 4.000 + 6.000')}
@@ -126,6 +135,7 @@ export default [
   nu("Compra de R$ 9.000: R$ 2.500 em dinheiro, R$ 3.500 pelo banco e o resto a prazo. Quanto fica a pagar ao fornecedor?",3000,"9.000 − 2.500 − 3.500 = 3.000.","R$")
  ]},
 {id:"dcx2", title:"Balancete de verificação", icon:"⚖️",
+ recap:["O balancete lista todas as contas com seus saldos devedores e credores.", "Se as partidas dobradas foram seguidas, total devedor = total credor.", "Ele não acusa conta errada com valor certo, lançamento esquecido nem lançamento repetido."],
  learn:[
   {h:"A lista dos saldos", b:`<p>O balancete lista todas as contas com seus saldos devedores e credores. Se os lançamentos seguiram as partidas dobradas, <b>total devedor = total credor</b>.</p>` + tbl(['Conta','Devedor','Credor'],[['Caixa','5.000',''],['Estoques','3.000',''],['Fornecedores','','2.000'],['Capital social','','6.000'],['<b>Total</b>','<b>8.000</b>','<b>8.000</b>']])},
   {h:"O que ele não pega", b:ul(['Lançar na conta errada, mas com o valor certo nos dois lados.','Esquecer um lançamento inteiro.','Lançar o mesmo fato duas vezes.']) + box('atencao','Balancete fechando não prova que está tudo certo. Só prova que débitos e créditos se equilibram.')}
@@ -139,6 +149,7 @@ export default [
   tf("O balancete ajuda a montar o Balanço e a DRE.",true,"Os saldos são a base das demonstrações.")
  ]},
 {id:"dcx3", title:"Contas redutoras", icon:"➖",
+ recap:["Conta redutora fica num grupo, mas tem saldo contrário a ele.", "Máquina de R$ 50.000 com R$ 20.000 de depreciação acumulada tem valor contábil de R$ 30.000.", "Assim o Balanço mostra o custo original e quanto já foi depreciado."],
  learn:[
   {h:"Natureza oposta ao grupo", b:`<p>Algumas contas ficam num grupo, mas têm saldo <b>contrário</b> a ele, para reduzi-lo sem apagar a informação original.</p>` + tbl(['Conta redutora','Reduz','Saldo'],[['Depreciação acumulada','Imobilizado (ativo)','Credor'],['Perdas estimadas com clientes','Clientes (ativo)','Credor'],['Devoluções de vendas','Receita de vendas','Devedor']])},
   {h:"Por que não baixar direto?", b:box('exemplo','Máquina de R$ 50.000 com depreciação acumulada de R$ 20.000: o Balanço mostra o custo (50.000), quanto já foi depreciado (20.000) e o valor contábil (30.000). Informação mais rica que mostrar só 30.000.')}
@@ -152,6 +163,7 @@ export default [
   fl("Uma conta com saldo oposto ao do grupo em que está é uma conta {redutora}.",["sintética","de resultado"],"Reduz o grupo sem apagar o original.")
  ]},
 {id:"dcx4", title:"Contas de resultado no razonete", icon:"📒",
+ recap:["Despesas aumentam a débito e receitas aumentam a crédito.", "O saldo normal da despesa é devedor e o da receita é credor.", "Resultado do mês = saldo das receitas − saldo das despesas."],
  learn:[
   {h:"Receitas e despesas também têm lado", b:`<p>Despesas aumentam a <b>débito</b> e receitas aumentam a <b>crédito</b>. Faz sentido: despesa diminui o PL (que é credor), e receita aumenta o PL.</p>` + tbl(['Conta','Aumenta com','Saldo normal'],[['Despesa','Débito','Devedor'],['Receita','Crédito','Credor']])},
   {h:"Um mês no razonete", b:box('exemplo','Receitas de serviços: 3.000 + 2.000 (créditos) = saldo credor de 5.000. Despesas de aluguel: 1.500 (débito). Resultado do mês: 5.000 − 1.500 = lucro de 3.500.')}
@@ -167,6 +179,7 @@ export default [
 
 /* ---------------- Lançamentos do Dia a Dia ---------------- */
 {id:"lancx1", title:"Vendas no cartão", icon:"💳",
+ recap:["Na venda no cartão, a receita é o valor cheio da venda.", "A taxa da administradora é uma despesa separada, e o valor a receber fica numa conta do Ativo até cair no banco.", "Registrar a receita já líquida da taxa esconde o custo do cartão e distorce a receita."],
  learn:[
   {h:"A receita é o valor da venda", b:`<p>Numa venda de R$ 1.000 no cartão, a receita é <b>R$ 1.000</b>. A taxa da administradora é uma <b>despesa</b> separada, e o valor a receber fica numa conta de ativo até cair no banco.</p>` + lanc([['D','Cartões a receber','970'],['D','Despesa com taxas de cartão','30'],['C','Receita de vendas','1.000']])},
   {h:"Quando o dinheiro cai", b:lanc([['D','Bancos','970'],['C','Cartões a receber','970']]) + box('atencao','Registrar a receita já líquida da taxa (970) esconde o custo do cartão e distorce a receita.')}
@@ -180,6 +193,7 @@ export default [
   mc("Cartões a receber é uma conta de:",["*Ativo","Passivo","Receita","Despesa"],"É um direito a receber da administradora.")
  ]},
 {id:"lancx2", title:"Adiantamento de clientes", icon:"🤝",
+ recap:["Dinheiro recebido antes da entrega é passivo (adiantamento de clientes), não receita.", "Na entrega: D Adiantamento de clientes / C Receita de serviços.", "Receita é reconhecida quando a obrigação com o cliente é cumprida."],
  learn:[
   {h:"Recebeu antes de entregar", b:`<p>Quando o cliente paga antes, a empresa ainda <b>deve</b> a entrega. Isso é um <b>passivo</b>, não receita.</p>` + lanc([['D','Bancos','3.000'],['C','Adiantamento de clientes','3.000']])},
   {h:"Na entrega vira receita", b:lanc([['D','Adiantamento de clientes','3.000'],['C','Receita de serviços','3.000']]) + box('regra','Receita é reconhecida quando a obrigação com o cliente é cumprida.')}
@@ -193,6 +207,7 @@ export default [
   mt([["Seguros a apropriar","Pagou antes de usar (ativo)"],["Adiantamento de clientes","Recebeu antes de entregar (passivo)"],["Salários a pagar","Usou antes de pagar (passivo)"],["Clientes","Entregou antes de receber (ativo)"]],"O tempo entre caixa e competência cria essas contas.")
  ]},
 {id:"lancx3", title:"Capital e distribuição de lucros", icon:"🤲",
+ recap:["Capital integralizado pelos sócios aumenta o PL: não é receita nem empréstimo.", "Distribuição de lucros não é despesa: é uma destinação do resultado, que reduz o PL.", "Capital: D Bancos / C Capital social. Lucros: D Lucros acumulados / C Lucros a distribuir."],
  learn:[
   {h:"Os sócios colocam dinheiro", b:`<p>Quando os sócios integralizam capital, entra recurso e aumenta o patrimônio líquido. Não é receita nem empréstimo.</p>` + lanc([['D','Bancos','50.000'],['C','Capital social','50.000']])},
   {h:"E recebem parte do lucro", b:`<p>A distribuição de lucros aos sócios <b>não é despesa</b>: é uma destinação do resultado, que reduz o patrimônio líquido.</p>` + lanc([['D','Lucros acumulados','10.000'],['C','Lucros a distribuir','10.000']]) + box('dica','Depois, no pagamento: D Lucros a distribuir / C Bancos.')}
@@ -206,6 +221,7 @@ export default [
   mc("Lucros a distribuir, depois de decididos e ainda não pagos, ficam no:",["*Passivo","Ativo","Resultado","Estoque"],"É uma obrigação com os sócios.")
  ]},
 {id:"lancx4", title:"Despesas a pagar", icon:"📌",
+ recap:["A despesa é do mês do consumo, mesmo que a conta chegue e seja paga depois.", "Reconhecimento: D Despesa / C Contas a pagar. Pagamento: D Contas a pagar / C Bancos.", "No pagamento a despesa não aparece de novo: ela já foi reconhecida no mês certo."],
  learn:[
   {h:"Usou, mas ainda não pagou", b:`<p>A conta de energia de março chega em abril. A despesa é de <b>março</b>: reconhece-se a despesa e uma obrigação.</p>` + lanc([['D','Despesa com energia','700'],['C','Contas a pagar','700']])},
   {h:"No pagamento", b:lanc([['D','Contas a pagar','700'],['C','Bancos','700']]) + box('dica','No pagamento, a despesa não aparece de novo: ela já foi reconhecida no mês certo.')}

@@ -4,7 +4,8 @@ import { mc, tf, nu, od } from '../../engine/exercises/factories.js';
 
 export default [
   {id:'digital1', title:'Da operação ao documento digital', icon:'📥',
-   learn:[
+   recap:["Um arquivo de nota não é um lançamento: precisa ser conferido e registrado.", "Quatro controles: receber e checar duplicidade, relacionar ao pedido, classificar conta e centro de custo, aprovar.", "Competência e caixa continuam diferentes: a despesa é do mês do serviço, e o pagamento só quita a dívida."],
+ learn:[
     {h:'Um arquivo ainda não é um lançamento', b:'<p>Uma compra começa com um fato econômico. O documento eletrônico registra a operação e fornece dados para a contabilidade. O ERP pode importar esses dados, mas alguém precisa conferir fornecedor, data, valor, natureza e autorização.</p>'+box('dica','Documento, aprovação, lançamento e pagamento são eventos diferentes. Guarde o vínculo entre eles.')},
     {h:'Quatro pontos de controle', b:ol(['Receber o documento e verificar autenticidade e duplicidade.','Relacionar ao pedido, contrato ou serviço recebido.','Classificar contas, centro de custo e período.','Aprovar, registrar e arquivar a evidência.'])+tbl(['Campo','Por que conferir'],[['Data da operação','Define o período a analisar'],['Identificador do documento','Ajuda a detectar duplicidade'],['Fornecedor e valor','Permitem conciliar com contrato e pagamento']]), check:mc('A mesma nota importada duas vezes deve gerar:',['Dois lançamentos iguais','*Um alerta para investigar duplicidade','Receita de crédito'],'Importação automática não elimina a conferência de documentos repetidos.')},
     {h:'Competência e caixa continuam diferentes', b:'<p>Uma consultoria foi recebida e faturada em março por R$ 1.200, para pagamento em abril. Sob as hipóteses do caso, a despesa pertence a março; o pagamento de abril liquida a obrigação.</p>'+lanc([['D','Despesa de consultoria','1.200'],['C','Fornecedores','1.200']])+box('atencao','O ERP não deve criar uma segunda despesa ao baixar o pagamento.')},
@@ -17,7 +18,8 @@ export default [
     od('Ordene o fluxo antes da baixa bancária:',['Receber e validar o documento','Conferir a operação e o período','Aprovar e registrar o lançamento','Vincular documento e evidências'],'O fluxo preserva a origem e a decisão contábil.')
    ]},
   {id:'digital2', title:'Plano de contas e regras no ERP', icon:'🗂️',
-   learn:[
+   recap:["Uma regra do ERP precisa representar o fato: a mesma palavra no documento pode ser bem, estoque ou despesa.", "Mapeie conta e centro de custo; o frete necessário entra no custo do bem.", "Teste a regra com um caso comum e uma exceção antes de expandir, e registre quem a aprovou."],
+ learn:[
     {h:'Uma regra precisa representar o fato', b:'<p>O ERP propõe contas com base em cadastro, produto e histórico. A mesma palavra no documento pode representar fatos diferentes: um computador para uso da empresa pode ser imobilizado; mercadorias para revenda são estoque.</p>'+box('dica','Uma boa regra automatizada tem escopo, responsável, aprovação e exceções claras.')},
     {h:'Mapeie contas e centro de custo', b:tbl(['Compra','Conta no exemplo'],[['Máquina para a produção','Máquinas e equipamentos'],['Mercadorias para revenda','Estoques'],['Serviço já consumido','Despesa do período']])+'<p>Centro de custo ajuda a analisar quem consumiu o recurso, mas não substitui a conta contábil. O cadastro deve permitir revisão quando a operação fugir do padrão.</p>', check:mc('Uma máquina comprada para uso da fábrica deve ser mapeada automaticamente como:',['Mercadorias para revenda','*Imobilizado, após conferir o fato','Receita de vendas'],'A finalidade de uso determina a classificação no exemplo.')},
     {h:'Exemplo de aquisição', b:'<p>A fábrica compra máquina por R$ 5.000 a prazo e paga R$ 200 de frete necessário para colocá-la em condições de uso. Sem outros gastos, o custo do bem será R$ 5.200.</p>'+eq('Custo inicial = 5.000 + 200 = R$ 5.200')+'<p>O sistema deve reunir os documentos da compra e do frete no histórico do ativo. O lançamento exato da contrapartida depende de como cada gasto foi pago.</p>'},
@@ -30,7 +32,8 @@ export default [
     od('Antes de ativar uma regra para todos os documentos:',['Definir o fato e a conta','Testar um caso comum','Testar uma exceção','Aprovar e documentar a regra'],'Uma exceção testada evita repetir o mesmo erro em escala.')
    ]},
   {id:'digital3', title:'Conciliação bancária no sistema', icon:'🏦',
-   learn:[
+   recap:["A conciliação compara o extrato do banco com o razão de Bancos, item por item.", "Diferenças comuns: tarifa, lançamento duplicado, pagamento em trânsito e data distinta.", "Não force a conciliação: busque a evidência antes de criar um ajuste."],
+ learn:[
     {h:'Dois registros da mesma movimentação', b:'<p>O extrato mostra o que o banco processou. O razão de Bancos mostra o que a contabilidade registrou. A conciliação compara ambos, item por item, e explica diferenças de data, valor ou omissão.</p>'+box('atencao','Saldo igual por acaso não prova que todas as transações foram lançadas corretamente.')},
     {h:'A tarifa que faltou', b:'<p>Saldo inicial: R$ 2.000. Entrou R$ 1.500 de cliente; saiu R$ 600 para fornecedor e R$ 25 de tarifa. O extrato termina em R$ 2.875. O ERP mostra R$ 2.900 porque a tarifa ainda não foi lançada.</p>'+eq('2.000 + 1.500 − 600 − 25 = R$ 2.875')+lanc([['D','Despesa bancária','25'],['C','Bancos','25']]), check:mc('ERP mostra R$ 2.900 e o extrato, R$ 2.875. Qual diferença investigar?',['*R$ 25','R$ 600','R$ 125','R$ 2.875'],'2.900 − 2.875 = 25: exatamente a tarifa que ainda não foi lançada.')},
     {h:'Não force a conciliação', b:'<p>Uma diferença pode ser tarifa, lançamento duplicado, pagamento em trânsito ou data distinta. Busque a evidência antes de criar um ajuste. Depois, associe extrato, comprovante e lançamento.</p>'+box('dica','A conciliação deve apontar itens pendentes, responsável e prazo de solução.')},
@@ -43,7 +46,8 @@ export default [
     od('Ordene a conciliação:',['Importar extrato','Comparar com o razão','Investigar itens sem par','Ajustar com evidência e conferir saldo'],'A evidência precede o ajuste.')
    ]},
   {id:'digital4', title:'Leasing: contrato e agenda no ERP', icon:'🚚',
-   learn:[
+   recap:["Antes de lançar, cadastre o contrato: bem, prazo, pagamentos e taxa de desconto.", "Todo mês os juros aumentam o passivo, o pagamento o reduz e o direito de uso é depreciado.", "No fechamento, confira o contrato, a agenda, o saldo do passivo e as alterações aprovadas."],
+ learn:[
     {h:'O contrato define o trabalho', b:'<p>Antes de criar lançamentos periódicos, cadastre o contrato, identifique o bem, o prazo, os pagamentos, opções relevantes e a taxa de desconto. O sistema precisa guardar a versão do documento que sustenta cada cálculo.</p>'+box('dica','Uma planilha e o ERP precisam usar as mesmas datas, taxa e hipóteses.')},
     {h:'Um exemplo mensal simplificado', b:'<p>Uma van identificada é arrendada por 24 meses, com 24 pagamentos de R$ 1.000 ao fim de cada mês e taxa de 1% ao mês. Sem outros componentes iniciais, o valor presente dos pagamentos é aproximadamente R$ 21.243,39.</p>'+eq('Passivo inicial = valor presente dos pagamentos futuros = R$ 21.243,39')+lanc([['D','Ativo de direito de uso','21.243,39'],['C','Passivo de arrendamento','21.243,39']]), check:mc('Qual valor o sistema precisa usar para o passivo inicial deste exemplo?',['R$ 24.000 nominais','*R$ 21.243,39 de valor presente','R$ 1.000 da primeira parcela'],'Os pagamentos futuros são descontados à taxa do exemplo.')},
     {h:'Agenda mensal e conciliação', b:'<p>No primeiro mês, juros aproximados de R$ 212,43 aumentam o passivo; o pagamento de R$ 1.000 o reduz. O saldo após a parcela fica em R$ 20.455,82. A depreciação do direito de uso é calculada separadamente conforme as hipóteses do contrato.</p>'+box('atencao','Alterações de prazo, pagamentos ou opções podem exigir remensuração. A oficina complementar de Imobilizado aprofunda os lançamentos do mês.')},
@@ -56,7 +60,8 @@ export default [
     mc('Qual item ajuda a revisar o valor calculado meses depois?',['Somente o saldo final do passivo no último mês','*Contrato, taxa, memória de cálculo e histórico','Uma imagem da tela, sem data nem identificação'],'A trilha de cálculo precisa ser reproduzível.')
    ]},
   {id:'digital5', title:'Fechamento digital e ECD', icon:'📚',
-   learn:[
+   recap:["Feche o período e concilie tudo antes de gerar o arquivo da ECD.", "Investigue diferenças, como R$ 50 entre o razão e a conciliação, antes do arquivo final.", "Guarde o pacote de evidências: arquivo, recibo, conciliações, balancete e correções."],
+ learn:[
     {h:'Fechar antes de transmitir', b:'<p>O fechamento reúne lançamentos, concilia saldos, revisa períodos e gera relatórios. A ECD integra o SPED e substitui, nos casos em que é exigida, livros contábeis em papel por arquivos digitais transmitidos. O arquivo precisa refletir a escrituração revisada.</p>'+box('atencao','Obrigação, leiaute e prazo devem ser conferidos nas orientações oficiais vigentes para cada entidade e período.')},
     {h:'Do razão ao arquivo', b:ol(['Feche movimentos e concilie contas relevantes.','Revise plano de contas, cadastros e saldos.','Gere o arquivo no leiaute aplicável.','Valide, corrija inconsistências e documente a versão entregue.'])+'<p>O envio é uma etapa do processo; um arquivo validado formalmente ainda exige que os fatos contábeis estejam corretos.</p>', check:mc('A validação técnica do arquivo prova, sozinha, que todas as contas estão corretas?',['Sim','*Não'],'É preciso revisar saldos, classificações e evidências.')},
     {h:'Uma diferença no balancete', b:'<p>O razão de Bancos aponta R$ 8.400, mas a conciliação documentada indica R$ 8.350. Investigue os R$ 50 antes de gerar o arquivo final. Pode haver tarifa, duplicidade ou corte de período.</p>'+eq('Diferença a investigar = 8.400 − 8.350 = R$ 50')},
@@ -69,7 +74,8 @@ export default [
     od('Ordene o fechamento:',['Conciliar e revisar saldos','Conferir cadastros e plano de contas','Gerar e validar o arquivo','Guardar versão, recibo e evidências'],'O arquivo vem depois da revisão da escrituração.')
    ]},
   {id:'digital6', title:'Permissões, erros e trilha de auditoria', icon:'🔐',
-   learn:[
+   recap:["Um sistema confiável registra quem incluiu, alterou e aprovou, com data e motivo.", "Separe tarefas sensíveis: quem cadastra o fornecedor não aprova sozinho o pagamento.", "Automação com regra errada repete o erro em todos os lançamentos: monitore as exceções."],
+ learn:[
     {h:'Quem fez o quê?', b:'<p>Um sistema confiável registra quem incluiu, alterou, aprovou e exportou dados, com data e motivo. Permissões devem acompanhar a função da pessoa. Uma correção contábil precisa preservar o histórico e a evidência do ajuste.</p>'+box('dica','Registrar usuário, data, valor anterior e novo valor facilita explicar mudanças no fechamento.')},
     {h:'Separe tarefas sensíveis', b:'<p>Quem cadastra fornecedor não deveria, sozinho, aprovar qualquer pagamento para esse fornecedor. Pequenas equipes podem usar revisão posterior documentada quando uma separação completa não for possível.</p>'+tbl(['Risco','Controle ilustrativo'],[['Pagamento indevido','Aprovação independente e comprovante'],['Nota duplicada','Alerta por identificador e fornecedor'],['Alteração sem rastro','Log e revisão de mudanças']]), check:mc('Que controle reduz risco de pagamento duplicado?',['Desativar todos os logs','*Alerta de duplicidade e revisão antes da aprovação','Usar somente o saldo final'],'A comparação dos dados do documento pode detectar a repetição.')},
     {h:'Automação também amplia erros', b:'<p>Uma regra que classifica errado 100 documentos gera 100 erros consistentes. Monitore exceções e reconcilie amostras após mudanças de regra. Treine a equipe para interromper o fluxo quando a evidência não sustentar o registro.</p>'},

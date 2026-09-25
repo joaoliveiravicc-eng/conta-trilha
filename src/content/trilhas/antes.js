@@ -3,6 +3,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, ew, od, ep, ts } from '../../engine/exe
 
 export default [
 {id:"antes1", title:"Porcentagem", icon:"💯",
+ recap:["Porcentagem é “por cem”: 25% = 25 ÷ 100 = 0,25.", "Aumento e desconto: valor final = valor × (1 ± taxa).", "Para saber quanto por cento é: parte ÷ total × 100."],
  learn:[
   {h:"O que é porcentagem", b:`<p>Porcentagem significa <b>“por cem”</b>. 25% são 25 partes de cada 100.</p>` + eq('25% = 25 ÷ 100 = 0,25') + box('exemplo','25% de R$ 200 = 0,25 × 200 = <b>R$ 50</b>.')},
   {h:"Atalhos para fazer de cabeça", b:tbl(['Percentual','Atalho','Exemplo com 360'],[['10%','Divida por 10','36'],['1%','Divida por 100','3,6'],['50%','Metade','180'],['5%','Metade de 10%','18'],['20%','Dobro de 10%','72']])},
@@ -21,6 +22,7 @@ export default [
   fl("Para calcular {10%} de um valor, basta dividi-lo por {10}.",["50%","100"],"Dividir por 10 dá 10%; dividir por 100 dá 1%.")
  ]},
 {id:"antes2", title:"Regra de três e rateio", icon:"🔺",
+ recap:["Regra de três: multiplique cruzado e isole o x.", "Depreciação, seguro e 13º são distribuídos no tempo: valor anual ÷ 12 × número de meses.", "Rateio divide um valor entre partes na proporção de cada uma."],
  learn:[
   {h:"Proporção", b:`<p>Quando duas grandezas crescem juntas na mesma medida, elas são <b>diretamente proporcionais</b>.</p>` + box('exemplo','2 pães custam R$ 3. Então 4 pães custam R$ 6.')},
   {h:"Regra de três", b:tbl(['Pães','Preço'],[['2','3'],['10','x']]) + `<p>Multiplique cruzado: 2 × x = 10 × 3, então x = 30 ÷ 2 = <b>15</b>.</p>`},
@@ -38,6 +40,7 @@ export default [
   wr("Qual é o nome da técnica de multiplicar cruzado para achar um valor proporcional? (três palavras)",["regra de tres","regra de 3"],"Regra de três.")
  ]},
 {id:"antes3", title:"Positivo, negativo e saldo", icon:"➕",
+ recap:["Saldo é o que sobra depois de somar as entradas e subtrair as saídas.", "Saldo negativo quer dizer que saiu mais do que entrou.", "Nos relatórios, número entre parênteses é negativo ou dedução."],
  learn:[
   {h:"Entrou e saiu", b:`<p>Pense na sua conta do banco: entradas somam, saídas subtraem. O resultado é o <b>saldo</b>.</p>` + tbl(['Movimento','Valor'],[['Saldo inicial','500'],['Salário','+ 2.000'],['Mercado','− 350'],['Conta de luz','− 150'],['<b>Saldo final</b>','<b>2.000</b>']])},
   {h:"Números negativos", b:`<p>Saldo negativo quer dizer que saiu mais do que entrou: você está devendo.</p>` + ul(['300 − 500 = <b>−200</b> (faltaram 200)','−200 é <b>menor</b> que −50']) + box('dica','Na Contabilidade, em vez de sinais, usamos lados: débito e crédito. Mas a lógica de somar e subtrair é a mesma.')},
@@ -53,6 +56,7 @@ export default [
   wr("Como se chama a diferença entre tudo o que entrou e tudo o que saiu de uma conta?",["saldo"],"Saldo = entradas − saídas.")
  ]},
 {id:"antes4", title:"Juros simples e compostos", icon:"📈",
+ recap:["Juros são o preço do dinheiro no tempo.", "Juros simples: J = C × i × t. Juros compostos: M = C × (1 + i)^t.", "Juros pagos são despesa financeira; juros recebidos são receita financeira."],
  learn:[
   {h:"O que são juros", b:`<p>Juros são o <b>preço do dinheiro no tempo</b>. Quem empresta recebe juros; quem pega emprestado paga.</p>` + tbl(['Termo','Significado'],[['Capital (C)','Valor inicial'],['Taxa (i)','Percentual por período'],['Tempo (t)','Número de períodos'],['Montante (M)','Capital + juros']])},
   {h:"Juros simples", b:eq('J = C × i × t') + box('exemplo','R$ 1.000 a 2% ao mês por 3 meses: 1.000 × 0,02 × 3 = <b>R$ 60</b>. Montante: R$ 1.060.')},
@@ -70,6 +74,7 @@ export default [
   wr("Como se chama o capital somado aos juros?",["montante"],"Montante = capital + juros.")
  ]},
 {id:"antes5", title:"O que é uma empresa", icon:"🏪",
+ recap:["Empresa é uma organização que produz ou vende algo buscando lucro; os sócios investem nela.", "O CNPJ é o “CPF da empresa”: o cadastro na Receita Federal.", "Comércio compra e revende, indústria transforma e serviços vendem trabalho."],
  learn:[
   {h:"Empresa e sócios", b:`<p>Empresa é uma organização que produz ou vende algo buscando <b>lucro</b>. Quem investe nela são os <b>sócios</b> (ou o empresário individual).</p>`},
   {h:"Formatos comuns no Brasil", b:tbl(['Tipo','Resumo'],[['MEI','Microempreendedor individual, faturamento de até R$ 81 mil por ano'],['SLU','Sociedade limitada com um único sócio'],['LTDA','Sociedade limitada: sócios respondem até o valor do capital'],['S.A.','Capital dividido em ações']])},
@@ -86,6 +91,7 @@ export default [
   ep("Com suas palavras: por que o dinheiro da empresa deve ficar separado do dinheiro do dono?","Porque a empresa é uma entidade separada do dono. Misturar os dois bagunça os números e impede saber se a empresa realmente dá lucro.",[["A empresa é separada do dono","separ","entidade","distint","diferent","nao mistur","outra pessoa","propri"],["Misturar distorce os números e o lucro","numer","controle","saber","lucro","resultado","informac","distorc","bagunc","errad","confus","prejuiz","conta"]],"Essa é a ideia de Entidade: patrimônio da empresa ≠ patrimônio do sócio.")
  ]},
 {id:"antes6", title:"À vista, a prazo e parcelado", icon:"💳",
+ recap:["À vista: o dinheiro chega na hora. A prazo: chega depois.", "Venda a prazo dá ao vendedor um direito a receber; a compra a prazo dá ao comprador uma dívida.", "Parcelado é a prazo dividido em partes; no cartão de crédito, a loja recebe da operadora depois."],
  learn:[
   {h:"À vista", b:`<p>Pagamento <b>na hora</b>: dinheiro, Pix, cartão de débito. Na Contabilidade, mexe direto no Caixa ou no Banco.</p>`},
   {h:"A prazo", b:`<p>Pagamento <b>depois</b>: em 30, 60 dias. Cada lado ganha algo diferente:</p>` + tbl(['Quem','O que surge'],[['Vendedor','Um direito a receber (Clientes)'],['Comprador','Uma dívida (Fornecedores)']])},
@@ -101,6 +107,7 @@ export default [
   wr("Complete: comprar e pagar só depois é comprar a ___.",["prazo"],"A prazo = pagamento futuro.")
  ]},
 {id:"antes7", title:"Nota fiscal, boleto e recibo", icon:"🧾",
+ recap:["Todo registro contábil precisa de um documento que comprove o fato.", "Nota fiscal comprova a venda, boleto é cobrança, recibo comprova pagamento e duplicata é título de venda a prazo.", "Guarde os documentos fiscais por pelo menos 5 anos."],
  learn:[
   {h:"Sem documento, sem registro", b:`<p>Todo registro contábil precisa de um <b>documento</b> que comprove o fato. É a prova de que ele aconteceu.</p>`},
   {h:"Os principais documentos", b:tbl(['Documento','Para que serve'],[['Nota fiscal','Comprova a venda e destaca tributos'],['Boleto','Cobrança bancária'],['Recibo','Comprova um pagamento'],['Duplicata','Título de uma venda a prazo'],['Contrato','Registra um acordo (aluguel, empréstimo)'],['Extrato bancário','Mostra a movimentação da conta']])},
@@ -117,6 +124,7 @@ export default [
   od("Ordene o caminho de uma venda a prazo:",["Emissão da nota fiscal","Envio do boleto ao cliente","Cliente paga o boleto","Banco credita o valor na conta"],"Primeiro se documenta, depois se cobra e se recebe.")
  ]},
 {id:"antes8", title:"Caixa, banco e Pix", icon:"🏦",
+ recap:["Caixa é o dinheiro em espécie; Bancos é o dinheiro em conta corrente.", "Aplicações financeiras rendem juros. Disponível = caixa + bancos + aplicações de liquidez imediata.", "Mover dinheiro entre essas contas não muda o total disponível."],
  learn:[
   {h:"Caixa", b:`<p>Dinheiro em espécie guardado na empresa (gaveta, cofre). A conta se chama <b>Caixa</b>.</p>`},
   {h:"Bancos", b:`<p>Dinheiro em conta corrente. A conta se chama <b>Bancos</b> (ou Bancos conta movimento). Pix, TED e boletos passam por aqui.</p>` + box('dica','Pix recebido = dinheiro entrando no banco na hora.')},
@@ -132,6 +140,7 @@ export default [
   nu("Caixa R$ 800, Bancos R$ 5.200 e aplicação de liquidez imediata R$ 2.000. Qual o disponível?",8000,"800 + 5.200 + 2.000 = 8.000.","R$")
  ]},
 {id:"antes9", title:"Variação percentual", icon:"📐",
+ recap:["Variação % = (valor novo − valor antigo) ÷ valor antigo × 100.", "O sinal negativo mostra queda, e a base é sempre o valor antigo.", "Subir 50% e cair 50% não volta ao valor original, porque a base muda."],
  learn:[
   {h:"De um valor para outro", b:`<p>Variação percentual mede o quanto um valor <b>cresceu</b> ou <b>caiu</b> em relação ao ponto de partida.</p>` + eq('Variação % = (Valor novo − Valor antigo) ÷ Valor antigo × 100') + box('exemplo','Vendas foram de R$ 200 para R$ 250: (250 − 200) ÷ 200 = 0,25 = <b>alta de 25%</b>.')},
   {h:"Quando o valor cai", b:box('exemplo','Despesa foi de R$ 400 para R$ 340: (340 − 400) ÷ 400 = −0,15 = <b>queda de 15%</b>.') + `<p>O sinal negativo mostra que o valor diminuiu. É exatamente essa a conta por trás da <b>análise horizontal</b> das demonstrações.</p>`},
@@ -147,6 +156,7 @@ export default [
   nu("Custos foram de R$ 12.000 para R$ 15.000. Qual foi a variação percentual?",25,"(15.000 − 12.000) ÷ 12.000 = 0,25 = 25%.","%")
  ]},
 {id:"antes10", title:"Médias e estimativas", icon:"📊",
+ recap:["Média simples: soma dos valores ÷ quantidade deles.", "Média ponderada: cada valor pesa de acordo com a sua quantidade.", "Arredonde antes de calcular para conferir se o resultado faz sentido."],
  learn:[
   {h:"Média simples", b:`<p>Soma todos os valores e divide pela quantidade deles.</p>` + eq('Média = Soma dos valores ÷ Quantidade de valores') + box('exemplo','Vendas de 3 meses: 100, 140 e 120. Média: (100 + 140 + 120) ÷ 3 = <b>120</b>.')},
   {h:"Média ponderada", b:`<p>Quando cada valor tem um “peso” diferente, como quantidades diferentes de cada lote de compra.</p>` + eq('Média ponderada = Σ(valor × peso) ÷ Σ(pesos)') + box('exemplo','80 unidades a R$ 5 e 20 unidades a R$ 8: (80×5 + 20×8) ÷ 100 = (400 + 160) ÷ 100 = <b>R$ 5,60</b>.') + box('dica','É exatamente essa conta que usamos no custo médio ponderado do estoque.')},
@@ -162,6 +172,7 @@ export default [
   wr("Quando cada valor tem um peso diferente na conta, a média se chama média ___.",["ponderada"],"Média ponderada.")
  ]},
 {id:"antes11", title:"Revisão: matemática financeira", icon:"🔄",
+ recap:["Porcentagem, regra de três, juros, variação e médias formam a caixa de ferramentas da matemática financeira.", "Aumentar 20% e depois diminuir 20% não volta ao valor original.", "Estimar antes de calcular ajuda a achar erros de conta."],
  learn:[
   {h:"Sua caixa de ferramentas", b:`<p>Antes de seguir para a Contabilidade de verdade, um resumo rápido do que você já sabe fazer:</p>` +
     tbl(['Ferramenta','Quando usar'],[['Porcentagem','Impostos, margens, aumentos e descontos'],['Regra de três e rateio','Distribuir um valor no tempo ou entre partes'],['Saldo (+ e −)','Somar entradas e subtrair saídas'],['Juros simples e compostos','O preço do dinheiro no tempo'],['Variação percentual','Comparar um valor novo com o antigo'],['Médias','Custo médio, estoque médio, prazos médios']])},

@@ -5,6 +5,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 export default [
 /* ---------------- Antes de Tudo: a barraca da feira ---------------- */
 {id:"feira1", title:"Montando a barraca", icon:"🍅",
+ recap:["Custo por unidade = custo total ÷ quantidade comprada.", "Esse custo é o ponto de partida para decidir o preço.", "Antes de vender, calcule quanto gasta, quanto cobra e quanto sobra."],
  learn:[
   {h:"A barraca do Seu Jorge", b:`<p>Seu Jorge vende frutas e verduras na feira de sábado. Antes de sair de casa, ele faz as contas: quanto gasta com mercadoria, quanto cobra e quanto sobra.</p>` + tbl(['Item','Custo'],[['Caixa de tomate (20 kg)','R$ 80'],['Caixa de banana (15 dúzias)','R$ 60'],['Aluguel da barraca no dia','R$ 40']])},
   {h:"Preço por unidade", b:eq('Custo por kg de tomate = 80 ÷ 20 = R$ 4') + box('dica','Dividir o custo total pela quantidade dá o custo de cada unidade. É o ponto de partida para decidir o preço.')}
@@ -18,6 +19,7 @@ export default [
   mc("Se o tomate estraga e ele joga fora 2 kg, o custo de cada kg vendido:",["*Aumenta, porque o gasto é dividido por menos quilos","Diminui, porque ele passa a vender menos tomates","Fica igual, porque o preço de compra não mudou","Vira zero, porque o tomate estragado não tem custo"],"R$ 80 ÷ 18 kg ≈ R$ 4,44.")
  ]},
 {id:"feira2", title:"Troco, desconto e pechincha", icon:"🪙",
+ recap:["Na venda, some os itens e calcule o troco: valor recebido − total.", "Desconto de 30% é multiplicar o preço por 0,70.", "O desconto de fim de feira evita levar mercadoria de volta."],
  learn:[
   {h:"Vendendo na hora", b:`<p>Na feira tudo é rápido: somar, dar troco e decidir se aceita a pechincha do cliente.</p>` + box('exemplo','Cliente leva 2 kg de tomate (R$ 6 o kg) e 1 dúzia de banana (R$ 6). Total: 12 + 6 = R$ 18. Pagou com R$ 50: troco de R$ 32.')},
   {h:"Desconto de fim de feira", b:`<p>Às 13h, Seu Jorge dá 30% de desconto para não levar mercadoria de volta.</p>` + eq('R$ 6 com 30% de desconto = 6 × 0,70 = R$ 4,20')}
@@ -31,6 +33,7 @@ export default [
   tf("Vender abaixo do custo no fim da feira pode fazer sentido se a mercadoria vai estragar.",true,"Recuperar parte do custo é melhor que perder tudo.")
  ]},
 {id:"feira3", title:"Pix, dinheiro e maquininha", icon:"📱",
+ recap:["Cada forma de pagamento chega em um prazo e tem um custo diferente.", "Na venda no cartão, a receita é o valor cheio e a taxa é despesa.", "Quanto sobra de verdade é a venda menos as taxas."],
  learn:[
   {h:"Cada forma de pagamento tem um custo", b:tbl(['Forma','Quando o dinheiro chega','Custo'],[['Dinheiro','Na hora','Nenhum, mas risco de perda'],['Pix','Na hora','Geralmente nenhum para pessoa física; pode haver tarifa para empresas'],['Cartão de débito','Em geral no dia seguinte','Taxa da maquininha'],['Cartão de crédito','Em geral após 30 dias','Taxa maior'],]) + box('atencao','Taxas variam por contrato e maquininha. Os números desta lição são exemplos.')},
   {h:"Quanto sobra de verdade", b:box('exemplo','Venda de R$ 100 no crédito com taxa de 3%: Seu Jorge recebe R$ 97. A receita da venda é R$ 100; os R$ 3 são despesa com taxa.')}
@@ -44,6 +47,7 @@ export default [
   nu("No dia: R$ 300 em dinheiro, R$ 450 em Pix e R$ 250 no débito (taxa 2%). Quanto entra no total, depois da taxa?",995,"300 + 450 + 245 = 995.","R$")
  ]},
 {id:"feira4", title:"Fechando o sábado", icon:"🧮",
+ recap:["Lucro do dia = vendas − custo das mercadorias vendidas − despesas.", "Mercadoria que sobrou não é custo do dia: continua sendo estoque.", "Dinheiro na gaveta não é lucro: parte dele repõe o custo."],
  learn:[
   {h:"O resultado da feira", b:tbl(['Item','Valor'],[['Vendas do dia','R$ 1.000'],['Custo das mercadorias vendidas','R$ 520'],['Aluguel da barraca','R$ 40'],['Taxas de cartão','R$ 5'],['Lucro do dia','R$ 435']]) + box('regra','Lucro = vendas − custo do que foi vendido − despesas do dia.')},
   {h:"Mercadoria que sobrou", b:`<p>O que não foi vendido não é custo do dia: continua sendo estoque para o próximo sábado (se não estragar).</p>`}
@@ -59,6 +63,7 @@ export default [
 
 /* ---------------- Estoques: Supermercado Bom Preço ---------------- */
 {id:"mercado1", title:"Chegou o caminhão", icon:"🚚",
+ recap:["Ao receber, confira a nota com o pedido, conte, veja a validade e registre a entrada.", "Divergência entre nota e mercadoria se resolve antes de assinar o recebimento.", "Custo total do lote = quantidade × custo unitário."],
  learn:[
   {h:"Recebendo mercadorias", b:`<p>O Supermercado Bom Preço recebe arroz de dois fornecedores na mesma semana.</p>` + tbl(['Lote','Quantidade','Custo unitário','Total'],[['Segunda','100 pacotes','R$ 20','R$ 2.000'],['Quinta','100 pacotes','R$ 24','R$ 2.400']])},
   {h:"Conferir antes de guardar", b:ol(['Conferir a nota com o pedido.','Contar e ver a validade.','Registrar a entrada no estoque.']) + box('dica','Divergência entre nota e mercadoria se resolve antes de assinar o recebimento.')}
@@ -72,6 +77,7 @@ export default [
   nu("Chegaram só 95 dos 100 pacotes do lote de quinta (R$ 24 cada). Qual valor deve ser registrado?",2280,"95 × 24 = 2.280.","R$")
  ]},
 {id:"mercado2", title:"PEPS no corredor do arroz", icon:"🍚",
+ recap:["No PEPS, a baixa usa primeiro o custo do lote mais antigo.", "Vendendo 150 pacotes, saem os 100 do primeiro lote e 50 do segundo.", "O PEPS acompanha o fluxo físico de produtos com validade."],
  learn:[
   {h:"Vende primeiro o que entrou primeiro", b:`<p>No PEPS, a baixa do estoque usa primeiro o custo do lote mais antigo.</p>` + box('exemplo','Vendeu 150 pacotes: 100 do lote de segunda (R$ 20) + 50 do lote de quinta (R$ 24). CMV = 2.000 + 1.200 = <b>R$ 3.200</b>. Sobram 50 pacotes a R$ 24 = R$ 1.200.')},
   {h:"Por que o PEPS combina com supermercado", b:`<p>Produtos com validade devem sair na ordem de chegada. O método de custo acompanha o fluxo físico.</p>`}
@@ -85,6 +91,7 @@ export default [
   mc("Por que supermercados costumam organizar a prateleira pelo PEPS físico?",["*Para vender antes o que vence antes","Para aumentar o imposto","Porque é proibido o contrário","Para esconder produtos"],"Evita perdas por validade.")
  ]},
 {id:"mercado3", title:"Custo médio no corredor do óleo", icon:"🫙",
+ recap:["No custo médio, cada compra recalcula o custo unitário de todo o estoque.", "A venda sai pela média vigente e não muda a média.", "Média = valor total do estoque ÷ quantidade total."],
  learn:[
   {h:"Média ponderada móvel", b:`<p>No custo médio, a cada compra recalcula-se o custo unitário de todo o estoque.</p>` + tbl(['Movimento','Qtd.','Custo unit.','Saldo'],[['Estoque inicial','60','R$ 8','60 × 8 = 480'],['Compra','40','R$ 10','100 un · R$ 880 → média R$ 8,80'],['Venda','50','R$ 8,80','50 un · R$ 440']])},
   {h:"A venda não muda a média", b:box('regra','Compras recalculam a média; vendas saem pela média vigente.')}
@@ -98,6 +105,7 @@ export default [
   fl("No custo médio, a média é recalculada a cada {compra}.",["venda","mês"],"Média ponderada móvel.")
  ]},
 {id:"mercado4", title:"Quebras e validade", icon:"🗑️",
+ recap:["Vencimento, embalagem rasgada e furto reduzem o estoque sem gerar venda.", "A perda vai para o resultado: D Perdas com estoques / C Estoques.", "Índice de quebra = perdas ÷ vendas."],
  learn:[
   {h:"Perdas fazem parte", b:`<p>Produtos vencidos, embalagens rasgadas e furtos reduzem o estoque sem gerar venda. Essa perda vai para o resultado.</p>` + lanc([['D','Perdas com estoques','300'],['C','Estoques','300']])},
   {h:"Medindo a perda", b:eq('Índice de quebra = Perdas ÷ Vendas') + box('exemplo','Perdas de R$ 1.500 num mês com vendas de R$ 150.000: quebra de 1%.')}
@@ -113,6 +121,7 @@ export default [
 
 /* ---------------- Custos: Hamburgueria do Beto ---------------- */
 {id:"burger1", title:"Quanto custa um hambúrguer?", icon:"🍔",
+ recap:["A ficha técnica lista cada ingrediente, com a quantidade e o custo.", "Sem ficha técnica, o preço é chute.", "Com ela, cada ingrediente que sobe de preço aparece na hora."],
  learn:[
   {h:"Ficha técnica", b:`<p>O Beto lista tudo o que vai em um hambúrguer, com a quantidade e o custo.</p>` + tbl(['Ingrediente','Custo por lanche'],[['Pão','R$ 1,50'],['Carne 150 g','R$ 6,00'],['Queijo','R$ 1,80'],['Salada e molho','R$ 0,70'],['Embalagem','R$ 1,00'],['<b>Total variável</b>','<b>R$ 11,00</b>']])},
   {h:"Por que a ficha técnica importa", b:box('dica','Sem ficha técnica, o preço é chute. Com ela, cada ingrediente que sobe de preço aparece na hora.')}
@@ -126,6 +135,7 @@ export default [
   mc("A ficha técnica serve principalmente para:",["*Saber o custo de cada produto e controlar o preço","Calcular o valor do aluguel que será pago no mês","Definir quantos funcionários serão contratados","Escolher a propaganda e as promoções do mês"],"Custo por unidade.")
  ]},
 {id:"burger2", title:"Margem de contribuição do lanche", icon:"💵",
+ recap:["Margem de contribuição = preço − custos e despesas variáveis.", "A taxa do aplicativo entra nos variáveis e reduz a margem do lanche.", "Comparar canais mostra onde cada lanche deixa mais margem."],
  learn:[
   {h:"O que sobra de cada venda", b:eq('Margem de contribuição = Preço − Custos e despesas variáveis') + box('exemplo','Lanche vendido por R$ 30. Custo variável R$ 11 e taxa do aplicativo de entrega de 20% do preço (R$ 6). Margem: 30 − 11 − 6 = <b>R$ 13</b>.')},
   {h:"Balcão ou aplicativo?", b:tbl(['Canal','Preço','Variáveis','Margem'],[['Balcão','R$ 30','R$ 11','R$ 19'],['Aplicativo (20%)','R$ 30','R$ 17','R$ 13']])}
@@ -139,6 +149,7 @@ export default [
   fl("Margem de contribuição = preço − custos e despesas {variáveis}.",["fixos","totais"],"O que sobra para pagar os fixos.")
  ]},
 {id:"burger3", title:"Quantos lanches para empatar?", icon:"⚖️",
+ recap:["Some os custos fixos do mês: aluguel, salários e a parte fixa de energia e gás.", "Ponto de equilíbrio = custos fixos ÷ margem de contribuição por lanche.", "Com R$ 12.000 de fixos e margem média de R$ 16, são 750 lanches por mês."],
  learn:[
   {h:"Os custos fixos do mês", b:tbl(['Fixo','Valor'],[['Aluguel','R$ 4.000'],['Salários','R$ 7.000'],['Energia e gás (parte fixa)','R$ 1.000'],['<b>Total</b>','<b>R$ 12.000</b>']])},
   {h:"Ponto de equilíbrio", b:eq('PE = Custos fixos ÷ Margem de contribuição por lanche') + box('exemplo','12.000 ÷ 16 (margem média) = <b>750 lanches</b> por mês, cerca de 25 por dia.')}
@@ -152,6 +163,7 @@ export default [
   mc("Vender 700 lanches no mês significa:",["*Prejuízo, porque está abaixo dos 750 lanches","Lucro, porque o mês teve muitas vendas","Empate, porque está perto do ponto de equilíbrio","Não dá para saber sem olhar o preço do lanche"],"Abaixo do ponto de equilíbrio.")
  ]},
 {id:"burger4", title:"Promoção vale a pena?", icon:"🎉",
+ recap:["Numa promoção, compare a margem total com e sem ela.", "Numa decisão de curto prazo com capacidade sobrando, aluguel e salários já existem de qualquer jeito.", "Preço abaixo do custo variável reduz o resultado a cada unidade vendida."],
  learn:[
   {h:"Terça em dobro", b:`<p>Beto pensa em vender o segundo lanche pela metade às terças, dia fraco. A pergunta: a promoção aumenta o lucro?</p>` + box('exemplo','Sem promoção: 20 lanches a R$ 30, margem R$ 19 cada = R$ 380. Com promoção: 50 lanches, metade a R$ 30 e metade a R$ 15. Margens: 25 × 19 + 25 × 4 = <b>R$ 575</b>.')},
   {h:"Os fixos não mudam", b:box('regra','Numa decisão de curto prazo, com capacidade sobrando, compare a margem extra: aluguel e salários já existem de qualquer jeito.')}
@@ -167,6 +179,7 @@ export default [
 
 /* ---------------- Demonstrações: Farmácia Vida ---------------- */
 {id:"farmacia1", title:"O balanço da Farmácia Vida", icon:"💊",
+ recap:["O estoque é o maior ativo da farmácia: remédio parado é dinheiro parado.", "Os convênios pagam depois, por isso surgem valores a receber.", "Ativo total = passivo + patrimônio líquido."],
  learn:[
   {h:"A fotografia de 31/12", b:tbl(['Ativo','R$'],[['Caixa e bancos','40.000'],['Clientes (convênios)','60.000'],['Estoques','150.000'],['Imobilizado líquido','110.000'],['<b>Total do ativo</b>','<b>360.000</b>']]) + tbl(['Passivo e PL','R$'],[['Fornecedores','90.000'],['Salários a pagar','20.000'],['Empréstimos (longo prazo)','100.000'],['Patrimônio líquido','150.000'],['<b>Total</b>','<b>360.000</b>']])},
   {h:"O que chama atenção", b:ul(['O estoque é o maior ativo: remédio parado é dinheiro parado.','Os convênios pagam depois: surgem valores a receber.','Ativo total = Passivo + PL.'])}
@@ -180,6 +193,7 @@ export default [
   mc("Na Farmácia Vida, o caixa e os bancos somam R$ 40 mil, os clientes R$ 60 mil, os estoques R$ 150 mil e o imobilizado R$ 110 mil. Qual é o maior ativo?",["*Estoques","Caixa e bancos","Clientes","Imobilizado"],"R$ 150 mil em remédios e produtos: dinheiro parado nas prateleiras.")
  ]},
 {id:"farmacia2", title:"A DRE da farmácia", icon:"📈",
+ recap:["Receita líquida − CMV = lucro bruto; depois vêm as despesas e os tributos sobre o lucro.", "Margem bruta = 360 ÷ 1.200 = 30%; margem líquida = 60 ÷ 1.200 = 5%.", "Uma margem menor que a bruta mostra o peso das despesas e dos tributos."],
  learn:[
   {h:"O ano em números", b:tbl(['Linha','R$'],[['Receita líquida','1.200.000'],['(−) CMV','(840.000)'],['= Lucro bruto','360.000'],['(−) Despesas operacionais','(288.000)'],['= Resultado antes dos tributos sobre o lucro','72.000'],['(−) Tributos sobre o lucro','(12.000)'],['= Lucro líquido','60.000']])},
   {h:"As margens", b:eq('Margem bruta = 360 ÷ 1.200 = 30%') + eq('Margem líquida = 60 ÷ 1.200 = 5%')}
@@ -193,6 +207,7 @@ export default [
   mc("Se uma farmácia negociar desconto com os fornecedores, qual margem melhora primeiro?",["*A margem bruta","Nenhuma","Só a liquidez","O capital social"],"CMV menor, lucro bruto maior.")
  ]},
 {id:"farmacia3", title:"Prazos: estoque, convênio e fornecedor", icon:"⏱️",
+ recap:["Estocagem, recebimento e pagamento são os três prazos que formam o ciclo.", "Ciclo financeiro = 64 + 18 − 38 = 44 dias.", "Nesses 44 dias a farmácia financia a operação com recursos próprios ou empréstimos."],
  learn:[
   {h:"Os três prazos", b:tbl(['Prazo','Fórmula','Farmácia'],[['Estocagem','Estoque ÷ CMV × 360','150 ÷ 840 × 360 ≈ 64 dias'],['Recebimento','Clientes ÷ Receita × 360','60 ÷ 1.200 × 360 = 18 dias'],['Pagamento','Fornecedores ÷ Compras × 360','≈ 38 dias (compras de 850 mil)']])},
   {h:"Ciclo financeiro", b:eq('Ciclo financeiro = 64 + 18 − 38 = 44 dias') + box('dica','Durante 44 dias a farmácia financia a operação com recursos próprios ou empréstimos.')}
@@ -208,6 +223,7 @@ export default [
 
 /* ---------------- Vida: primeiro emprego ---------------- */
 {id:"emprego1", title:"O primeiro holerite", icon:"📄",
+ recap:["No holerite, o bruto não é o que cai na conta: descontam-se previdência, imposto de renda (quando houver) e vale-transporte.", "Líquido = bruto − descontos.", "Confira o holerite todo mês, com cada desconto."],
  learn:[
   {h:"Bruto não é o que cai na conta", b:`<p>Ana começou a trabalhar. No holerite aparecem o salário <b>bruto</b>, os <b>descontos</b> (contribuição previdenciária, imposto de renda quando houver, vale-transporte) e o <b>líquido</b>, que cai na conta.</p>` + box('atencao','Percentuais e faixas de desconto mudam por lei. Nesta lição, os valores de desconto são exemplos dados no próprio exercício.')},
   {h:"Um holerite de exemplo", b:tbl(['Item','R$'],[['Salário bruto','2.500,00'],['(−) Previdência (exemplo)','(200,00)'],['(−) Vale-transporte (exemplo)','(150,00)'],['= Líquido','2.150,00']])}
@@ -221,6 +237,7 @@ export default [
   nu("Descontos totais de R$ 350 sobre bruto de R$ 2.500. Que % do bruto foi descontado?",14,"350 ÷ 2.500 = 14%.","%")
  ]},
 {id:"emprego2", title:"O orçamento da Ana", icon:"🗓️",
+ recap:["Divida o líquido entre moradia e contas, mercado e transporte, lazer, curso e reserva.", "Pague a reserva primeiro, no dia do salário.", "A compra no cartão vai para a fatura do mês seguinte, mas o gasto é de hoje: anote no dia."],
  learn:[
   {h:"Dividindo o líquido", b:tbl(['Destino','R$'],[['Aluguel dividido e contas','900'],['Mercado e transporte','500'],['Lazer','300'],['Curso','150'],['Reserva','300']]) + box('dica','Pagar a reserva primeiro, no dia do salário, ajuda a não gastar o que era para guardar.')},
   {h:"Competência na vida real", b:`<p>A compra no cartão feita hoje vai para a fatura do mês que vem, mas o gasto é de hoje. Anotar no dia evita susto.</p>`}
@@ -234,6 +251,7 @@ export default [
   mc("Uma compra parcelada em 10 vezes:",["*Compromete o orçamento dos próximos 10 meses","Só afeta o orçamento do mês em que a compra foi feita","Não precisa ser anotada no orçamento","Não tem nenhum custo, se não tiver juros"],"Cada parcela reduz a folga futura.")
  ]},
 {id:"emprego3", title:"13º, férias e a reserva", icon:"🎁",
+ recap:["O 13º e as férias (com o adicional de um terço) são valores maiores em datas certas.", "Planeje para que não sumam em gastos pequenos: férias = salário + um terço do salário.", "Plano: reservar para o começo do ano, reforçar a reserva de emergência e quitar dívidas caras antes de compras maiores."],
  learn:[
   {h:"Dinheiro que vem uma vez por ano", b:`<p>O 13º salário e as férias (com o adicional de um terço) são valores maiores que chegam em datas certas. Planejar evita que sumam em gastos pequenos.</p>` + eq('Férias = salário + salário ÷ 3')},
   {h:"Um plano simples", b:ol(['Reservar para os gastos do começo do ano (material, impostos da casa, seguros).','Reforçar a reserva de emergência.','Quitar dívidas caras.','Só então pensar em compras maiores.'])}
@@ -247,6 +265,7 @@ export default [
   mc("Ana tem uma dívida no rotativo do cartão e recebeu o 13º. Uma boa decisão é:",["*Quitar a dívida do rotativo","Comprar um celular novo","Deixar o dinheiro parado na conta","Pagar só o mínimo da fatura"],"Juros do rotativo são muito altos.")
  ]},
 {id:"emprego4", title:"Primeiros investimentos", icon:"🌱",
+ recap:["Com seis meses de gastos guardados, dá para investir para objetivos de longo prazo.", "Juros compostos ajudam: R$ 300 por mês a 0,8% ao mês viram cerca de R$ 3.760 em 12 meses.", "Rendimentos variam; o que se guarda é certo, o que se ganha não é."],
  learn:[
   {h:"Com a reserva formada", b:`<p>Com seis meses de gastos guardados, Ana começa a investir para objetivos de longo prazo.</p>` + tbl(['Objetivo','Prazo','Onde faz sentido pensar'],[['Reserva de emergência','Já','Liquidez diária e baixo risco'],['Intercâmbio','3 anos','Renda fixa com vencimento próximo do objetivo'],['Aposentadoria','30 anos','Carteira diversificada']])},
   {h:"Juros compostos a favor", b:box('exemplo','R$ 300 por mês, rendendo 0,8% ao mês, viram cerca de R$ 3.760 em 12 meses: R$ 3.600 guardados e cerca de R$ 160 de rendimentos.') + box('atencao','Rendimentos variam com as taxas do mercado. Os números são ilustrativos.')}
@@ -262,6 +281,7 @@ export default [
 
 /* ---------------- Auditoria: auditando a Moda Aurora ---------------- */
 {id:"audloja1", title:"Planejando a auditoria da loja", icon:"🔎",
+ recap:["Comece entendendo como a loja vende: cartão, dinheiro, trocas, estoque e comissões.", "Identifique onde há mais risco de erro relevante.", "A materialidade pode partir de uma referência, como 5% do lucro antes dos tributos."],
  learn:[
   {h:"Entender o negócio", b:`<p>A auditoria da Moda Aurora começa por entender como ela vende: cartão, dinheiro, trocas, estoque e comissões. Onde há mais risco de erro relevante?</p>` + tbl(['Área','Risco'],[['Estoques','Alto: valor grande, perdas e furtos'],['Receita com cartão','Médio: conciliação com a administradora'],['Devoluções','Médio: podem esconder receita'],['Móveis','Baixo: valor pequeno']])},
   {h:"Materialidade", b:box('exemplo','Lucro antes dos tributos de R$ 400 mil. Se o auditor usar 5% como referência, a materialidade fica em R$ 20 mil.')}
@@ -275,6 +295,7 @@ export default [
   fl("As áreas com maior risco recebem {mais} procedimentos de auditoria.",["menos","nenhum"],"Abordagem baseada em risco.")
  ]},
 {id:"audloja2", title:"Contagem do estoque", icon:"📦",
+ recap:["O auditor acompanha a contagem física no fim do ano e faz contagens-teste.", "Confira do sistema para a prateleira e da prateleira para o sistema.", "Diferenças no teste levam a investigar as causas e a ampliar a amostra se puderem ser relevantes."],
  learn:[
   {h:"Acompanhando o inventário", b:`<p>O auditor acompanha a contagem física no fim do ano: observa a equipe contar, faz contagens-teste e confere com o sistema.</p>` + ul(['Do sistema para a prateleira: o que está registrado existe?','Da prateleira para o sistema: o que existe está registrado?'])},
   {h:"Diferenças encontradas", b:box('exemplo','Em 40 itens testados, 3 tinham diferença. O auditor investiga as causas e amplia o teste se o erro puder ser relevante.')}
@@ -288,6 +309,7 @@ export default [
   mt([["Existência","Do sistema para a prateleira"],["Integridade","Da prateleira para o sistema"],["Valorização","Custo × quantidade conferidos"]],"O que cada teste confirma.")
  ]},
 {id:"audloja3", title:"Receitas do cartão e devoluções", icon:"💳",
+ recap:["Compare as vendas no cartão do sistema com os extratos da administradora e os depósitos no banco.", "Vendas no sistema − taxas = depósitos da administradora.", "Muitas devoluções logo após o fim do ano podem indicar venda registrada sem ter acontecido."],
  learn:[
   {h:"Conciliando o cartão", b:`<p>O auditor compara as vendas no cartão do sistema da loja com os extratos da administradora e com os depósitos no banco.</p>` + eq('Vendas no sistema − taxas = depósitos da administradora')},
   {h:"Devoluções suspeitas", b:box('atencao','Muitas devoluções logo após o fim do ano podem indicar vendas registradas sem acontecer, para inflar a receita. O auditor olha as devoluções de janeiro.')}
@@ -303,6 +325,7 @@ export default [
 
 /* ---------------- Rotina digital: um dia no escritório contábil ---------------- */
 {id:"escritorio1", title:"Segunda-feira no escritório", icon:"🗂️",
+ recap:["Na segunda-feira, separe os documentos por cliente e confira o que chegou.", "Documentos com prazo, como guias e folha, vêm primeiro.", "Um calendário de obrigações por cliente evita esquecimentos."],
  learn:[
   {h:"A caixa de entrada", b:`<p>No escritório da Carla chegam, na segunda, documentos de vários clientes: notas de compra, extratos, recibos de aluguel e a folha de um salão.</p>` + ol(['Separar por cliente.','Conferir se o documento é da empresa certa.','Classificar e lançar.','Guardar o documento vinculado ao lançamento.'])},
   {h:"Prioridades", b:box('dica','Documentos com prazo (guias, folha) vêm primeiro. Um calendário de obrigações por cliente evita esquecimentos.')}
@@ -316,6 +339,7 @@ export default [
   fl("Todo lançamento deve ficar vinculado ao seu {documento}.",["palpite","e-mail"],"Rastreabilidade.")
  ]},
 {id:"escritorio2", title:"Conciliando o banco do cliente", icon:"🏦",
+ recap:["Compare o extrato com o razão e liste cada diferença.", "Razão 12.760 − tarifa 60 = 12.700; extrato 12.400 + cheque não compensado 300 = 12.700.", "Cada diferença precisa de explicação documentada."],
  learn:[
   {h:"Extrato x razão", b:tbl(['Item','Extrato','Razão'],[['Saldo final','R$ 12.400','R$ 12.760'],['Tarifa não lançada','− 60','—'],['Cheque emitido e não compensado','—','− 300']])},
   {h:"Fechando a diferença", b:eq('Razão 12.760 − tarifa 60 = 12.700; extrato 12.400 + cheque 300 = 12.700') + box('regra','Cada diferença precisa de explicação documentada.')}
@@ -329,6 +353,7 @@ export default [
   mc("Depois dos ajustes, razão e extrato ficaram em R$ 12.700. Isso indica que:",["*A conciliação fechou","Há fraude","O banco errou","O cliente tem lucro"],"Diferenças explicadas.")
  ]},
 {id:"escritorio3", title:"Fechamento do mês do cliente", icon:"✅",
+ recap:["Checklist de fechamento: bancos, clientes e fornecedores, estoque, provisões, depreciação e balancete.", "Compare com o mês anterior: variação grande pode ser erro de lançamento.", "Uma despesa fora do padrão pode ser algo que o cliente precisa saber."],
  learn:[
   {h:"Checklist de fechamento", b:ul(['Bancos conciliados.','Clientes e fornecedores batendo com os relatórios.','Estoque conferido.','Provisões do mês (férias, 13º, energia a pagar).','Depreciação lançada.','Balancete revisado e fechado.'])},
   {h:"Revisão analítica", b:box('dica','Compare com o mês anterior: uma despesa de energia três vezes maior pode ser erro de lançamento ou algo que o cliente precisa saber.')}
@@ -344,6 +369,7 @@ export default [
 
 /* ---------------- Imobilizado: a frota da transportadora ---------------- */
 {id:"frota1", title:"Comprando os caminhões", icon:"🚛",
+ recap:["O custo de cada caminhão inclui preço, frete e emplacamento.", "Gastos para deixar o bem pronto para uso entram no custo do ativo.", "Depreciação anual = (custo − residual) ÷ vida útil."],
  learn:[
   {h:"O custo de cada caminhão", b:tbl(['Item','R$'],[['Preço do caminhão','400.000'],['Frete até a empresa','6.000'],['Emplacamento e documentação','4.000'],['<b>Custo do ativo</b>','<b>410.000</b>']]) + box('dica','Gastos para deixar o bem pronto para uso entram no custo.')},
   {h:"Vida útil e residual", b:box('exemplo','Vida útil estimada de 8 anos e valor residual de R$ 90.000: depreciação anual de (410.000 − 90.000) ÷ 8 = <b>R$ 40.000</b>.')}
@@ -357,6 +383,7 @@ export default [
   mc("A depreciação mensal de um caminhão de R$ 40.000 por ano é:",["*R$ 3.333,33","R$ 40.000","R$ 4.000","R$ 333,33"],"40.000 ÷ 12.")
  ]},
 {id:"frota2", title:"Quilômetros rodados", icon:"🛣️",
+ recap:["Para caminhões, o desgaste acompanha os quilômetros: método das unidades produzidas.", "Depreciação por km = (custo − residual) ÷ km totais esperados.", "Troca de pneus e óleo é despesa; motor novo que aumenta a vida útil é ativo."],
  learn:[
   {h:"Depreciar pelo uso", b:`<p>Para caminhões, o desgaste acompanha os quilômetros. A empresa pode usar o método das unidades produzidas (aqui, km rodados).</p>` + eq('Depreciação por km = (Custo − Residual) ÷ km totais esperados') + box('exemplo','(410.000 − 90.000) ÷ 800.000 km = R$ 0,40 por km. Um ano com 120.000 km: R$ 48.000.')},
   {h:"Manutenção x melhoria", b:tbl(['Gasto','Tratamento'],[['Troca de pneus e óleo','Despesa'],['Motor novo que aumenta a vida útil','Ativo']])}
@@ -370,6 +397,7 @@ export default [
   mc("Por que usar km rodados em vez do método linear para caminhões?",["*Porque o desgaste acompanha o uso","Porque é proibido o linear","Para pagar menos imposto","Porque não há vida útil"],"O método deve refletir o consumo dos benefícios.")
  ]},
 {id:"frota3", title:"Vendendo um caminhão velho", icon:"🏷️",
+ recap:["Valor contábil = custo − depreciação acumulada.", "Vendido acima do valor contábil, há ganho; abaixo, há perda.", "A baixa tira do ativo o custo e a depreciação acumulada do caminhão."],
  learn:[
   {h:"Valor contábil na venda", b:box('exemplo','Caminhão com custo de R$ 410.000 e depreciação acumulada de R$ 300.000: valor contábil de R$ 110.000. Vendido por R$ 130.000: ganho de R$ 20.000.') + lanc([['D','Bancos','130.000'],['D','Depreciação acumulada','300.000'],['C','Veículos','410.000'],['C','Ganho na venda de imobilizado','20.000']])},
   {h:"Perda na venda", b:`<p>Se o caminhão fosse vendido por R$ 90.000, haveria perda de R$ 20.000 (110.000 − 90.000).</p>`}

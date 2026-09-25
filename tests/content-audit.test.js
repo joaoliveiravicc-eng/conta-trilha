@@ -139,3 +139,15 @@ test('verdadeiro ou falso: as respostas verdadeiras não dominam (58% antes da a
   assert.ok(t / (t + f) <= 0.58 && t / (t + f) >= 0.42, 'verdadeiras: ' + Math.round(t / (t + f) * 100) + '%');
   for (const [id, p] of Object.entries(perCourse)) assert.ok(p.t / (p.t + p.f) <= 0.78, id + ' com ' + p.t + ' verdadeiras e ' + p.f + ' falsas');
 });
+
+test('toda lição termina com um resumo próprio ("Leve com você"), e não com os títulos dos cartões', () => {
+  const bad = [];
+  for (const l of lessons){
+    const r = l.recap;
+    if (!Array.isArray(r) || r.length < 2 || r.length > 4){ bad.push(l.id + ': ' + (r ? r.length : 0) + ' itens'); continue; }
+    if (r.some(t => typeof t !== 'string' || t.trim().length < 12 || t.length > 220)) bad.push(l.id + ': item vazio ou longo demais');
+    if (new Set(r).size !== r.length) bad.push(l.id + ': item repetido');
+    if (/<HOJE|undefined|NaN/.test(r.join(' '))) bad.push(l.id + ': lixo de template');
+  }
+  assert.deepEqual(bad, []);
+});

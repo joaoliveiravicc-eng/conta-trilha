@@ -4,6 +4,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od, ep } from '../../engine/exercises/f
 /* Carreiras · Analista Financeiro Jr: do zero ao que a rotina e a entrevista da vaga cobram. */
 export default [
 {id:"fj1", title:"O patrimônio de uma empresa", icon:"🏢",
+ recap:["Patrimônio é o conjunto de bens, direitos e obrigações: Ativo, Passivo e Patrimônio Líquido.", "Ativo = Passivo + PL.", "Contas a receber é Ativo; contas a pagar é Passivo."],
  learn:[
   {h:"Ativo, Passivo e Patrimônio Líquido", b:`<p>Toda empresa tem um <b>patrimônio</b>: o conjunto de bens, direitos e obrigações que ela tem numa data.</p>` + tbl(['Grupo','O que é','Exemplos'],[['Ativo','O que a empresa tem ou tem a receber','Dinheiro no banco, clientes a receber, estoque, máquinas'],['Passivo','O que a empresa deve','Fornecedores, empréstimos, salários a pagar'],['Patrimônio Líquido (PL)','O que sobra: Ativo − Passivo','Capital dos sócios e lucros acumulados']])},
   {h:"A equação fundamental", b:eq('Ativo = Passivo + Patrimônio Líquido') + box('exemplo','Ativo de R$ 100.000 e Passivo de R$ 40.000: o PL é R$ 60.000. É o que sobraria para os sócios se a empresa pagasse tudo o que deve.')},
@@ -17,6 +18,7 @@ export default [
   fl("Ativo = Passivo + {Patrimônio Líquido}.",["Lucro","Receita"],"É a equação fundamental da Contabilidade.")
  ]},
 {id:"fj2", title:"Débito e crédito, direto ao ponto", icon:"✍️",
+ recap:["Todo lançamento tem débito e crédito de mesmo valor; débito e crédito não são “bom” ou “ruim”.", "Recebimento de cliente: D Bancos / C Clientes. Pagamento de fornecedor: D Fornecedores / C Bancos.", "O sistema sugere as contas, mas entender débito e crédito ajuda a conferir."],
  learn:[
   {h:"A regra que você vai usar todo dia", b:`<p>Todo lançamento tem <b>débito</b> e <b>crédito</b> de mesmo valor. Débito e crédito não significam “bom” ou “ruim”: são só os dois lados do registro.</p>` + tbl(['Grupo','Aumenta com','Diminui com'],[['Ativo','Débito','Crédito'],['Passivo e PL','Crédito','Débito'],['Despesa','Débito','Crédito'],['Receita','Crédito','Débito']])},
   {h:"Um recebimento de cliente", b:`<p>A empresa recebe no banco R$ 5.000 de um cliente que comprou a prazo:</p>` + lanc([['D','Bancos','5.000'],['C','Clientes','5.000']]) + box('exemplo','Bancos (Ativo) aumenta por débito. Clientes (Ativo) diminui por crédito: o direito virou dinheiro.')},
@@ -31,6 +33,7 @@ export default [
   tf("Num lançamento, o total de débitos precisa ser igual ao total de créditos.",true,"É o método das partidas dobradas.")
  ]},
 {id:"fj3", title:"Receita, despesa e lucro", icon:"📈",
+ recap:["Lucro = receitas − custos − despesas, e a DRE mostra isso num período.", "Venda a prazo já é receita no mês da venda: é o regime de competência.", "Lucro alto não significa caixa cheio."],
  learn:[
   {h:"De onde vem o lucro", b:`<p>A <b>DRE</b> (Demonstração do Resultado do Exercício) mostra, num período, quanto a empresa ganhou de receita e quanto consumiu de custos e despesas.</p>` + eq('Lucro = Receitas − Custos − Despesas')},
   {h:"Um mês simples", b:tbl(['Item','Valor'],[['Receita de vendas','R$ 40.000'],['(−) Custo das mercadorias vendidas','R$ 22.000'],['(−) Despesas administrativas','R$ 9.000'],['= Lucro do período','R$ 9.000']]) + box('dica','O lucro do mês é um dos primeiros números que um gestor pergunta ao financeiro.')},
@@ -44,6 +47,7 @@ export default [
   cl("Receita ou despesa?",["Receita","Despesa"],"Venda de mercadorias:0|Conta de energia:1|Serviço prestado a um cliente:0|Salário dos funcionários:1|Tarifa bancária:1","Receita é o que a empresa ganha com sua atividade; despesa é o que ela consome para funcionar.")
  ]},
 {id:"fj4", title:"A rotina de contas a pagar", icon:"🧾",
+ recap:["O contas a pagar quita o valor certo, à pessoa certa, na data certa.", "Ciclo: receber a nota e o boleto, conferir com o pedido, lançar, agendar e pagar.", "A conferência evita pagar duas vezes, pagar para o CNPJ errado, perder o vencimento e cair em boleto falso."],
  learn:[
   {h:"O que faz o contas a pagar", b:`<p>Controla tudo o que a empresa <b>deve pagar</b>: fornecedores, contas de consumo, tributos, aluguel. O objetivo é pagar o valor certo, para a pessoa certa, na data certa.</p>`},
   {h:"O ciclo de uma conta a pagar", b:ol(['Receber a nota fiscal e o boleto.','Conferir com o pedido de compra: fornecedor, valor, quantidade e vencimento.','Lançar no sistema e agendar o pagamento para a data de vencimento.','Depois do pagamento, dar baixa no título e arquivar o comprovante.']) + box('dica','Pagar muito antes do vencimento tira dinheiro do caixa sem necessidade, a não ser que haja desconto que compense.')},
@@ -57,6 +61,7 @@ export default [
   en("A empresa pagou pelo banco R$ 4.500 a um fornecedor.","Fornecedores","Bancos",["Despesa de compras","Clientes"],"A dívida diminui por débito e o banco diminui por crédito.")
  ]},
 {id:"fj5", title:"A rotina de contas a receber", icon:"💰",
+ recap:["O contas a receber cuida do que os clientes devem: boleto, vencimento, baixa e cobrança.", "Da venda ao recebimento: nota e boleto, título no sistema, baixa pelo extrato e cobrança.", "Prazo médio de recebimento: quanto menor, mais rápido o dinheiro chega ao caixa."],
  learn:[
   {h:"O espelho do contas a pagar", b:`<p>Contas a receber cuida do que os <b>clientes devem</b> à empresa: emissão de boletos, acompanhamento dos vencimentos, baixa dos pagamentos e cobrança de quem atrasa.</p>`},
   {h:"Da venda ao recebimento", b:ol(['Emitir a nota fiscal e o boleto.','Registrar o título no sistema com o vencimento.','Conferir no extrato se o pagamento entrou e dar baixa.','Cobrar quem não pagou, com educação e firmeza.']) + box('exemplo','Um boleto de R$ 3.000 venceu dia 10. No dia 11, sem pagamento no extrato, o cliente entra na lista de cobrança.')},
@@ -70,6 +75,7 @@ export default [
   mc("Um cliente pagou, mas o título continua em aberto no sistema. O que faltou?",["*Dar baixa no título com base no extrato bancário","Emitir outra nota fiscal para o mesmo cliente","Cobrar o cliente novamente pelo mesmo valor"],"Sem a baixa, o sistema mostra uma dívida que não existe mais e o cliente pode ser cobrado por engano.")
  ]},
 {id:"fj6", title:"Juros, multa e inadimplência", icon:"⏰",
+ recap:["Atraso gera multa (percentual fixo, cobrado uma vez) e juros de mora (por dia ou por mês).", "Boleto de R$ 1.000, multa de 2% e juros de 1% ao mês, com 10 dias de atraso: R$ 1.023,33.", "Perda estimada com clientes é reconhecida antes de se confirmar; o aging é a base dela."],
  learn:[
   {h:"O preço do atraso", b:`<p>Quando um pagamento atrasa, costumam incidir <b>multa</b> e <b>juros de mora</b>.</p>` + tbl(['Encargo','Como funciona'],[['Multa','Percentual fixo sobre o valor, cobrado uma única vez'],['Juros de mora','Percentual por dia ou por mês de atraso, sobre o valor em aberto']])},
   {h:"Calculando", b:box('exemplo','Boleto de R$ 1.000, multa de 2% e juros de 1% ao mês (0,033% ao dia), pago com 10 dias de atraso: multa R$ 20 e juros de cerca de R$ 3,33. Total: R$ 1.023,33.') + box('dica','Os percentuais valem os que estão no boleto ou no contrato. Confira sempre o documento.')},
@@ -84,6 +90,7 @@ export default [
   mc("Um relatório que separa os títulos vencidos por faixa de atraso (até 30 dias, 31 a 60...) se chama:",["*Aging","Balancete","Razonete"],"O aging mostra há quanto tempo cada valor está vencido.")
  ]},
 {id:"fj7", title:"Conciliação bancária", icon:"🏦",
+ recap:["Conciliar é comparar o sistema com o extrato, item por item, até os saldos baterem.", "Passo a passo: importar, comparar, investigar o que aparece só de um lado e registrar os ajustes.", "Tarifa só no extrato deve ser lançada; pagamento agendado só no sistema é item em trânsito."],
  learn:[
   {h:"O que é conciliar", b:`<p><b>Conciliação bancária</b> é comparar os lançamentos do sistema da empresa com o extrato do banco, item por item, até os saldos baterem.</p>`},
   {h:"Passo a passo", b:ol(['Importar o extrato do banco do período.','Comparar cada movimento do extrato com um lançamento do sistema.','Investigar o que aparece só de um lado.','Registrar os ajustes com documento e conferir o saldo final.']) + box('exemplo','Uma tarifa bancária de R$ 45 aparece no extrato, mas não no sistema. É um item sem par que precisa ser lançado.')},
@@ -98,6 +105,7 @@ export default [
   nu("O extrato mostra saldo de R$ 10.300. Um pagamento de R$ 700, já baixado no sistema, só sai do banco amanhã. Qual deve ser o saldo do sistema hoje?",9600,"10.300 − 700 = 9.600. O sistema já tirou o pagamento; o banco ainda não.","R$")
  ]},
 {id:"fj8", title:"Fluxo de caixa", icon:"💵",
+ recap:["O fluxo de caixa registra só o que mexe no dinheiro, seja receita, empréstimo ou aporte.", "Saldo final = saldo inicial + entradas − saídas.", "O fluxo projetado mostra com antecedência se vai faltar ou sobrar dinheiro."],
  learn:[
   {h:"Dinheiro que entra e sai", b:`<p>O <b>fluxo de caixa</b> registra só o que mexe no dinheiro. Não importa se é receita, empréstimo ou aporte dos sócios.</p>` + tbl(['Movimento','No caixa'],[['Recebimento de clientes','Entrada'],['Pagamento a fornecedores','Saída'],['Empréstimo recebido','Entrada'],['Pagamento de salários','Saída']])},
   {h:"A conta do saldo", b:eq('Saldo final = Saldo inicial + Entradas − Saídas') + box('exemplo','Saldo inicial de R$ 8.000, entradas de R$ 15.000 e saídas de R$ 12.000: saldo final de R$ 11.000.')},
@@ -111,6 +119,7 @@ export default [
   nu("Saldo de R$ 2.000 hoje. Nesta semana entram R$ 6.000 e saem R$ 9.500. Quanto vai faltar no fim da semana?",1500,"2.000 + 6.000 − 9.500 = −1.500. Faltam R$ 1.500: é hora de avisar o gestor.","R$")
  ]},
 {id:"fj9", title:"Caixa não é lucro", icon:"⚖️",
+ recap:["A DRE responde quanto a empresa ganhou (competência); o fluxo de caixa responde quanto dinheiro ela tem (caixa).", "Venda a prazo dá lucro no mês e caixa só depois.", "Empréstimo, pagamento de dívida e compra de máquina mexem no caixa sem passar pela despesa."],
  learn:[
   {h:"Duas perguntas diferentes", b:tbl(['Pergunta','Onde se responde'],[['Quanto a empresa ganhou no período?','DRE, pelo regime de competência'],['Quanto dinheiro ela tem e terá?','Fluxo de caixa, pelo regime de caixa']])},
   {h:"Um caso clássico", b:`<p>Uma empresa vende R$ 20.000 a prazo, para receber em 60 dias, e paga R$ 8.000 de despesas à vista no mesmo mês.</p>` + eq('Lucro do mês = 20.000 − 8.000 = R$ 12.000') + eq('Caixa do mês = 0 − 8.000 = R$ 8.000 a menos') + box('atencao','A empresa teve lucro, mas o caixa diminuiu. O analista precisa saber explicar esse descompasso.')},
@@ -124,6 +133,7 @@ export default [
   wr("Qual regime registra o valor só quando o dinheiro entra ou sai? (uma palavra)",["caixa"],"Regime de caixa.")
  ]},
 {id:"fj10", title:"Lendo o Balanço e a DRE", icon:"📊",
+ recap:["O Balanço é uma foto da empresa numa data; a DRE é um filme de um período.", "Circulante é o que vira dinheiro ou vence em até 12 meses.", "A DRE parte da receita bruta, tira deduções, custos e despesas e chega ao resultado."],
  learn:[
   {h:"O Balanço em poucas linhas", b:`<p>O <b>Balanço Patrimonial</b> é uma foto da empresa numa data: o que ela tem, o que deve e o que sobra para os sócios.</p>` + tbl(['Ativo','Passivo + PL'],[['Circulante: caixa, clientes, estoque','Circulante: fornecedores, salários, tributos a pagar'],['Não circulante: imóveis, máquinas','Não circulante: financiamentos longos'],['','Patrimônio Líquido']])},
   {h:"Circulante e não circulante", b:`<p><b>Circulante</b> é o que vira dinheiro ou vence em até 12 meses. É onde ficam os saldos de contas a receber e a pagar do dia a dia.</p>` + box('dica','Um financiamento de 5 anos tem uma parte no Passivo Circulante (parcelas dos próximos 12 meses) e o restante no Não Circulante.')},
@@ -137,6 +147,7 @@ export default [
   nu("Receita bruta de R$ 100.000 e tributos sobre vendas de R$ 15.000. Qual é a receita líquida?",85000,"100.000 − 15.000 = 85.000.","R$")
  ]},
 {id:"fj11", title:"Indicadores essenciais", icon:"📐",
+ recap:["Liquidez corrente = ativo circulante ÷ passivo circulante.", "Margem bruta e margem líquida = lucro ÷ receita líquida.", "Prazo médio de pagamento = (fornecedores ÷ compras) × dias. Receber antes de pagar dá fôlego ao caixa."],
  learn:[
   {h:"Liquidez corrente", b:`<p>Mostra se a empresa tem recursos de curto prazo para pagar as dívidas de curto prazo.</p>` + eq('Liquidez corrente = Ativo Circulante ÷ Passivo Circulante') + box('exemplo','Ativo circulante de R$ 80.000 e passivo circulante de R$ 40.000: liquidez de 2. São R$ 2 para cada R$ 1 que vence no curto prazo.')},
   {h:"Margens", b:eq('Margem bruta = Lucro bruto ÷ Receita líquida') + eq('Margem líquida = Lucro líquido ÷ Receita líquida') + box('dica','Margem líquida de 10% quer dizer que, de cada R$ 100 vendidos, sobram R$ 10 de lucro.')},
@@ -150,6 +161,7 @@ export default [
   mc("A empresa recebe dos clientes em 45 dias e paga os fornecedores em 30. O que acontece?",["*Ela paga antes de receber e precisa cobrir essa diferença","Sobra dinheiro no caixa, porque o dinheiro dos clientes demora","Não faz diferença, porque os prazos se compensam"],"São 15 dias em que a empresa financia a operação com dinheiro próprio ou emprestado.")
  ]},
 {id:"fj12", title:"Excel do analista financeiro", icon:"📑",
+ recap:["PROCV traz um dado de outra tabela; o último argumento 0 exige correspondência exata.", "SOMASE soma só o que atende à condição; SE mostra um resultado conforme a condição.", "Tabela dinâmica resume uma lista grande sem fórmulas. Na entrevista, explique quando usar cada ferramenta."],
  learn:[
   {h:"Por que o Excel aparece em quase toda vaga", b:`<p>O analista júnior passa boa parte do dia organizando, cruzando e conferindo dados em planilhas: extratos, títulos em aberto, relatórios do sistema.</p>` + tbl(['Função','Para que serve'],[['SOMA','Somar uma coluna ou um intervalo'],['SE','Mostrar um resultado conforme uma condição'],['SOMASE','Somar só o que atende a uma condição'],['PROCV / PROCX','Buscar um dado em outra tabela'],['Tabela dinâmica','Resumir uma lista grande por cliente, mês ou categoria']])},
   {h:"PROCV na prática", b:`<p>Você tem a lista de títulos com o código do cliente e quer trazer o nome de cada um de outra tabela:</p>` + eq('=PROCV(A2; Clientes!A:B; 2; 0)') + box('exemplo','Busca o código em A2 na primeira coluna da tabela de clientes e devolve a 2ª coluna (o nome). O 0 exige correspondência exata.')},
@@ -163,6 +175,7 @@ export default [
   mc("A fórmula =SE(E2&lt;HOJE(); \"Vencido\"; \"A vencer\") mostra “Vencido” quando:",["*A data em E2 já passou","A data em E2 é futura","E2 está vazia"],"Se o vencimento é anterior a hoje, o título está vencido.")
  ]},
 {id:"fj13", title:"Tributos e retenções na rotina", icon:"🧮",
+ recap:["ICMS é estadual, ISS é municipal, PIS e COFINS são federais sobre a receita; IRPJ e CSLL, sobre o lucro.", "Retenção na fonte: quem paga desconta o tributo e recolhe ao governo.", "O valor pago ao fornecedor é o líquido; o retido vira obrigação com prazo próprio."],
  learn:[
   {h:"Os nomes que aparecem nas notas", b:tbl(['Tributo','Sobre o quê','Esfera'],[['ICMS','Circulação de mercadorias','Estadual'],['ISS','Prestação de serviços','Municipal'],['PIS e COFINS','Receita (faturamento)','Federal'],['IRPJ e CSLL','Lucro','Federal']]) + box('atencao','A Reforma Tributária vai substituir aos poucos ICMS, ISS, PIS e COFINS por IBS e CBS, numa transição que vai de 2026 a 2033. Por enquanto, os nomes antigos continuam aparecendo.')},
   {h:"Retenção na fonte", b:`<p>Em muitos serviços, quem <b>paga</b> desconta um tributo e recolhe direto ao governo. O fornecedor recebe menos do que o valor da nota.</p>` + box('exemplo','Nota de serviço de R$ 1.000 com retenção de 5% de ISS: o fornecedor recebe R$ 950, e a empresa recolhe os R$ 50 à prefeitura.')},
@@ -179,6 +192,7 @@ export default [
   tf("Quando a empresa retém um tributo e não o recolhe no prazo, a multa é do fornecedor.",false,"Quem retém passa a ser o responsável pelo recolhimento: a multa é da empresa, e não do fornecedor.")
  ]},
 {id:"fj14", title:"Sigilo e LGPD no financeiro", icon:"🔒",
+ recap:["A LGPD define regras para coletar, guardar e usar dados pessoais.", "O financeiro lida com dados de clientes, fornecedores e funcionários, e um vazamento gera multa e prejuízo.", "Acesse só o necessário, use os canais oficiais e nunca compartilhe login e senha."],
  learn:[
   {h:"O que é a LGPD", b:`<p>A <b>Lei Geral de Proteção de Dados</b> define regras para coletar, guardar e usar dados pessoais: nome, CPF, endereço, dados bancários, salário.</p>`},
   {h:"Por que isso cai numa vaga financeira", b:`<p>O financeiro lida o tempo todo com dados de clientes, fornecedores e funcionários. Um vazamento pode gerar multa para a empresa e prejuízo para as pessoas.</p>` + box('atencao','Nunca envie planilhas com dados de clientes ou funcionários por canais pessoais, como WhatsApp ou e-mail particular.')},
@@ -192,6 +206,7 @@ export default [
   mc("Qual é uma boa prática no dia a dia?",["*Acessar só os dados necessários à tarefa","Compartilhar o login com o colega, para agilizar","Guardar cópias dos arquivos no computador pessoal"],"Acesso mínimo necessário é um princípio central da LGPD.")
  ]},
 {id:"fj15", title:"Currículo e entrevista", icon:"🎯",
+ recap:["Para vaga júnior, o recrutador procura formação em área próxima, noção da rotina e vontade de aprender.", "Responda sobre experiências com situação, o que você fez e o resultado.", "Antes do dia: pesquise a empresa, releia a vaga e treine em voz alta."],
  learn:[
   {h:"O que o recrutador procura", b:ul(['Formação em Contabilidade, Administração, Economia ou área próxima. Estar cursando costuma bastar para vaga júnior.','Noção de contas a pagar e a receber, conciliação bancária e fluxo de caixa.','Excel: pelo menos PROCV, SOMASE, filtros e tabela dinâmica.','Organização, atenção a detalhes e cumprimento de prazos.']) + box('dica','Escreva o que você fez com números: “conciliei 3 contas bancárias por mês” diz mais do que “ajudei no financeiro”.')},
   {h:"Perguntas comuns", b:tbl(['Pergunta','O que avaliam'],[['O que é conciliação bancária?','Se você conhece a rotina'],['Qual a diferença entre lucro e caixa?','Se você entende os números'],['Conte uma vez em que encontrou um erro.','Atenção a detalhes'],['Como você organiza tarefas com prazo?','Organização'],['Por que a área financeira?','Interesse real pela função']])},
@@ -208,6 +223,7 @@ export default [
   ep("Treine outra pergunta comum: por que uma empresa pode ter lucro e estar sem dinheiro?","Porque o lucro segue a competência: vendas a prazo entram como receita antes de o dinheiro chegar. Além disso, pagamentos de dívidas, compras de bens e estoques tiram dinheiro do caixa sem virar despesa na hora.",[["Receita antes do dinheiro","prazo","depois","competenc","nao receb","ainda nao","receber"],["Dinheiro que sai antes ou sem virar despesa","divid","emprestim","estoque","maquin","compra","investim","pag"]],"Mostra que você entende a diferença entre DRE e fluxo de caixa.")
  ]},
 {id:"fj0", title:"Porcentagem e juros do dia a dia", icon:"🧮",
+ recap:["Porcentagem é uma fração de 100: transforme em decimal e multiplique.", "Juros simples: capital × taxa × tempo. Juros compostos: os juros entram na base do mês seguinte.", "Multa, juros, desconto à vista e variação de despesas são porcentagem."],
  learn:[
   {h:"Porcentagem sem medo", b:`<p>Porcentagem é uma fração de 100. Para calcular, transforme em decimal e multiplique.</p>` + eq('15% de R$ 800 = 0,15 × 800 = R$ 120') + tbl(['Situação','Conta'],[['Aumento de 10%','Valor × 1,10'],['Desconto de 10%','Valor × 0,90'],['Variação','(Novo − Antigo) ÷ Antigo']]) + box('exemplo','A conta de energia foi de R$ 800 para R$ 1.000. Variação: 200 ÷ 800 = 25% a mais.')},
   {h:"Juros simples", b:`<p>Os juros são sempre calculados sobre o valor inicial.</p>` + eq('Juros = Capital × taxa × tempo') + box('exemplo','R$ 1.000 a 2% ao mês por 3 meses: 1.000 × 0,02 × 3 = R$ 60 de juros.')},
@@ -223,6 +239,7 @@ export default [
   tf("Um aumento de 10% seguido de um desconto de 10% volta exatamente ao preço original.",false,"100 × 1,10 = 110; 110 × 0,90 = 99. O desconto incide sobre uma base maior.")
  ]},
 {id:"fjb1", title:"Boleto, Pix, TED e cartão", icon:"💳",
+ recap:["Pix chega na hora; TED, no mesmo dia em horário bancário; boleto tem beneficiário, pagador e linha digitável.", "No boleto, o beneficiário precisa ser o fornecedor da nota.", "No cartão, a empresa recebe o valor menos a taxa; antecipar recebíveis tem custo."],
  learn:[
   {h:"Como o dinheiro entra e sai", b:tbl(['Meio','Quando o dinheiro chega','Observação'],[['Pix','Na hora, qualquer dia e horário','Confira nome e CNPJ do recebedor antes de confirmar'],['TED','No mesmo dia, em horário bancário','Usada para valores altos e pagamentos programados'],['Boleto','Em geral, 1 dia útil depois do pagamento','Tem vencimento, multa e juros próprios'],['Cartão de crédito','Em geral, cerca de 30 dias depois da venda','A operadora cobra uma taxa sobre cada venda']]) + box('dica','O DOC deixou de existir em 2024. Se aparecer numa pergunta, é pegadinha.')},
   {h:"Anatomia de um boleto", b:ul(['<b>Beneficiário</b>: quem vai receber. Precisa ser o fornecedor da nota.','<b>Pagador</b>: quem deve pagar, com nome e CNPJ.','<b>Linha digitável</b> e código de barras: identificam o boleto.','<b>Vencimento</b>, multa e juros por atraso.']) + box('atencao','Golpe comum: boleto adulterado com o beneficiário trocado. O valor e o vencimento parecem certos, mas o dinheiro vai para outra conta.')},
@@ -236,6 +253,7 @@ export default [
   mc("Antecipar os recebíveis do cartão significa:",["*Receber antes do prazo, pagando um custo por isso","Receber um valor maior do que o total da venda feita","Cancelar a venda no cartão do cliente"],"A antecipação troca prazo por dinheiro hoje, com desconto.")
  ]},
 {id:"fjb2", title:"Rotina bancária no sistema", icon:"🗂️",
+ recap:["O DDA mostra os boletos registrados contra o CNPJ da empresa: compare com as notas lançadas.", "Remessa: o sistema envia o lote ao banco. Retorno: o banco informa o que foi pago ou recebido.", "Alçada exige aprovação acima de um valor; segregação separa quem cadastra de quem aprova o pagamento."],
  learn:[
   {h:"DDA: os boletos em nome da empresa", b:`<p>No <b>DDA</b> (Débito Direto Autorizado), os boletos registrados contra o CNPJ da empresa aparecem sozinhos no internet banking.</p>` + box('dica','Compare o DDA com as notas lançadas. Boleto que chegou por e-mail e não aparece no DDA merece desconfiança.')},
   {h:"Remessa e retorno", b:`<p>Em vez de pagar boleto por boleto, o sistema da empresa gera um <b>arquivo de remessa</b> com o lote do dia e o envia ao banco. Depois, o banco devolve um <b>arquivo de retorno</b> dizendo o que foi pago ou recebido, e o sistema dá baixa sozinho.</p>` + tbl(['Arquivo','Vai de... para...','Serve para'],[['Remessa','Empresa → banco','Enviar pagamentos ou registrar boletos'],['Retorno','Banco → empresa','Confirmar o que foi pago ou recebido']]) + box('exemplo','Esses arquivos seguem o padrão CNAB da Febraban, com versões de 240 e de 400 posições. Se a vaga pede “CNAB”, é isso.')},
@@ -250,6 +268,7 @@ export default [
   od("Ordene o pagamento em lote:",["Aprovar os títulos do dia","Gerar o arquivo de remessa","Enviar ao banco e autorizar","Importar o retorno e conferir as baixas"],"Aprovar, enviar e confirmar.")
  ]},
 {id:"fjc1", title:"Sobra ou falta de caixa", icon:"🪙",
+ recap:["Capital de giro sustenta a operação entre pagar fornecedores e receber dos clientes.", "Quando sobra dinheiro, aplique em algo de baixo risco e resgate rápido, seguindo a política.", "Quando falta, as saídas são negociar prazo, antecipar recebíveis ou buscar capital de giro, cada uma com seu custo."],
  learn:[
   {h:"Capital de giro", b:`<p>É o dinheiro que sustenta a operação entre pagar fornecedores e receber dos clientes. Quanto mais a empresa espera para receber e menos prazo tem para pagar, mais capital de giro precisa.</p>` + eq('Ciclo financeiro = prazo de estoque + prazo de recebimento − prazo de pagamento') + box('exemplo','Estoque parado por 30 dias, recebimento em 40 e pagamento em 45: ciclo financeiro de 25 dias que a empresa precisa financiar.')},
   {h:"Quando sobra dinheiro", b:`<p>Dinheiro parado na conta corrente não rende. Seguindo a política da empresa, a sobra costuma ir para aplicações de <b>baixo risco e resgate rápido</b>, como CDB com liquidez diária.</p>`},
@@ -263,6 +282,7 @@ export default [
   tf("Aumentar o prazo de pagamento aos fornecedores reduz o ciclo financeiro.",true,"O prazo de pagamento entra subtraindo na conta.")
  ]},
 {id:"fjc2", title:"Orçamento e fechamento do mês", icon:"🗓️",
+ recap:["Compare o orçado com o realizado todo mês e explique as diferenças.", "A conta diz o que foi gasto; o centro de custo diz onde.", "Checklist: conciliar bancos, conferir títulos em aberto e lançar as despesas do mês ainda não pagas (provisões)."],
  learn:[
   {h:"Orçado x realizado", b:`<p>O <b>orçamento</b> é o plano de receitas e despesas. Todo mês, o financeiro compara o que foi planejado com o que aconteceu e explica as diferenças.</p>` + tbl(['Conta','Orçado','Realizado','Variação'],[['Energia','R$ 5.000','R$ 6.000','+R$ 1.000 (+20%)'],['Receita de vendas','R$ 80.000','R$ 72.000','−R$ 8.000 (−10%)']]) + box('dica','Não basta mostrar o número: explique o motivo. “A energia subiu 20% porque a bandeira tarifária foi vermelha” é uma análise.')},
   {h:"Centros de custo", b:`<p>A conta contábil diz <b>o que</b> foi gasto. O <b>centro de custo</b> diz <b>onde</b>: qual área, unidade ou fazenda. É o que permite saber quanto custa cada parte do negócio.</p>` + box('exemplo','Conta: Combustíveis. Centro de custo: Fazenda A. Assim o diesel da fazenda não se mistura com o do escritório.')},
@@ -276,6 +296,7 @@ export default [
   od("Ordene o fechamento do mês:",["Conciliar os bancos","Conferir títulos em aberto","Lançar as provisões","Montar relatórios e explicar variações"],"Conferir antes de reportar.")
  ]},
 {id:"fjm1", title:"Receitas de TV e rádio", icon:"📺",
+ recap:["TV e rádio vendem espaço publicitário; quem compra são os anunciantes, em geral por agências.", "O PI formaliza a venda, e a agência costuma ficar com um desconto-padrão.", "A receita é reconhecida quando o comercial vai ao ar; o checking comprova a veiculação."],
  learn:[
   {h:"Como uma emissora ganha dinheiro", b:`<p>TV e rádio vendem <b>espaço publicitário</b>: comerciais, merchandising e patrocínios de programas. Quem compra são os anunciantes, quase sempre por meio de uma <b>agência de publicidade</b>.</p>` + box('dica','Grupos de comunicação também costumam ter receitas de portais de notícias, eventos, licenciamento de marcas e aluguel de imóveis.')},
   {h:"O PI e a comissão da agência", b:`<p>A venda é formalizada no <b>PI (Pedido de Inserção)</b>, que diz o que vai ao ar, quando e por quanto. A agência costuma ficar com um desconto-padrão, em geral de 20% do valor bruto, e o veículo recebe o restante.</p>` + box('exemplo','Campanha de R$ 50.000 brutos: a agência fica com R$ 10.000 (20%) e a emissora recebe R$ 40.000.')},
@@ -289,6 +310,7 @@ export default [
   tf("Uma permuta de espaço publicitário por serviços não precisa ser registrada, porque não envolve dinheiro.",false,"Ela gera receita e despesa (ou ativo) e deve ser registrada.")
  ]},
 {id:"fjm2", title:"O caixa do agronegócio", icon:"🌾",
+ recap:["Na fazenda, as despesas se espalham pelo ano e a receita se concentra na venda da safra: o caixa é sazonal.", "A safra é financiada por custeio agrícola e CPR.", "Gado e lavoura em formação são ativos biológicos; depois da colheita, o grão vira estoque."],
  learn:[
   {h:"Gasta o ano todo, recebe na colheita", b:`<p>Numa fazenda, as despesas se espalham pelo ano: sementes, fertilizantes, diesel, salários, veterinário. Já a receita se concentra na <b>venda da safra</b> ou dos animais. É a <b>sazonalidade</b>, e o fluxo de caixa precisa prever os meses de aperto.</p>` + tbl(['Unidade','Equivale a'],[['Saca (soja, milho, café)','60 kg'],['Arroba (gado)','15 kg']])},
   {h:"Como a safra é financiada", b:tbl(['Instrumento','O que é'],[['Custeio agrícola','Crédito rural para pagar os gastos da safra, quitado depois da colheita'],['CPR (Cédula de Produto Rural)','O produtor recebe hoje e se compromete a entregar produto ou pagar no futuro'],['Barter','Troca de insumos por parte da produção futura']])},
@@ -303,6 +325,7 @@ export default [
   tf("Depois de colhida, a soja deixa de ser ativo biológico e passa a ser estoque.",true,"O produto colhido é estoque até ser vendido.")
  ]},
 {id:"fjm3", title:"Um grupo, várias empresas", icon:"🏛️",
+ recap:["Cada empresa do grupo tem o seu CNPJ, banco, contabilidade e tributos.", "Quando uma paga pela outra, nasce um saldo intercompany: uma tem a receber e a outra tem a pagar.", "Despesas compartilhadas são rateadas por um critério definido."],
  learn:[
   {h:"Cada CNPJ, suas contas", b:`<p>Um grupo reúne várias empresas com os mesmos donos: emissoras, rádios, fazendas, imobiliária. Cada uma tem o próprio CNPJ, conta bancária, contabilidade e tributos.</p>` + box('atencao','A nota fiscal precisa estar no CNPJ da empresa que usou o serviço, e o pagamento deve sair da conta dessa mesma empresa.')},
   {h:"Quando uma empresa paga pela outra", b:`<p>Se a Rádio paga uma conta da Fazenda, nasce um saldo entre as duas: a Rádio tem a receber e a Fazenda tem a pagar. São as operações <b>intercompany</b>. O mesmo vale para empréstimos entre empresas do grupo (<b>mútuo</b>).</p>` + lanc([['D','Mútuo a receber (na Rádio)','20.000'],['C','Bancos (na Rádio)','20.000']]) + lanc([['D','Bancos (na Fazenda)','20.000'],['C','Mútuo a pagar (na Fazenda)','20.000']]) + box('dica','No fechamento, os saldos precisam bater: o que uma tem a receber, a outra tem a pagar, com o mesmo valor. Em mútuos pode haver IOF; o fiscal orienta.')},
@@ -316,6 +339,7 @@ export default [
   en("Na Fazenda: recebeu no banco R$ 20.000 emprestados pela Rádio, do mesmo grupo.","Bancos","Mútuo a pagar",["Receita de vendas","Mútuo a receber"],"Entra dinheiro e surge uma dívida com a outra empresa do grupo.")
  ]},
 {id:"fjm4", title:"Um dia no financeiro", icon:"📋",
+ recap:["Se o dinheiro não cobre tudo, avise o gestor na hora, com o número, e proponha a ordem de prioridade.", "Folha e tributos costumam vir primeiro, porque o atraso gera multas pesadas.", "Conta bancária nova por e-mail: confirme por um contato conhecido. Depósito sem identificação: procure títulos em aberto."],
  learn:[
   {h:"Segunda-feira, 8h", b:`<p>Você chega e encontra: saldo de R$ 60.000, títulos de R$ 85.000 vencendo hoje, um e-mail “urgente” de fornecedor com conta bancária nova e um depósito de R$ 12.000 no extrato sem identificação.</p>` + box('dica','Respire. Um bom analista organiza a fila antes de sair pagando.')},
   {h:"Quando o dinheiro não dá para tudo", b:ol(['Avise o gestor na hora, com o número: faltam R$ 25.000.','Proponha a ordem: folha e tributos costumam vir primeiro, porque o atraso gera multas pesadas e riscos maiores.','Depois, fornecedores essenciais para a operação.','Para o restante, negocie prazo ou veja a saída mais barata no fluxo de caixa.']) + box('regra','Quem decide o que fica para depois é o gestor. Seu papel é levar os números e uma proposta.')},
@@ -330,6 +354,7 @@ export default [
   od("Ordene o fim do dia:",["Confirmar os pagamentos feitos","Conciliar o banco","Atualizar o fluxo de caixa","Avisar pendências ao gestor"],"Fechar o dia com os números em ordem.")
  ]},
 {id:"fjs1", title:"Simulado: prova técnica", icon:"📝",
+ recap:["A prova costuma ter contas rápidas, conceitos, Excel e casos curtos.", "Faça primeiro o que você sabe e estime antes de calcular para perceber erros grandes.", "Nos casos, mostre o raciocínio: conferir, avisar e documentar."],
  learn:[
   {h:"Como costuma ser a prova", b:ul(['Contas rápidas: porcentagem, juros, variações e prazos médios.','Conceitos: conciliação, competência x caixa, circulante, retenções.','Excel: qual função usar e o que uma fórmula faz.','Casos curtos: o que você faria numa situação do dia a dia.']) + box('dica','Leia a pergunta duas vezes e confira a unidade: mês ou dia, % ou R$, bruto ou líquido.')},
   {h:"Estratégia", b:ol(['Faça primeiro as questões que você sabe.','Nas contas, estime antes de calcular para perceber erros grandes.','Nos casos, mostre o raciocínio: conferir, avisar e documentar.'])}
@@ -345,6 +370,7 @@ export default [
   tf("Na conciliação bancária, uma tarifa que aparece só no extrato deve ser lançada no sistema.",true,"É uma despesa real que faltava registrar.")
  ]},
 {id:"fj16", title:"Revisão: Analista Financeiro Jr", icon:"🔄",
+ recap:["Patrimônio: Ativo = Passivo + PL. Contas a pagar: conferir antes de pagar, na data certa.", "Contas a receber: registrar, dar baixa e cobrar. Conciliação: sistema e extrato, item por item.", "Lucro não é caixa: a DRE segue a competência e o fluxo de caixa mostra o dinheiro."],
  learn:[
   {h:"O que você viu nesta trilha", b:tbl(['Tema','Em uma frase'],[['Patrimônio','Ativo = Passivo + PL'],['Contas a pagar','Conferir antes de pagar, na data certa'],['Contas a receber','Registrar, dar baixa e cobrar quem atrasa'],['Conciliação','Sistema e extrato, item por item'],['Fluxo de caixa','Saldo inicial + entradas − saídas'],['Indicadores','Liquidez, margem e prazos médios'],['Bancos','Pix, TED, boleto, DDA, remessa e retorno'],['Planejamento','Capital de giro, orçado x realizado e fechamento'],['Mídia e agro','PI e comissão de agência; safra, custeio e sazonalidade'],['Rotina','Excel, retenções e cuidado com dados pessoais']])}
  ],

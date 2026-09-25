@@ -42,6 +42,14 @@ function classifyEx(accts, q){
   return [cl(q, cats, pool.map(a => a + ':' + cats.indexOf(NAME[groupOf(a)])).join('|'), 'Olhe a natureza de cada conta: bem ou direito, obrigação, capital dos sócios, receita ou despesa.')];
 }
 
+/* "Leve com você" do episódio: o que os fatos ensinam e o resultado do dia. */
+function episodeRecap(sc, ep, res){
+  const out = [...new Set(ep.tx.map(t => t.e).filter(Boolean))].slice(0, 2);
+  out.push(sc.entries === false ? 'Receita e despesa mudam o resultado; trocar bens, pagar ou receber dívidas, ou receber adiantado, não.' : 'Todo fato tem pelo menos um débito e um crédito de mesmo valor.');
+  out.push('Resultado do episódio: ' + (res > 0 ? 'lucro de ' + money(res) : res < 0 ? 'prejuízo de ' + money(-res) : 'nem lucro nem prejuízo') + '.');
+  return out;
+}
+
 function episodeLesson(sc, ep, n, bal){
   const cashBefore = cash(bal);
   ep.tx.forEach(t => { check(sc, sum(t.d) === sum(t.c), '"' + t.f + '" não fecha'); t.d.concat(t.c).forEach(([a]) => check(sc, groupOf(a), 'conta sem grupo: ' + a)); applyTx(bal, t); });
@@ -70,7 +78,7 @@ function episodeLesson(sc, ep, n, bal){
   ex.push(...classifyEx(accts, 'Classifique estas contas de ' + sc.name + ' (' + ep.title + '):'));
   if (ep.extra) ex.push(...ep.extra);
   return {
-    id: sc.id + n, title: ep.title, icon: ep.icon || sc.icon,
+    id: sc.id + n, title: ep.title, icon: ep.icon || sc.icon, recap: episodeRecap(sc, ep, res),
     learn: [
       { h: ep.title, b: '<p>' + ep.story + '</p><p><b>O que aconteceu:</b></p>' + ol(ep.tx.map(t => t.f)) },
       { h: 'Contas deste episódio', b: accountsTable(accts) + box('dica', sc.entries === false ? 'Pergunte sempre: isso muda o resultado (receita ou despesa) ou só troca bens e dívidas de lugar?' : 'Para cada fato, pergunte: o que aumentou ou diminuiu? Aumento de ativo e despesa é débito; de passivo, patrimônio líquido e receita é crédito.') }
@@ -105,6 +113,7 @@ function closingLesson(sc, n, bal, lessons){
   if (sc.closingExtra) ex.push(...sc.closingExtra);
   return {
     id: sc.id + n, title: 'Fechando o mês', icon: '📒',
+    recap: ['O balancete lista os saldos de todas as contas, e o total devedor é igual ao total credor.', 'Resultado do mês = receitas − custos e despesas: ' + (total >= 0 ? 'lucro de ' + money(total) : 'prejuízo de ' + money(-total)) + '.', 'Ativo = Passivo + Patrimônio líquido: ' + money(ativo) + ' = ' + money(passivo) + ' + ' + money(pl) + '.'],
     learn: [
       { h: 'O balancete de ' + sc.name, b: '<p>Depois de todos os episódios, estes são os saldos das contas:</p>' + balancete },
       { h: 'Do balancete às demonstrações', b: tbl(['Item', 'Valor'], [['Receitas do mês', money(receitas)], ['Resultado do mês', (total >= 0 ? 'Lucro de ' : 'Prejuízo de ') + money(Math.abs(total))], ['Ativo total', money(ativo)], ['Passivo', money(passivo)], ['Patrimônio líquido', money(pl)]]) + box('regra', 'Ativo = Passivo + Patrimônio líquido: ' + money(ativo) + ' = ' + money(passivo) + ' + ' + money(pl) + '.') }

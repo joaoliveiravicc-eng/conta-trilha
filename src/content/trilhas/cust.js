@@ -5,7 +5,8 @@ export default {
   desc:"Custos, margem de contribuição, ponto de equilíbrio e orçamento: contabilidade para decidir.",
   lessons:[
   {id:"cust1", title:"Gasto, custo, despesa e investimento", icon:"🧩",
-   learn:[
+   recap:["Gasto é qualquer sacrifício financeiro; o destino define o nome: investimento, custo, despesa ou perda.", "O custo de produção fica no estoque e vai para a DRE como CPV quando o produto é vendido.", "Custo direto é identificado no produto; o indireto atende vários produtos e precisa de rateio."],
+ learn:[
     {h:"Tudo começa com um gasto", b:`<p><b>Gasto</b> é qualquer sacrifício financeiro para obter um bem ou serviço. Dependendo do destino, o gasto recebe um nome diferente.</p>`},
     {h:"Os quatro destinos", b:tbl(['Tipo','O que é','Exemplo'],[['Investimento','Gasto que fica no Ativo','Compra de máquina, estoque de matéria-prima'],['Custo','Gasto para produzir bens ou serviços','Matéria-prima usada, salário da fábrica'],['Despesa','Gasto para vender e administrar','Comissões, salário do escritório'],['Perda','Consumo anormal e involuntário','Estoque destruído em enchente']])},
     {h:"Custo vira despesa na venda", b:`<p>O custo de produção fica guardado no estoque de produtos prontos. Quando o produto é vendido, esse custo vai para a DRE como <b>CPV</b> (custo dos produtos vendidos).</p>`},
@@ -19,7 +20,8 @@ export default {
     {t:"fill", q:"Custos ___ são identificados diretamente no produto; custos ___ exigem rateio.", o:["diretos","indiretos","fixos","perdidos"], a:["diretos","indiretos"], e:"Direto: mede-se no produto. Indireto: precisa de critério de rateio."}
    ]},
   {id:"cust2", title:"Custos fixos e variáveis", icon:"📉",
-   learn:[
+   recap:["Custos variáveis mudam com o volume; custos fixos não mudam dentro de uma faixa de atividade.", "Quanto mais se produz, menor o custo fixo que cada unidade carrega.", "Custos semivariáveis têm uma parte fixa e outra variável."],
+ learn:[
     {h:"Custos variáveis", b:`<p>Variam junto com o volume produzido: matéria-prima, embalagem, comissão por venda. Se a produção é zero, o custo variável é zero.</p>`},
     {h:"Custos fixos", b:`<p>Não mudam com o volume, dentro de uma faixa de atividade: aluguel, salário do gerente, seguro.</p>`},
     {h:"O efeito escala", b:tbl(['Produção','Custo fixo total','Custo fixo por unidade'],[['100 unidades','10.000','100,00'],['1.000 unidades','10.000','10,00']]) + `<p>Quanto mais se produz, menor o custo fixo que cada unidade carrega.</p>`},
@@ -33,7 +35,8 @@ export default {
     {t:"mc", q:"Se a produção dobrar, o custo fixo total:", o:["Permanece o mesmo, por ser fixo","Dobra junto com a produção","Cai pela metade do valor atual","Zera, porque a produção dobrou"], a:0, e:"O total fixo não muda; o que cai é o custo fixo por unidade."}
    ]},
   {id:"cust3", title:"Margem de contribuição e ponto de equilíbrio", icon:"🎯",
-   learn:[
+   recap:["Margem de contribuição unitária = preço − custos e despesas variáveis por unidade.", "Ponto de equilíbrio = custos fixos ÷ margem de contribuição unitária: resultado zero.", "Em reais: custos fixos ÷ índice de margem de contribuição."],
+ learn:[
     {h:"Margem de contribuição", b:eq('MC unitária = Preço − Custos e despesas variáveis por unidade') + `<p>É quanto cada unidade vendida “contribui” para pagar os custos fixos e, depois, gerar lucro.</p>`},
     {h:"Ponto de equilíbrio", b:eq('PE (unidades) = Custos e despesas fixos ÷ MC unitária') + `<p>Nesse volume, a empresa não tem lucro nem prejuízo: o resultado é zero.</p>`},
     {h:"Exemplo completo", b:box('exemplo','Preço de R$ 50 e custo variável de R$ 30: MC de R$ 20.<br>Custos fixos de R$ 10.000: PE = 10.000 ÷ 20 = <b>500 unidades</b>.<br>Vendendo 700 unidades: 200 acima do PE × R$ 20 = <b>lucro de R$ 4.000</b>.')},
@@ -48,7 +51,8 @@ export default {
     {t:"mc", q:"Se o preço de venda cai e os custos continuam iguais, o ponto de equilíbrio:", o:["Aumenta","Diminui","Não muda","Zera"], a:0, e:"A MC unitária diminui, então são necessárias mais unidades para cobrir os fixos."}
    ]},
   {id:"cust4", title:"Orçamento e indicadores", icon:"🗓️",
-   learn:[
+   recap:["O orçamento começa pelas vendas, porque todo o resto depende delas.", "Orçado x realizado: favorável é melhor que o previsto; desfavorável é pior.", "EBITDA, giro do estoque e outros indicadores acompanham o desempenho."],
+ learn:[
     {h:"Orçamento", b:`<p>É o plano financeiro para o futuro, geralmente anual. Começa pelo <b>orçamento de vendas</b>, porque todo o resto depende de quanto se espera vender.</p>`},
     {h:"A sequência", b:ol(['Vendas','Produção','Compras e custos','Despesas','Caixa','DRE e Balanço projetados'])},
     {h:"Orçado x realizado", b:`<p>Comparar o previsto com o real mostra onde estão os desvios.</p>` + ul(['<b>Favorável</b>: melhor que o previsto (receita maior ou gasto menor).','<b>Desfavorável</b>: pior que o previsto.']) +
@@ -64,7 +68,8 @@ export default {
     {t:"mc", q:"Um orçamento flexível:", o:["Ajusta os valores ao volume real de atividade","Nunca muda depois de aprovado pela diretoria","Substitui a DRE no relatório de fim de ano","É feito só uma vez na vida da empresa"], a:0, e:"Ele recalcula o esperado para o volume que de fato ocorreu."}
    ]},
   {id:"cust5", title:"Custeio por absorção x variável", icon:"⚗️",
-   learn:[
+   recap:["Absorção: todos os custos de produção vão para o produto e ficam no estoque até a venda.", "Variável: só os custos variáveis vão para o produto; o fixo de fábrica vira despesa do período.", "Se a empresa produz mais do que vende, o lucro pela absorção fica maior que pelo variável."],
+ learn:[
     {h:"Duas formas de custear o produto", b:`<p>Os dois métodos tratam os <b>custos fixos de fábrica</b> de um jeito diferente.</p>`},
     {h:"Custeio por absorção", b:`<p>Todos os custos de produção — fixos e variáveis — vão para o produto e ficam no estoque até a venda. É o método exigido pela <b>Contabilidade societária e fiscal</b> no Brasil.</p>` + box('exemplo','Custo variável de R$ 10/un + custo fixo de fábrica de R$ 4/un = custo do produto de R$ 14/un.')},
     {h:"Custeio variável (ou direto)", b:`<p>Só os <b>custos variáveis</b> vão para o produto. Os custos fixos de fábrica viram despesa do período <b>inteira</b>, direto na DRE, não importa quanto foi vendido.</p>` + box('exemplo','Mesmo caso: custo do produto de R$ 10/un pelo variável; o custo fixo de fábrica vai inteiro para a DRE do período.') + box('dica','O custeio variável é muito usado internamente, porque facilita calcular a margem de contribuição.')},
@@ -80,7 +85,8 @@ export default {
     {t:"mc", q:"O custeio variável é especialmente útil para calcular:", o:["A margem de contribuição","O valor do ICMS","A depreciação acumulada","O capital social"], a:0, e:"Separar custos variáveis facilita diretamente a conta de margem de contribuição."}
    ]},
   {id:"cust6", title:"Formação de preço de venda", icon:"🏷️",
-   learn:[
+   recap:["Mark-up divisor: preço = custo ÷ (1 − soma dos percentuais sobre o preço).", "Somar os percentuais ao custo é um erro comum e deixa o lucro abaixo do desejado.", "O preço final também depende do mercado: concorrentes e disposição do cliente a pagar."],
+ learn:[
     {h:"Partindo do custo", b:`<p>Uma forma comum de precificar é aplicar um <b>mark-up</b> sobre o custo do produto: um multiplicador que cobre despesas, impostos sobre a venda e a margem de lucro desejada.</p>`},
     {h:"Mark-up divisor", b:eq('Preço de venda = Custo ÷ (1 − soma dos percentuais sobre o preço)') +
       box('exemplo','Custo de R$ 60. Despesas variáveis de 10%, impostos de 15% e lucro desejado de 15% do preço, total 40%.<br>Preço = 60 ÷ (1 − 0,40) = 60 ÷ 0,60 = <b>R$ 100</b>.')},
@@ -95,7 +101,8 @@ export default {
     {t:"tf", q:"Margem sobre o custo e margem sobre o preço de venda são a mesma conta.", a:false, e:"São bases diferentes e dão resultados diferentes; é preciso saber qual está sendo usada."}
    ]},
   {id:"cust7", title:"Revisão: custos e gerencial", icon:"🔄",
-   learn:[
+   recap:["Todo gasto nasce como investimento, custo, despesa ou perda; custos podem ser diretos ou indiretos, fixos ou variáveis.", "Margem de contribuição = preço − custo variável, e o ponto de equilíbrio = fixos ÷ margem.", "Vender acima do ponto de equilíbrio gera lucro."],
+ learn:[
     {h:"O caminho do gasto", b:ol(['Todo gasto nasce como <b>investimento</b>, <b>custo</b>, <b>despesa</b> ou <b>perda</b>.','Custos podem ser <b>diretos</b> ou <b>indiretos</b>, e <b>fixos</b> ou <b>variáveis</b>.','A <b>margem de contribuição</b> (preço − custo variável) define o <b>ponto de equilíbrio</b>.','O <b>orçamento</b> parte das vendas esperadas e se desdobra em produção, compras e caixa.'])}
    ],
    ex:[

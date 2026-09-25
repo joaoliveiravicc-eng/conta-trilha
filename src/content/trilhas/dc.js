@@ -5,7 +5,8 @@ export default {
   desc:"O coração da Contabilidade: razonetes, natureza das contas e o método das partidas dobradas.",
   lessons:[
   {id:"dc1", title:"O razonete (conta T)", icon:"🆃",
-   learn:[
+   recap:["Cada item do patrimônio tem uma conta, que guarda os aumentos e as diminuições dele.", "No razonete (conta T), o lado esquerdo é o débito e o direito é o crédito.", "O saldo é a diferença entre os lados e recebe o nome do lado maior."],
+ learn:[
     {h:"O que é uma conta", b:`<p>Cada item do patrimônio tem uma <b>conta</b>: Caixa, Estoques, Fornecedores, Capital Social... A conta guarda todos os aumentos e diminuições daquele item.</p>`},
     {h:"O razonete", b:`<p>O jeito mais visual de enxergar uma conta é o <b>razonete</b>, que tem formato de T:</p>` + T('Caixa',['1.000','500'],['300']) +
       `<p>O lado <b>esquerdo</b> é o <b>débito</b>. O lado <b>direito</b> é o <b>crédito</b>.</p>` +
@@ -24,7 +25,8 @@ export default {
     {t:"tf", q:"O saldo recebe o nome do lado que tem o maior total.", a:true, e:"Se os débitos somam mais, o saldo é devedor; se os créditos somam mais, é credor."}
    ]},
   {id:"dc2", title:"Natureza das contas", icon:"🧭",
-   learn:[
+   recap:["Ativo e Despesa aumentam no débito; Passivo, PL e Receita aumentam no crédito.", "Despesa é devedora porque diminui o PL, que é credor.", "Contas redutoras, como a depreciação acumulada, têm natureza oposta à do grupo."],
+ learn:[
     {h:"A tabela mais importante", b:tbl(['Grupo','Aumenta com','Diminui com','Saldo normal'],[['Ativo','Débito','Crédito','Devedor'],['Passivo','Crédito','Débito','Credor'],['PL','Crédito','Débito','Credor'],['Receita','Crédito','Débito','Credor'],['Despesa','Débito','Crédito','Devedor']])},
     {h:"Por que despesa é devedora?", b:`<p>Despesa <b>diminui</b> o PL. Como o PL aumenta no crédito, aquilo que o diminui vai para o débito.</p><p>Receita <b>aumenta</b> o PL, por isso vai para o crédito, igual ao PL.</p>`},
     {h:"Contas redutoras", b:`<p>Algumas contas ficam em um grupo mas têm natureza oposta, para <b>reduzir</b> outra conta:</p>` +
@@ -40,7 +42,8 @@ export default {
     {t:"fill", q:"Ativo e ___ aumentam no débito; Passivo, PL e ___ aumentam no crédito.", o:["Despesa","Receita","Caixa","Fornecedores"], a:["Despesa","Receita"], e:"Regra de ouro da natureza das contas."}
    ]},
   {id:"dc3", title:"Partidas dobradas na prática", icon:"🔁",
-   learn:[
+   recap:["Partidas dobradas: todo fato tem pelo menos um débito e um crédito de mesmo valor.", "Passo a passo: ver quais contas mudaram, se aumentaram ou diminuíram, e aplicar a natureza.", "Compra à vista: D Estoques / C Caixa. Compra a prazo: D Estoques / C Fornecedores."],
+ learn:[
     {h:"Não há débito sem crédito", b:`<p>O método das <b>partidas dobradas</b>, divulgado por Luca Pacioli em 1494, diz que todo fato é registrado com pelo menos <b>um débito e um crédito</b> de mesmo valor.</p>` +
       box('regra','Soma dos débitos = soma dos créditos. Sempre.')},
     {h:"Passo a passo para lançar", b:ol(['Quais contas mudaram com esse fato?','Cada uma <b>aumentou</b> ou <b>diminuiu</b>?','Aplique a natureza: aumento de Ativo vai a débito, aumento de Passivo vai a crédito, e assim por diante.','Confira se débitos e créditos têm o mesmo valor.'])},
@@ -59,7 +62,8 @@ export default {
     {t:"mc", q:"Ao pagar uma dívida com fornecedor, o que acontece com Ativo e Passivo?", o:["Ambos diminuem","Ambos aumentam","O Ativo aumenta e o Passivo diminui","Nada muda"], a:0, e:"Sai dinheiro (Ativo diminui) e a dívida acaba (Passivo diminui)."}
    ]},
   {id:"dc4", title:"Tipos de fatos contábeis", icon:"🔀",
-   learn:[
+   recap:["Fato permutativo troca valores entre contas sem mudar o PL.", "Fato modificativo altera o PL: aumentativo (receita) ou diminutivo (despesa).", "Fato misto junta uma permuta e uma modificação, como pagar uma dívida com juros."],
+ learn:[
     {h:"Fatos permutativos", b:`<p>Apenas <b>trocam</b> valores entre contas, sem mudar o PL.</p>` + box('exemplo','Comprar mercadoria à vista: Caixa diminui, Estoques aumenta. O PL continua igual.')},
     {h:"Fatos modificativos", b:`<p><b>Alteram o PL</b>. Envolvem receitas ou despesas.</p>` +
       ul(['<b>Aumentativos</b>: receitas. Ex: serviço prestado e recebido à vista.','<b>Diminutivos</b>: despesas. Ex: pagamento da conta de luz.']) +
@@ -77,7 +81,8 @@ export default {
     {t:"tf", q:"Um fato permutativo altera o valor do Patrimônio Líquido.", a:false, e:"Fatos permutativos só trocam valores entre contas; quem altera o PL são os modificativos."}
    ]},
   {id:"dc5", title:"Erros e estornos", icon:"↩️",
-   learn:[
+   recap:["Na Contabilidade não se apaga nem se rasura: faz-se um estorno e depois o lançamento correto.", "O estorno é o lançamento original ao contrário.", "Complemento: se o valor saiu a menor, lança-se só a diferença."],
+ learn:[
     {h:"Todo mundo erra", b:`<p>Lançou na conta errada ou com o valor errado? Na Contabilidade <b>não se apaga</b>: faz-se um estorno e depois o lançamento correto.</p>` + box('atencao','Rasurar ou apagar registros não é permitido: a contabilidade precisa deixar rastro.')},
     {h:"O estorno", b:`<p>Estorno é o lançamento original <b>ao contrário</b>.</p>` + box('exemplo','Lançado por engano: D Despesa de aluguel / C Caixa, R$ 500. Era conta de energia.') + `<p>Estorno:</p>` + lanc([['D','Caixa','500'],['C','Despesa de aluguel','500']]) + `<p>Correto:</p>` + lanc([['D','Despesa com energia','500'],['C','Caixa','500']])},
     {h:"Transferência e complemento", b:ul(['<b>Transferência</b>: corrige de uma vez, debitando a conta certa e creditando a errada.','<b>Complemento</b>: se lançou valor a menor, lança-se só a diferença.']) + lanc([['D','Despesa com energia','500'],['C','Despesa de aluguel','500']])}
@@ -91,7 +96,8 @@ export default {
     {t:"ew", q:"Uma despesa de energia de R$ 200 foi lançada em Despesa de aluguel. Escreva o lançamento de transferência que corrige direto.", d:["Despesa com energia"], c:["Despesa de aluguel"], e:"Debita-se a conta certa e credita-se a errada.", h:"Qual conta precisa receber o valor?"}
    ]},
   {id:"dc6", title:"Encerrando o resultado do período", icon:"🔒",
-   learn:[
+   recap:["Receitas e despesas são contas temporárias e zeram no fim do período.", "O saldo delas vai para a Apuração do Resultado do Exercício (ARE).", "O saldo da ARE é o lucro ou o prejuízo, e segue para o Patrimônio Líquido."],
+ learn:[
     {h:"Contas que zeram a cada período", b:`<p>Receitas e despesas são contas <b>temporárias</b>: no fim do período, precisam ser <b>zeradas</b> para começar o próximo do zero. Contas de Ativo, Passivo e PL são <b>permanentes</b>: seus saldos seguem para o período seguinte.</p>`},
     {h:"A conta de apuração", b:`<p>Todo o saldo das contas de receita e de despesa é transferido para uma conta transitória: <b>Apuração do Resultado do Exercício (ARE)</b>.</p>` +
       lanc([['D','Receita de vendas','50.000'],['C','Apuração do Resultado do Exercício','50.000']]) +
@@ -110,7 +116,8 @@ export default {
     {t:"tf", q:"Se as despesas superarem as receitas na apuração, o resultado reduz o Patrimônio Líquido.", a:true, e:"Um prejuízo diminui o PL, ao contrário do lucro."}
    ]},
   {id:"dc7", title:"Revisão: débito e crédito", icon:"🔄",
-   learn:[
+   recap:["Ativo e Despesa aumentam no débito; Passivo, PL e Receita aumentam no crédito.", "Todo lançamento tem débitos e créditos de mesmo valor.", "Cuidado: o extrato do banco mostra os lados invertidos em relação à conta Bancos da empresa."],
+ learn:[
     {h:"A regra de ouro, de novo", b:box('regra','<b>Ativo e Despesa</b> aumentam no DÉBITO.<br><b>Passivo, PL e Receita</b> aumentam no CRÉDITO.') + `<p>Todo lançamento tem débitos e créditos de mesmo valor (partidas dobradas), e no fim do período as contas de resultado são encerradas contra a Apuração do Resultado do Exercício.</p>`}
    ],
    ex:[

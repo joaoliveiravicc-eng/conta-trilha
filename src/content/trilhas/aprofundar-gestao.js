@@ -5,6 +5,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 export default [
 /* ---------------- Demonstrações Financeiras ---------------- */
 {id:"demox1", title:"Lucro não é caixa", icon:"🔍",
+ recap:["Lucro e caixa diferem: venda a prazo dá lucro na venda e caixa só no recebimento.", "Depreciação reduz o lucro e não tira dinheiro do caixa.", "Do lucro ao caixa: some o que não saiu dinheiro e subtraia o que ainda não foi recebido."],
  learn:[
   {h:"Por que o lucro e o caixa diferem", b:tbl(['Item','Afeta o lucro?','Afeta o caixa?'],[['Venda a prazo','Sim, no mês da venda','Só no recebimento'],['Depreciação','Sim (despesa)','Não'],['Compra de estoque à vista','Só quando vendido (CMV)','Sim, na compra'],['Pagamento de empréstimo (principal)','Não','Sim']])},
   {h:"Do lucro ao caixa", b:box('exemplo','Lucro de R$ 50.000. Depreciação de R$ 10.000 (não saiu dinheiro): soma. Clientes a receber aumentaram R$ 25.000 (vendeu e não recebeu): subtrai. Caixa das operações: 50 + 10 − 25 = <b>R$ 35.000</b>.')}
@@ -18,6 +19,7 @@ export default [
   fl("Aumento de clientes a receber {reduz} o caixa em relação ao lucro.",["aumenta","não altera"],"Vendeu e ainda não recebeu.")
  ]},
 {id:"demox2", title:"Margens", icon:"📐",
+ recap:["Margem bruta = lucro bruto ÷ receita líquida.", "Margem líquida = lucro líquido ÷ receita líquida.", "Margem líquida de 10% quer dizer R$ 10 de lucro a cada R$ 100 vendidos."],
  learn:[
   {h:"Lucro em relação às vendas", b:eq('Margem bruta = Lucro bruto ÷ Receita líquida') + eq('Margem líquida = Lucro líquido ÷ Receita líquida')},
   {h:"Lendo as margens", b:box('exemplo','Receita líquida 500.000, lucro bruto 200.000, lucro líquido 50.000: margem bruta 40%, margem líquida 10%. De cada R$ 100 vendidos, sobram R$ 10 de lucro.') + box('dica','Compare margens com anos anteriores e com empresas do mesmo setor. Setores diferentes têm margens naturalmente diferentes.')}
@@ -31,6 +33,7 @@ export default [
   fl("Margem líquida = lucro líquido ÷ {receita líquida}.",["ativo total","patrimônio líquido"],"Lucro sobre vendas.")
  ]},
 {id:"demox3", title:"Capital circulante líquido", icon:"🌊",
+ recap:["CCL = ativo circulante − passivo circulante.", "CCL positivo indica que os recursos de curto prazo cobrem as dívidas de curto prazo.", "A liquidez seca tira os estoques, porque eles ainda precisam ser vendidos."],
  learn:[
   {h:"Folga de curto prazo", b:eq('CCL = Ativo circulante − Passivo circulante') + `<p>CCL positivo indica que os recursos de curto prazo cobrem as dívidas de curto prazo, com sobra.</p>`},
   {h:"Liquidez seca", b:eq('Liquidez seca = (Ativo circulante − Estoques) ÷ Passivo circulante') + box('dica','Tira os estoques porque eles ainda precisam ser vendidos para virar dinheiro.')}
@@ -44,6 +47,7 @@ export default [
   fl("CCL = ativo circulante − {passivo circulante}.",["patrimônio líquido","passivo não circulante"],"Folga de curto prazo.")
  ]},
 {id:"demox4", title:"Retorno sobre o patrimônio", icon:"💹",
+ recap:["ROE = lucro líquido ÷ patrimônio líquido: o retorno para cada real dos sócios.", "ROA = lucro líquido ÷ ativo total.", "Compare o ROE com o que os sócios ganhariam em outra aplicação."],
  learn:[
   {h:"ROE", b:eq('ROE = Lucro líquido ÷ Patrimônio líquido') + `<p>Mostra quanto a empresa gerou de lucro para cada real investido pelos sócios.</p>`},
   {h:"ROA", b:eq('ROA = Lucro líquido ÷ Ativo total') + box('exemplo','Lucro 30.000, PL 200.000, Ativo 500.000: ROE 15%, ROA 6%.') + box('dica','Compare o ROE com o que os sócios ganhariam em outra aplicação de risco parecido.')}
@@ -59,6 +63,7 @@ export default [
 
 /* ---------------- Custos e Gerencial ---------------- */
 {id:"custx1", title:"Diretos, indiretos e rateio", icon:"🧮",
+ recap:["Custo direto é medido em cada produto; o indireto é comum a vários.", "O rateio distribui os indiretos por um critério: horas-máquina, horas de mão de obra ou área.", "O critério de rateio muda o custo de cada produto."],
  learn:[
   {h:"Dá para medir por produto?", b:tbl(['Tipo','Característica','Exemplo'],[['Direto','Medido diretamente em cada produto','Matéria-prima, mão de obra do produto'],['Indireto','Comum a vários produtos','Aluguel da fábrica, supervisão, energia geral']])},
   {h:"Rateio", b:`<p>Custos indiretos são distribuídos aos produtos por um critério: horas-máquina, horas de mão de obra, área.</p>` + box('exemplo','Aluguel da fábrica R$ 10.000. Produto A usa 300 horas-máquina, B usa 200. A recebe 3/5 = R$ 6.000; B recebe R$ 4.000.')}
@@ -72,6 +77,7 @@ export default [
   fl("Custos comuns a vários produtos são custos {indiretos}.",["diretos","variáveis"],"Precisam de rateio.")
  ]},
 {id:"custx2", title:"Margem de segurança", icon:"🛟",
+ recap:["Margem de segurança = vendas atuais − vendas no ponto de equilíbrio.", "Em percentual: (vendas atuais − vendas no PE) ÷ vendas atuais.", "Quanto maior a margem, mais as vendas podem cair antes de dar prejuízo."],
  learn:[
   {h:"Quanto as vendas podem cair", b:eq('Margem de segurança = Vendas atuais − Vendas no ponto de equilíbrio') + `<p>Mostra a folga antes de a empresa começar a ter prejuízo.</p>`},
   {h:"Em percentual", b:eq('MS % = (Vendas atuais − Vendas no PE) ÷ Vendas atuais') + box('exemplo','Vende 1.000 unidades; ponto de equilíbrio em 750. Margem de segurança: 250 unidades, ou 25%.')}
@@ -85,6 +91,7 @@ export default [
   fl("Margem de segurança = vendas atuais − vendas no {ponto de equilíbrio}.",["mês anterior","orçamento"],"Folga até o resultado zero.")
  ]},
 {id:"custx3", title:"Alavancagem operacional", icon:"🏋️",
+ recap:["Com custos fixos altos, uma variação nas vendas causa uma variação maior no lucro.", "GAO = margem de contribuição total ÷ lucro operacional.", "Com GAO de 5, vendas 10% maiores tendem a dar um lucro cerca de 50% maior, e vale o mesmo para queda."],
  learn:[
   {h:"Custos fixos amplificam", b:`<p>Com custos fixos altos, uma variação nas vendas causa uma variação <b>maior</b> no lucro, para cima e para baixo.</p>` + eq('GAO = Margem de contribuição total ÷ Lucro operacional')},
   {h:"Exemplo", b:box('exemplo','Margem de contribuição 100.000; custos fixos 80.000; lucro 20.000. GAO = 5. Se as vendas subirem 10%, o lucro tende a subir cerca de 50%. Se caírem 10%, cai cerca de 50%.')}
@@ -98,6 +105,7 @@ export default [
   fl("GAO = margem de contribuição total ÷ {lucro operacional}.",["custo fixo","receita"],"Sensibilidade do lucro às vendas.")
  ]},
 {id:"custx4", title:"Custo-padrão", icon:"📏",
+ recap:["Custo-padrão é uma meta: quanto o produto deveria custar em condições normais.", "Variação = custo real − custo-padrão.", "Custo real acima do padrão é variação desfavorável."],
  learn:[
   {h:"Quanto deveria custar", b:`<p>O <b>custo-padrão</b> é uma meta: quanto um produto deveria custar em condições normais. Depois, compara-se com o <b>custo real</b>.</p>` + eq('Variação = Custo real − Custo-padrão')},
   {h:"Lendo a variação", b:tbl(['Situação','Leitura'],[['Real maior que o padrão','Variação desfavorável: investigar'],['Real menor que o padrão','Variação favorável']]) + box('exemplo','Padrão: 2 kg de farinha por bolo a R$ 5/kg = R$ 10. Real: 2,2 kg a R$ 5/kg = R$ 11. Variação desfavorável de R$ 1 por bolo, causada pela quantidade.')}
@@ -113,6 +121,7 @@ export default [
 
 /* ---------------- Tributos no Brasil ---------------- */
 {id:"tribx1", title:"Os elementos de um tributo", icon:"🧱",
+ recap:["Fato gerador: o que faz o tributo ser devido. Contribuinte: quem paga.", "Base de cálculo é o valor sobre o qual se calcula; alíquota é o percentual.", "Valor devido = base de cálculo × alíquota."],
  learn:[
   {h:"As peças", b:tbl(['Elemento','Pergunta que responde'],[['Fato gerador','O que faz o tributo ser devido?'],['Contribuinte','Quem deve pagar?'],['Base de cálculo','Sobre qual valor?'],['Alíquota','Qual percentual (ou valor) aplicar?']])},
   {h:"Exemplo didático", b:box('exemplo','Tributo fictício de 10% sobre vendas. Fato gerador: a venda. Contribuinte: quem vende. Base: R$ 5.000 de vendas. Alíquota: 10%. Valor devido: R$ 500.') + box('atencao','As alíquotas desta lição são fictícias. Alíquotas reais variam por tributo, local e regime e mudam com a legislação.')}
@@ -126,6 +135,7 @@ export default [
   fl("A situação prevista em lei que faz o tributo ser devido é o {fato gerador}.",["contribuinte","recibo"],"Sem fato gerador, não há tributo.")
  ]},
 {id:"tribx2", title:"Obrigação principal e acessória", icon:"📑",
+ recap:["Obrigação principal é pagar o tributo ou a multa.", "Obrigação acessória é fazer algo para o controle do fisco: emitir nota, entregar declarações.", "Descumprir a acessória pode gerar multa, mesmo sem tributo a pagar."],
  learn:[
   {h:"Pagar e informar", b:tbl(['Obrigação','O que é','Exemplo'],[['Principal','Pagar o tributo ou a multa','Recolher a guia'],['Acessória','Fazer ou prestar algo para o controle do fisco','Emitir nota, entregar declarações, escriturar livros']])},
   {h:"As duas importam", b:`<p>Mesmo sem tributo a pagar, a empresa pode ter declarações a entregar. Deixar de cumprir uma obrigação acessória pode gerar multa.</p>`}
@@ -139,6 +149,7 @@ export default [
   mc("Para que servem as obrigações acessórias?",["*Permitir ao fisco controlar as operações","Aumentar o lucro da empresa no fim do ano","Substituir o pagamento do tributo devido","Nada: servem só para gerar burocracia"],"Informação para fiscalização.")
  ]},
 {id:"tribx3", title:"Crédito e não cumulatividade", icon:"🔁",
+ recap:["Tributo cumulativo incide em cada etapa sobre o valor total, sem abater o que foi pago antes.", "No não cumulativo, quem compra abate o tributo pago na etapa anterior.", "Com crédito, cada etapa paga só sobre o valor que acrescentou."],
  learn:[
   {h:"Tributo em cascata x com crédito", b:`<p>Num tributo <b>cumulativo</b>, ele incide em cada etapa sobre o valor total, e o que foi pago antes não é descontado. Num <b>não cumulativo</b>, quem compra pode abater o tributo pago na etapa anterior (o <b>crédito</b>).</p>`},
   {h:"Exemplo com alíquota fictícia de 10%", b:tbl(['Etapa','Venda','Tributo na venda','Crédito da compra','A recolher'],[['Indústria','1.000','100','0','100'],['Loja','1.500','150','100','50']]) + box('dica','Com crédito, cada etapa paga sobre o valor que acrescentou.')}
@@ -152,6 +163,7 @@ export default [
   fl("O valor pago na etapa anterior que pode ser abatido chama-se {crédito}.",["débito","multa"],"Base da não cumulatividade.")
  ]},
 {id:"tribx4", title:"Tributos sobre vendas e sobre o lucro", icon:"📊",
+ recap:["Tributos sobre vendas incidem sobre a receita e são deduções da receita bruta.", "Tributos sobre o lucro incidem sobre o resultado e aparecem depois dele.", "Os tributos sobre vendas existem mesmo com prejuízo; os sobre o lucro dependem de haver lucro tributável."],
  learn:[
   {h:"Onde aparecem na DRE", b:tbl(['Tipo','Incide sobre','Posição na DRE'],[['Tributos sobre vendas','A receita das vendas','Deduções da receita bruta'],['Tributos sobre o lucro','O resultado','Depois do resultado antes dos tributos']])},
   {h:"Diferença prática", b:`<p>Tributos sobre vendas existem mesmo com prejuízo, pois incidem sobre a receita. Tributos sobre o lucro, em regra, dependem de haver lucro tributável.</p>` + box('atencao','Regras de apuração e alíquotas reais dependem do regime tributário e mudam com a legislação.')}
@@ -167,6 +179,7 @@ export default [
 
 /* ---------------- Auditoria ---------------- */
 {id:"audx1", title:"Papéis de trabalho", icon:"🗃️",
+ recap:["Os papéis de trabalho registram o planejamento, os procedimentos, a evidência e as conclusões.", "O que não está documentado é tratado como não feito.", "Um revisor experiente deve entender o trabalho só pelos papéis."],
  learn:[
   {h:"O que o auditor documenta", b:`<p>Os <b>papéis de trabalho</b> registram o que foi planejado, os procedimentos feitos, a evidência obtida e as conclusões. São a prova de que a auditoria foi feita.</p>` + ul(['Objetivo do teste','Amostra e documentos examinados','Resultados e exceções encontradas','Conclusão e quem revisou'])},
   {h:"Por que importa", b:box('regra','O que não está documentado é tratado como não feito. Um revisor experiente deve entender o trabalho só pelos papéis.')}
@@ -180,6 +193,7 @@ export default [
   fl("A documentação da auditoria é feita nos papéis de {trabalho}.",["parede","caixa"],"Registro do que foi feito.")
  ]},
 {id:"audx2", title:"Amostragem", icon:"🎲",
+ recap:["O auditor examina uma amostra e usa o resultado para concluir sobre o conjunto.", "A amostra pode ser aleatória, por valor ou por seleção de itens-chave.", "A escolha precisa representar a população, sem pegar só o que é fácil."],
  learn:[
   {h:"Não dá para ver tudo", b:`<p>Com milhares de documentos, o auditor examina uma <b>amostra</b> e usa o resultado para concluir sobre o conjunto.</p>` + ul(['<b>Aleatória</b>: todos têm chance de ser escolhidos.','<b>Por valor</b>: itens grandes têm mais chance.','<b>Itens-chave</b>: examina 100% dos itens acima de um valor.'])},
   {h:"Cuidados", b:box('atencao','Se a amostra só pega o que é fácil, a conclusão fica distorcida. A escolha precisa representar a população.')}
@@ -193,6 +207,7 @@ export default [
   fl("A amostra precisa {representar} a população para a conclusão valer.",["ignorar","substituir"],"Senão a conclusão é enviesada.")
  ]},
 {id:"audx3", title:"Eventos subsequentes", icon:"📆",
+ recap:["Eventos entre a data do balanço e a da autorização podem exigir ajuste ou divulgação.", "Se evidenciam algo que já existia na data do balanço, ajusta-se; se é fato novo, divulga-se.", "O auditor procura esses eventos até a data do relatório."],
  learn:[
   {h:"Depois da data do balanço", b:`<p>Fatos que acontecem entre a data das demonstrações e a data da sua autorização podem exigir ajuste ou divulgação.</p>` + tbl(['Tipo','Exemplo','Tratamento'],[['Evidencia algo que já existia na data','Cliente que já estava em dificuldade entra em falência','Ajustar as demonstrações'],['Surge depois da data','Incêndio na fábrica em janeiro','Não ajustar; divulgar se relevante']])},
   {h:"Papel do auditor", b:`<p>O auditor procura esses eventos até a data do relatório: lê atas, conversa com a administração e acompanha processos.</p>`}
@@ -206,6 +221,7 @@ export default [
   fl("Eventos que revelam condições já existentes na data do balanço exigem {ajuste}.",["divulgação apenas","nada"],"Refletem a situação daquela data.")
  ]},
 {id:"audx4", title:"Independência e ética", icon:"⚖️",
+ recap:["A opinião só vale se o auditor for independente, de fato e na aparência.", "Isso pede, por exemplo, não ter participação financeira relevante no cliente.", "Ceticismo profissional: questionar, ficar alerta e avaliar criticamente a evidência."],
  learn:[
   {h:"Por que independência importa", b:`<p>A opinião do auditor só tem valor se ele for <b>independente</b> da empresa auditada, de fato e na aparência.</p>` + ul(['Não ter participação financeira relevante no cliente.','Não auditar o próprio trabalho (ex.: ter feito a contabilidade que vai auditar).','Não depender excessivamente de honorários de um único cliente.'])},
   {h:"Ceticismo profissional", b:`<p>Atitude de questionar, ficar alerta a sinais de erro ou fraude e avaliar criticamente a evidência, sem supor desonestidade nem honestidade absoluta.</p>`}
@@ -221,6 +237,7 @@ export default [
 
 /* ---------------- Contabilidade para a Vida ---------------- */
 {id:"vidax1", title:"Inflação e poder de compra", icon:"🛒",
+ recap:["Inflação é o aumento geral dos preços: o mesmo dinheiro compra menos.", "Ganho real ≈ rendimento − inflação.", "Render menos que a inflação é perder poder de compra."],
  learn:[
   {h:"O dinheiro compra menos", b:`<p><b>Inflação</b> é o aumento geral dos preços. Se os preços sobem 5% no ano, R$ 100 compram menos do que antes.</p>` + box('exemplo','Uma cesta custava R$ 200. Com 5% de inflação, passa a custar R$ 210.')},
   {h:"Ganho real", b:`<p>Se o dinheiro rendeu 8% e a inflação foi 5%, o ganho real foi de aproximadamente <b>3%</b>. Render menos que a inflação é perder poder de compra.</p>` + eq('Ganho real ≈ Rendimento − Inflação')}
@@ -234,6 +251,7 @@ export default [
   mc("Salário subiu 4% e a inflação foi 6%. O poder de compra:",["*Caiu","Subiu","Ficou igual","Dobrou"],"Os preços subiram mais que o salário.")
  ]},
 {id:"vidax2", title:"Cartão de crédito sem susto", icon:"💳",
+ recap:["Fechamento é quando a fatura é calculada; vencimento é quando ela deve ser paga.", "Pagar só o mínimo joga o resto no rotativo, com juros altos.", "Regra de ouro: pague a fatura inteira."],
  learn:[
   {h:"Como a fatura funciona", b:ul(['<b>Fechamento</b>: data em que a fatura é calculada.','<b>Vencimento</b>: data de pagamento.','<b>Pagamento mínimo</b>: pagar só uma parte e o resto vai para o <b>rotativo</b>, com juros altos.'])},
   {h:"Regra prática", b:box('regra','Pague a fatura inteira. Se não der, é comum que um empréstimo pessoal ou parcelamento da fatura tenha juros menores que o rotativo; compare o custo total antes.') + box('dica','Compras parceladas comprometem as próximas faturas. Some as parcelas futuras antes de comprar.')}
@@ -247,6 +265,7 @@ export default [
   fl("O saldo da fatura que não foi pago e gera juros vai para o {rotativo}.",["limite","fechamento"],"Uma das dívidas mais caras.")
  ]},
 {id:"vidax3", title:"Metas financeiras", icon:"🎯",
+ recap:["Meta boa tem prazo e valor: curto (até 1 ano), médio (1 a 5 anos) ou longo (mais de 5 anos).", "Valor mensal ≈ meta ÷ número de meses.", "Meta de R$ 6.000 em 12 meses: guardar R$ 500 por mês, sem contar rendimentos."],
  learn:[
   {h:"Metas com prazo e valor", b:tbl(['Prazo','Exemplo'],[['Curto (até 1 ano)','Reserva para o conserto do carro'],['Médio (1 a 5 anos)','Entrada de um apartamento'],['Longo (mais de 5 anos)','Aposentadoria']])},
   {h:"Transforme em parcela", b:eq('Valor mensal ≈ Meta ÷ Número de meses') + box('exemplo','Meta de R$ 6.000 em 12 meses: guardar R$ 500 por mês (sem contar rendimentos).')}
@@ -260,6 +279,7 @@ export default [
   od("Ordene os passos:",["Definir o objetivo","Estimar o valor","Escolher o prazo","Calcular quanto guardar por mês","Acompanhar todo mês"],"Do sonho ao plano.")
  ]},
 {id:"vidax4", title:"Financiamento: o custo total", icon:"🏠",
+ recap:["Uma parcela que cabe no bolso pode esconder um custo total alto.", "Custo total = entrada + (parcela × número de parcelas).", "O CET reúne juros, tarifas, seguros e tributos e é o número certo para comparar ofertas."],
  learn:[
   {h:"Olhe além da parcela", b:`<p>Uma parcela que cabe no bolso pode esconder um custo total alto. Some tudo o que será pago.</p>` + eq('Custo total = Entrada + (Parcela × Número de parcelas)')},
   {h:"CET", b:`<p>O <b>Custo Efetivo Total</b> reúne juros, tarifas, seguros e tributos do financiamento. É o número certo para comparar ofertas.</p>` + box('exemplo','Carro de R$ 40.000: entrada R$ 10.000 + 48 × R$ 900 = R$ 53.200 no total. R$ 13.200 a mais que o preço à vista.')}

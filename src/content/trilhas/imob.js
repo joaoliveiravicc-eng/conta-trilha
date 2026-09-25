@@ -5,7 +5,8 @@ export default {
   desc:"Bens de uso duradouro, métodos de depreciação, baixa de ativos, intangíveis e avaliação pelo valor recuperável.",
   lessons:[
   {id:"imob1", title:"O que é o Imobilizado", icon:"🏢",
-   learn:[
+   recap:["O Imobilizado reúne bens tangíveis usados na operação por mais de um ano.", "O custo inclui preço, frete, seguro, instalação e testes, tudo o que deixa o bem pronto para uso.", "Gasto que aumenta a vida útil ou a capacidade é capitalizado; manutenção normal é despesa."],
+ learn:[
     {h:"Bens de uso duradouro", b:`<p>O <b>Ativo Imobilizado</b> reúne os bens tangíveis usados na operação da empresa por <b>mais de um ano</b>: máquinas, veículos, móveis, prédios, computadores. Diferente do estoque, eles não são comprados para revenda.</p>`},
     {h:"O que entra no custo", b:`<p>O custo inicial do bem inclui tudo o que é necessário para deixá-lo <b>pronto para uso</b>: preço de compra, frete, seguro no transporte, instalação e testes.</p>` +
       box('exemplo','Máquina de R$ 40.000, frete de R$ 1.500 e instalação de R$ 2.500: custo capitalizado de <b>R$ 44.000</b>.')},
@@ -22,7 +23,8 @@ export default {
     {t:"mc", q:"Uma máquina comprada para ser revendida por uma loja de equipamentos é, para essa loja, um:", o:["Estoque, porque será revendida, e não Imobilizado","Imobilizado, sempre, por ser uma máquina","Intangível, por ser um bem de alto valor","Investimento de longo prazo em equipamentos"], a:0, e:"O que define o grupo é a finalidade: se é para revender, é estoque, mesmo sendo uma máquina."}
    ]},
   {id:"imob2", title:"Métodos de depreciação", icon:"📐",
-   learn:[
+   recap:["Linear: o mesmo valor por período. Soma dos dígitos: mais no início, menos no fim.", "Unidades produzidas: pelo uso real, como horas ou quilômetros rodados.", "O método precisa refletir o padrão de consumo do bem, e não é uma escolha livre."],
+ learn:[
     {h:"Relembrando o método linear", b:`<p>O método linear (ou das quotas constantes) distribui o mesmo valor de depreciação em cada período. É o mais simples e o mais usado.</p>` + eq('Depreciação anual = (Custo − Valor residual) ÷ Vida útil')},
     {h:"Método das somas dos dígitos (acelerado)", b:`<p>Deprecia <b>mais no início</b> e menos no fim, para bens que perdem valor ou rendimento mais rápido logo nos primeiros anos.</p>` +
       box('exemplo','Vida útil de 4 anos: soma dos dígitos = 1+2+3+4 = 10. No 1º ano deprecia-se 4/10 do valor depreciável; no 2º, 3/10; no 3º, 2/10; no 4º, 1/10.')},
@@ -38,7 +40,8 @@ export default {
     {t:"tf", q:"A escolha do método de depreciação é livre e não precisa ter relação com o uso real do bem.", a:false, e:"O método deve refletir o padrão em que os benefícios econômicos do bem são consumidos."}
    ]},
   {id:"imob3", title:"Baixa e venda de bens", icon:"📤",
-   learn:[
+   recap:["Ao vender ou baixar um bem, saem do Imobilizado o custo e toda a depreciação acumulada dele.", "Valor contábil líquido = custo − depreciação acumulada.", "Resultado na venda = valor de venda − valor contábil líquido: ganho se positivo, perda se negativo."],
+ learn:[
     {h:"Tirando o bem do Ativo", b:`<p>Quando um bem é vendido, doado ou descartado, ele precisa <b>sair</b> do Imobilizado — junto com toda a depreciação acumulada dele.</p>`},
     {h:"Valor contábil líquido", b:eq('Valor contábil líquido = Custo − Depreciação acumulada') + box('exemplo','Máquina com custo de R$ 50.000 e depreciação acumulada de R$ 35.000: valor contábil líquido de <b>R$ 15.000</b>.')},
     {h:"Ganho ou perda na venda", b:`<p>Compara-se o <b>valor recebido</b> na venda com o <b>valor contábil líquido</b> do bem.</p>` + eq('Resultado na venda = Valor de venda − Valor contábil líquido') +
@@ -54,7 +57,8 @@ export default {
     {t:"tf", q:"Se o valor de venda for maior que o valor contábil líquido, a empresa reconhece um ganho.", a:true, e:"Vendeu por mais do que o bem valia nos livros: ganho na venda."}
    ]},
   {id:"imob4", title:"Ativos intangíveis", icon:"💡",
-   learn:[
+   recap:["Intangíveis não têm existência física: marcas, patentes, softwares e direitos.", "Para reconhecer: identificável, controlado pela empresa e capaz de gerar benefícios futuros.", "Vida útil definida se amortiza; o goodwill não se amortiza e é testado por impairment."],
+ learn:[
     {h:"Sem existência física", b:`<p><b>Intangíveis</b> são ativos não monetários e <b>sem substância física</b>, mas que geram benefícios econômicos futuros: marcas, patentes, softwares, direitos de uso.</p>`},
     {h:"Três testes de reconhecimento", b:ul(['<b>Identificável</b>: pode ser separado e vendido, ou vem de um direito legal/contratual.','<b>Controlado</b> pela empresa: ela consegue impedir que outros usem sem permissão.','Capaz de gerar <b>benefícios econômicos futuros</b>.']) + box('atencao','Marcas e listas de clientes desenvolvidas internamente, sem uma compra separada, em geral não podem ser reconhecidas como Ativo — o gasto vira despesa.')},
     {h:"Vida útil definida ou indefinida", b:tbl(['Tipo','Exemplo','Tratamento'],[['Vida útil definida','Uma patente com prazo legal de proteção','Amortiza ao longo da vida útil'],['Vida útil indefinida','Uma marca que a empresa pretende manter indefinidamente','Não amortiza; é testada por impairment todo ano']])},
@@ -68,7 +72,8 @@ export default {
     {t:"wr", q:"Como se chama, em português, o teste que verifica se um ativo intangível de vida indefinida ainda vale o que está registrado nos livros?", a:["teste de impairment","impairment","teste de valor recuperavel","valor recuperavel"], e:"Teste de valor recuperável (impairment)."}
    ]},
   {id:"imob5", title:"Valor recuperável (impairment)", icon:"📉",
-   learn:[
+   recap:["Um ativo não pode ficar por mais do que se pode recuperar.", "Valor recuperável = o maior entre o valor justo líquido de venda e o valor em uso.", "Se o valor contábil é maior que o recuperável, reconhece-se a perda por impairment."],
+ learn:[
     {h:"O Ativo não pode valer mais do que realmente vale", b:`<p>Pelo princípio da <b>prudência</b>, um ativo nunca deve ficar registrado por um valor <b>maior</b> do que a empresa conseguiria recuperar usando-o ou vendendo-o.</p>`},
     {h:"Valor recuperável", b:`<p>É o <b>maior</b> entre duas opções:</p>` + ul(['<b>Valor justo líquido de venda</b>: quanto se conseguiria vendendo o ativo hoje, menos os custos da venda.','<b>Valor em uso</b>: o valor presente dos benefícios futuros que o ativo ainda vai gerar em uso.'])},
     {h:"Quando reconhecer a perda", b:eq('Valor contábil > Valor recuperável → reconhece perda por impairment') +
@@ -84,7 +89,8 @@ export default {
     {t:"tf", q:"Havendo indícios de perda de valor, um bem de vida útil definida também deve ser testado quanto ao valor recuperável, mesmo fora do teste anual obrigatório dos intangíveis de vida indefinida.", a:true, e:"Indícios de perda de valor disparam o teste a qualquer momento, para qualquer tipo de ativo."}
    ]},
   {id:"imob6", title:"Revisão: imobilizado e intangíveis", icon:"🔄",
-   learn:[
+   recap:["Do custo à baixa: reconhecer o custo total, depreciar ao longo da vida útil e baixar na venda ou no descarte.", "Revise vida útil, residual e sinais de perda de valor.", "A perda por impairment reduz o ativo quando ele vale menos que o registrado."],
+ learn:[
     {h:"Do custo à baixa", b:ol(['Reconhecimento: custo total até o bem ficar pronto para uso.','Depreciação: distribui o custo ao longo da vida útil (linear, acelerado ou por unidades produzidas).','Baixa: compara o valor de venda com o valor contábil líquido para achar ganho ou perda.','Impairment: se o valor recuperável cair abaixo do valor contábil, reconhece-se a perda.'])}
    ],
    ex:[

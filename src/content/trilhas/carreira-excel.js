@@ -33,6 +33,7 @@ const PIVOT = tbl(['Centro de custo','Aberta','Paga','Total geral'],[['Administr
 export default [
 /* ================= Fundamentos rápidos ================= */
 {id:"xl1", title:"A planilha por dentro", icon:"📄",
+ recap:["A planilha é uma grade: colunas com letras, linhas com números e células com endereço, como B2.", "A1:A5 é um intervalo de 5 células; B2:C4 é o retângulo de B2 a C4.", "Toda fórmula começa com =, e no Excel em português os argumentos se separam por ponto e vírgula."],
  learn:[
   {h:"Células, linhas e colunas", b:`<p>Uma planilha é uma grade. As colunas têm letras (A, B, C…) e as linhas, números (1, 2, 3…). Cada célula tem um endereço: a letra da coluna e depois o número da linha.</p>` + g([['Item','Qtd','Preço'],['Caneta','10','2,50'],['Papel A4','3','28,00']],['B3']) + box('exemplo','A célula destacada é a <b>B3</b>: coluna B, linha 3. Ela guarda o número 3.')},
   {h:"Intervalos e fórmulas", b:ul(['<b>A1:A5</b> vai de A1 até A5 (5 células).','<b>B2:C4</b> é o retângulo de B2 a C4 (6 células).','Toda fórmula começa com <b>=</b>.','No Excel em português, os argumentos são separados por <b>;</b> (ponto e vírgula).']) + eq('=SOMA(D2:D6) &nbsp;·&nbsp; =B2*C2 &nbsp;·&nbsp; =MÉDIA(B2:B10)')}
@@ -46,6 +47,7 @@ export default [
   mc("Uma fórmula sempre começa com:",["*= (sinal de igual)","# (cerquilha)","@ (arroba)","Aspas"],"Sem o sinal de igual, o Excel trata o conteúdo como texto.")
  ]},
 {id:"xl2", title:"Referências relativas e absolutas", icon:"📌",
+ recap:["Ao copiar uma fórmula, as referências relativas mudam junto com a linha ou a coluna.", "O cifrão trava: $A$1 não muda, A$1 trava a linha e $A1 trava a coluna.", "A tecla F4 alterna entre relativa e absoluta enquanto você edita."],
  learn:[
   {h:"Copiar muda as referências", b:`<p>Se C2 tem =A2*B2 e você copia para C3, a fórmula vira =A3*B3. Isso é a referência <b>relativa</b>: ela anda junto com a fórmula.</p>` + g([['Qtd','Preço','Total'],['10','5','=A2*B2'],['4','8','=A3*B3']])},
   {h:"O cifrão trava", b:ul(['<b>$A$1</b>: trava coluna e linha (referência absoluta).','<b>$A1</b>: trava só a coluna.','<b>A$1</b>: trava só a linha.','A tecla <b>F4</b> alterna entre os tipos enquanto você edita a fórmula.']) + box('exemplo','Para o % de cada linha sobre o total em B10: =B2/$B$10. Copiando para baixo, B2 vira B3, B4…, mas $B$10 continua fixo.')}
@@ -59,6 +61,7 @@ export default [
   mc("Qual referência trava só a linha 1?",["*A$1","$A1","$A$1","A1"],"O cifrão antes do número trava a linha.")
  ]},
 {id:"xl3", title:"Funções essenciais", icon:"🧮",
+ recap:["SOMA, MÉDIA, MÁXIMO, MÍNIMO, CONT.NÚM e CONT.VALORES são as funções do dia a dia.", "CONT.NÚM conta células com número; CONT.VALORES conta células não vazias.", "Numa base de notas, elas resumem valores por coluna."],
  learn:[
   {h:"As que você vai usar todo dia", b:tbl(['Função','O que faz'],[['SOMA','Soma. <br><code>=SOMA(D2:D6)</code>'],['MÉDIA','Média. <br><code>=MÉDIA(D2:D6)</code>'],['MÁXIMO / MÍNIMO','Maior / menor valor. <br><code>=MÁXIMO(D2:D6)</code>'],['CONT.NÚM','Conta células com número. <br><code>=CONT.NÚM(D2:D6)</code>'],['CONT.VALORES','Conta células não vazias. <br><code>=CONT.VALORES(B2:B6)</code>'],['ARRED','Arredonda. <br><code>=ARRED(D2/3;2)</code>']])},
   {h:"Numa base de notas", b:notas() + box('dica','Antes de qualquer relatório, confira o total com =SOMA. É o jeito mais rápido de perceber uma linha esquecida.')}
@@ -72,6 +75,7 @@ export default [
   nu("Qual o resultado de =ARRED(10/3;2)?",3.33,"10 ÷ 3 = 3,333…; com 2 casas, 3,33.","",undefined,0.001)
  ]},
 {id:"xl4", title:"SE, E e OU", icon:"🔀",
+ recap:["=SE(teste; se verdadeiro; se falso): textos sempre entre aspas.", "E exige todas as condições; OU exige só uma.", "SE aninhado serve para mais de duas saídas."],
  learn:[
   {h:"Uma decisão dentro da fórmula", b:eq('=SE(teste_lógico; valor_se_verdadeiro; valor_se_falso)') + box('exemplo','=SE(D2>1000;"Gestor";"Automática"): nota acima de R$ 1.000 vai para aprovação do gestor.') + ul(['Texto sempre entre aspas.','Comparadores: = , &lt;&gt; (diferente), &gt;, &lt;, &gt;=, &lt;=.'])},
   {h:"E, OU e SE dentro de SE", b:ul(['<b>E</b>: todas as condições precisam ser verdadeiras. =SE(E(D2>1000;E2="Aberta");"Priorizar";"OK")','<b>OU</b>: basta uma. =SE(OU(C2="TI";C2="Marketing");"Revisar";"—")','<b>SE aninhado</b>, para mais de duas saídas: =SE(D2>5000;"Diretoria";SE(D2>1000;"Gestor";"Automática"))'])}
@@ -87,6 +91,7 @@ export default [
 
 /* ================= Organizando dados ================= */
 {id:"xl5", title:"Classificar e filtrar", icon:"🔽",
+ recap:["O filtro só oculta linhas, não apaga nada.", "Classificar pode usar várias colunas, como centro de custo e depois valor.", "Selecione a tabela inteira antes de classificar, para não embaralhar as colunas."],
  learn:[
   {h:"Filtro não apaga nada", b:`<p>Em <b>Dados › Filtro</b>, cada cabeçalho ganha uma setinha. Você escolhe o que ver: só um fornecedor, só notas abertas, valores acima de um limite. As outras linhas ficam ocultas, não apagadas.</p>` + box('atencao','Com o filtro ligado, =SOMA soma também as linhas ocultas. Para somar só o que está visível, use =SUBTOTAL(9;D2:D100).')},
   {h:"Classificar", b:ul(['<b>Dados › Classificar</b>: por uma ou várias colunas (ex.: centro de custo e, depois, valor do maior para o menor).','Selecione a tabela inteira antes, para não embaralhar uma coluna separada das outras.'])}
@@ -100,6 +105,7 @@ export default [
   tf("Dá para classificar por duas colunas ao mesmo tempo, como centro de custo e depois valor.",true,"Adicione níveis em Dados › Classificar.")
  ]},
 {id:"xl6", title:"Tabela formatada e dados limpos", icon:"🧹",
+ recap:["Formatar como tabela faz as linhas novas entrarem nas fórmulas e na tabela dinâmica (depois de Atualizar).", "Vilões da base: número guardado como texto, espaços sobrando e linhas duplicadas.", "ARRUMAR tira os espaços; converta o texto em número."],
  learn:[
   {h:"Formatar como tabela", b:`<p>Em <b>Página Inicial › Formatar como Tabela</b>, o intervalo vira uma tabela com nome. Vantagens:</p>` + ul(['Linhas novas entram automaticamente nas fórmulas e na tabela dinâmica (depois de Atualizar).','Uma fórmula digitada numa coluna se completa sozinha até o fim.','Filtros e linhas zebradas já vêm prontos.'])},
   {h:"Os vilões da base", b:tbl(['Problema','Sinal','Solução'],[['Número guardado como texto','Alinhado à esquerda, triângulo verde','Converter em número'],['Espaços sobrando','"Beta " diferente de "Beta"','=ARRUMAR(B2)'],['Linhas duplicadas','Mesma nota duas vezes','Dados › Remover Duplicatas'],['Tudo numa coluna só','"1001;Alfa;TI"','Dados › Texto para Colunas']])}
@@ -113,6 +119,7 @@ export default [
   mc("Por que números guardados como texto são um problema?",["*SOMA e PROCV podem ignorá-los ou não encontrá-los","Porque eles ficam coloridos e atrapalham a leitura","Porque ocupam mais espaço no arquivo da planilha","Não são problema: o Excel converte tudo sozinho"],"Texto não entra na soma e não é igual a número numa busca.")
  ]},
 {id:"xl7", title:"Validação e formatação condicional", icon:"🚦",
+ recap:["A lista suspensa (validação de dados) evita variações como “Pg” e “Paga ” na mesma coluna.", "A formatação condicional pinta células por regra, como vencimentos passados.", "Regras com fórmula permitem várias condições, como vencida e ainda não paga."],
  learn:[
   {h:"Lista suspensa", b:`<p>Em <b>Dados › Validação de Dados › Lista</b>, a célula só aceita valores de uma lista (ex.: Aberta, Recebida, Paga). Isso evita "Paga", "Pg" e "Paga " (com espaço) misturados, que viram categorias diferentes nas somas e na tabela dinâmica.</p>`},
   {h:"Destacar o que importa", b:`<p>Em <b>Página Inicial › Formatação Condicional</b>, você pinta células por regra: vencimentos passados em vermelho, valores acima do orçamento em amarelo.</p>` + box('exemplo','Regra com fórmula para notas vencidas: =E($F2&lt;HOJE();$E2&lt;&gt;"Paga") — vencimento no passado e ainda não paga.')}
@@ -128,6 +135,7 @@ export default [
 
 /* ================= PROCV ================= */
 {id:"xl8", title:"PROCV: buscando informações", icon:"🔎",
+ recap:["O PROCV busca um valor na primeira coluna da matriz e traz um dado de outra coluna.", "Ele tem quatro pedaços: o que procurar, onde, qual coluna trazer e o tipo de correspondência.", "A tabela deve começar pela coluna do código."],
  learn:[
   {h:"Para que serve", b:`<p>O PROCV procura um valor na <b>primeira coluna</b> de uma tabela e traz o que está na mesma linha, em outra coluna. No financeiro: trazer o nome do fornecedor pelo código, o centro de custo, o prazo de pagamento.</p>` + eq('=PROCV(valor_procurado; matriz_tabela; núm_índice_coluna; [procurar_intervalo])')},
   {h:"Um exemplo", b:forn() + box('exemplo','=PROCV("F02";A2:D5;2;FALSO) procura F02 na coluna A e traz a 2ª coluna da tabela: <b>Beta</b>. Com 4 no lugar do 2, traz o prazo: <b>45</b>.')},
@@ -142,6 +150,7 @@ export default [
   tf("O PROCV procura o valor em qualquer coluna da matriz, à sua escolha.",false,"O PROCV procura sempre na primeira coluna da matriz. Por isso a tabela deve começar pela coluna do código.")
  ]},
 {id:"xl9", title:"Correspondência exata e erros", icon:"⚠️",
+ recap:["O último argumento FALSO (ou 0) exige correspondência exata.", "#N/D significa que não achou; #REF! indica coluna fora da matriz; #NOME? indica nome de função errado.", "Códigos que parecem iguais podem diferir por espaço ou por serem texto e número."],
  learn:[
   {h:"FALSO não é detalhe", b:`<p>O último argumento define o tipo de busca. <b>FALSO</b> (ou 0) é a correspondência exata. Se ele for <b>omitido</b>, o Excel usa VERDADEIRO (aproximada), que presume a primeira coluna em ordem e pode trazer a linha errada sem avisar.</p>` + box('regra','Buscou código, CNPJ ou número de nota? Sempre FALSO.')},
   {h:"Os erros e o que significam", b:tbl(['Erro','Causa comum'],[['#N/D','O valor procurado não existe na 1ª coluna (ou está escrito diferente)'],['#REF!','O número da coluna é maior que o número de colunas da matriz'],['#NOME?','Nome da função errado ou texto sem aspas']]) + box('dica','=SEERRO(PROCV(H2;A2:D5;2;FALSO);"Não cadastrado") troca o erro por uma mensagem.')}
@@ -155,6 +164,7 @@ export default [
   tf("#NOME? costuma aparecer quando o nome da função está escrito errado.",true,"Ex.: =PROCVV(…).")
  ]},
 {id:"xl10", title:"Travando a matriz e armadilhas", icon:"🔒",
+ recap:["Ao copiar o PROCV para baixo, trave a matriz com $: $F$2:$H$50.", "Se o código aparece duas vezes, o PROCV traz a primeira ocorrência.", "Quando não acha, confira espaços, texto x número e o cadastro."],
  learn:[
   {h:"Copiando o PROCV para baixo", b:`<p>Numa base de notas, o PROCV é copiado para centenas de linhas. Sem cifrão, a matriz anda junto (A2:D5 vira A3:D6, A4:D7…) e os primeiros fornecedores somem da busca.</p>` + eq('=PROCV(B2;$A$2:$D$5;2;FALSO)') + box('dica','Outra saída é usar colunas inteiras ($A:$D) ou uma tabela formatada, que não andam.')},
   {h:"Quando o PROCV não acha", b:ul(['A coluna procurada precisa ser a <b>primeira</b> da matriz: o PROCV não olha para a esquerda.','<b>Número x texto</b>: "1001" (texto) não é igual a 1001 (número).','<b>Espaços</b>: "F02 " não é "F02". Limpe com ARRUMAR.','<b>Duplicados</b>: se o código aparece duas vezes, o PROCV traz a primeira ocorrência.'])}
@@ -168,6 +178,7 @@ export default [
   tf("Se o código aparece duas vezes, o PROCV soma os dois resultados.",false,"O PROCV traz só a primeira ocorrência, sem somar. Por isso vale remover duplicados do cadastro.")
  ]},
 {id:"xl11", title:"PROCX e ÍNDICE + CORRESP", icon:"🧭",
+ recap:["O PROCX indica onde procurar e de onde trazer, em qualquer direção, com correspondência exata por padrão.", "ÍNDICE + CORRESP funciona em qualquer versão e em qualquer direção.", "O PROCX existe no Microsoft 365 e no Excel 2021 ou mais novo."],
  learn:[
   {h:"PROCX", b:`<p>No Microsoft 365 e no Excel 2021 ou mais novo existe o PROCX: você indica onde procurar e de onde trazer, em qualquer direção, e a correspondência já é exata por padrão.</p>` + eq('=PROCX(valor; matriz_procura; matriz_retorno; [se_não_encontrado])') + box('exemplo','=PROCX("Beta";B2:B5;A2:A5;"Não achei") traz F02, que está numa coluna <b>à esquerda</b>.')},
   {h:"ÍNDICE + CORRESP", b:eq('=ÍNDICE(A2:A5; CORRESP("Beta"; B2:B5; 0))') + ul(['CORRESP acha a posição (0 = correspondência exata).','ÍNDICE traz o valor daquela posição.','Funciona em qualquer versão e em qualquer direção.']) + box('dica','Na entrevista: PROCV é o básico esperado; mostrar que conhece o PROCX é um diferencial.')}
@@ -183,6 +194,7 @@ export default [
 
 /* ================= SOMASE, SOMASES e CONT.SES ================= */
 {id:"xl12", title:"SOMASE: somar com uma condição", icon:"➕",
+ recap:["SOMASE soma com uma condição: intervalo do critério, critério e intervalo a somar.", "Na SOMASE o intervalo a somar vem por último; na SOMASES, primeiro.", "O critério pode estar numa célula."],
  learn:[
   {h:"A sintaxe", b:eq('=SOMASE(intervalo; critérios; [intervalo_soma])') + notas() + box('exemplo','=SOMASE(B2:B6;"Alfa";D2:D6) soma as notas da Alfa: 1.200 + 800 = <b>2.000</b>.')},
   {h:"Critério numa célula", b:`<p>Em vez de digitar o nome, aponte para uma célula: =SOMASE($B$2:$B$6;G2;$D$2:$D$6). A mesma fórmula serve para cada fornecedor listado na coluna G.</p>` + box('dica','Sem o intervalo_soma, a SOMASE soma o próprio intervalo do critério. Útil para "somar valores acima de 1.000".')}
@@ -196,6 +208,7 @@ export default [
   tf("Na SOMASES, o intervalo a somar é o último argumento.",false,"Na SOMASES o intervalo a somar é o primeiro. Só na SOMASE ele vem por último. Atenção a essa diferença.")
  ]},
 {id:"xl13", title:"SOMASES: várias condições", icon:"➕",
+ recap:["SOMASES soma com várias condições, e todas precisam ser atendidas ao mesmo tempo.", "Sintaxe: intervalo a somar, depois pares de intervalo e critério.", "Funciona como um E entre as condições."],
  learn:[
   {h:"A sintaxe", b:eq('=SOMASES(intervalo_soma; intervalo_critérios1; critérios1; intervalo_critérios2; critérios2; …)') + box('atencao','A ordem muda! Na SOMASES, o intervalo a somar vem <b>primeiro</b>. Na SOMASE, ele vem por último.')},
   {h:"Um exemplo", b:notas() + box('exemplo','=SOMASES(D2:D6;C2:C6;"TI";E2:E6;"Paga") soma as notas de TI já pagas: <b>1.500</b>.') + `<p>Todas as condições precisam ser verdadeiras ao mesmo tempo (funciona como um E). O Excel aceita até 127 pares de critérios.</p>`}
@@ -209,6 +222,7 @@ export default [
   nu('Qual o resultado de =SOMASES(D2:D6;C2:C6;"Comercial";E2:E6;"Aberta")?' + notas(),0,"Não há nota do Comercial em aberto.")
  ]},
 {id:"xl14", title:"Critérios com operadores, células e datas", icon:"📅",
+ recap:["Critérios aceitam operadores (\">1000\", \"<>Paga\") e curingas (*, ?).", "Para usar o valor de uma célula, junte o operador com &: \">=\"&G1.", "Para somar um mês, use datas de corte com DATA e FIMMÊS."],
  learn:[
   {h:"Escrevendo critérios", b:tbl(['Critério','Significa'],[['">1000"','maior que 1.000'],['"&lt;&gt;Paga"','diferente de Paga'],['"&gt;="&amp;G1','maior ou igual ao valor em G1'],['"*Energia*"','contém "Energia" (curinga *)'],['"F0?"','F0 e mais um caractere (curinga ?)']]) + box('regra','Operador e célula se juntam com &amp;: "&gt;="&amp;G1.')},
   {h:"Somando um mês", b:`<p>Para somar março de 2026 numa coluna de datas (A):</p>` + eq('=SOMASES(C:C; A:A; ">="&DATA(2026;3;1); A:A; "<="&FIMMÊS(DATA(2026;3;1);0))') + box('dica','FIMMÊS(data;0) devolve o último dia do mês daquela data. É o jeito seguro para meses de 28, 30 ou 31 dias.') + g(DATAS)}
@@ -222,6 +236,7 @@ export default [
   tf("FIMMÊS(DATA(2026;2;1);0) devolve 29/02/2026.",false,"2026 não é ano bissexto: fevereiro termina em 28/02/2026.")
  ]},
 {id:"xl15", title:"CONT.SES e MÉDIASES", icon:"🔢",
+ recap:["CONT.SE e CONT.SES contam com uma ou várias condições; MÉDIASES tira média com condições.", "Contagens alimentam indicadores, como % de notas em aberto.", "Exemplo: 2 abertas em 5 notas são 40%."],
  learn:[
   {h:"Contar e tirar média com condições", b:tbl(['Função','O que faz'],[['CONT.SE','Conta com 1 condição. <br><code>=CONT.SE(E2:E6;"Aberta")</code>'],['CONT.SES','Conta com várias condições. <br><code>=CONT.SES(C2:C6;"TI";E2:E6;"Paga")</code>'],['MÉDIASES','Média com condições. <br><code>=MÉDIASES(D2:D6;C2:C6;"TI")</code>']]) + notas()},
   {h:"Indicadores com contagem", b:box('exemplo','% de notas em aberto = CONT.SE(E2:E6;"Aberta") ÷ CONT.VALORES(A2:A6) = 2 ÷ 5 = <b>40%</b>.') + box('dica','Contagens alimentam indicadores como "% de notas com divergência" e "% de ordens de compra no prazo".')}
@@ -237,6 +252,7 @@ export default [
 
 /* ================= Tabela dinâmica ================= */
 {id:"xl16", title:"Preparando a base", icon:"🧱",
+ recap:["Uma boa base tem cabeçalho único, uma linha por lançamento, sem linhas vazias, totais ou células mescladas.", "Prefira uma coluna Data a uma coluna para cada mês.", "Base limpa antes da tabela dinâmica evita relatório errado."],
  learn:[
   {h:"Regras de uma boa base", b:ul(['Uma linha por registro (uma nota por linha).','Um cabeçalho em cada coluna, sem repetir nomes.','Sem linhas ou colunas totalmente em branco no meio.','Sem células mescladas.','Datas como data e valores como número.']) + box('dica','Formate a base como tabela: ao incluir linhas novas, a tabela dinâmica as encontra depois de Atualizar.')},
   {h:"Base ruim x base boa", b:tbl(['Base ruim','Base boa'],[['Subtotais no meio das linhas','Só registros; os totais ficam na tabela dinâmica'],['Meses nas colunas (jan, fev, mar…)','Uma coluna Data ou Mês'],['"TI" mesclado em 5 linhas','"TI" repetido em cada linha']])}
@@ -250,6 +266,7 @@ export default [
   od("Ordene a preparação da base:",["Conferir os cabeçalhos","Remover linhas em branco e subtotais","Desfazer células mescladas","Formatar como tabela"],"Limpar primeiro, formatar no fim.")
  ]},
 {id:"xl17", title:"Montando a tabela dinâmica", icon:"🧩",
+ recap:["Na tabela dinâmica, arraste campos para Linhas, Colunas, Valores e Filtros.", "Campo de texto em Valores vira Contagem; campo numérico vira Soma.", "Confira: o total geral tem de bater com a soma da base."],
  learn:[
   {h:"As quatro áreas", b:`<p>Em <b>Inserir › Tabela Dinâmica</b>, escolha a base e onde colocar. Depois arraste os campos:</p>` + tbl(['Área','Para quê','Exemplo'],[['Linhas','Itens de cima para baixo','Centro de custo'],['Colunas','Itens lado a lado','Status'],['Valores','O que somar ou contar','Soma de Valor'],['Filtros','Filtrar o relatório inteiro','Fornecedor']])},
   {h:"O resultado com a base de notas", b:PIVOT + box('dica','Campo de texto em Valores vira Contagem; campo de número vira Soma. Dá para trocar em Configurações do Campo de Valor.')}
@@ -263,6 +280,7 @@ export default [
   mc("Para ver cada status numa coluna separada, arraste Status para:",["*Colunas","Valores","Filtros","Linhas"],"Colunas mostram itens lado a lado.")
  ]},
 {id:"xl18", title:"Agrupar, mostrar % e atualizar", icon:"🔄",
+ recap:["Agrupe datas por mês, mostre valores como % do total e dê duplo clique para ver os lançamentos.", "A tabela dinâmica não se atualiza sozinha: use Atualizar.", "Se a base cresceu e não é tabela formatada, altere a fonte de dados."],
  learn:[
   {h:"Três recursos que impressionam", b:ul(['<b>Agrupar datas</b>: clique direito numa data › Agrupar › Meses (e Anos, se houver mais de um ano).','<b>% do total</b>: clique direito no valor › Mostrar Valores Como › % do Total Geral.','<b>Detalhar</b>: duplo clique num número mostra as linhas que o formam.'])},
   {h:"Ela não se atualiza sozinha", b:box('atencao','Mudou a base? Clique direito na tabela dinâmica › Atualizar. Sem isso, o relatório mostra os números antigos.') + `<p>Se a base cresceu e não é uma tabela formatada, ajuste o intervalo em <b>Alterar Fonte de Dados</b>.</p>`}
@@ -276,6 +294,7 @@ export default [
   tf("Dá para mostrar os valores como percentual do total geral.",true,"Mostrar Valores Como › % do Total Geral.")
  ]},
 {id:"xl19", title:"Segmentação, gráfico e a ferramenta certa", icon:"🎛️",
+ recap:["A segmentação filtra a tabela dinâmica com botões, e o gráfico dinâmico acompanha os filtros.", "Tabela dinâmica serve para explorar; SOMASES serve para relatório com layout fixo.", "Na entrevista, explique quando usar cada ferramenta."],
  learn:[
   {h:"Deixando interativo", b:ul(['<b>Segmentação de dados</b>: botões para filtrar a tabela dinâmica com um clique (Analisar Tabela Dinâmica › Inserir Segmentação de Dados).','<b>Gráfico dinâmico</b>: um gráfico que acompanha os filtros da tabela dinâmica.'])},
   {h:"Tabela dinâmica ou SOMASES?", b:tbl(['Situação','Melhor escolha'],[['Explorar a base e descobrir onde está o gasto','Tabela dinâmica'],['Relatório mensal com layout fixo e comentários','SOMASES'],['Resumo rápido para uma reunião','Tabela dinâmica'],['Previsto x realizado lado a lado','SOMASES (o previsto está em outra tabela)']])}
@@ -291,6 +310,7 @@ export default [
 
 /* ================= Na prática: o teste de Excel ================= */
 {id:"xl20", title:"Teste 1: notas e fornecedores", icon:"🧪",
+ recap:["O teste costuma pedir PROCV, SOMASES e uma tabela dinâmica.", "Roteiro: ler tudo, conferir a base, resolver com fórmulas e conferir os totais.", "Nunca digite resultados à mão."],
  learn:[
   {h:"O que costuma cair", b:`<p>Muitas seleções para analista aplicam um teste prático curto: completar colunas com PROCV, resumir valores com SOMASES e montar uma tabela dinâmica. As lições desta unidade simulam isso. Para treinar no Excel de verdade, baixe a planilha:</p>` + download('/carreira/treino-excel-analista.xlsx','Baixar a planilha de treino (.xlsx)') + box('dica','Faça no computador, marcando o tempo. O gabarito está na última aba: só olhe no fim.')},
   {h:"Roteiro para qualquer teste", b:ol(['Leia todo o enunciado antes de começar.','Confira a base: cabeçalhos, espaços sobrando, números como texto.','Resolva com fórmulas, sem digitar resultados à mão.','Confira os totais: o resumo precisa bater com a soma da base.','Formate os valores e salve com o nome pedido.'])},
@@ -306,6 +326,7 @@ export default [
   od("Ordene o roteiro do teste:",["Ler todo o enunciado","Conferir a base","Resolver com fórmulas","Conferir os totais","Salvar com o nome pedido"],"Entender, conferir, resolver, validar e entregar.")
  ]},
 {id:"xl21", title:"Teste 2: previsto x realizado", icon:"🧪",
+ recap:["O previsto x realizado por centro pode vir de SOMASES com referências travadas.", "Variação = realizado − previsto; variação % = variação ÷ previsto.", "Para despesa, gastar acima do previsto é desfavorável, e totais iguais podem esconder centros estourados."],
  learn:[
   {h:"O resumo pedido", b:`<p>Com a base de notas (aba Notas, colunas C = centro de custo e D = valor), preencha o realizado de cada centro e a variação contra o previsto:</p>` + g([['Centro','Previsto','Realizado','Variação','%'],['Administrativo','1.500','','',''],['Comercial','1.000','','',''],['Marketing','4.000','','',''],['TI','5.500','','','']],['C2']) + eq('C2: =SOMASES(Notas!$D:$D;Notas!$C:$C;A2) &nbsp;·&nbsp; D2: =C2-B2 &nbsp;·&nbsp; E2: =D2/B2')},
   {h:"Como ler a variação", b:ul(['Variação = Realizado − Previsto.','Numa despesa, variação positiva significa gasto <b>acima</b> do previsto (desfavorável).','% = Variação ÷ Previsto.']) + box('dica','Total igual ao previsto não quer dizer que está tudo certo: olhe cada linha.')}
@@ -320,6 +341,7 @@ export default [
   tf("A variação percentual se calcula dividindo a variação pelo previsto.",true,"% = (Realizado − Previsto) ÷ Previsto.")
  ]},
 {id:"xl22", title:"Teste 3: resumo e apresentação", icon:"🧪",
+ recap:["O resumo por tabela dinâmica precisa ter total geral igual à soma da base.", "Escolha o gráfico pelo objetivo: colunas para comparar, linhas para evolução, pizza com moderação.", "Explique em três partes: o que foi pedido, como resolveu e como conferiu."],
  learn:[
   {h:"Resumo com tabela dinâmica", b:PIVOT + box('dica','Confira: o total geral da tabela dinâmica (12.000) precisa bater com =SOMA da coluna Valor da base.')},
   {h:"Qual gráfico usar", b:tbl(['Objetivo','Gráfico'],[['Comparar centros de custo','Colunas ou barras'],['Evolução mês a mês','Linhas'],['Participação no total, com poucas categorias','Pizza (com moderação)'],['Previsto x realizado','Colunas agrupadas']])},

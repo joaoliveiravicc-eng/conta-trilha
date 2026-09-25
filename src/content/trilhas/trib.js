@@ -5,7 +5,8 @@ export default {
   desc:"Tipos de tributos, regimes tributários e a Reforma Tributária do consumo.",
   lessons:[
   {id:"trib1", title:"Tipos de tributos", icon:"🏷️",
-   learn:[
+   recap:["Tributo é um pagamento obrigatório, em dinheiro, criado por lei, que não é multa.", "Espécies: imposto, taxa e contribuição. Esferas: federal, estadual e municipal.", "Diretos recaem sobre quem paga; indiretos vêm embutidos no preço, como ICMS, ISS e IPI."],
+ learn:[
     {h:"O que é tributo", b:`<p>Pelo Código Tributário Nacional (art. 3º), tributo é um pagamento <b>obrigatório</b> ao Estado, em dinheiro, criado por lei, e que <b>não é multa</b>.</p>`},
     {h:"Espécies", b:tbl(['Espécie','Característica','Exemplo'],[['Imposto','Não tem contrapartida específica','IR, ICMS'],['Taxa','Paga por um serviço público ou fiscalização','Alvará, coleta de lixo'],['Contribuição de melhoria','Por obra pública que valoriza o imóvel','Asfalto na rua']]) +
       box('dica','O STF reconhece ainda os empréstimos compulsórios e as contribuições especiais, como PIS, Cofins e as contribuições ao INSS.')},
@@ -20,7 +21,8 @@ export default {
     {t:"mc", q:"Qual destes é um tributo indireto?", o:["ICMS","IRPF","IPTU","IPVA"], a:0, e:"O ICMS vem embutido no preço e é repassado ao consumidor."}
    ]},
   {id:"trib2", title:"Regimes tributários", icon:"🏢",
-   learn:[
+   recap:["O regime define como a empresa calcula IRPJ, CSLL, PIS e Cofins.", "Simples Nacional: até R$ 4,8 milhões por ano, com guia única (DAS). Lucro Presumido: até R$ 78 milhões, com lucro presumido sobre a receita.", "Lucro Real: o imposto incide sobre o lucro contábil ajustado."],
+ learn:[
     {h:"Por que o regime importa", b:`<p>O regime define como a empresa calcula IRPJ, CSLL, PIS e Cofins (e, no Simples, quase todos os tributos). Escolher bem pode reduzir muito a carga.</p>`},
     {h:"Simples Nacional", b:`<p>Para micro e pequenas empresas com receita bruta de até <b>R$ 4,8 milhões por ano</b>. Vários tributos são pagos em uma guia única, o <b>DAS</b>, com alíquotas que crescem com o faturamento.</p><p>O <b>MEI</b>, dentro do Simples, atende quem fatura até <b>R$ 81 mil por ano</b>.</p>`},
     {h:"Lucro Presumido", b:`<p>Para empresas com receita de até <b>R$ 78 milhões por ano</b>. O lucro é presumido como um percentual da receita: para o IRPJ, em geral <b>8%</b> no comércio e na indústria e <b>32%</b> na maioria dos serviços.</p>`},
@@ -35,7 +37,8 @@ export default {
     {t:"mc", q:"O adicional de 10% do IRPJ incide sobre:", o:["O lucro que exceder R$ 20 mil por mês","Toda a receita bruta da empresa no mês","O prejuízo apurado no período pela empresa","Os dividendos pagos aos sócios no ano"], a:0, e:"Só a parcela acima de R$ 20 mil mensais (R$ 240 mil por ano) paga o adicional."}
    ]},
   {id:"trib3", title:"Consumo e a Reforma Tributária", icon:"🔄",
-   learn:[
+   recap:["Não cumulatividade: o imposto pago nas compras é abatido do imposto devido nas vendas.", "Reforma Tributária: a CBS substitui PIS e Cofins e o IBS substitui ICMS e ISS.", "A transição vai de 2026 a 2033, e 2026 é o ano de teste (CBS de 0,9% e IBS de 0,1%)."],
+ learn:[
     {h:"Não cumulatividade", b:`<p>No ICMS, no IPI e no PIS/Cofins do regime não cumulativo, a empresa <b>desconta o imposto pago nas compras</b> (crédito) do imposto devido nas vendas (débito). Assim, paga só sobre o valor que agregou.</p>`},
     {h:"Exemplo com ICMS", b:box('exemplo','Na compra das mercadorias foram pagos R$ 180 de ICMS. Na venda, o ICMS devido é de R$ 270. A empresa recolhe só <b>R$ 90</b>.') +
       lanc([['D','ICMS sobre vendas (dedução)','270'],['C','ICMS a recolher','270']])},
@@ -52,7 +55,8 @@ export default {
     {t:"entry", q:"Apuração do ICMS devido sobre as vendas do mês, R$ 2.500.", accts:["ICMS sobre vendas","ICMS a recolher","ICMS a recuperar","Caixa"], d:["ICMS sobre vendas"], c:["ICMS a recolher"], e:"O ICMS sobre vendas é dedução da receita (débito) e gera a obrigação de recolher (crédito)."}
    ]},
   {id:"trib4", title:"Planejamento tributário: elisão e evasão", icon:"⚖️",
-   learn:[
+   recap:["Elisão é reduzir tributos por meios lícitos, em regra antes do fato gerador.", "Evasão (sonegação) é reduzir ou não pagar o tributo por meios ilícitos, como omitir receita ou usar nota fria.", "A evasão é crime e gera multa e cobrança do tributo com juros."],
+ learn:[
     {h:"Pagar menos imposto é crime?", b:`<p>Não necessariamente. Existe uma linha bem definida entre <b>reduzir tributos de forma lícita</b> e <b>sonegar</b>.</p>`},
     {h:"Elisão fiscal", b:`<p><b>Elisão</b> é a redução <b>lícita</b> da carga tributária, usando os meios previstos ou não vedados pela lei — geralmente feita <b>antes</b> do fato gerador acontecer.</p>` +
       box('exemplo','Uma empresa simula seu resultado nos dois regimes tributários permitidos para o seu porte e escolhe o Lucro Presumido, porque nesse caso paga legalmente menos do que pagaria no Lucro Real.')},
@@ -68,7 +72,8 @@ export default {
     {t:"match", pairs:[["Elisão fiscal","Redução lícita da carga tributária"],["Evasão fiscal","Redução por meios ilícitos, como omitir receita"],["Fato gerador","O evento que faz nascer a obrigação de pagar o tributo"]], e:"O critério central é sempre a licitude do meio usado."}
    ]},
   {id:"trib5", title:"Revisão: tributos", icon:"🔄",
-   learn:[
+   recap:["Tributo nasce de um fato previsto em lei, o fato gerador.", "Regimes tributários mudam a forma de apuração.", "Planejar dentro da lei é elisão; fraudar é evasão."],
+ learn:[
     {h:"O mapa dos tributos", b:tbl(['Pergunta','Resposta'],[['Imposto, taxa ou contribuição de melhoria?','Taxa tem contrapartida de serviço; contribuição de melhoria vem de obra pública'],['Direto ou indireto?','Direto recai sobre quem paga; indireto é repassado no preço'],['Qual regime?','Simples (pequenas empresas), Presumido (base por %) ou Real (sobre o lucro ajustado)'],['Lícito ou ilícito?','Elisão é legal; evasão (sonegação) é crime']])}
    ],
    ex:[

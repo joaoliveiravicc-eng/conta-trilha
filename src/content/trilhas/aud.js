@@ -5,7 +5,8 @@ export default {
   desc:"Auditoria interna e externa, riscos, controles, evidências e o relatório do auditor.",
   lessons:[
   {id:"aud1", title:"O que é auditoria", icon:"🕵️",
-   learn:[
+   recap:["Auditoria é o exame independente das demonstrações para aumentar a confiança de quem as usa; o auditor emite uma opinião.", "A interna é feita por uma área da empresa; a externa, por uma firma sem vínculo com ela.", "A auditoria dá segurança razoável, não certeza absoluta, com testes e amostragem."],
+ learn:[
     {h:"Definição", b:`<p>Auditoria é o exame <b>independente</b> das demonstrações financeiras para aumentar a confiança de quem as usa.</p><p>No fim, o auditor emite uma <b>opinião</b>: as demonstrações estão adequadas, em todos os aspectos relevantes?</p>`},
     {h:"Interna x externa", b:tbl(['','Interna','Externa (independente)'],[['Quem faz','Área da própria empresa','Firma sem vínculo com a empresa'],['Foco','Controles, riscos e processos','Demonstrações financeiras'],['Para quem','Administração e conselho','Sócios, investidores e mercado']]) +
       `<p>A auditoria externa é obrigatória para companhias abertas e sociedades de grande porte.</p>`},
@@ -21,7 +22,8 @@ export default {
     {t:"mc", q:"A auditoria independente é obrigatória por lei para:", o:["Companhias abertas e sociedades de grande porte","Todo MEI, mesmo com faturamento muito pequeno","Somente os órgãos públicos e as autarquias","Nenhuma empresa, porque a auditoria é sempre voluntária"], a:0, e:"Quem tem investidores no mercado ou grande porte precisa de auditoria externa."}
    ]},
   {id:"aud2", title:"Risco e materialidade", icon:"🎲",
-   learn:[
+   recap:["Materialidade é o valor a partir do qual um erro poderia mudar a decisão de quem lê as demonstrações.", "Risco de auditoria = risco inerente × risco de controle × risco de detecção.", "Quanto maior o risco inerente e o de controle, mais testes e evidências."],
+ learn:[
     {h:"Materialidade", b:`<p>É o valor a partir do qual um erro poderia <b>mudar a decisão</b> de quem lê as demonstrações.</p>` +
       box('exemplo','Um erro de R$ 100 numa empresa que fatura bilhões não é material. Numa empresa muito pequena, pode ser. Uma referência comum é um percentual do lucro antes dos impostos, por exemplo 5%.')},
     {h:"Risco de auditoria", b:`<p>É o risco de o auditor dar uma opinião inadequada, como dizer que está tudo certo quando existe uma distorção relevante.</p>` + eq('Risco de auditoria = Risco inerente × Risco de controle × Risco de detecção')},
@@ -37,7 +39,8 @@ export default {
     {t:"num", q:"Lucro antes dos impostos de R$ 2.000.000 e materialidade definida em 5%. Qual o valor da materialidade?", a:100000, u:"R$", e:"2.000.000 × 5% = 100.000."}
    ]},
   {id:"aud3", title:"Controles internos", icon:"🛡️",
-   learn:[
+   recap:["Controles internos protegem ativos e garantem informações confiáveis, operações eficientes e cumprimento das leis.", "Exemplos: segregação de funções, alçadas e conciliação bancária.", "Preventivos evitam o erro antes de acontecer; detectivos o encontram depois."],
+ learn:[
     {h:"O que são", b:`<p>Políticas e procedimentos para <b>proteger os ativos</b>, garantir informações confiáveis, operações eficientes e o cumprimento das leis.</p>`},
     {h:"COSO: cinco componentes", b:ul(['<b>Ambiente de controle</b>: cultura, ética e exemplo da liderança.','<b>Avaliação de riscos</b>: identificar o que pode dar errado.','<b>Atividades de controle</b>: aprovações, conciliações, segregação.','<b>Informação e comunicação</b>: a informação certa chega a quem precisa.','<b>Monitoramento</b>: verificar se os controles funcionam.'])},
     {h:"Exemplos de controles", b:tbl(['Controle','Como funciona'],[['Segregação de funções','Quem aprova não paga nem registra'],['Alçadas','Pagamentos grandes exigem duas aprovações'],['Conciliação bancária','Conferir o saldo contábil com o extrato'],['Inventário físico','Contar o estoque e comparar com o sistema'],['Controle de acesso','Senhas e perfis nos sistemas']])},
@@ -51,7 +54,8 @@ export default {
     {t:"mc", q:"A conciliação bancária compara:", o:["O saldo contábil com o extrato do banco","O estoque contábil com as vendas do período","Os salários pagos com os impostos do mês","A DRE com a DFC do mesmo período"], a:0, e:"Diferenças apontam lançamentos faltando, duplicados ou erros."}
    ]},
   {id:"aud4", title:"Evidências e procedimentos", icon:"🧪",
-   learn:[
+   recap:["Evidência precisa ser suficiente (quantidade) e apropriada (relevância e confiabilidade).", "É mais confiável a evidência externa, obtida direto pelo auditor e documental.", "Procedimentos: inspeção, observação, confirmação externa e recálculo. Asserções: existência, integridade, direitos, avaliação."],
+ learn:[
     {h:"Evidência de auditoria", b:`<p>São as informações que sustentam a opinião do auditor. Precisam ser:</p>` + ul(['<b>Suficientes</b>: quantidade.','<b>Apropriadas</b>: qualidade, ou seja, relevância e confiabilidade.'])},
     {h:"O que é mais confiável", b:ul(['Evidência <b>externa</b> é mais confiável que interna.','Obtida <b>diretamente</b> pelo auditor é mais confiável que obtida de forma indireta.','<b>Documental</b> é mais confiável que verbal.','<b>Original</b> é mais confiável que cópia.'])},
     {h:"Procedimentos", b:tbl(['Procedimento','O que é'],[['Inspeção','Examinar documentos ou ativos'],['Observação','Ver um processo acontecendo'],['Confirmação externa','Resposta direta de um terceiro, como um banco'],['Recálculo','Refazer contas'],['Reexecução','Refazer um controle da empresa'],['Procedimentos analíticos','Comparar tendências e índices'],['Indagação','Fazer perguntas']])},
@@ -66,7 +70,8 @@ export default {
     {t:"mc", q:"Verificar se vendas de 2 de janeiro foram registradas em dezembro testa a asserção de:", o:["Corte","Existência","Direitos e obrigações","Avaliação"], a:0, e:"Corte verifica se as transações estão no período correto."}
    ]},
   {id:"aud5", title:"Relatório do auditor", icon:"📝",
-   learn:[
+   recap:["O relatório do auditor traz a opinião sobre as demonstrações.", "Sem ressalva: adequadas. Com ressalva: distorção relevante, mas não generalizada. Adversa: relevante e generalizada.", "Ênfase e PAA são seções adicionais; dúvida sobre a continuidade leva a uma seção específica."],
+ learn:[
     {h:"A opinião", b:`<p>Ao final do trabalho, o auditor emite o <b>relatório do auditor independente</b>, com sua opinião sobre as demonstrações.</p>`},
     {h:"Tipos de opinião", b:tbl(['Opinião','Quando'],[['Sem ressalva (não modificada)','As demonstrações estão adequadas'],['Com ressalva','Distorção relevante, mas não generalizada'],['Adversa','Distorções relevantes e generalizadas'],['Abstenção de opinião','Sem evidência suficiente, com possíveis efeitos relevantes e generalizados']])},
     {h:"Seções adicionais", b:ul(['<b>Parágrafo de ênfase</b>: chama atenção para algo já divulgado corretamente, como um processo judicial relevante. <b>Não muda</b> a opinião.','<b>Principais Assuntos de Auditoria (PAA)</b>: temas que exigiram mais atenção; obrigatórios para companhias listadas.'])},
@@ -80,7 +85,8 @@ export default {
     {t:"tf", q:"A abstenção de opinião ocorre quando o auditor não consegue evidência suficiente e os possíveis efeitos são relevantes e generalizados.", a:true, e:"Nesse caso, ele não tem base para opinar."}
    ]},
   {id:"aud6", title:"Fraude x erro", icon:"🎭",
-   learn:[
+   recap:["O que diferencia fraude de erro é a intenção.", "Há a manipulação de resultados e a apropriação indevida de ativos.", "Triângulo da fraude: pressão, oportunidade e racionalização."],
+ learn:[
     {h:"A diferença é a intenção", b:`<p>Uma distorção nas demonstrações pode ser um <b>erro</b> (não intencional) ou uma <b>fraude</b> (intencional, para obter vantagem indevida).</p>`},
     {h:"Tipos de fraude", b:ul(['<b>Manipulação de resultados</b> (fraudulent financial reporting): inflar receitas, esconder despesas ou dívidas.','<b>Apropriação indevida de ativos</b>: desviar dinheiro ou bens da empresa para uso próprio.']) + box('dica','A fraude de manipulação costuma partir da alta administração; a apropriação de ativos costuma ser de funcionários.')},
     {h:"O triângulo da fraude", b:tbl(['Elemento','Significado'],[['Pressão','Uma necessidade ou incentivo para cometer a fraude'],['Oportunidade','Controles fracos que permitem agir sem ser percebido'],['Racionalização','A justificativa que a pessoa dá para si mesma']]) + box('exemplo','Um funcionário endividado (pressão), sem segregação de funções no caixa (oportunidade), que pensa “só estou pegando emprestado” (racionalização).')},
@@ -95,7 +101,8 @@ export default {
     {t:"tf", q:"Fraudes costumam ser mais fáceis de detectar do que erros, porque deixam mais rastros.", a:false, e:"O contrário: fraudes envolvem ocultação deliberada, o que as torna mais difíceis de detectar."}
    ]},
   {id:"aud7", title:"Revisão: auditoria", icon:"🔄",
-   learn:[
+   recap:["Fluxo: entender a empresa e os riscos, definir a materialidade e testar controles e saldos.", "Avalie as distorções encontradas com base nas evidências.", "A opinião no relatório vem por último."],
+ learn:[
     {h:"Do planejamento à opinião", b:ol(['Avaliar <b>risco</b> e definir a <b>materialidade</b>.','Entender e testar os <b>controles internos</b>.','Coletar <b>evidências</b> (inspeção, confirmação, recálculo...).','Emitir o <b>relatório</b>, com opinião sem ressalva, com ressalva, adversa ou abstenção.'])}
    ],
    ex:[

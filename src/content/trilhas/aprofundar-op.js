@@ -5,6 +5,7 @@ import { mc, tf, fl, mt, en, cl, nu, wr, od } from '../../engine/exercises/facto
 export default [
 /* ---------------- Rotina Contábil Digital ---------------- */
 {id:"digitalx1", title:"Módulos integrados do ERP", icon:"🔗",
+ recap:["Um fato passa por vários módulos: comercial, fiscal, estoque, financeiro e contabilidade.", "A integração depende de cadastros certos: produto com conta errada leva todas as vendas para a conta errada.", "Revise os cadastros que alimentam a integração."],
  learn:[
   {h:"Um fato, vários módulos", b:`<p>No ERP, uma venda nasce no módulo <b>comercial</b>, gera a nota no <b>fiscal</b>, a baixa no <b>estoque</b>, o título no <b>financeiro</b> e o lançamento na <b>contabilidade</b>.</p>` + ol(['Pedido de venda','Nota fiscal emitida','Estoque baixado','Conta a receber criada','Lançamento contábil gerado'])},
   {h:"Integração exige cadastro certo", b:box('atencao','Se o cadastro do produto aponta a conta errada, todas as vendas daquele produto vão para a conta errada. Revise os cadastros que alimentam a integração.')}
@@ -18,6 +19,7 @@ export default [
   fl("A baixa da mercadoria vendida acontece no módulo de {estoque}.",["folha","ponto"],"Controle das quantidades.")
  ]},
 {id:"digitalx2", title:"Centro de custo", icon:"🎯",
+ recap:["A conta diz o que foi gasto; o centro de custo diz onde.", "O centro de custo mostra quanto custa cada área e permite comparar filiais.", "Também serve para cobrar os responsáveis pelo orçamento de cada área."],
  learn:[
   {h:"Onde o gasto aconteceu", b:`<p>A conta diz <b>o que</b> foi gasto (energia, salários). O centro de custo diz <b>onde</b>: produção, vendas, administração, filial.</p>` + tbl(['Lançamento','Conta','Centro de custo'],[['Energia da fábrica','Despesa com energia','Produção'],['Salário do vendedor','Despesa com salários','Comercial'],['Salário do contador','Despesa com salários','Administrativo']])},
   {h:"Para que serve", b:ul(['Saber quanto custa cada área.','Comparar filiais.','Cobrar responsáveis pelo orçamento de cada área.'])}
@@ -31,6 +33,7 @@ export default [
   mc("Um gestor quer saber quanto a filial Norte gastou. O que ajuda?",["*Lançamentos com centro de custo por filial","Somar apenas o saldo do caixa de cada dia","Olhar somente o Balanço Patrimonial da empresa","Contar o número de funcionários da filial"],"Centro de custo separa por área.")
  ]},
 {id:"digitalx3", title:"Indicadores e painéis", icon:"📊",
+ recap:["Um painel reúne poucos indicadores da saúde do negócio, com definição clara.", "Mesmo nome, mesma fórmula em todos os relatórios.", "Concilie os dados do painel com a contabilidade: poucos indicadores bem escolhidos valem mais."],
  learn:[
   {h:"Números que viram decisão", b:`<p>Um painel (dashboard) reúne poucos indicadores que mostram a saúde do negócio: faturamento, margem, caixa, contas a receber vencidas.</p>` + box('dica','Bom indicador tem definição clara, fonte confiável e é acompanhado com frequência.')},
   {h:"Cuidados", b:ul(['Mesmo nome, mesma fórmula em todos os relatórios.','Dados do painel conciliados com a contabilidade.','Poucos indicadores, bem escolhidos, valem mais que dezenas.'])}
@@ -44,6 +47,7 @@ export default [
   fl("O painel que reúne indicadores do negócio também é chamado de {dashboard}.",["balancete","razonete"],"Visão rápida para decidir.")
  ]},
 {id:"digitalx4", title:"Dados pessoais e segurança", icon:"🔒",
+ recap:["Folha e cadastros têm dados pessoais, e a LGPD exige tratamento com finalidade e cuidado.", "Cada pessoa acessa só o que precisa, com senhas fortes e acesso em dois passos.", "Faça backup regular e nunca envie planilhas com CPFs por canais abertos."],
  learn:[
   {h:"A contabilidade guarda dados sensíveis", b:`<p>Folha, cadastro de clientes e fornecedores têm <b>dados pessoais</b>: CPF, endereço, salário. A LGPD (Lei Geral de Proteção de Dados) pede que eles sejam tratados com finalidade, necessidade e segurança.</p>`},
   {h:"Boas práticas", b:ul(['Cada pessoa acessa só o que precisa.','Senhas fortes e acesso em dois passos.','Backup regular, testado.','Não enviar planilhas com CPFs por canais abertos.'])}
@@ -59,6 +63,7 @@ export default [
 
 /* ---------------- Imobilizado e Intangíveis ---------------- */
 {id:"imobx1", title:"Vida útil e valor residual", icon:"⏳",
+ recap:["Vida útil é o tempo que a empresa espera usar o bem; valor residual é quanto espera obter no fim.", "Depreciação anual = (custo − residual) ÷ vida útil.", "Vida útil é uma estimativa da empresa, baseada na experiência e no uso."],
  learn:[
   {h:"Quanto tempo e quanto sobra", b:`<p><b>Vida útil</b> é o tempo que a empresa espera usar o bem. <b>Valor residual</b> é quanto espera obter por ele no fim desse uso.</p>` + eq('Depreciação anual = (Custo − Valor residual) ÷ Vida útil')},
   {h:"Exemplo", b:box('exemplo','Van de R$ 120.000, valor residual R$ 20.000, vida útil 5 anos: (120.000 − 20.000) ÷ 5 = <b>R$ 20.000 por ano</b>.') + box('dica','Vida útil é estimativa da empresa, baseada no uso esperado. Deve ser revisada se as condições mudarem.')}
@@ -72,6 +77,7 @@ export default [
   fl("Depreciação anual = (custo − {valor residual}) ÷ vida útil.",["depreciação acumulada","receita"],"Base depreciável.")
  ]},
 {id:"imobx2", title:"Manutenção ou melhoria?", icon:"🔧",
+ recap:["Manutenção que só mantém o bem funcionando é despesa do período.", "Melhoria que aumenta a capacidade ou a vida útil soma-se ao custo do ativo.", "Troca de óleo e pintura de rotina são despesa; motor novo que estende a vida útil é ativo."],
  learn:[
   {h:"Duas naturezas", b:tbl(['Gasto','Tratamento'],[['Manutenção que mantém o bem funcionando','Despesa do período'],['Melhoria que aumenta capacidade ou vida útil','Soma ao custo do ativo']])},
   {h:"Exemplos", b:ul(['Troca de óleo e pneus do caminhão: despesa.','Motor novo que aumenta a vida útil em 3 anos: ativo.','Pintura de rotina: despesa.']) + lanc([['D','Veículos','15.000'],['C','Bancos','15.000']])}
@@ -85,6 +91,7 @@ export default [
   fl("Gastos que apenas mantêm o bem funcionando são {despesa} do período.",["ativo","receita"],"Não aumentam o benefício futuro.")
  ]},
 {id:"imobx3", title:"Depreciação, amortização e exaustão", icon:"🪨",
+ recap:["Depreciação vale para bens tangíveis, amortização para intangíveis com vida útil definida e exaustão para recursos naturais.", "As três distribuem o custo pelo período em que o ativo gera benefícios.", "Intangível de vida útil indefinida, como o goodwill, não se amortiza: é testado por impairment."],
  learn:[
   {h:"Três nomes, uma ideia", b:tbl(['Termo','Aplica-se a','Exemplo'],[['Depreciação','Bens tangíveis do imobilizado','Máquinas, veículos'],['Amortização','Intangíveis com vida útil definida','Software, licença com prazo'],['Exaustão','Recursos naturais extraídos','Mina, reserva florestal']])},
   {h:"O que tem em comum", b:`<p>Todas distribuem o custo de um ativo ao longo do período em que ele gera benefícios.</p>` + box('atencao','Intangível com vida útil indefinida, como o goodwill, não é amortizado: é testado quanto à recuperabilidade.')}
@@ -98,6 +105,7 @@ export default [
   fl("Depreciação, amortização e exaustão distribuem o {custo} de um ativo ao longo do seu uso.",["lucro","caixa"],"Confronto com os benefícios.")
  ]},
 {id:"imobx4", title:"Terrenos e edifícios", icon:"🏗️",
+ recap:["Na compra de um imóvel, separa-se o valor do terreno e o da construção.", "O edifício se desgasta e é depreciado; o terreno, em regra, não.", "Terreno e edificações ficam em contas diferentes do Imobilizado."],
  learn:[
   {h:"Terreno não se deprecia", b:`<p>Na compra de um imóvel, separa-se o valor do <b>terreno</b> e o da <b>construção</b>. O edifício se desgasta e é depreciado; o terreno, em regra, não.</p>` + box('exemplo','Imóvel de R$ 1.000.000: terreno R$ 400.000 e edifício R$ 600.000. Se o edifício tem vida útil de 25 anos e residual zero: 600.000 ÷ 25 = R$ 24.000 por ano.')},
   {h:"Onde fica", b:lanc([['D','Terrenos','400.000'],['D','Edificações','600.000'],['C','Bancos','1.000.000']])}
@@ -113,6 +121,7 @@ export default [
 
 /* ---------------- Estoques ---------------- */
 {id:"estoqx1", title:"Inventário periódico e permanente", icon:"📋",
+ recap:["Permanente: cada entrada e saída é registrada na hora e o CMV é conhecido a cada venda.", "Periódico: conta-se o estoque no fim e o CMV é calculado pela fórmula.", "A contagem física continua importante para conferir o sistema."],
  learn:[
   {h:"Dois jeitos de controlar", b:tbl(['Sistema','Como funciona','CMV'],[['Permanente','Cada entrada e saída é registrada na hora','Conhecido a cada venda'],['Periódico','Conta-se o estoque no fim do período','Calculado no fim: EI + Compras − EF']])},
   {h:"Contar continua importante", b:`<p>Mesmo no permanente, a contagem física confere o sistema: perdas, furtos e erros de registro aparecem na diferença.</p>`}
@@ -126,6 +135,7 @@ export default [
   cl("Permanente ou periódico?",["Permanente","Periódico"],"Baixa do estoque a cada venda no sistema:0|CMV por EI + compras − EF:1|Saldo disponível a qualquer momento:0|Contagem só no fechamento:1","Registro contínuo x cálculo no fim.")
  ]},
 {id:"estoqx2", title:"Ponto de pedido e estoque de segurança", icon:"📦",
+ recap:["O ponto de pedido diz em que nível de estoque fazer uma nova compra.", "Ponto de pedido = consumo diário × prazo de entrega + estoque de segurança.", "Pedir cedo demais prende dinheiro; pedir tarde demais deixa faltar mercadoria."],
  learn:[
   {h:"Quando comprar de novo", b:`<p>Pedir cedo demais prende dinheiro; tarde demais, falta mercadoria. O <b>ponto de pedido</b> diz em que nível de estoque fazer a compra.</p>` + eq('Ponto de pedido = Consumo diário × Prazo de entrega + Estoque de segurança')},
   {h:"Exemplo", b:box('exemplo','A loja vende 20 unidades por dia, o fornecedor entrega em 5 dias e mantém-se 40 de segurança: 20 × 5 + 40 = <b>140 unidades</b>. Quando o estoque chegar a 140, faz-se o pedido.') + box('dica','O estoque de segurança protege contra atrasos e picos de venda.')}
@@ -139,6 +149,7 @@ export default [
   fl("Ponto de pedido = consumo diário × prazo de entrega + estoque de {segurança}.",["giro","venda"],"Folga contra imprevistos.")
  ]},
 {id:"estoqx3", title:"Giro do estoque", icon:"🔄",
+ recap:["Giro = CMV ÷ estoque médio; estoque médio = (inicial + final) ÷ 2.", "Prazo médio de estocagem = 360 ÷ giro.", "Estoque parado prende dinheiro."],
  learn:[
   {h:"Quantas vezes o estoque roda", b:eq('Giro = CMV ÷ Estoque médio') + eq('Estoque médio = (Estoque inicial + Estoque final) ÷ 2')},
   {h:"Em dias", b:eq('Prazo médio de estocagem = 360 ÷ Giro') + box('exemplo','CMV R$ 120.000, estoque médio R$ 20.000: giro 6 vezes no ano, ou cerca de 60 dias parado em média.') + box('dica','Estoque parado é dinheiro parado. Giro maior, em geral, libera caixa.')}
@@ -152,6 +163,7 @@ export default [
   fl("Prazo médio de estocagem = 360 ÷ {giro}.",["CMV","lucro"],"Converte o giro em dias.")
  ]},
 {id:"estoqx4", title:"Custo ou valor realizável?", icon:"🏷️",
+ recap:["O estoque vale o menor entre o custo e o valor realizável líquido (VRL).", "VRL = preço de venda estimado − gastos para concluir e vender.", "Se o VRL for menor que o custo, a diferença é perda no resultado."],
  learn:[
   {h:"O menor dos dois", b:`<p>O estoque é mensurado pelo <b>menor valor</b> entre o custo e o <b>valor realizável líquido</b> (preço de venda estimado menos os gastos para concluir e vender).</p>` + eq('VRL = Preço de venda estimado − Gastos para vender')},
   {h:"Exemplo", b:box('exemplo','Custo R$ 1.000. Preço de venda caiu para R$ 900 e a comissão é R$ 50: VRL = R$ 850. O estoque passa a valer R$ 850 e a perda de R$ 150 vai para o resultado.')}

@@ -5,7 +5,8 @@ export default {
   desc:"Balanço Patrimonial, DRE, Fluxo de Caixa e como analisar os números com índices.",
   lessons:[
   {id:"demo1", title:"Balanço Patrimonial", icon:"🏛️",
-   learn:[
+   recap:["O Balanço é uma fotografia da posição do patrimônio em uma data.", "O Ativo é ordenado pela liquidez; o Passivo, pela exigibilidade: o que vence antes vem primeiro.", "Ativo = Passivo + Patrimônio Líquido."],
+ learn:[
     {h:"Uma fotografia", b:`<p>O Balanço Patrimonial mostra a posição do patrimônio em <b>uma data</b>, por exemplo 31 de dezembro. Ativo de um lado; Passivo e PL do outro.</p>`},
     {h:"Estrutura do Ativo", b:`<p>Ordenado pela <b>liquidez</b>: do que vira dinheiro mais rápido para o mais lento.</p>` +
       tbl(['Grupo','Exemplos'],[['Ativo Circulante (até 12 meses)','Caixa, bancos, clientes, estoques'],['Realizável a longo prazo','Valores a receber após 12 meses'],['Investimentos','Participações em outras empresas, imóveis para renda'],['Imobilizado','Máquinas, veículos, prédios usados na operação'],['Intangível','Marcas, softwares, patentes']])},
@@ -22,7 +23,8 @@ export default {
     {t:"num", q:"Ativo Circulante de R$ 40.000, Ativo Não Circulante de R$ 60.000 e Passivo total de R$ 55.000. Qual o PL?", a:45000, u:"R$", e:"Ativo total 100.000 − Passivo 55.000 = 45.000."}
    ]},
   {id:"demo2", title:"DRE", icon:"🧮",
-   learn:[
+   recap:["A DRE mostra, num período, como a empresa chegou ao lucro ou prejuízo.", "Receita bruta − deduções = receita líquida; − CMV = lucro bruto; − despesas operacionais chega ao resultado.", "O lucro líquido da DRE vai para o Patrimônio Líquido do Balanço."],
+ learn:[
     {h:"Um filme do período", b:`<p>A <b>Demonstração do Resultado do Exercício (DRE)</b> mostra como a empresa chegou ao lucro ou prejuízo em um período, como um ano ou um trimestre.</p>`},
     {h:"A estrutura, de cima para baixo", b:tbl(['Linha','O que é'],[['Receita bruta','Total vendido'],['(−) Deduções','Devoluções, descontos e impostos sobre vendas'],['(=) Receita líquida',''],['(−) CMV / CPV / CSP','Custo do que foi vendido'],['(=) Lucro bruto',''],['(−) Despesas operacionais','Vendas, administrativas e outras'],['(±) Resultado financeiro','Juros pagos e recebidos'],['(=) Resultado antes do IR e CSLL',''],['(−) IR e CSLL','Tributos sobre o lucro'],['(=) Lucro líquido','']])},
     {h:"Exemplo numérico", b:tbl(['Linha','R$'],[['Receita bruta','100.000'],['(−) Deduções','(10.000)'],['(=) Receita líquida','90.000'],['(−) CMV','(50.000)'],['(=) Lucro bruto','40.000'],['(−) Despesas operacionais','(25.000)'],['(−) Resultado financeiro','(3.000)'],['(=) Antes do IR e CSLL','12.000'],['(−) IR e CSLL','(3.000)'],['<b>(=) Lucro líquido</b>','<b>9.000</b>']]) + `<p>Valores ilustrativos.</p>`},
@@ -37,7 +39,8 @@ export default {
     {t:"mc", q:"A DRE mostra:", o:["O resultado de um período","A posição do patrimônio em uma data","Apenas o saldo de caixa","Apenas o capital dos sócios"], a:0, e:"A DRE é o “filme” do período; o Balanço é a “fotografia”."}
    ]},
   {id:"demo3", title:"Fluxo de Caixa", icon:"💵",
-   learn:[
+   recap:["A DFC mostra as entradas e saídas reais de dinheiro: lucro não é caixa.", "As atividades são operacional, de investimento e de financiamento.", "No método indireto, a depreciação é somada de volta ao lucro, pois reduziu o lucro sem sair dinheiro."],
+ learn:[
     {h:"Lucro não é caixa", b:`<p>Uma empresa pode ter lucro e ficar sem dinheiro, por exemplo se vende tudo a prazo. A <b>Demonstração dos Fluxos de Caixa (DFC)</b> mostra as entradas e saídas <b>reais</b> de dinheiro.</p>`},
     {h:"As três atividades", b:tbl(['Atividade','Exemplos'],[['Operacionais','Recebimentos de clientes, pagamentos a fornecedores e salários'],['Investimento','Compra e venda de imobilizado, participações em outras empresas'],['Financiamento','Empréstimos obtidos e pagos, aportes de sócios, dividendos pagos']])},
     {h:"Método direto e indireto", b:ul(['<b>Direto</b>: lista os recebimentos e pagamentos das operações.','<b>Indireto</b>: parte do lucro líquido e ajusta o que não mexe no caixa (como a depreciação) e as variações de clientes, estoques e fornecedores.'])},
@@ -51,7 +54,8 @@ export default {
     {t:"mc", q:"Um aporte de capital feito pelos sócios, em dinheiro, é atividade de:", o:["Financiamento","Investimento","Operacional","Nenhuma"], a:0, e:"Recursos vindos de sócios ou credores são financiamento."}
    ]},
   {id:"demo4", title:"Análise por índices", icon:"🔎",
-   learn:[
+   recap:["Liquidez corrente = ativo circulante ÷ passivo circulante; a seca desconta os estoques.", "Endividamento = passivo total ÷ ativo total. Rentabilidade: margem líquida, ROA e ROE.", "Análise vertical usa uma base do mesmo ano; a horizontal compara anos. Um índice isolado diz pouco."],
+ learn:[
     {h:"Liquidez", b:tbl(['Índice','Fórmula'],[['Liquidez corrente','Ativo Circulante ÷ Passivo Circulante'],['Liquidez seca','(Ativo Circulante − Estoques) ÷ Passivo Circulante'],['Liquidez imediata','Disponível ÷ Passivo Circulante']]) + `<p>Acima de 1: há mais recursos de curto prazo do que dívidas de curto prazo.</p>`},
     {h:"Endividamento", b:eq('Endividamento = Passivo total ÷ Ativo total') + `<p>Mostra quanto do Ativo é financiado por dinheiro de terceiros.</p>`},
     {h:"Rentabilidade", b:tbl(['Índice','Fórmula'],[['Margem líquida','Lucro líquido ÷ Receita líquida'],['ROA','Lucro líquido ÷ Ativo total'],['ROE','Lucro líquido ÷ Patrimônio Líquido']])},
@@ -67,7 +71,8 @@ export default {
     {t:"tf", q:"A análise horizontal compara cada item com o total do mesmo período.", a:false, e:"Isso é a análise vertical. A horizontal compara a evolução de um item entre períodos diferentes."}
    ]},
   {id:"demo5", title:"DMPL, DVA e notas explicativas", icon:"🗒️",
-   learn:[
+   recap:["O conjunto de demonstrações inclui Balanço, DRE, DFC, DMPL, DRA, DVA e notas explicativas.", "A DMPL mostra como cada conta do PL mudou: lucro, dividendos, aumento de capital e reservas.", "As notas explicativas detalham critérios e números; a DVA mostra a riqueza gerada e distribuída e é obrigatória para companhias abertas."],
+ learn:[
     {h:"O conjunto completo", b:`<p>Além de Balanço, DRE e DFC, o conjunto de demonstrações inclui a <b>DMPL</b>, a <b>DRA</b> (resultado abrangente), a <b>DVA</b> (obrigatória para companhias abertas) e as <b>notas explicativas</b>.</p>`},
     {h:"DMPL", b:`<p>A Demonstração das Mutações do Patrimônio Líquido mostra como cada conta do PL mudou: lucro, dividendos, aumento de capital, reservas.</p>` + tbl(['Movimento','R$'],[['PL inicial','100.000'],['(+) Lucro do ano','30.000'],['(−) Dividendos','(10.000)'],['<b>PL final</b>','<b>120.000</b>']])},
     {h:"Notas explicativas e DVA", b:ul(['<b>Notas explicativas</b>: detalham critérios e números, como políticas contábeis, estoques e processos judiciais.','<b>DVA</b>: mostra a riqueza gerada e como foi distribuída entre empregados, governo, financiadores e sócios.'])}
@@ -81,7 +86,8 @@ export default {
     {t:"wr", q:"Qual a sigla da demonstração das mutações do patrimônio líquido?", a:["dmpl"], e:"DMPL."}
    ]},
   {id:"demo6", title:"Ciclo operacional e financeiro", icon:"🔁",
-   learn:[
+   recap:["Ciclo operacional = prazo médio de estoque + prazo médio de recebimento.", "Ciclo financeiro = ciclo operacional − prazo médio de pagamento.", "Quanto maior o ciclo financeiro, mais dinheiro a empresa precisa para bancar a operação."],
+ learn:[
     {h:"Do estoque ao dinheiro de volta", b:`<p>O <b>ciclo operacional</b> é o tempo entre comprar mercadoria (ou matéria-prima) e receber o dinheiro da venda dela.</p>` + eq('Ciclo operacional = Prazo médio de estoque + Prazo médio de recebimento')},
     {h:"Prazos médios", b:tbl(['Prazo','Fórmula (em dias)'],[['Médio de estoque (PME)','Estoque médio ÷ CMV × 360'],['Médio de recebimento (PMR)','Clientes médio ÷ Receita × 360'],['Médio de pagamento (PMP)','Fornecedores médio ÷ Compras × 360']]) + box('dica','360 é uma convenção comum para simplificar a conta; alguns usam 365.')},
     {h:"O ciclo financeiro", b:`<p>O <b>ciclo financeiro</b> (ou ciclo de caixa) desconta o tempo que a empresa tem para pagar os fornecedores:</p>` + eq('Ciclo financeiro = Ciclo operacional − PMP') +
@@ -97,7 +103,8 @@ export default {
     {t:"mc", q:"Negociar um prazo maior com os fornecedores tende a:", o:["Reduzir o ciclo financeiro","Aumentar o ciclo financeiro","Não afetar o ciclo financeiro","Aumentar o ciclo operacional"], a:0, e:"Um PMP maior é descontado do ciclo operacional, reduzindo o ciclo financeiro."}
    ]},
   {id:"demo7", title:"Revisão: demonstrações financeiras", icon:"🔄",
-   learn:[
+   recap:["Balanço: o que a empresa tem e deve numa data. DRE: como chegou ao lucro num período.", "DFC: por onde o dinheiro entrou e saiu. DMPL: como o PL mudou.", "Cada demonstração responde a uma pergunta diferente sobre a mesma empresa."],
+ learn:[
     {h:"Quem responde o quê", b:tbl(['Demonstração','Pergunta que responde'],[['Balanço Patrimonial','O que a empresa tem e deve, numa data?'],['DRE','Como ela chegou ao lucro, num período?'],['DFC','Por onde o dinheiro entrou e saiu de verdade?'],['Índices','A situação é boa, comparada a quê?'],['DMPL','O que mudou no Patrimônio Líquido?']])}
    ],
    ex:[

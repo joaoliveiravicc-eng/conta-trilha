@@ -5,7 +5,8 @@ export default {
   desc:"Compras, vendas, salários, empréstimos e depreciação: os lançamentos que toda empresa faz.",
   lessons:[
   {id:"lanc1", title:"Compra e venda de mercadorias", icon:"🛒",
-   learn:[
+   recap:["Mercadoria comprada para revender é Estoque e só vira custo quando vendida.", "A venda tem duas partes: a receita, pelo preço de venda, e a baixa do estoque, pelo custo (CMV).", "No inventário periódico, CMV = estoque inicial + compras − estoque final."],
+ learn:[
     {h:"Mercadoria é estoque", b:`<p>A mercadoria comprada para revender entra no Ativo como <b>Estoques</b>. Ela só vira custo quando é <b>vendida</b>.</p>` + lanc([['D','Estoques','600'],['C','Fornecedores','600']])},
     {h:"A venda tem duas partes", b:ol(['<b>Receita</b>, pelo preço de venda: D Caixa ou Clientes, C Receita de vendas.','<b>Baixa do estoque</b>, pelo custo: D CMV (Custo das Mercadorias Vendidas), C Estoques.']) +
       box('exemplo','Mercadoria que custou R$ 600 é vendida à vista por R$ 1.000.') +
@@ -25,7 +26,8 @@ export default {
     {t:"mc", q:"Quando a mercadoria comprada vira custo (CMV)?", o:["No momento da compra","Quando é vendida","Quando é paga ao fornecedor","Sempre no fim do ano"], a:1, e:"Enquanto não vendida, a mercadoria é Ativo (Estoques)."}
    ]},
   {id:"lanc2", title:"Salários e encargos", icon:"👷",
-   learn:[
+   recap:["Salário é despesa do mês trabalhado, mesmo que pago no mês seguinte.", "Pagar o salário quita a dívida; não é uma nova despesa.", "INSS e IR descontados do empregado não são despesa da empresa: ela só retém e repassa."],
+ learn:[
     {h:"Reconhecendo a despesa", b:`<p>Salário é despesa do mês <b>trabalhado</b> (competência), mesmo que seja pago no mês seguinte.</p>` + lanc([['D','Despesa com salários','10.000'],['C','Salários a pagar','10.000']])},
     {h:"Pagando os salários", b:lanc([['D','Salários a pagar','10.000'],['C','Bancos','10.000']]) + box('atencao','O pagamento <b>não</b> é uma nova despesa. Ele só quita a dívida registrada antes.')},
     {h:"Encargos da empresa", b:`<p>Além do salário, a empresa tem encargos próprios, como o <b>FGTS</b> (8% da remuneração) e, em regra, a contribuição patronal ao INSS, que na maioria das empresas fora do Simples Nacional é de 20%.</p>` + lanc([['D','Despesa com FGTS','800'],['C','FGTS a recolher','800']])},
@@ -42,7 +44,8 @@ export default {
     {t:"entry", q:"Folha bruta de R$ 5.000, com R$ 400 de INSS retido do empregado. Marque todas as contas.", accts:["Despesa com salários","Salários a pagar","INSS a recolher","Bancos"], d:["Despesa com salários"], c:["Salários a pagar","INSS a recolher"], e:"Despesa de 5.000; a empresa deve 4.600 ao funcionário e 400 ao INSS. É um lançamento de 2ª fórmula."}
    ]},
   {id:"lanc3", title:"Empréstimos e juros", icon:"🏦",
-   learn:[
+   recap:["Empréstimo: D Bancos / C Empréstimos a pagar. Dinheiro de empréstimo não é receita.", "Juros são despesa financeira, reconhecida mês a mês por competência.", "Até 12 meses é Passivo Circulante; depois disso, Não Circulante. Juros de aplicações são receita financeira."],
+ learn:[
     {h:"Pegando o empréstimo", b:lanc([['D','Bancos','20.000'],['C','Empréstimos a pagar','20.000']]) + `<p>Entra dinheiro e nasce uma obrigação.</p>` + box('atencao','Dinheiro de empréstimo <b>não é receita</b>. Ele terá de ser devolvido.')},
     {h:"Juros são despesa financeira", b:`<p>Os juros remuneram o banco pelo tempo. São reconhecidos por competência, mês a mês, como <b>despesa financeira</b>.</p>` + lanc([['D','Despesa de juros','300'],['C','Juros a pagar','300']])},
     {h:"Curto ou longo prazo?", b:tbl(['Vencimento','Classificação'],[['Até 12 meses','Passivo Circulante'],['Após 12 meses','Passivo Não Circulante']]) + `<p>Um empréstimo de 3 anos tem parcelas nos dois grupos: as do próximo ano no Circulante e o resto no Não Circulante.</p>`},
@@ -57,7 +60,8 @@ export default {
     {t:"entry", q:"Rendimento de R$ 150 em uma aplicação financeira, somado à própria aplicação.", accts:["Aplicações financeiras","Receita financeira","Despesa de juros","Bancos"], d:["Aplicações financeiras"], c:["Receita financeira"], e:"A aplicação (Ativo) cresce e reconhece-se a receita financeira."}
    ]},
   {id:"lanc4", title:"Depreciação", icon:"🚚",
-   learn:[
+   recap:["Depreciação distribui o custo do bem ao longo da vida útil, como despesa.", "Linear: (custo − valor residual) ÷ vida útil. Lançamento: D Despesa de depreciação / C Depreciação acumulada.", "Terrenos não se depreciam; recursos naturais têm exaustão e intangíveis, amortização."],
+ learn:[
     {h:"O que é depreciação", b:`<p>Máquinas, veículos e computadores perdem valor com o uso e o tempo. A <b>depreciação</b> distribui o custo do bem ao longo da sua vida útil, como despesa.</p>`},
     {h:"Método linear", b:eq('Depreciação anual = (Custo − Valor residual) ÷ Vida útil') +
       box('exemplo','Máquina de R$ 50.000, valor residual de R$ 5.000 e vida útil de 5 anos: (50.000 − 5.000) ÷ 5 = <b>9.000 por ano</b>, ou 750 por mês.')},
@@ -74,7 +78,8 @@ export default {
     {t:"mc", q:"A conta Depreciação acumulada tem natureza:", o:["Credora, redutora do Ativo","Devedora, do Passivo","Credora, de Receita","Devedora, do PL"], a:0, e:"Ela fica no Ativo, mas com saldo credor, para reduzir o valor dos bens."}
    ]},
   {id:"lanc5", title:"Diário, Razão e Balancete", icon:"📚",
-   learn:[
+   recap:["Diário: os lançamentos em ordem cronológica. Razão: os lançamentos agrupados por conta.", "Balancete: lista os saldos, e o total devedor deve ser igual ao credor.", "Balancete fechado não garante que não há erros."],
+ learn:[
     {h:"Livro Diário", b:`<p>Registra <b>todos</b> os lançamentos em <b>ordem cronológica</b>: data, contas, histórico e valor.</p><p>É um livro obrigatório e hoje é entregue em formato digital pela ECD, dentro do SPED.</p>`},
     {h:"Livro Razão", b:`<p>Reúne os lançamentos <b>por conta</b>. É, na prática, a coleção de todos os razonetes, e mostra o saldo de cada conta.</p>` + T('Fornecedores',['3.000'],['5.000','2.000'],'Saldo credor: 4.000')},
     {h:"Balancete de verificação", b:`<p>Lista todas as contas com seus saldos. O total dos saldos devedores deve ser igual ao total dos saldos credores.</p>` +
@@ -91,7 +96,8 @@ export default {
     {t:"tf", q:"Todo lançamento deve estar apoiado em um documento que comprove o fato.", a:true, e:"Sem documento, o registro não tem comprovação."}
    ]},
   {id:"lanc6", title:"Despesas antecipadas", icon:"🛡️",
-   learn:[
+   recap:["Despesa antecipada é paga antes do uso e fica no Ativo: o direito de usar o serviço.", "Todo mês, a apropriação leva uma parte para a despesa: D Despesa / C Despesa antecipada.", "Exemplos: seguro anual, aluguel adiantado, assinatura anual e IPTU em cota única."],
+ learn:[
     {h:"Pagou antes de usar", b:`<p>Um seguro anual pago à vista cobre 12 meses. Pela competência, ele <b>não</b> vira despesa de uma vez.</p>`},
     {h:"No pagamento", b:lanc([['D','Seguros a apropriar','12.000'],['C','Bancos','12.000']]) + `<p>Despesa antecipada é um <b>Ativo</b>: o direito de usar o serviço no futuro.</p>`},
     {h:"A cada mês", b:lanc([['D','Despesa com seguros','1.000'],['C','Seguros a apropriar','1.000']]) + `<p>Esse lançamento mensal se chama <b>apropriação</b>.</p>`},
@@ -106,7 +112,8 @@ export default {
     {t:"expl", q:"Com suas palavras: por que um seguro anual pago em janeiro não é despesa toda em janeiro?", model:"Pelo regime de competência, a despesa é reconhecida no período em que o benefício é usado. Como o seguro cobre 12 meses, ele fica no ativo e vira despesa aos poucos, mês a mês.", k:[["Regime de competência","competenc"],["Cobre vários meses","mes","meses","periodo","ano","12","doze"],["Vira despesa aos poucos","aos pouco","cada mes","mensal","apropri","proporcion","parcel","divid","ao longo"]], e:"Competência + apropriação mensal."}
    ]},
   {id:"lanc7", title:"Provisões: férias e 13º", icon:"🏖️",
-   learn:[
+   recap:["Provisão é uma obrigação que já existe, com valor ou data incertos.", "13º: provisão mensal = salário ÷ 12. Férias: também 1/12 por mês, mais o terço constitucional.", "Provisionar faz cada mês carregar o seu custo real e mostra no Balanço a dívida que já existe."],
+ learn:[
     {h:"O que é provisão", b:`<p>Obrigação que já existe por fatos passados, mas com valor ou data de pagamento incertos. Exemplos: férias e 13º dos empregados, processos trabalhistas prováveis.</p>`},
     {h:"13º salário", b:`<p>A cada mês trabalhado, o empregado ganha direito a <b>1/12</b> do 13º. A empresa reconhece essa despesa mês a mês.</p>` + eq('Provisão mensal = Salário ÷ 12') + lanc([['D','Despesa com 13º salário','250'],['C','13º salário a pagar','250']])},
     {h:"Férias", b:`<p>Também 1/12 por mês, mais o <b>terço constitucional</b> (1/3 a mais).</p>` + box('exemplo','Salário de R$ 3.000: férias = 3.000 + 1.000 = R$ 4.000. Por mês: 4.000 ÷ 12 ≈ R$ 333,33.')},
@@ -121,7 +128,8 @@ export default {
     {t:"wr", q:"Qual fração do 13º o empregado ganha por mês trabalhado? (ex: 1/2)", a:["1/12","um doze avos"], e:"Um doze avos (1/12) por mês."}
    ]},
   {id:"lanc8", title:"Devoluções e abatimentos", icon:"↪️",
-   learn:[
+   recap:["Devolução de vendas desfaz a venda: cancela a receita e devolve o custo ao estoque.", "No abatimento, o cliente fica com a mercadoria e recebe um desconto.", "Devoluções e abatimentos são deduções da receita bruta na DRE."],
+ learn:[
     {h:"Quando o cliente devolve", b:`<p>Uma venda pode ser desfeita, total ou parcialmente: o produto veio com defeito, ou não era o que o cliente pediu. Isso é uma <b>devolução de vendas</b>.</p>`},
     {h:"Duas partes, de novo", b:`<p>A devolução desfaz a venda em espelho: cancela a receita e devolve o custo ao estoque.</p>` +
       lanc([['D','Devolução de vendas','1.000'],['C','Caixa ou Clientes','1.000']]) + lanc([['D','Estoques','600'],['C','CMV','600']]) +
@@ -139,7 +147,8 @@ export default {
     {t:"mc", q:"Um cliente recebe R$ 80 de desconto por um pequeno defeito, mas fica com o produto. Isso é:", o:["Um abatimento sobre vendas","Uma devolução de vendas","Uma perda de estoque","Uma despesa financeira"], a:0, e:"Não há devolução física da mercadoria: é um abatimento."}
    ]},
   {id:"lanc9", title:"Provisão para devedores duvidosos", icon:"🚨",
-   learn:[
+   recap:["A provisão para devedores duvidosos reconhece a perda provável com clientes antes de ela acontecer.", "É uma conta redutora de Clientes: o Ativo aparece pelo que se espera receber.", "Se o cliente não paga, a baixa usa a provisão que já existia, sem nova despesa."],
+ learn:[
     {h:"Nem todo cliente paga", b:`<p>Quando a empresa vende a prazo, sabe, pela experiência, que uma parte dos clientes não vai pagar. Registrar essa expectativa <b>antes</b> que aconteça é aplicar o princípio da <b>prudência</b>.</p>`},
     {h:"A provisão", b:`<p>A <b>Provisão para Devedores Duvidosos (PDD)</b>, também chamada de perdas estimadas em créditos de liquidação duvidosa, é uma conta <b>redutora do Ativo</b> (de Clientes).</p>` +
       lanc([['D','Despesa com devedores duvidosos','2.000'],['C','Provisão para devedores duvidosos','2.000']]) + box('exemplo','Clientes de R$ 100.000, com histórico de 2% de inadimplência: provisão de R$ 2.000.')},
@@ -155,7 +164,8 @@ export default {
     {t:"num", q:"Clientes de R$ 80.000 e provisão de R$ 3.000. Qual o valor líquido de Clientes no Balanço?", a:77000, u:"R$", e:"80.000 − 3.000 = 77.000."}
    ]},
   {id:"lanc10", title:"Revisão: lançamentos do dia a dia", icon:"🔄",
-   learn:[
+   recap:["Compra a prazo: D Estoques / C Fornecedores. Salários do mês: D Despesa com salários / C Salários a pagar.", "Baixa do estoque vendido: D CMV / C Estoques. Depreciação: D Despesa de depreciação / C Depreciação acumulada.", "Pagar uma dívida já registrada não é uma nova despesa."],
+ learn:[
     {h:"Os lançamentos mais comuns", b:tbl(['Fato','Lançamento típico'],[['Compra de mercadoria a prazo','D Estoques / C Fornecedores'],['Salário do mês (competência)','D Despesa com salários / C Salários a pagar'],['Depreciação do mês','D Despesa de depreciação / C Depreciação acumulada'],['Pagamento antecipado (seguro)','D Seguros a apropriar / C Bancos, depois D Despesa / C Seguros a apropriar'],['Cliente que não vai pagar (estimado)','D Despesa com devedores duvidosos / C Provisão para devedores duvidosos']])}
    ],
    ex:[
