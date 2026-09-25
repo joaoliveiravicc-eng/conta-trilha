@@ -13,7 +13,9 @@ export const PANELS = [
  {id:"gestao", title:"Análise e Gestão", desc:"Ler as demonstrações e usar custos para decidir."},
  {id:"trib_aud", title:"Tributos e Auditoria", desc:"Como a empresa paga tributos e como ela é auditada."},
  {id:"extra", title:"Extras", desc:"Leve o que aprendeu para a sua própria vida financeira."},
- {id:"carreiras", title:"Carreiras", desc:"Trilhas montadas para uma vaga: do zero ao que a rotina e a entrevista cobram."}
+ {id:"carreiras", title:"Carreiras", desc:"Trilhas montadas para uma vaga: do zero ao que a rotina e a entrevista cobram."},
+ {id:"car_ferr", title:"Ferramentas da vaga", desc:"Excel e orçamento no nível que a vaga de analista pede."},
+ {id:"car_vaga", title:"Rotina e entrevista", desc:"Notas, compras e contratos, e a preparação final para a entrevista."}
 ];
 
 export const LAYOUT = [
@@ -34,7 +36,9 @@ export const LAYOUT = [
  {id:"vida", panel:"extra", title:"Contabilidade para a Vida", icon:"🏠", color:"#C06A1B", desc:"Use o que aprendeu no seu dinheiro: balanço pessoal, orçamento, reserva e dívidas.",
   units:[["Finanças pessoais",["vida1","vida2","vida3","vida4"]],["Revisão",["vida5"]]]},
  {id:"financeirojr", panel:"carreiras", title:"Analista Financeiro Jr", icon:"💼", color:"#146C94", desc:"Do zero ao que a vaga cobra: contas a pagar e a receber, bancos, conciliação, fluxo de caixa, indicadores, Excel, o financeiro de mídia e agro, e a entrevista.",
-  units:[["Do zero: números e patrimônio",["fj0","fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6","fj13"]],["Bancos e tesouraria",["fjb1","fjb2","fj7"]],["Caixa e planejamento",["fj8","fj9","fjc1","fjc2"]],["Números e ferramentas",["fj10","fj11","fj12"]],["Na prática: um grupo de mídia e agro",["fjm1","fjm2","fjm3","fjm4"]],["Pronto para a vaga",["fj14","fj15","fjs1"]],["Revisão",["fj16"]]]}
+  units:[["Do zero: números e patrimônio",["fj0","fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6","fj13"]],["Bancos e tesouraria",["fjb1","fjb2","fj7"]],["Caixa e planejamento",["fj8","fj9","fjc1","fjc2"]],["Números e ferramentas",["fj10","fj11","fj12"]],["Na prática: um grupo de mídia e agro",["fjm1","fjm2","fjm3","fjm4"]],["Pronto para a vaga",["fj14","fj15","fjs1"]],["Revisão",["fj16"]]]},
+ {id:"car_excel", panel:"car_ferr", open:true, title:"Excel para a vaga", icon:"📊", color:"#1D6F42", desc:"Do básico ao que o teste de seleção cobra: referências, SE, PROCV, SOMASES e tabela dinâmica.",
+  units:[["Fundamentos rápidos",["xl1","xl2","xl3","xl4"]],["Organizando dados",["xl5","xl6","xl7"]],["PROCV",["xl8","xl9","xl10","xl11"]],["SOMASE, SOMASES e CONT.SES",["xl12","xl13","xl14","xl15"]],["Tabela dinâmica",["xl16","xl17","xl18","xl19"]],["Na prática: o teste de Excel",["xl20","xl21","xl22"]]]}
 ];
 
 /* Unidade 'Aprofundando' no fim de cada trilha. Alunos que já tinham terminado a
@@ -87,7 +91,7 @@ export function buildCourses(rawCourses, newLessons, extra, layout = LAYOUT){
   Object.keys(extra).forEach(id => { if (pool[id]) pool[id].ex = pool[id].ex.concat(extra[id]); });
   return layout.map(L => {
     const o = old[L.id] || {};
-    const c = { id:L.id, panel:L.panel, title:L.title || o.title, icon:L.icon || o.icon, color:L.color || o.color, desc:L.desc || o.desc };
+    const c = { id:L.id, panel:L.panel, title:L.title || o.title, icon:L.icon || o.icon, color:L.color || o.color, desc:L.desc || o.desc, open:!!L.open };
     c.units = L.units.map(u => ({ t:u[0], lessons:u[1].map(id => pool[id]) }));
     c.lessons = [].concat.apply([], c.units.map(u => u.lessons));
     return c;

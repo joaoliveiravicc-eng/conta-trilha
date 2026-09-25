@@ -15,7 +15,11 @@ export const COURSE_GOALS = {
   trib:['Entender apuração e obrigações','Conferir bases, créditos e documentos'],
   aud:['Relacionar riscos a procedimentos','Sustentar conclusões com evidências'],
   vida:['Organizar patrimônio e orçamento','Projetar compromissos e imprevistos'],
-  financeirojr:['Executar a rotina de contas a pagar, a receber, bancos e conciliação','Planejar o caixa e explicar lucro, caixa e indicadores','Aplicar a rotina a um grupo de mídia e agro, e se sair bem na entrevista']
+  financeirojr:['Executar a rotina de contas a pagar, a receber, bancos e conciliação','Planejar o caixa e explicar lucro, caixa e indicadores','Aplicar a rotina a um grupo de mídia e agro, e se sair bem na entrevista'],
+  car_excel:['Usar PROCV, SOMASES e tabela dinâmica com segurança','Montar e conferir relatórios no Excel como num teste de seleção'],
+  car_orcamento:['Comparar previsto e realizado e explicar variações','Construir indicadores confiáveis para a gestão'],
+  car_rotina:['Conferir notas fiscais, ordens de compra e contratos','Aplicar noções fiscais e contábeis na rotina'],
+  car_entrevista:['Contar sua experiência com exemplos concretos','Responder às perguntas técnicas da vaga com segurança']
 };
 
 export const WORKSHOPS = [

@@ -31,6 +31,7 @@ export default defineConfig({
         // aluno mora em localStorage/Supabase, não neste cache.
         globPatterns: ['**/*.{js,css,html,png,svg,webp,woff2,json,webmanifest}'],
         navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/carreira\//],
         skipWaiting: true,
         clientsClaim: true,
         runtimeCaching: [

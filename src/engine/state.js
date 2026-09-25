@@ -86,6 +86,7 @@ export function addCoins(n){ S.coins += n; S.st.coins += n; return n; }
 export const lessonsDone = c => c.lessons.filter(l => S.done[l.id]).length;
 export const courseComplete = c => c.lessons.filter(l => !l.optional).every(l => S.done[l.id]);
 export const courseUnlocked = c => {
+  if (c.open) return true;
   const area = areaForCourse(c.id);
   const position = area?.courseIds.indexOf(c.id) ?? 0;
   const previous = position > 0 ? COURSES.find(item => item.id === area.courseIds[position - 1]) : null;

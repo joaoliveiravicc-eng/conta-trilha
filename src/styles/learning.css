@@ -211,3 +211,28 @@ body.modal-open{overflow:hidden;}
 .jump-card > span:first-child{font-size:1.3rem;}
 .jump-card strong{display:block;font-size:.88rem;}
 .jump-card span span{display:block;font-size:.76rem;color:var(--muted);}
+/* ---------- grade estilo planilha (trilhas de Excel) ---------- */
+.qq .tblwrap{font-family:var(--fb);font-weight:400;font-size:.9rem;letter-spacing:0;margin:12px 0 4px;}
+.xlwrap{border-radius:8px;background:var(--card);}
+table.xl{font-size:.8rem;font-variant-numeric:tabular-nums;width:auto;min-width:100%;}
+table.xl th,table.xl td{border:1px solid var(--line);padding:5px 8px;white-space:nowrap;}
+table.xl thead th{background:var(--soft);color:var(--muted);font-weight:600;text-align:center;font-size:.72rem;padding:3px 8px;}
+table.xl th.xr{background:var(--soft);color:var(--muted);font-weight:600;text-align:center;font-size:.72rem;width:28px;padding:5px 4px;}
+table.xl th.xc{width:28px;}
+table.xl td.nb{text-align:right;}
+table.xl td.fx{font-family:ui-monospace,Consolas,monospace;color:var(--green2);font-size:.76rem;}
+table.xl td.mk{outline:2px solid var(--green);outline-offset:-2px;background:var(--greenp);font-weight:700;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;margin:8px 0 4px;padding:11px 14px;border-radius:12px;background:var(--green);color:#10230C;font-weight:800;text-decoration:none;box-shadow:0 3px 0 color-mix(in srgb,var(--green) 60%,#174300);}
+.dl-btn:active{transform:translateY(2px);box-shadow:none;}
+@media (max-width:420px){
+  table.xl{font-size:.72rem;}
+  table.xl th,table.xl td{padding:4px 5px;}
+  table.xl th.xr,table.xl th.xc{width:20px;padding:4px 3px;}
+  table.xl td.fx{font-size:.68rem;}
+}
+@media (max-width:420px){
+  #s-learn table.xl{font-size:.68rem;}
+  #s-learn table.xl th,#s-learn table.xl td{padding:4px 4px;}
+  .tblwrap code,.eqn{overflow-wrap:anywhere;}
+}
+.tblwrap code{font-size:.92em;}

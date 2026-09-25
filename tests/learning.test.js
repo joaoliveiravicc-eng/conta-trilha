@@ -5,8 +5,8 @@ import { fresh, normalize, setState, S, courseComplete, courseUnlocked, lessonUn
 import { checkpointId, unitComplete, checkpointItems, checkpointRecord, reviewRecord, dueLessons, spacedItems } from '../src/engine/learning.js';
 
 test('currículo: referências, chaves persistidas e respostas válidas',()=>{
-  assert.equal(COURSES.length,13);
-  assert.equal(TOTAL_LESSONS,217);
+  assert.equal(COURSES.length,14);
+  assert.equal(TOTAL_LESSONS,239);
   const ids=new Set(), keys=new Set(); let workshops=0, questions=0;
   for(const c of COURSES){
     assert.ok(c.goals.length>=2);
@@ -139,4 +139,16 @@ test('teste para pular sorteia de todas as lições, sem repetir',async()=>{
   const seen=new Set();
   for(let i=0;i<40;i++){ const items=sampleItems(lessons,10); assert.equal(items.length,10); assert.equal(new Set(items.map(x=>x.key)).size,10); items.forEach(it=>seen.add(it.key.split('#')[0])); }
   assert.ok(seen.size>=lessons.length-1, 'lições cobertas: '+seen.size);
+});
+
+test('área Carreira: trilhas completas e a entrevista liberada desde o início',async()=>{
+  const { AREAS } = await import('../src/content/areas.js');
+  const area=AREAS.find(a=>a.id==='carreiras'); assert.ok(area);
+  for(const id of area.courseIds.filter(id=>id.startsWith('car_'))){
+    const c=COURSES.find(x=>x.id===id); assert.ok(c,id);
+    assert.ok(c.goals.length>=2,id);
+    for(const l of c.lessons){ assert.ok(l.learn.length>=2,l.id+' teoria'); assert.ok(l.ex.length>=5,l.id+' exercícios'); }
+  }
+  const entrevista=COURSES.find(c=>c.id==='car_entrevista');
+  if(entrevista){ setState(normalize({v:6,done:{},area:'carreiras',onboarded:true})); assert.equal(courseUnlocked(entrevista),true); }
 });

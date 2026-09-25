@@ -29,5 +29,29 @@ export function lanc(lines){
     return '<div class="ln ' + (l[0] === 'D' ? 'd' : 'c') + '"><span class="dc">' + l[0] + '</span><span class="acc">' + l[1] + '</span><span class="val">' + (l[2] || '') + '</span></div>';
   }).join('') + '</div>';
 }
+/* Grade no estilo do Excel: letras nas colunas, números nas linhas. `mark` destaca células
+   (ex.: ['D2']). Células que começam com "=" aparecem como fórmula. */
+export function planilha(rows, opts){
+  opts = opts || {};
+  const cols = Math.max.apply(null, rows.map(function(r){ return r.length; }));
+  const start = opts.startRow || 1, marks = opts.mark || [], col0 = (opts.startCol || 'A').charCodeAt(0) - 65;
+  const letter = function(i){ return String.fromCharCode(65 + col0 + i); };
+  const cell = function(v, ref){
+    const txt = v === null || v === undefined ? '' : String(v);
+    const cls = (marks.indexOf(ref) >= 0 ? 'mk ' : '') + (txt.charAt(0) === '=' ? 'fx' : (/^-?[\d.,]+%?$/.test(txt) ? 'nb' : ''));
+    return '<td' + (cls ? ' class="' + cls.trim() + '"' : '') + '>' + txt + '</td>';
+  };
+  let h = '<div class="tblwrap xlwrap"><table class="xl"><thead><tr><th class="xc"></th>';
+  for (let i = 0; i < cols; i++) h += '<th>' + letter(i) + '</th>';
+  h += '</tr></thead><tbody>';
+  rows.forEach(function(r, ri){
+    const n = start + ri;
+    h += '<tr><th class="xr">' + n + '</th>';
+    for (let i = 0; i < cols; i++) h += cell(r[i], letter(i) + n);
+    h += '</tr>';
+  });
+  return h + '</tbody></table></div>';
+}
+export function download(href, label){ return '<a class="dl-btn" href="' + href + '" download>⬇ ' + label + '</a>'; }
 export function ul(items){ return '<ul class="blist">' + items.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ul>'; }
 export function ol(items){ return '<ol class="steps">' + items.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ol>'; }
