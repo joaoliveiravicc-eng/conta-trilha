@@ -54,3 +54,11 @@ Os casos são didáticos e simplificados. A oficina tributária usa uma alíquot
 - `src/styles/learning.css`: apresentação dos componentes de aprendizagem.
 
 As alterações estão no projeto local. Publicar a versão exige o fluxo de implantação do projeto.
+
+## Área Carreiras (setembro de 2026)
+
+Quatro trilhas novas para a vaga de Analista Administrativo Financeiro Jr: Excel (22 lições), Orçamento e indicadores (13), Notas, compras e contratos (16) e Entrevista (15). Todas ficam liberadas desde o início.
+
+Fontes consultadas em 25/09/2026 e citadas nos cartões: anúncio da vaga; site oficial do Grupo Massa; CF/88, art. 7º; CLT, art. 71; Lei 7.418/1985, art. 4º; Lei 8.036/1990, art. 15; Lei 4.749/1965; Lei 10.192/2001, art. 2º; Lei 10.833/2003, arts. 30 a 32; RIR/2018, arts. 714 e 716; Lei 8.212/1991, art. 31; LC 116/2003; LC 214/2025, arts. 62 e 343 a 348 (com a LC 227/2026); Ajuste SINIEF 07/2005 (com os Ajustes 44/20 e 14/26); Manual de Orientação do Contribuinte da NF-e. Empresas, CNPJs e valores de exemplo são fictícios.
+
+Largura: fórmulas longas quebram a linha, e até 360 px tabelas e cartões ficam mais compactos. Todas as 2.741 telas (teoria e exercícios) foram medidas a 320 e 375 px sem vazar a página.

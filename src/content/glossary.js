@@ -73,7 +73,34 @@ export const GLOSS_ADD = [
  ["Notas explicativas","Informações que detalham e explicam as demonstrações financeiras."],
  ["Plano de contas","Lista organizada e codificada das contas usadas pela empresa."],
  ["Conta analítica","Conta de último nível, que recebe lançamentos."],
- ["Reserva de emergência","Dinheiro guardado para imprevistos, em aplicação de fácil resgate."]
+ ["Reserva de emergência","Dinheiro guardado para imprevistos, em aplicação de fácil resgate."],
+ /* Área Carreiras */
+ ["PROCV","Função do Excel que procura um valor na primeira coluna de uma tabela e traz a informação de outra coluna da mesma linha. Use FALSO para correspondência exata."],
+ ["SOMASES","Função do Excel que soma uma coluna só nas linhas que atendem a uma ou mais condições."],
+ ["CONT.SES","Função do Excel que conta as linhas que atendem a uma ou mais condições."],
+ ["Tabela dinâmica","Recurso do Excel que resume uma base grande arrastando campos para linhas, colunas, valores e filtros."],
+ ["Referência absoluta","Endereço de célula travado com $ (como $A$2), que não muda ao copiar a fórmula."],
+ ["Ordem de compra (OC)","Documento que formaliza e autoriza uma compra com o fornecedor, antes do gasto."],
+ ["Requisição de compra","Pedido interno de uma área para que compras adquira algo."],
+ ["Alçada","Limite de valor que cada pessoa pode aprovar."],
+ ["Conferência em três vias","Comparar ordem de compra, recebimento e nota fiscal antes de lançar e pagar."],
+ ["Comprometido","Valor do orçamento reservado em ordens de compra e contratos que ainda não viraram nota."],
+ ["Forecast","Nova previsão do ano: realizado até agora mais a projeção dos meses que faltam."],
+ ["Previsto x realizado","Comparação entre o orçamento e o que de fato aconteceu, com variação em R$ e %."],
+ ["Saving","Economia obtida numa negociação, medida contra uma referência honesta de preço."],
+ ["Lead time","Tempo entre o pedido e a entrega. Em compras, da requisição ao recebimento."],
+ ["Aging","Relatório que separa títulos a vencer e vencidos por faixa de dias."],
+ ["Chave de acesso","Número de 44 dígitos que identifica uma NF-e e permite consultá-la."],
+ ["DANFE","Documento Auxiliar da NF-e: a representação impressa. A nota é o arquivo XML."],
+ ["CFOP","Código Fiscal de Operações e Prestações: 4 dígitos que dizem o tipo e a direção da operação."],
+ ["NCM","Nomenclatura Comum do Mercosul: 8 dígitos que classificam uma mercadoria."],
+ ["Carta de correção (CC-e)","Evento que corrige erros da NF-e que não mexem em imposto, valor, quantidade, partes ou datas."],
+ ["Manifestação do destinatário","Eventos com que a empresa confirma, recusa ou desconhece uma NF-e emitida contra o seu CNPJ."],
+ ["Retenção na fonte","Quem paga desconta parte do valor e recolhe o tributo em nome de quem prestou o serviço."],
+ ["Aditivo","Documento assinado que muda valor, prazo ou escopo de um contrato."],
+ ["Reajuste","Atualização do valor de um contrato por um índice, no máximo uma vez por ano (Lei 10.192/2001)."],
+ ["Glosa","Desconto previsto no contrato quando o nível de serviço combinado não é cumprido."],
+ ["Método STAR","Forma de contar uma experiência na entrevista: situação, tarefa, ação e resultado."]
 ];
 
 export const GLOSS = GLOSSARY.concat(GLOSS_ADD).sort((a, b) => a[0].localeCompare(b[0], 'pt-BR'));

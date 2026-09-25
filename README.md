@@ -4,7 +4,7 @@
 como app (PWA) no celular ou no computador direto pelo navegador.
 
 App no estilo Duolingo para aprender Contabilidade do zero, em português. 6 áreas (incluindo Carreiras),
-13 trilhas e 217 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
+17 trilhas e 283 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
 "Na prática" com negócios e situações reais, oficinas e desafios relâmpago), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
@@ -105,3 +105,18 @@ produção no Vercel (projeto `conta-trilha`, conta `joao`).
 
 `npm run build` gera o site estático em `dist/` caso queira publicar em outro lugar
 (Netlify, GitHub Pages, qualquer host de arquivos estáticos).
+
+## Área Carreiras
+
+Trilhas montadas para uma vaga real (Analista Administrativo Financeiro Jr, Grupo Massa, Curitiba),
+todas liberadas desde o início (`open:true` em `LAYOUT`):
+
+- `financeirojr`: Analista Financeiro Jr (26 lições).
+- `car_excel`: Excel para a vaga (22), com grades no estilo planilha (`planilha()` em
+  `render-helpers.js`) e a planilha de treino `public/carreira/treino-excel-analista.xlsx`.
+- `car_orcamento`: Orçamento e indicadores (13), com o caso fictício "Rede Capivara".
+- `car_rotina`: Notas, compras e contratos (16), com regras fiscais conferidas em fonte oficial.
+- `car_entrevista`: Entrevista da vaga (15), com respostas abertas corrigidas por ideias-chave.
+
+Regras de conteúdo: fatos legais e da empresa só de fonte oficial, com a data da consulta no cartão;
+cada pergunta precisa se entender sozinha, porque desafios e revisões embaralham os exercícios.
