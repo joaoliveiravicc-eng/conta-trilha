@@ -17,7 +17,7 @@ export const AREAS = [
     courseIds:['vida'] },
   { id:'carreiras', icon:'💼', title:'Carreiras', short:'Carreiras', color:'#146C94',
     description:'Preparação para vagas reais, do zero à entrevista: Analista Financeiro Jr e Analista Administrativo Financeiro Jr.',
-    courseIds:['financeirojr','car_excel','car_orcamento','car_entrevista'] },
+    courseIds:['financeirojr','car_excel','car_orcamento','car_rotina','car_entrevista'] },
 ];
 
 export const DEFAULT_AREA = 'fundamentos';
