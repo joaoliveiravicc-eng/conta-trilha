@@ -38,7 +38,9 @@ export const LAYOUT = [
  {id:"financeirojr", panel:"carreiras", title:"Analista Financeiro Jr", icon:"💼", color:"#146C94", desc:"Do zero ao que a vaga cobra: contas a pagar e a receber, bancos, conciliação, fluxo de caixa, indicadores, Excel, o financeiro de mídia e agro, e a entrevista.",
   units:[["Do zero: números e patrimônio",["fj0","fj1","fj2","fj3"]],["Contas a pagar e a receber",["fj4","fj5","fj6","fj13"]],["Bancos e tesouraria",["fjb1","fjb2","fj7"]],["Caixa e planejamento",["fj8","fj9","fjc1","fjc2"]],["Números e ferramentas",["fj10","fj11","fj12"]],["Na prática: um grupo de mídia e agro",["fjm1","fjm2","fjm3","fjm4"]],["Pronto para a vaga",["fj14","fj15","fjs1"]],["Revisão",["fj16"]]]},
  {id:"car_excel", panel:"car_ferr", open:true, title:"Excel para a vaga", icon:"📊", color:"#1D6F42", desc:"Do básico ao que o teste de seleção cobra: referências, SE, PROCV, SOMASES e tabela dinâmica.",
-  units:[["Fundamentos rápidos",["xl1","xl2","xl3","xl4"]],["Organizando dados",["xl5","xl6","xl7"]],["PROCV",["xl8","xl9","xl10","xl11"]],["SOMASE, SOMASES e CONT.SES",["xl12","xl13","xl14","xl15"]],["Tabela dinâmica",["xl16","xl17","xl18","xl19"]],["Na prática: o teste de Excel",["xl20","xl21","xl22"]]]}
+  units:[["Fundamentos rápidos",["xl1","xl2","xl3","xl4"]],["Organizando dados",["xl5","xl6","xl7"]],["PROCV",["xl8","xl9","xl10","xl11"]],["SOMASE, SOMASES e CONT.SES",["xl12","xl13","xl14","xl15"]],["Tabela dinâmica",["xl16","xl17","xl18","xl19"]],["Na prática: o teste de Excel",["xl20","xl21","xl22"]]]},
+ {id:"car_entrevista", panel:"car_vaga", open:true, title:"Entrevista da vaga", icon:"🎯", color:"#7B3FA0", desc:"Analista Administrativo Financeiro Jr no Grupo Massa: a vaga e a empresa, sua história no método STAR, as perguntas técnicas e um simulado final.",
+  units:[["A vaga e a empresa",["ent1","ent2","ent3"]],["Sua história",["ent4","ent5","ent6"]],["Técnica: notas, compras e contratos",["ent7","ent8","ent9"]],["Técnica: orçamento, indicadores e fiscal",["ent10","ent11","ent12"]],["Reta final",["ent13","ent14","ent15"]]]}
 ];
 
 /* Unidade 'Aprofundando' no fim de cada trilha. Alunos que já tinham terminado a

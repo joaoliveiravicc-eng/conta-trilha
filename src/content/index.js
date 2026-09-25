@@ -19,6 +19,7 @@ import deepenGestao from './trilhas/aprofundar-gestao.js';
 import practiceThemes from './trilhas/pratica-temas.js';
 import { SCENARIO_LESSONS } from './scenarios.js';
 import careerExcel from './trilhas/carreira-excel.js';
+import careerInterview from './trilhas/carreira-entrevista.js';
 import extra from './extra.js';
 import expand from './expand.js';
 import { enrichCourses } from './workshops.js';
@@ -30,7 +31,7 @@ const layouts = AREAS.flatMap(area => area.courseIds).map(id => LAYOUT.find(cour
 
 const built = buildCourses(
   [base, dc, lanc, demo, cust, trib, aud, imob],
-  antes.concat(vida, estoq, digital, financeiroJr, deepenFund, deepenOp, deepenGestao, practiceThemes, SCENARIO_LESSONS, careerExcel),
+  antes.concat(vida, estoq, digital, financeiroJr, deepenFund, deepenOp, deepenGestao, practiceThemes, SCENARIO_LESSONS, careerExcel, careerInterview),
   extra, layouts
 );
 built.forEach(course => course.lessons.forEach(lesson => {
