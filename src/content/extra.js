@@ -128,7 +128,7 @@ export default {
  ],
  aud2:[
   nu("Receita de R$ 10.000.000 e materialidade de 1% da receita. Qual o valor?",100000,"10.000.000 × 1% = 100.000.","R$"),
-  wr("Qual componente do risco o auditor controla? (uma palavra)",["deteccao"],"Detecção.")
+  wr("Qual componente do risco o auditor controla? (uma palavra)",["deteccao","risco de deteccao"],"O risco de detecção: é o único componente que o auditor controla, ao decidir quantos testes fazer. Os riscos inerente e de controle pertencem à empresa.")
  ],
  aud3:[
   wr("Separar aprovar, pagar e registrar entre pessoas diferentes é a segregação de...",["funcoes","funcao"],"Segregação de funções."),

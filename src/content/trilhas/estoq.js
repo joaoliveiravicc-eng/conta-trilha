@@ -14,7 +14,7 @@ export default [
   mc("Estoques de mercadorias para revenda ficam em que grupo do Balanço?",["*Ativo Circulante","Ativo Não Circulante","Passivo Circulante","Patrimônio Líquido"],"O estoque costuma virar dinheiro em até 12 meses."),
   tf("Produtos ainda não vendidos continuam sendo um bem da empresa, e não uma despesa.",true,"Só viram custo/despesa quando são vendidos ou consumidos."),
   mc("No inventário periódico, quando o CMV é apurado?",["*Só no fechamento, por uma fórmula","A cada venda, na hora","Nunca é apurado","Todo início de mês, por estimativa"],"O periódico calcula tudo de uma vez ao final do período."),
-  wr("Como se chama o estoque de produtos prontos para vender que a loja ainda não vendeu?",["mercadorias","estoque de mercadorias","mercadorias para revenda"],"Mercadorias para revenda."),
+  wr("Como se chama o estoque de produtos prontos para vender que a loja ainda não vendeu?",["mercadorias","estoque de mercadorias","mercadorias para revenda","estoque","estoque para revenda"],"Mercadorias para revenda: o estoque de quem compra pronto para vender."),
   mt([["Mercadoria para revenda","Comprada pronta para vender"],["Matéria-prima","Vai virar produto"],["Produto acabado","Já foi fabricado, pronto para vender"],["Inventário periódico","Apura o CMV só no fechamento"]],"Cada tipo de estoque tem um papel diferente na produção."),
   cl("O item é estoque ou não?",["Estoque","Não é estoque"],"Mercadorias para revenda:0|Computador do escritório:1|Matéria-prima:0|Dinheiro em caixa:1","Estoque é o que a empresa vai vender ou consumir na atividade.")
  ]},
@@ -112,6 +112,6 @@ export default [
   nu("Estoque inicial R$ 10.000, compras R$ 40.000, estoque final R$ 9.000. Qual o CMV?",41000,"10.000 + 40.000 − 9.000 = 41.000.","R$"),
   tf("O método UEPS é aceito pelas normas contábeis brasileiras.",false,"No Brasil usam-se PEPS ou custo médio ponderado; o UEPS não é aceito."),
   mc("A contagem física do estoque aponta R$ 8.200, mas o saldo contábil é R$ 8.800. O que isso indica?",["*Uma perda de R$ 600 a ajustar","Um ganho de R$ 600","Que não há nada a fazer","Um erro que se corrige sozinho"],"8.800 − 8.200 = 600 de diferença, tratada como perda de estoque."),
-  wr("Numa indústria, como se chama o estoque do que ainda está sendo fabricado?",["produtos em elaboracao","em elaboracao","produto em elaboracao"],"Produtos em elaboração.")
+  wr("Numa indústria, como se chama o estoque do que ainda está sendo fabricado?",["produtos em elaboracao","em elaboracao","produto em elaboracao","producao em andamento","em andamento","produtos em andamento","produtos em processo","em processo"],"Produtos em elaboração, também chamados de produção em andamento: o que ainda está sendo fabricado.")
  ]}
 ];
