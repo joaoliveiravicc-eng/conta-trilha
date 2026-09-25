@@ -62,3 +62,20 @@ Quatro trilhas novas para a vaga de Analista Administrativo Financeiro Jr: Excel
 Fontes consultadas em 25/09/2026 e citadas nos cartões: anúncio da vaga; site oficial do Grupo Massa; CF/88, art. 7º; CLT, art. 71; Lei 7.418/1985, art. 4º; Lei 8.036/1990, art. 15; Lei 4.749/1965; Lei 10.192/2001, art. 2º; Lei 10.833/2003, arts. 30 a 32; RIR/2018, arts. 714 e 716; Lei 8.212/1991, art. 31; LC 116/2003; LC 214/2025, arts. 62 e 343 a 348 (com a LC 227/2026); Ajuste SINIEF 07/2005 (com os Ajustes 44/20 e 14/26); Manual de Orientação do Contribuinte da NF-e. Empresas, CNPJs e valores de exemplo são fictícios.
 
 Largura: fórmulas longas quebram a linha, e até 360 px tabelas e cartões ficam mais compactos. Todas as 2.741 telas (teoria e exercícios) foram medidas a 320 e 375 px sem vazar a página.
+
+## Treino de revisão (setembro de 2026)
+
+Cada trilha ganhou **treinos de revisão**, marcados com um halter no caminho. Eles olham para trás: revisam as
+etapas anteriores da trilha e, na primeira etapa, a trilha anterior da área. São opcionais, sem tempo, sem perder
+corações e com dicas. Um treino sorteia de 5 a 10 questões de lições já concluídas, começando pelas que a pessoa
+mais errou e pelas com revisão vencida, uma de cada lição antes de repetir. Até 40% da rodada vem da **revisão
+integrada**, perguntas novas que misturam lições diferentes.
+
+Ao terminar, as revisões espaçadas das lições treinadas são reagendadas (1, 3, 7, 14 e 30 dias) conforme os acertos
+de primeira, e o resultado indica as lições a reforçar. A aba Praticar tem o hub "Trilhas de treino" com um treino
+por trilha e um misto da área.
+
+Fundamentos: recuperação ativa, distribuição do estudo no tempo e mistura de assuntos (prática intercalada), as
+mesmas ideias do guia do IES citado acima.
+
+Arquivos: `src/engine/training.js`, `src/ui/screens/training.js`, `src/content/revisao.js` e `tests/training.test.js`.

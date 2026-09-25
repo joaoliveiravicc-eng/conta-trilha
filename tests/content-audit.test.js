@@ -9,7 +9,8 @@ import { TIPS } from '../src/content/tips.js';
 
 const strip = s => String(s).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 const lessons = COURSES.flatMap(c => c.lessons);
-const exercises = lessons.flatMap(l => l.ex.map((x, i) => ({ l, x, i, id: l.id + '#' + i })));
+const reviews = COURSES.filter(c => c.review).map(c => c.review);
+const exercises = lessons.concat(reviews).flatMap(l => l.ex.map((x, i) => ({ l, x, i, id: l.id + '#' + i })));
 
 test('HTML: só tags conhecidas (um "<HOJE()" solto já cortou uma pergunta)', () => {
   const allowed = new Set(['p', 'b', 'div', 'table', 'thead', 'tr', 'th', 'tbody', 'td', 'ul', 'li', 'ol', 'span', 'br', 'a', 'code', 'sup', 'strong', 'em', 'i', 'small', 'sub']);
@@ -19,7 +20,8 @@ test('HTML: só tags conhecidas (um "<HOJE()" solto já cortou uma pergunta)', (
     else if (Array.isArray(v)) v.forEach((x, i) => walk(x, where + '[' + i + ']'));
     else if (v && typeof v === 'object') Object.keys(v).filter(k => !['course', 'unit', 'lesson'].includes(k)).forEach(k => walk(v[k], where + '.' + k));
   };
-  lessons.forEach(l => { walk({ t: l.title, g: l.goal, r: l.recap, learn: l.learn }, l.id); l.ex.forEach((x, i) => walk(x, l.id + '#' + i)); });
+  lessons.forEach(l => { walk({ t: l.title, g: l.goal, r: l.recap, learn: l.learn }, l.id); });
+  exercises.forEach(({ x, id }) => walk(x, id));
   walk(GLOSS, 'GLOSS'); walk(TIPS, 'TIPS');
   assert.deepEqual(found, []);
 });

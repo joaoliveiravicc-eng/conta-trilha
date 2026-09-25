@@ -7,6 +7,8 @@ import { go, sheet } from '../router.js';
 import { renderHome } from './home.js';
 import { openLesson, startLearn } from './learn.js';
 import { startLessonQuiz, startFinal, startSession } from './quiz.js';
+import { trainingRow, trainingSheet, trainingCount, trainingDone } from './training.js';
+import { DUMBBELL } from '../components/icons.js';
 
 export let PATHC = null;
 export function openPath(c){ PATHC = c; renderPath(); go('path'); }
@@ -19,13 +21,14 @@ export function renderPath(){
   const challengesDone = c.units.filter(u => S.checkpoints[checkpointId(u)]?.passed).length;
   const spots = c.units.flatMap(u => challengeSpots(u));
   const crowns = spots.filter(sp => S.challenges[sp.id]?.perfect).length, beaten = spots.filter(sp => S.challenges[sp.id]?.passed).length;
+  const trainTotal = trainingCount(c), trainDone = trainingDone(c);
   const html = c.units.map(u => {
     const completed = unitComplete(u, S.done), count = u.lessons.filter(l => S.done[l.id]).length;
     const current = next && u.lessons.includes(next);
     const score = S.checkpoints[checkpointId(u)];
     return `<details class="learning-unit ${completed ? 'complete' : ''}" ${current ? 'open' : ''}>
       <summary><span class="unit-index">${completed ? '✓' : u.idx + 1}</span><span class="unit-summary"><span class="eyebrow">ETAPA ${u.idx + 1}</span><strong>${u.t}</strong><span class="muted small">${count} de ${u.lessons.length} lições concluídas</span></span><span class="unit-expand" aria-hidden="true">⌄</span></summary>
-      ${jumpHtml(c, u)}
+      ${jumpHtml(c, u)}${trainingRow(c, u)}
       <div class="lesson-roadmap">${u.lessons.map((l, li) => {
         const done = !!S.done[l.id], unlocked = lessonUnlocked(l), active = l === next;
         return `<button class="lesson-row ${done ? 'completed' : ''} ${active ? 'current' : ''} ${unlocked ? '' : 'locked'}" data-act="lesson" data-i="${l.idx}">
@@ -41,17 +44,18 @@ export function renderPath(){
   const areaPosition = area?.courseIds.indexOf(c.id) + 1 || 1;
   $('#s-path').innerHTML = `<div class="path-top"><button class="icon-btn" data-act="back" aria-label="Voltar às trilhas">←</button><div><div class="pk">Trilha ${areaPosition} de ${area?.courseIds.length || COURSES.length} · ${area?.title || 'Contabilidade'}</div><h1>${c.title}</h1></div></div>
     <div class="course-overview"><div class="eyebrow">UM PASSO DE CADA VEZ</div><p>${c.desc}</p><ul class="course-goals">${c.goals.map(g => '<li>'+g+'</li>').join('')}</ul>
-      <div class="course-metrics"><span><b>${requiredDone}/${required.length}</b> lições essenciais</span><span><b>${challengesDone}/${c.units.length}</b> selos</span>${spots.length ? '<span><b>'+beaten+'/'+spots.length+'</b> desafios · 👑 '+crowns+'</span>' : ''}<span><b>${n}</b> lições no total</span></div>
+      <div class="course-metrics"><span><b>${requiredDone}/${required.length}</b> lições essenciais</span><span><b>${challengesDone}/${c.units.length}</b> selos</span>${spots.length ? '<span><b>'+beaten+'/'+spots.length+'</b> desafios · 👑 '+crowns+'</span>' : ''}${trainTotal ? '<span><b>'+trainDone+'/'+trainTotal+'</b> treinos '+DUMBBELL+'</span>' : ''}<span><b>${n}</b> lições no total</span></div>
       <div class="progress-track" role="progressbar" aria-label="Lições essenciais concluídas" aria-valuemin="0" aria-valuemax="${required.length}" aria-valuenow="${requiredDone}"><div class="progress-fill" style="width:${requiredDone/required.length*100}%"></div></div>
       ${next ? '<button class="btn primary" data-act="resume">Continuar: '+next.title+' →</button>' : '<p class="small">Todas as lições concluídas. Retome uma etapa para reforçar o que aprendeu.</p>'}
-    </div><div class="curriculum-heading"><h2>Seu caminho</h2><p>Aprenda, pratique e confira o que ficou. Os desafios ⚡ no caminho são opcionais e difíceis: sem dicas, com tempo e só 3 corações.</p></div>
+    </div><div class="curriculum-heading"><h2>Seu caminho</h2><p>Aprenda, pratique e confira o que ficou. Os desafios ⚡ no caminho são opcionais e difíceis: sem dicas, com tempo e só 3 corações. Os treinos ${DUMBBELL} revisam o que você já estudou, sem pressa e com dicas.</p></div>
     <div class="learning-units">${html}</div><div class="course-finale"><span class="eyebrow">CONCLUSÃO DA TRILHA</span><h2>${S.trophies[c.id] ? 'Troféu conquistado' : 'Teste final'}</h2><p>10 questões para reunir os conhecimentos das lições essenciais.</p><button class="btn ${courseComplete(c) ? 'primary' : 'ghost'}" data-act="final">${S.trophies[c.id] ? 'Refazer o teste' : courseComplete(c) ? 'Fazer teste final' : 'Como liberar o teste?'}</button></div>`;
   bindActs($('#s-path'), {
     back: () => { renderHome(); go('home'); }, resume: () => openLesson(next),
     lesson: b => lessonSheet(c.lessons[+b.dataset.i]),
     checkpoint: b => checkpointSheet(c, c.units[+b.dataset.u]), final: () => finalSheet(c),
     challenge: b => challengeSheet(c, c.units[+b.dataset.u], +b.dataset.after),
-    jump: b => jumpSheet(c, c.units[+b.dataset.u])
+    jump: b => jumpSheet(c, c.units[+b.dataset.u]),
+    train: b => trainingSheet(c, c.units[+b.dataset.u])
   });
 }
 

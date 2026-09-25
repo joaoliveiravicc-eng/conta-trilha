@@ -23,6 +23,7 @@ import careerInterview from './trilhas/carreira-entrevista.js';
 import careerBudget from './trilhas/carreira-orcamento.js';
 import careerRoutine from './trilhas/carreira-rotina.js';
 import extra from './extra.js';
+import { REVIEW_BANK } from './revisao.js';
 import expand from './expand.js';
 import { enrichCourses } from './workshops.js';
 import { AREAS } from './areas.js';
@@ -43,6 +44,12 @@ built.forEach(course => course.lessons.forEach(lesson => {
 }));
 export const COURSES = enrichCourses(built);
 
+/* Revisão integrada: perguntas que só aparecem nos treinos (ver revisao.js). Não contam como lições. */
+COURSES.forEach(course => {
+  const ex = REVIEW_BANK[course.id]; if (!ex) return;
+  course.review = { id:'rev-' + course.id, title:'Revisão integrada: ' + course.title, course, ex, virtual:true, optional:true, learn:[] };
+});
+
 export const EX = {};
 COURSES.forEach((course, courseIndex) => {
   course.idx = courseIndex;
@@ -56,6 +63,10 @@ COURSES.forEach((course, courseIndex) => {
       exercise.key = lesson.id + '#' + exerciseIndex;
       EX[exercise.key] = { x:exercise, l:lesson, c:course };
     });
+  });
+  if (course.review) course.review.ex.forEach((exercise, exerciseIndex) => {
+    exercise.key = course.review.id + '#' + exerciseIndex;
+    EX[exercise.key] = { x:exercise, l:course.review, c:course };
   });
 });
 

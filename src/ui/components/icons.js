@@ -1,2 +1,5 @@
 /* Bolota (moeda do app) desenhada em SVG, para não depender de emoji do sistema. */
 export const ACORN = '<svg class="acorn" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.6 0 1 .5 1 1.1V4h-2V2.6c0-.6.4-1.1 1-1.1Z" fill="#6B4122"/><path d="M3.5 10.2C3.5 6.9 7.3 4.6 12 4.6s8.5 2.3 8.5 5.6c0 .5-.4.8-.9.8H4.4c-.5 0-.9-.3-.9-.8Z" fill="#8A5A2B"/><path d="M6 7.4h12M5 9.4h14" stroke="#6B4122" stroke-width="1" stroke-linecap="round"/><path d="M4.6 11.5h14.8c-.2 4.9-2.6 9.1-7.4 11-4.8-1.9-7.2-6.1-7.4-11Z" fill="#D9A25B"/><path d="M8 13.5c.3 2.4 1.3 4.4 3 5.8" stroke="#F3CE96" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';
+
+/* Halter: o símbolo do treino de revisão. Traço fino, herda a cor do texto (currentColor). */
+export const DUMBBELL = '<svg class="dumbbell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg>';

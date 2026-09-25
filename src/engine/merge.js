@@ -41,6 +41,7 @@ export function mergeProgress(local, cloud){
   m.mistakes = union(local.mistakes, cloud.mistakes);
   m.checkpoints = unionBy(local.checkpoints, cloud.checkpoints, bestRecord);
   m.challenges = unionBy(local.challenges, cloud.challenges, (x, y) => Object.assign({}, x, y, { passed:!!(x.passed || y.passed), perfect:!!(x.perfect || y.perfect), attempts:maxNum(x.attempts, y.attempts) }));
+  m.training = unionBy(local.training, cloud.training, (x, y) => Object.assign({}, x, y, { count:maxNum(x.count, y.count), best:maxNum(x.best, y.best), last:later(x.last, y.last) }));
   m.repetition = unionBy(local.repetition, cloud.repetition, laterRecord);
   m.days = unionBy(local.days, cloud.days, maxNum);
   m.best = unionBy(local.best, cloud.best, maxNum);

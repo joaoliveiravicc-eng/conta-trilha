@@ -5,7 +5,7 @@ como app (PWA) no celular ou no computador direto pelo navegador.
 
 App no estilo Duolingo para aprender Contabilidade do zero, em português. 6 áreas (incluindo Carreiras),
 17 trilhas e 283 lições (cada trilha tem revisão, a unidade "Aprofundando", unidades
-"Na prática" com negócios e situações reais, oficinas e desafios relâmpago), motor de exercícios com ~10 tipos de questão, gamificação (XP,
+"Na prática" com negócios e situações reais, oficinas, desafios relâmpago e treinos de revisão), motor de exercícios com ~10 tipos de questão, gamificação (XP,
 moedas, corações, sequência, níveis, badges, missões diárias), 3 estudos de caso
 completos e um glossário de termos contábeis. Mascote: Bento, o castor contador.
 
@@ -120,3 +120,29 @@ todas liberadas desde o início (`open:true` em `LAYOUT`):
 
 Regras de conteúdo: fatos legais e da empresa só de fonte oficial, com a data da consulta no cartão;
 cada pergunta precisa se entender sozinha, porque desafios e revisões embaralham os exercícios.
+
+## Treino de revisão (o halter)
+
+O halter (SVG em `ui/components/icons.js`) marca no caminho de cada trilha um **treino de revisão**: ele olha
+para trás, para as etapas anteriores da trilha (na primeira etapa, para a trilha anterior da área; trilhas
+`open`, como as de carreira, não revisam outra). É sem tempo, sem perder corações e com dicas, ao contrário do
+desafio ⚡. São 75 treinos no caminho, mais o hub **Trilhas de treino** na aba Praticar (um treino por trilha
+e um misto da área).
+
+- `engine/training.js`: funções puras (quais lições revisar, escolha das questões, recompensa, reagendamento).
+  A rodada começa pelo que a pessoa mais errou e pelo que está com a revisão vencida, cobre várias lições
+  e reagenda a revisão espaçada delas conforme os acertos de primeira.
+- `ui/screens/training.js`: nó no caminho, folha de confirmação, hub e resultado. O `quiz.js` só ganhou três ganchos.
+- `content/revisao.js` (**revisão integrada**): perguntas novas que misturam lições de uma mesma trilha e só
+  aparecem nos treinos (até 40% da rodada). Cada uma declara em `covers` as lições de que depende e só entra
+  quando todas já foram concluídas. Ficam em `course.review` e no índice `EX`, com chaves `rev-<trilha>#n`,
+  fora da contagem de lições. Errar uma delas devolve as lições cobertas para a revisão do dia.
+- Estado: `S.training[id] = { count, best, last, accuracy }` (ids `treino:<lição inicial da etapa>`,
+  `treino:trilha:<id>` e `treino:area:<id>`), sincronizado em `merge.js`. Conquistas: Primeiro treino e Rato de academia.
+
+## Auditoria de conteúdo
+
+`tests/content-audit.test.js` guarda os defeitos que a auditoria de setembro de 2026 encontrou: HTML solto
+(um `<HOJE()` cortava uma pergunta), perguntas que dependiam de "no caso anterior", exercícios dos negócios
+das lições "Na prática" sem os dados no enunciado e estrutura inválida por tipo. Relatório completo em
+`AUDITORIA_2026-09.md`.

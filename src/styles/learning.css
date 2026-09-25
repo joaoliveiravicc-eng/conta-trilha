@@ -252,3 +252,29 @@ table.xl td.mk{outline:2px solid var(--green);outline-offset:-2px;background:var
 .qq .qctx{display:block;font-family:var(--fb);font-weight:600;font-size:.85rem;letter-spacing:0;line-height:1.4;color:var(--muted);margin:0 0 6px;}
 .qq .facts{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;font-family:var(--fb);font-weight:400;font-size:.9rem;letter-spacing:0;line-height:1.4;}
 .qq .facts li{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px;}
+/* ---------- treino de revisão (halter): olha para trás, sem tempo e com dicas ---------- */
+:root{--gym:#2B6CA3;--gym2:#1F4F7A;--gymp:#E4EEF7;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gym:#3B7FB8;--gym2:#9CC8EC;--gymp:#1A2B3A;}}
+:root[data-theme="dark"]{--gym:#3B7FB8;--gym2:#9CC8EC;--gymp:#1A2B3A;}
+.dumbbell{width:1.2em;height:1.2em;vertical-align:-.2em;flex:none;}
+.course-preview-meta .dumbbell,.course-metrics .dumbbell,.curriculum-heading .dumbbell{width:1.05em;height:1.05em;vertical-align:-.15em;color:var(--gym);}
+.train-row{display:flex;align-items:center;gap:14px;width:calc(100% - 16px);margin:6px 8px;padding:12px;text-align:left;border-radius:14px;min-height:68px;border:2px solid var(--gym);background:var(--gymp);color:var(--text);box-shadow:0 3px 0 color-mix(in srgb,var(--gym) 45%,transparent);}
+.train-row.done{border-color:color-mix(in srgb,var(--gym) 55%,var(--line));box-shadow:none;}
+.train-row.locked{border:2px dashed var(--line);background:var(--soft);box-shadow:none;}
+.train-row .lesson-state{color:var(--gym2);font-weight:700;}
+.train-row.locked .lesson-state{color:var(--muted);font-weight:600;}
+.train-marker{position:relative;width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--gym);color:#fff;box-shadow:inset 0 0 0 3px rgba(255,255,255,.22);}
+.train-marker .dumbbell{width:24px;height:24px;vertical-align:baseline;}
+.train-row.locked .train-marker{background:var(--line);color:var(--muted);box-shadow:none;}
+.train-marker i{position:absolute;right:-4px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;font-style:normal;font-size:.66rem;font-weight:800;display:grid;place-items:center;border:2px solid var(--card);}
+.sh-i.train-i{color:var(--gym);display:grid;place-items:center;}
+.sh-i.train-i .dumbbell{width:46px;height:46px;vertical-align:baseline;}
+.pcard.train-card .pe{color:var(--gym);background:var(--gymp);}
+.pcard.train-card .pe .dumbbell{width:28px;height:28px;vertical-align:baseline;}
+.pcard.train-card .cnt.train-cnt{background:var(--gym);}
+.pcard.train-card:hover:not(:disabled){border-color:var(--gym);}
+@media(max-width:560px){
+  .train-row{flex-wrap:wrap;column-gap:12px;row-gap:6px;padding:12px 10px;width:calc(100% - 8px);margin:6px 4px;}
+  .train-row .lesson-description{flex:1 1 calc(100% - 62px);}
+  .train-row .lesson-state{margin-left:56px;flex-basis:calc(100% - 56px);}
+}

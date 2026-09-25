@@ -24,5 +24,7 @@ export const BADGES = [
   {id:'dare1', i:'⚡', n:'Encarou o desafio', d:'Vença um desafio relâmpago da trilha', t:s => Object.values(s.challenges || {}).some(c => c.passed)},
   {id:'crown1', i:'💎', n:'Lendário', d:'Ganhe a coroa em um desafio (zero erros)', t:s => Object.values(s.challenges || {}).some(c => c.perfect)},
   {id:'dare10', i:'🔥', n:'Desafiante', d:'Vença 10 desafios relâmpago', t:s => Object.values(s.challenges || {}).filter(c => c.passed).length >= 10},
+  {id:'gym1', i:'🏋️', n:'Primeiro treino', d:'Faça um treino de revisão', t:s => Object.keys(s.training || {}).length >= 1},
+  {id:'gym10', i:'💪', n:'Rato de academia', d:'Faça 10 treinos de revisão', t:s => Object.values(s.training || {}).reduce((n, r) => n + (r.count || 0), 0) >= 10},
   {id:'all', i:'👑', n:'Formado(a)', d:'Todos os troféus', t:s => ALL_COURSE_IDS.every(id => s.trophies[id])}
 ];

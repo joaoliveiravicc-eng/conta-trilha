@@ -3,6 +3,8 @@ import { cloudAvailable, isLoggedIn } from '../../engine/sync-supabase.js';
 import { S, today, nextLesson, doneCount, curStreak, courseComplete, courseUnlocked, lessonsDone } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
 import { challengeSpots } from '../../engine/learning.js';
+import { trainingSpots, previousCourseOf } from '../../engine/training.js';
+import { DUMBBELL } from '../components/icons.js';
 import { pick } from '../../engine/random.js';
 import { COURSES } from '../../content/index.js';
 import { TIPS } from '../../content/tips.js';
@@ -69,9 +71,13 @@ export function courseRow(c, number = c.idx + 1){
   return '<button class="crow' + (lk ? ' locked' : '') + '" data-act="course" data-i="' + c.idx + '" style="--cc:' + c.color + '">' +
     '<div class="badge">' + (lk ? '🔒' : c.icon) + '<span class="num">' + number + '</span></div>' +
     '<div class="ci"><div class="ct">' + c.title + (S.trophies[c.id] ? ' 🏆' : '') + '</div><div class="cs">' + c.desc + '</div>' +
-    '<span class="course-preview-meta">'+c.units.length+' etapas · '+c.units.flatMap(u => challengeSpots(u)).length+' desafios ⚡'+(workshops ? ' · '+workshops+' '+(workshops === 1 ? 'oficina prática' : 'oficinas práticas') : '')+'</span>' +
+    '<span class="course-preview-meta">'+c.units.length+' etapas · '+c.units.flatMap(u => challengeSpots(u)).length+' desafios ⚡'+trainMeta(c)+(workshops ? ' · '+workshops+' '+(workshops === 1 ? 'oficina prática' : 'oficinas práticas') : '')+'</span>' +
     '<div class="progress-track"><div class="progress-fill" style="width:' + (d / n * 100) + '%"></div></div>' +
     '<div class="cm"><span>' + d + ' de ' + n + ' lições</span><span>' + (lk ? 'Bloqueada' : (d === n ? 'Concluída' : '')) + '</span></div></div><div class="chev">›</div></button>';
+}
+function trainMeta(c){
+  const n = trainingSpots(c, previousCourseOf(c, COURSES, areaForCourse)).length;
+  return n ? ' · '+n+' treinos '+DUMBBELL : '';
 }
 export function lockedCourse(c){
   const area = areaForCourse(c.id), previous = COURSES.find(item => item.id === area?.courseIds[area.courseIds.indexOf(c.id) - 1]);

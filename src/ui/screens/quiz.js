@@ -19,6 +19,7 @@ import { openPath } from './path.js';
 import { startLearn } from './learn.js';
 import { renderPractice } from './practice.js';
 import { caseBalanceteHTML } from './cases.js';
+import { finishTraining } from './training.js';
 
 export let SES = null, R = null;
 const PRAISE = ['Muito bem!', 'Isso aí!', 'Correto!', 'Mandou bem!', 'Perfeito!', 'Exato!', 'Excelente!', 'Show de bola!'];
@@ -55,7 +56,7 @@ export function renderItem(){
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   body.innerHTML = '';
-  body.appendChild(el('div','session-context', '<span>'+ (SES.kind==='challenge'?'⚡ Desafio · sem dicas':SES.kind==='jump'?'⏩ Teste para pular':SES.kind==='unlock'?'🔓 Teste para liberar':SES.kind==='checkpoint'?'Selo · '+SES.unit.t:SES.kind==='spaced'?'Revisão do dia':SES.lesson?SES.lesson.title:SES.kind==='final'?'Teste final':'Prática') +'</span><span>'+SES.done+' de '+SES.total+' concluídas</span>'));
+  body.appendChild(el('div','session-context', '<span>'+ (SES.kind==='challenge'?'⚡ Desafio · sem dicas':SES.kind==='training'?'Treino de revisão':SES.kind==='jump'?'⏩ Teste para pular':SES.kind==='unlock'?'🔓 Teste para liberar':SES.kind==='checkpoint'?'Selo · '+SES.unit.t:SES.kind==='spaced'?'Revisão do dia':SES.lesson?SES.lesson.title:SES.kind==='final'?'Teste final':'Prática') +'</span><span>'+SES.done+' de '+SES.total+' concluídas</span>'));
   bentoQuiz('idle');
   const retry = !!SES.wrong[it.key];
   body.appendChild(el('div', 'qk', (SAY.quiz[x.t] || 'Responda:') + (retry ? ' <span class="tagnew">Tente de novo</span>' : '')));
@@ -127,7 +128,7 @@ export function quitQuiz(){
     { quit: () => { const s = SES; stopClock(); SES = null; exitTo(s); } });
 }
 function exitTo(s){
-  if (s && s.course && ['lesson','final','checkpoint','challenge','jump','unlock'].includes(s.kind)) openPath(s.course);
+  if (s && s.course && ['lesson','final','checkpoint','challenge','jump','unlock','training'].includes(s.kind)) openPath(s.course);
   else { renderPractice(); go('practice'); }
 }
 function finish(){
@@ -155,6 +156,8 @@ function finish(){
     extra.push([passed ? '✓' : '↻', passed ? 'Selo conquistado. Retome esta etapa quando quiser reforçar.' : 'O selo pede pelo menos 80%. Reveja os pontos abaixo e tente novamente.']);
     const revisit = [...new Set(s.items.filter(it=>!s.cleanKeys.includes(it.key)).map(it=>EX[it.key]?.l).filter(Boolean))];
     caseHtml = revisit.length ? '<div class="result-review"><h2>Vale retomar</h2>'+revisit.map(l=>'<button class="btn ghost" data-act="theory" data-id="'+l.id+'">'+l.title+' →</button>').join('')+'</div>' : '';
+  } else if (s.kind === 'training'){
+    ({ xp, coins, title, sub, mood, extra, caseHtml } = finishTraining(s));
   } else if (s.kind === 'jump'){
     s.skipLessons.forEach(l => { S.done[l.id] = S.done[l.id] || true; });
     xp = 10 + s.first; coins = 5;
