@@ -16,7 +16,7 @@ export default {
       box('regra','<b>Entidade:</b> o patrimônio da empresa é separado do patrimônio dos sócios.')}
    ],
    ex:[
-    {t:"mc", q:"Qual é o principal objetivo da Contabilidade?", o:["Calcular apenas impostos","Fornecer informações úteis sobre o patrimônio para a tomada de decisões","Fiscalizar os funcionários","Controlar apenas o dinheiro do dono"], a:1, e:"A Contabilidade gera informação útil sobre o patrimônio e o desempenho para quem precisa decidir."},
+    {t:"mc", q:"Qual é o principal objetivo da Contabilidade?", o:["Calcular apenas os impostos que a empresa deve pagar","Fornecer informações úteis sobre o patrimônio para decisões","Fiscalizar o trabalho dos funcionários da empresa","Controlar apenas o dinheiro pessoal do dono do negócio"], a:1, e:"A Contabilidade gera informação útil sobre o patrimônio e o desempenho para quem precisa decidir."},
     {t:"tf", q:"Um banco que analisa um pedido de empréstimo é um usuário da informação contábil.", a:true, e:"Bancos analisam as demonstrações para avaliar se a empresa consegue pagar o que deve."},
     {t:"fill", q:"A Contabilidade primeiro ___ os fatos, depois os classifica, ___ em relatórios e, por fim, interpreta os números.", o:["registra","resume","esconde","apaga"], a:["registra","resume"], e:"Registrar, classificar, resumir e interpretar: essa é a sequência do trabalho contábil."},
     {t:"tf", q:"Pagar a conta de luz da casa do dono com o dinheiro da empresa está correto, afinal o dono é a empresa.", a:false, e:"Pela ideia de Entidade, o patrimônio da empresa é separado do patrimônio dos sócios."},
@@ -61,7 +61,7 @@ export default {
     {t:"num", q:"Ativo de R$ 250.000 e PL de R$ 90.000. Quanto é o Passivo?", a:160000, u:"R$", e:"Passivo = Ativo − PL = 250.000 − 90.000 = 160.000."},
     {t:"tf", q:"Se o Passivo é maior que o Ativo, o PL é negativo, situação chamada de passivo a descoberto.", a:true, e:"Com PL negativo, as dívidas superam tudo o que a empresa tem."},
     {t:"fill", q:"O ___ reúne bens e direitos; o ___ reúne as obrigações com terceiros.", o:["Ativo","Passivo","Lucro","Caixa"], a:["Ativo","Passivo"], e:"Ativo = bens + direitos. Passivo = obrigações."},
-    {t:"mc", q:"Os sócios colocam R$ 20.000 em dinheiro para abrir a empresa. O que acontece?", o:["Aumenta o Ativo (Caixa) e aumenta o PL (Capital Social)","Aumenta o Ativo e aumenta o Passivo","Diminui o Ativo e aumenta o PL","Nada muda no patrimônio"], a:0, e:"Entra dinheiro (Ativo) e os sócios passam a ter essa parte na empresa (Capital Social, no PL)."},
+    {t:"mc", q:"Os sócios colocam R$ 20.000 em dinheiro para abrir a empresa. O que acontece?", o:["Aumenta o Ativo (Caixa) e o PL (Capital Social)","Aumenta o Ativo (Caixa) e aumenta o Passivo (Dívidas)","Diminui o Ativo (Caixa) e aumenta o PL (Capital)","Nada muda no patrimônio, só troca de lugar"], a:0, e:"Entra dinheiro (Ativo) e os sócios passam a ter essa parte na empresa (Capital Social, no PL)."},
     {t:"class", q:"Em que grupo fica cada conta?", cats:["Ativo","Passivo","PL"], items:[["Caixa",0],["Capital social",2],["Fornecedores",1],["Estoques",0],["Empréstimos a pagar",1],["Reservas de lucros",2]], e:"Capital social e reservas pertencem aos sócios, por isso ficam no PL."}
    ]},
   {id:"base4", title:"Receitas, despesas e resultado", icon:"📈",
@@ -90,12 +90,12 @@ export default {
     {h:"Para que serve", b:`<p>Padronizar: todos registram do mesmo jeito, os relatórios saem automaticamente e dá para comparar um mês com outro.</p>`}
    ],
    ex:[
-    {t:"mc", q:"O que é o plano de contas?", o:["A lista organizada das contas usadas pela empresa","Um plano de negócios","O orçamento anual","Um tipo de imposto"], a:0, e:"Ele padroniza os registros."},
+    {t:"mc", q:"O que é o plano de contas?", o:["A lista organizada das contas usadas pela empresa","Um plano de negócios para os próximos anos","O orçamento anual aprovado pela diretoria","Um tipo de imposto cobrado sobre as contas bancárias"], a:0, e:"Ele padroniza os registros."},
     {t:"tf", q:"Contas sintéticas recebem lançamentos diretamente.", a:false, e:"Quem recebe lançamentos são as analíticas."},
     {t:"ord", q:"Ordene do grupo mais amplo para a conta mais específica:", items:["Ativo","Ativo Circulante","Disponível","Caixa"], e:"Do geral para o detalhe."},
     {t:"class", q:"Sintética ou analítica?", cats:["Sintética","Analítica"], items:[["Ativo Circulante",0],["Caixa",1],["Disponível",0],["Banco do Bairro S.A.",1],["Passivo Circulante",0]], e:"Analíticas são o último nível."},
     {t:"wr", q:"Como se chamam as contas do último nível, que recebem os lançamentos?", a:["analiticas","analitica","contas analiticas"], e:"Contas analíticas."},
-    {t:"mc", q:"Qual a principal vantagem de um plano de contas bem feito?", o:["Registros padronizados e relatórios comparáveis","Pagar menos impostos","Dispensar documentos","Eliminar a auditoria"], a:0, e:"Padronização gera informação confiável."}
+    {t:"mc", q:"Qual a principal vantagem de um plano de contas bem feito?", o:["Registros padronizados e relatórios comparáveis","Pagar menos impostos em todos os períodos","Dispensar os documentos que comprovam os fatos","Eliminar a necessidade de auditoria externa"], a:0, e:"Padronização gera informação confiável."}
    ]},
   {id:"base6", title:"Competência x caixa", icon:"🗓️",
    learn:[

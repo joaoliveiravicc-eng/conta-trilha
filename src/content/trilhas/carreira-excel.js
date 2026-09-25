@@ -54,7 +54,7 @@ export default [
   mc("C2 tem =A2*B2. Copiando para C5, a fórmula fica:",["*=A5*B5","=A2*B2","=A5*B2","=C5*D5"],"Referências relativas acompanham a linha."),
   mc("C2 tem =B2*$F$1. Copiando para C3, a fórmula fica:",["*=B3*$F$1","=B3*$F$2","=B2*$F$1","=B3*F2"],"$F$1 está travada; B2 anda."),
   fl("Percentual sobre o total em B10, para copiar para baixo: =B2/{$B$10}",["B10","$B10","B$11"],"A linha 10 precisa ficar fixa ao copiar para baixo: $B$10."),
-  tf("A tecla F4 alterna entre referência relativa e absoluta enquanto você edita a fórmula.",true,"A1 → $A$1 → A$1 → $A1 → A1."),
+  tf("A tecla F2 alterna entre referência relativa e absoluta enquanto você edita a fórmula.",false,"Quem alterna é a tecla F4: A1 → $A$1 → A$1 → $A1 → A1. A F2 só coloca a célula em modo de edição."),
   nu("Qual o resultado em C3 (em %)?" + g([['Centro','Gasto','%'],['TI','2.000','=B2/$B$6'],['Adm','1.000','=B3/$B$6'],['Mkt','1.500','=B4/$B$6'],['RH','500','=B5/$B$6'],['Total','5.000','']],['C3']),20,"1.000 ÷ 5.000 = 20%.","%"),
   mc("Qual referência trava só a linha 1?",["*A$1","$A1","$A$1","A1"],"O cifrão antes do número trava a linha.")
  ]},
@@ -96,7 +96,7 @@ export default [
   mc("Com a base filtrada só em TI, qual fórmula soma apenas as linhas visíveis?",["*=SUBTOTAL(9;D2:D100)","=SOMA(D2:D100)","=CONT.VALORES(D2:D100)","=MÉDIA(D2:D100)"],"SUBTOTAL ignora as linhas ocultas pelo filtro."),
   nu("Filtrando a base por Status = Aberta, quanto somam os valores visíveis?" + notas(),8500,"3.500 + 5.000 = 8.500."),
   od("Ordene para ver as notas abertas do maior para o menor valor:",["Selecionar a tabela","Ligar o filtro (Dados › Filtro)","Filtrar Status = Aberta","Classificar Valor do maior para o menor"],"Filtrar e depois ordenar o que ficou."),
-  mc("Por que selecionar a tabela inteira antes de classificar?",["*Para as colunas não se desalinharem","Para ficar mais rápido","Porque o Excel exige cor","Não faz diferença"],"Classificar uma coluna sozinha embaralha os registros."),
+  mc("Por que selecionar a tabela inteira antes de classificar?",["*Para as colunas não se desalinharem das linhas","Para o processo ficar mais rápido no Excel","Porque o Excel exige que a tabela tenha cor","Não faz diferença: o Excel sempre escolhe sozinho"],"Classificar uma coluna sozinha embaralha os registros."),
   tf("Dá para classificar por duas colunas ao mesmo tempo, como centro de custo e depois valor.",true,"Adicione níveis em Dados › Classificar.")
  ]},
 {id:"xl6", title:"Tabela formatada e dados limpos", icon:"🧹",
@@ -105,12 +105,12 @@ export default [
   {h:"Os vilões da base", b:tbl(['Problema','Sinal','Solução'],[['Número guardado como texto','Alinhado à esquerda, triângulo verde','Converter em número'],['Espaços sobrando','"Beta " diferente de "Beta"','=ARRUMAR(B2)'],['Linhas duplicadas','Mesma nota duas vezes','Dados › Remover Duplicatas'],['Tudo numa coluna só','"1001;Alfa;TI"','Dados › Texto para Colunas']])}
  ],
  ex:[
-  mc("Um número alinhado à esquerda com um triângulo verde no canto provavelmente:",["*Está guardado como texto","É uma fórmula","Está negativo","Está em outra aba"],"Número como texto não entra em somas nem casa com o PROCV."),
+  mc("Um número alinhado à esquerda com um triângulo verde no canto provavelmente:",["*Está guardado como texto, não como número","É uma fórmula que ainda não foi calculada","Está negativo e precisa ser corrigido","Está vindo de outra aba da mesma planilha"],"Número como texto não entra em somas nem casa com o PROCV."),
   mc("Qual função remove os espaços sobrando no começo e no fim de um texto?",["*ARRUMAR","SEERRO","CONCAT","ARRED"],"=ARRUMAR(B2) limpa espaços extras."),
   tf("Numa tabela formatada, uma fórmula digitada na coluna se completa sozinha nas outras linhas.",true,"É uma das vantagens da tabela."),
   cl("Qual recurso resolve?",["Remover Duplicatas","Texto para Colunas","ARRUMAR"],"Nota 1003 lançada duas vezes:0|Código, fornecedor e valor numa coluna só:1|\"Alfa \" com espaço no fim:2","Cada problema, sua ferramenta."),
   tf("Remover duplicatas pode ser feito sem conferir quais linhas são repetidas.",false,"Confira antes: duas notas de mesmo valor podem ser legítimas."),
-  mc("Por que números guardados como texto são um problema?",["*SOMA e PROCV podem ignorá-los ou não encontrá-los","Porque ficam coloridos","Porque ocupam mais espaço","Não são problema"],"Texto não entra na soma e não é igual a número numa busca.")
+  mc("Por que números guardados como texto são um problema?",["*SOMA e PROCV podem ignorá-los ou não encontrá-los","Porque eles ficam coloridos e atrapalham a leitura","Porque ocupam mais espaço no arquivo da planilha","Não são problema: o Excel converte tudo sozinho"],"Texto não entra na soma e não é igual a número numa busca.")
  ]},
 {id:"xl7", title:"Validação e formatação condicional", icon:"🚦",
  learn:[
@@ -120,7 +120,7 @@ export default [
  ex:[
   mc('Para impedir que alguém digite "Pg" em vez de "Paga", use:',["*Validação de dados com lista","Formatação condicional","Filtro","Remover duplicatas"],"A validação controla o que pode ser digitado."),
   tf("A formatação condicional muda o valor da célula.",false,"Ela só muda a aparência."),
-  mc('A regra =E($F2&lt;HOJE();$E2&lt;&gt;"Paga") destaca:',["*Notas vencidas e ainda não pagas","Todas as notas pagas","Só as notas de hoje","Nada"],"As duas condições precisam ser verdadeiras."),
+  mc('A regra =E($F2&lt;HOJE();$E2&lt;&gt;"Paga") destaca:',["*Notas vencidas que ainda não foram pagas","Todas as notas que já foram pagas","Só as notas que vencem exatamente hoje","Nenhuma nota, porque a regra está incompleta"],"As duas condições precisam ser verdadeiras."),
   tf('"Paga" e "Paga " (com espaço no fim) viram categorias diferentes numa tabela dinâmica.',true,"O espaço torna os textos diferentes."),
   cl("Validação ou formatação condicional?",["Validação de dados","Formatação condicional"],"Limitar o status a uma lista:0|Pintar de vermelho as notas vencidas:1|Aceitar só datas no campo de vencimento:0|Destacar valores acima de R$ 10.000:1","Validação controla o que entra; formatação muda a aparência."),
   mc("Qual função retorna a data de hoje?",["*HOJE()","DATA()","DIA()","ANO()"],"HOJE() se atualiza sozinha a cada dia.")
@@ -138,8 +138,8 @@ export default [
   nu('=PROCV("F01";A2:D5;4;FALSO) retorna:' + forn(),30,"F01 está na linha 2; a 4ª coluna é o prazo: 30."),
   od("Ordene os argumentos do PROCV:",["Valor procurado","Matriz da tabela","Número da coluna a trazer","FALSO (correspondência exata)"],"O quê, onde, qual coluna e tipo de busca."),
   fl("Trazer o centro de custo do código em H2: =PROCV({H2};A2:D5;{3};{FALSO})",["2","VERDADEIRO","A2"],"H2 é o código, 3 é a coluna do centro de custo e FALSO pede a correspondência exata."),
-  mc("Na matriz A2:D5, o número 3 do PROCV indica:",["*A 3ª coluna da matriz (coluna C)","A linha 3","O terceiro fornecedor","Três resultados"],"A contagem começa na primeira coluna da matriz."),
-  tf("O PROCV procura o valor na primeira coluna da matriz.",true,"Por isso a tabela deve começar pela coluna do código.")
+  mc("Na matriz A2:D5, o número 3 do PROCV indica:",["*A 3ª coluna da matriz, ou seja, a coluna C","A linha 3 da matriz, de cima para baixo","O terceiro fornecedor da lista encontrada","A quantidade de resultados que serão devolvidos"],"A contagem começa na primeira coluna da matriz."),
+  tf("O PROCV procura o valor em qualquer coluna da matriz, à sua escolha.",false,"O PROCV procura sempre na primeira coluna da matriz. Por isso a tabela deve começar pela coluna do código.")
  ]},
 {id:"xl9", title:"Correspondência exata e erros", icon:"⚠️",
  learn:[
@@ -160,12 +160,12 @@ export default [
   {h:"Quando o PROCV não acha", b:ul(['A coluna procurada precisa ser a <b>primeira</b> da matriz: o PROCV não olha para a esquerda.','<b>Número x texto</b>: "1001" (texto) não é igual a 1001 (número).','<b>Espaços</b>: "F02 " não é "F02". Limpe com ARRUMAR.','<b>Duplicados</b>: se o código aparece duas vezes, o PROCV traz a primeira ocorrência.'])}
  ],
  ex:[
-  mc("B2 tem =PROCV(A2;F2:H50;2;FALSO) e foi copiada até B200. O problema é:",["*A matriz anda junto e perde linhas; o certo é $F$2:$H$50","Nenhum","O número da coluna muda sozinho","O FALSO vira VERDADEIRO"],"Sem cifrão, F2:H50 vira F3:H51, F4:H52…"),
+  mc("B2 tem =PROCV(A2;F2:H50;2;FALSO) e foi copiada até B200. O problema é:",["*A matriz se desloca ao copiar; o certo é $F$2:$H$50","Nenhum: a fórmula funciona igual em todas as linhas","O número da coluna muda sozinho ao copiar para baixo","O FALSO vira VERDADEIRO nas linhas de baixo"],"Sem cifrão, F2:H50 vira F3:H51, F4:H52…"),
   fl("Trave a matriz: =PROCV(A2;{$F$2:$H$50};2;FALSO)",["F2:H50","$F2:H$50"],"Com cifrão nas duas pontas, a matriz não anda ao copiar."),
   tf("O PROCV consegue trazer um valor de uma coluna à esquerda da coluna procurada.",false,"Ele só olha para a direita. Use PROCX ou ÍNDICE+CORRESP."),
   mc('Na base, o código está como "F02 " (com espaço). O PROCV por "F02" retorna:',["*#N/D","Beta","#REF!","F02"],"O espaço torna os textos diferentes."),
   mc("A nota 1001 está como texto numa tabela e como número na outra. O PROCV:",["*Não encontra (#N/D)","Encontra normalmente","Retorna zero","Soma os dois"],"Texto e número não são iguais para a busca."),
-  tf("Se o código aparece duas vezes, o PROCV traz a primeira ocorrência.",true,"Por isso vale remover duplicados do cadastro.")
+  tf("Se o código aparece duas vezes, o PROCV soma os dois resultados.",false,"O PROCV traz só a primeira ocorrência, sem somar. Por isso vale remover duplicados do cadastro.")
  ]},
 {id:"xl11", title:"PROCX e ÍNDICE + CORRESP", icon:"🧭",
  learn:[
@@ -193,7 +193,7 @@ export default [
   nu('Qual o resultado de =SOMASE(D2:D6;">1000")?' + notas(),11200,"Sem intervalo_soma, soma o próprio intervalo: 1.200 + 3.500 + 5.000 + 1.500."),
   od("Ordene os argumentos da SOMASE:",["Intervalo do critério","Critério","Intervalo a somar"],"Na SOMASE, o que se soma vem por último."),
   fl('Somar as notas da Beta: =SOMASE({B2:B6};"Beta";{D2:D6})',["C2:C6","E2:E6"],"O critério é o fornecedor (coluna B) e a soma é o valor (coluna D)."),
-  tf("Na SOMASE, o intervalo a somar é o último argumento.",true,"Na SOMASES é o primeiro. Atenção a essa diferença.")
+  tf("Na SOMASES, o intervalo a somar é o último argumento.",false,"Na SOMASES o intervalo a somar é o primeiro. Só na SOMASE ele vem por último. Atenção a essa diferença.")
  ]},
 {id:"xl13", title:"SOMASES: várias condições", icon:"➕",
  learn:[
@@ -219,7 +219,7 @@ export default [
   nu('Qual o resultado de =SOMASES(C2:C5;C2:C5;">500")?' + g(DATAS),5850,"900 + 4.000 + 950 = 5.850."),
   mc("Qual critério soma tudo o que NÃO está pago?",['*"<>Paga"','"=Paga"','"!Paga"','"-Paga"'],"No Excel, diferente é <>."),
   fl('Critério apontando para a célula G1: ">="{&}G1',["+","*"],"O & junta o operador com o valor da célula."),
-  tf("FIMMÊS(DATA(2026;2;1);0) devolve 28/02/2026.",true,"2026 não é ano bissexto.")
+  tf("FIMMÊS(DATA(2026;2;1);0) devolve 29/02/2026.",false,"2026 não é ano bissexto: fevereiro termina em 28/02/2026.")
  ]},
 {id:"xl15", title:"CONT.SES e MÉDIASES", icon:"🔢",
  learn:[
@@ -232,7 +232,7 @@ export default [
   nu('Qual o resultado de =MÉDIASES(D2:D6;C2:C6;"TI")?' + notas(),2500,"(3.500 + 1.500) ÷ 2 = 2.500."),
   nu("Que percentual das notas está pago?" + notas(),60,"3 notas pagas ÷ 5 notas = 60%.","%"),
   mt([["SOMASES","Soma com condições"],["CONT.SES","Conta com condições"],["MÉDIASES","Média com condições"],["CONT.VALORES","Conta células preenchidas"]],"A família SES."),
-  mc("Na MÉDIASES, o primeiro argumento é:",["*O intervalo com os valores para a média","O critério","O intervalo do critério","A célula do resultado"],"Igual à SOMASES: os valores vêm primeiro.")
+  mc("Na MÉDIASES, o primeiro argumento é:",["*O intervalo com os valores para a média","O critério que será usado para filtrar as linhas","O intervalo onde está o critério de filtro","A célula onde o resultado vai aparecer"],"Igual à SOMASES: os valores vêm primeiro.")
  ]},
 
 /* ================= Tabela dinâmica ================= */
@@ -244,9 +244,9 @@ export default [
  ex:[
   cl("Isso atrapalha a tabela dinâmica?",["Atrapalha","Tudo bem"],"Célula mesclada no centro de custo:0|Linha de subtotal no meio da base:0|Cabeçalho em todas as colunas:1|Datas em formato de data:1|Coluna sem cabeçalho:0","Base limpa: um registro por linha e cabeçalho em tudo."),
   tf("Linhas de subtotal dentro da base ajudam a tabela dinâmica.",false,"Ela somaria o subtotal junto com os registros, dobrando valores."),
-  mc("Qual formato é melhor para analisar gastos por mês?",["*Uma coluna Data, com cada lançamento numa linha","Uma coluna para cada mês","Uma aba para cada mês","Um arquivo para cada mês"],"A tabela dinâmica agrupa as datas por mês para você."),
+  mc("Qual formato é melhor para analisar gastos por mês?",["*Uma coluna Data, com cada lançamento numa linha","Uma coluna para cada mês do ano, lado a lado, com os totais","Uma aba separada para cada mês do ano","Um arquivo separado para cada mês do ano"],"A tabela dinâmica agrupa as datas por mês para você."),
   tf("Formatar a base como tabela ajuda a tabela dinâmica a incluir as linhas novas.",true,"A fonte de dados cresce junto."),
-  mc("Uma coluna sem cabeçalho na base faz com que:",["*O Excel não consiga criar a tabela dinâmica até ela ter um nome","Nada aconteça","Os valores dobrem","As cores mudem"],"Todo campo precisa de um nome."),
+  mc("Uma coluna sem cabeçalho na base faz com que:",["*O Excel não crie a tabela dinâmica até a coluna ter nome","Nada aconteça, porque o Excel inventa um nome para a coluna","Os valores da coluna sejam dobrados na tabela dinâmica","As cores da tabela mudem para o padrão do Excel"],"Todo campo precisa de um nome."),
   od("Ordene a preparação da base:",["Conferir os cabeçalhos","Remover linhas em branco e subtotais","Desfazer células mescladas","Formatar como tabela"],"Limpar primeiro, formatar no fim.")
  ]},
 {id:"xl17", title:"Montando a tabela dinâmica", icon:"🧩",
@@ -270,8 +270,8 @@ export default [
  ex:[
   tf("Ao alterar um valor na base, a tabela dinâmica se atualiza automaticamente.",false,"É preciso clicar em Atualizar."),
   nu("Com % do Total Geral, quanto representa Marketing (5.000 de 12.000)? Arredonde para inteiro.",42,"5.000 ÷ 12.000 ≈ 41,7%, ou 42%.","%",undefined,0.5),
-  mc("Para ver os lançamentos que formam um número da tabela dinâmica:",["*Dar duplo clique no número","Apagar a tabela","Desfazer (Ctrl+Z)","Filtrar a base"],"O Excel abre uma aba com as linhas de origem."),
-  mc("A base ganhou 200 linhas novas e não é uma tabela formatada. Além de atualizar, é preciso:",["*Alterar a fonte de dados para incluir as linhas novas","Nada","Recriar o arquivo","Mesclar as células"],"A fonte antiga não enxerga as linhas de baixo."),
+  mc("Para ver os lançamentos que formam um número da tabela dinâmica:",["*Dar duplo clique no número que interessa","Apagar a tabela dinâmica e criar outra","Desfazer a última ação com Ctrl+Z","Filtrar a base de dados original"],"O Excel abre uma aba com as linhas de origem."),
+  mc("A base ganhou 200 linhas novas e não é uma tabela formatada. Além de atualizar, é preciso:",["*Alterar a fonte de dados para incluir as linhas novas","Nada: atualizar já inclui as linhas novas automaticamente","Recriar o arquivo do zero em uma nova planilha","Mesclar as células novas com as células antigas"],"A fonte antiga não enxerga as linhas de baixo."),
   od("Ordene depois de corrigir um valor na base:",["Corrigir o valor na base","Clicar na tabela dinâmica","Clique direito › Atualizar","Conferir o total com a soma da base"],"Atualizar e conferir."),
   tf("Dá para mostrar os valores como percentual do total geral.",true,"Mostrar Valores Como › % do Total Geral.")
  ]},
@@ -282,9 +282,9 @@ export default [
  ],
  ex:[
   cl("Qual ferramenta?",["Tabela dinâmica","SOMASES"],"Descobrir rapidamente qual centro gastou mais:0|Relatório fixo de previsto x realizado:1|Resumo para uma reunião em 5 minutos:0|Célula que alimenta um indicador do painel:1","Explorar pede tabela dinâmica; layout fixo pede fórmulas."),
-  mc("A segmentação de dados serve para:",["*Filtrar a tabela dinâmica com botões","Somar valores","Mesclar células","Proteger a planilha"],"Filtro visual, com um clique."),
+  mc("A segmentação de dados serve para:",["*Filtrar a tabela dinâmica com botões","Somar os valores de várias tabelas dinâmicas","Mesclar células da tabela dinâmica em grupos","Proteger a planilha contra alterações de outras pessoas"],"Filtro visual, com um clique."),
   tf("O gráfico dinâmico muda junto com os filtros da tabela dinâmica.",true,"Eles ficam ligados."),
-  mc("Por que o previsto x realizado costuma ser feito com SOMASES?",["*Previsto e realizado estão em tabelas diferentes e o layout é fixo","Porque a tabela dinâmica não soma","Porque SOMASES é mais bonita","Não há motivo"],"A fórmula junta as duas fontes no layout que o gestor espera."),
+  mc("Por que o previsto x realizado costuma ser feito com SOMASES?",["*Previsto e realizado vêm de tabelas diferentes","Porque a tabela dinâmica não sabe somar valores","Porque a função SOMASES deixa o relatório mais bonito","Não há motivo: dá no mesmo usar qualquer ferramenta"],"A fórmula junta as duas fontes no layout que o gestor espera."),
   tf("Na entrevista, vale explicar quando usar tabela dinâmica e quando usar fórmulas.",true,"Mostra critério, não só técnica."),
   mt([["Segmentação de dados","Filtro com botões"],["Gráfico dinâmico","Gráfico ligado à tabela dinâmica"],["Atualizar","Relê a base"],["Mostrar Valores Como","% do total e outras visões"]],"Recursos da tabela dinâmica.")
  ]},
@@ -316,7 +316,7 @@ export default [
   nu("Qual a variação de Marketing (realizado − previsto de R$ 4.000)?",1000,"5.000 − 4.000 = 1.000.","R$"),
   nu("Marketing: previsto de R$ 4.000 e realizado de R$ 5.000. Qual a variação percentual?",25,"1.000 ÷ 4.000 = 25%.","%"),
   mc("Marketing gastou 25% acima do previsto. Para uma despesa, isso é:",["*Desfavorável","Favorável","Neutro","Impossível"],"Gastou mais do que o planejado."),
-  mc("O total previsto (R$ 12.000) é igual ao realizado (R$ 12.000). Conclusão:",["*Não basta: Marketing estourou e outros centros ficaram abaixo","Está tudo sob controle","O orçamento está errado","Não precisa de análise"],"Variações opostas se compensam no total. Analise por centro."),
+  mc("O total previsto (R$ 12.000) é igual ao realizado (R$ 12.000). Conclusão:",["*Não basta: Marketing estourou e outros centros sobraram","Está tudo sob controle, porque os totais são iguais","O orçamento está errado, porque não deveria fechar igual","Não precisa de análise, pois nenhum centro passou do total"],"Variações opostas se compensam no total. Analise por centro."),
   tf("A variação percentual se calcula dividindo a variação pelo previsto.",true,"% = (Realizado − Previsto) ÷ Previsto.")
  ]},
 {id:"xl22", title:"Teste 3: resumo e apresentação", icon:"🧪",
@@ -329,7 +329,7 @@ export default [
   cl("Qual gráfico?",["Colunas ou barras","Linhas"],"Comparar os gastos de cada centro de custo:0|Mostrar a despesa de energia mês a mês:1|Comparar fornecedores pelo valor comprado:0|Acompanhar o saldo de caixa ao longo do ano:1","Comparar categorias pede colunas; evolução no tempo pede linhas."),
   tf("Conferir se o total da tabela dinâmica bate com a soma da base é uma boa prática.",true,"É a validação mais simples e mais importante."),
   nu("Na tabela dinâmica do resumo, qual o total geral em aberto?" + PIVOT,8500,"Coluna Aberta, linha Total geral."),
-  mc("Como mostrar quantas notas há por status, em vez da soma dos valores?",["*Trocar Soma por Contagem nas configurações do campo de valor","Apagar a coluna Valor","Usar SOMASES","Mesclar os status"],"Resumir valores por: Contagem."),
+  mc("Como mostrar quantas notas há por status, em vez da soma dos valores?",["*Trocar Soma por Contagem nas configurações do campo","Apagar a coluna Valor e criar uma tabela nova sem ela","Usar SOMASES em vez da tabela dinâmica para contar","Mesclar as células de status para agrupar as notas"],"Resumir valores por: Contagem."),
   ep("Explique, como numa entrevista, o que o PROCV faz e um cuidado importante ao usá-lo.","O PROCV procura um valor, como um código de fornecedor, na primeira coluna de uma tabela e traz a informação de outra coluna da mesma linha. O cuidado principal é usar FALSO para correspondência exata e travar a matriz com cifrão ao copiar.",[["Procura um valor","procur","busc","codigo","valor"],["Na primeira coluna","primeira coluna","1a coluna","coluna"],["Traz outra informação da linha","traz","retorn","mesma linha","outra coluna","informac"],["Correspondência exata ou matriz travada","falso","exat","cifrao","trav","absolut","$"]],"Resposta curta, com exemplo e um cuidado técnico, mostra domínio."),
   od("Ordene a explicação da sua solução:",["O que foi pedido","Quais funções você usou","Como você conferiu o resultado"],"Pedido, solução e validação.")
  ]}

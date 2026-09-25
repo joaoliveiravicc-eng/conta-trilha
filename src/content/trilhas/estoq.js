@@ -71,7 +71,7 @@ export default [
  ],
  ex:[
   tf("Se a contagem física mostrar menos mercadoria do que o saldo contábil, há uma perda a registrar.",true,"A diferença entre o físico e o contábil vira ajuste."),
-  mc("Pelo princípio da prudência, quando o estoque deve ser ajustado para baixo?",["*Quando o valor de mercado fica menor que o custo","Nunca","Todo fim de ano, sem motivo","Só quando o dono pedir"],"O estoque não pode ficar registrado por um valor maior do que vale."),
+  mc("Pelo princípio da prudência, quando o estoque deve ser ajustado para baixo?",["*Quando o valor de mercado fica menor que o custo","Nunca, porque o estoque fica sempre pelo custo original","Todo fim de ano, mesmo sem nenhum motivo real","Só quando o dono da empresa pedir o ajuste"],"O estoque não pode ficar registrado por um valor maior do que vale."),
   wr("Como se chama a contagem física do estoque feita para conferir com os registros contábeis?",["inventario","inventário","inventario fisico","inventário físico"],"Inventário físico."),
   en("Registro de uma perda de estoque por quebra, identificada na contagem física, R$ 350.","Despesa com perdas de estoque","Estoques",["Caixa","Fornecedores"],"A perda reduz o estoque e vira despesa do período."),
   nu("O saldo contábil do estoque é R$ 12.000. A contagem física aponta R$ 11.400. Qual o valor da perda?",600,"12.000 − 11.400 = 600.","R$"),

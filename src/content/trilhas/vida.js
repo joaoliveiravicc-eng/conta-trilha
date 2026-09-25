@@ -11,7 +11,7 @@ export default [
   cl("Ativo ou passivo pessoal?",["Ativo","Passivo"],"Saldo na poupança:0|Fatura do cartão:1|Carro quitado:0|Financiamento do apartamento:1|Ações na bolsa:0","Ativo é o que você tem; passivo é o que você deve."),
   nu("Ativo pessoal de R$ 55.000 e dívidas de R$ 21.000. Qual o seu PL?",34000,"55.000 − 21.000 = 34.000.","R$"),
   tf("Num carro financiado, o carro é ativo e o saldo do financiamento é passivo.",true,"São dois itens diferentes do seu balanço."),
-  mc("Seu PL pessoal cresce quando você:",["*Paga dívidas com renda nova ou aumenta investimentos","Pega um empréstimo","Parcela uma compra","Troca dinheiro de conta"],"Pegar empréstimo aumenta ativo e passivo juntos; o PL não muda."),
+  mc("Seu PL pessoal cresce quando você:",["*Usa renda nova para quitar dívidas ou investir","Pega um empréstimo para comprar algo que quer","Parcela uma compra no cartão de crédito","Troca dinheiro de uma conta para outra"],"Pegar empréstimo aumenta ativo e passivo juntos; o PL não muda."),
   ep("Com suas palavras: o que é o patrimônio líquido de uma pessoa?","É o valor de tudo o que a pessoa tem (bens, dinheiro, investimentos) menos tudo o que ela deve (dívidas). É o quanto sobraria se pagasse todas as dívidas.",[["O que você tem","tem","bens","dinheiro","investim","ativo","possu"],["Menos o que você deve","deve","divida","passivo","obrigac","emprestim"],["É a diferença","menos","subtra","diferenc","sobr","descont","tirando"]],"PL pessoal = Ativo − Passivo.")
  ]},
 {id:"vida2", title:"Orçamento pessoal", icon:"📋",
@@ -48,8 +48,8 @@ export default [
   {h:"Antes de investir", b:ul(['Primeiro monte a <b>reserva de emergência</b>.','Defina o <b>prazo</b>: dinheiro que você vai precisar em breve pede mais liquidez e menos risco.','Entenda o produto antes de aplicar: taxas, risco e como resgatar.']) + box('atencao','Promessas de retorno muito acima do mercado, com “garantia”, são um sinal clássico de golpe.')}
  ],
  ex:[
-  mc("Na renda fixa, o investidor basicamente:",["*Empresta dinheiro e sabe, desde o início, a regra do rendimento","Vira sócio de uma empresa","Nunca sabe como o rendimento será calculado","Só pode aplicar em imóveis"],"Renda fixa é, na essência, um empréstimo com regra conhecida."),
-  mc("Na renda variável, o retorno:",["*Depende do desempenho do negócio e do mercado, podendo ser positivo ou negativo","É sempre fixo e garantido","Nunca pode ser negativo","É definido por lei"],"Por isso se chama variável: o resultado não é conhecido de antemão."),
+  mc("Na renda fixa, o investidor basicamente:",["*Empresta dinheiro e conhece a regra do rendimento","Vira sócio de uma empresa e divide os lucros","Nunca sabe como o rendimento será calculado","Só pode aplicar em imóveis e terrenos"],"Renda fixa é, na essência, um empréstimo com regra conhecida."),
+  mc("Na renda variável, o retorno:",["*Depende do negócio e do mercado, e pode ser negativo","É sempre fixo e garantido pela empresa emissora","Nunca pode ser negativo, se você esperar o bastante","É definido por lei e igual para todo investidor"],"Por isso se chama variável: o resultado não é conhecido de antemão."),
   tf("Diversificar investimentos ajuda a reduzir o risco da carteira como um todo.",true,"Se um ativo vai mal, outros podem compensar."),
   wr("Complete o ditado popular sobre diversificação: não coloque todos os ovos na mesma ___.",["cesta"],"Diversificação é justamente não concentrar tudo em um único lugar."),
   tf("Uma promessa de retorno muito acima do mercado, com garantia, é um sinal de alerta para possível golpe.",true,"Retorno alto sempre vem acompanhado de mais risco; “garantia” de ganho alto não existe de verdade."),

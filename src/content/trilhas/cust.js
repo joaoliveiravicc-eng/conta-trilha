@@ -15,7 +15,7 @@ export default {
     {t:"class", q:"Classifique cada gasto", cats:["Custo","Despesa","Investimento","Perda"], items:[["Matéria-prima consumida",0],["Comissão de vendedores",1],["Compra de uma máquina",2],["Estoque destruído em enchente",3],["Salário do operário da fábrica",0],["Aluguel do escritório administrativo",1]], e:"Custo está ligado à produção; despesa, a vender e administrar; investimento fica no Ativo; perda é anormal."},
     {t:"tf", q:"O salário do pessoal administrativo é custo de produção.", a:false, e:"Pessoal administrativo gera despesa, não custo de produção."},
     {t:"mc", q:"O aluguel de uma fábrica que produz vários produtos é um custo:", o:["Indireto","Direto","Sempre variável","Que nunca vai para a DRE"], a:0, e:"Como atende vários produtos, precisa de rateio: é indireto."},
-    {t:"mc", q:"Quando o custo de produção aparece na DRE?", o:["Quando o produto é vendido, como CPV","Na compra da matéria-prima","Nunca","No pagamento ao fornecedor"], a:0, e:"Até a venda, o custo fica no estoque."},
+    {t:"mc", q:"Quando o custo de produção aparece na DRE?", o:["Quando o produto é vendido, como CPV","Na compra da matéria-prima, como despesa","Nunca aparece na DRE da empresa","No pagamento ao fornecedor da matéria-prima"], a:0, e:"Até a venda, o custo fica no estoque."},
     {t:"fill", q:"Custos ___ são identificados diretamente no produto; custos ___ exigem rateio.", o:["diretos","indiretos","fixos","perdidos"], a:["diretos","indiretos"], e:"Direto: mede-se no produto. Indireto: precisa de critério de rateio."}
    ]},
   {id:"cust2", title:"Custos fixos e variáveis", icon:"📉",
@@ -30,7 +30,7 @@ export default {
     {t:"num", q:"Custo fixo de R$ 20.000 e produção de 4.000 unidades. Qual o custo fixo por unidade?", a:5, u:"R$", e:"20.000 ÷ 4.000 = 5."},
     {t:"tf", q:"O custo variável unitário tende a ser constante, enquanto o total varia com o volume.", a:true, e:"Cada unidade usa a mesma matéria-prima; o total cresce com a quantidade."},
     {t:"num", q:"Custo variável de R$ 8 por unidade e produção de 1.500 unidades. Qual o custo variável total?", a:12000, u:"R$", e:"8 × 1.500 = 12.000."},
-    {t:"mc", q:"Se a produção dobrar, o custo fixo total:", o:["Permanece o mesmo","Dobra","Cai pela metade","Zera"], a:0, e:"O total fixo não muda; o que cai é o custo fixo por unidade."}
+    {t:"mc", q:"Se a produção dobrar, o custo fixo total:", o:["Permanece o mesmo, por ser fixo","Dobra junto com a produção","Cai pela metade do valor atual","Zera, porque a produção dobrou"], a:0, e:"O total fixo não muda; o que cai é o custo fixo por unidade."}
    ]},
   {id:"cust3", title:"Margem de contribuição e ponto de equilíbrio", icon:"🎯",
    learn:[
@@ -60,8 +60,8 @@ export default {
     {t:"tf", q:"Uma despesa realizada acima do orçado é uma variação desfavorável.", a:true, e:"Gastar mais que o previsto piora o resultado."},
     {t:"num", q:"Vendas orçadas de R$ 100.000 e realizadas de R$ 92.000. De quanto foi a variação?", a:8000, u:"R$", e:"100.000 − 92.000 = 8.000, uma variação desfavorável."},
     {t:"num", q:"CMV anual de R$ 240.000 e estoque médio de R$ 40.000. Quantas vezes o estoque girou?", a:6, s:"vezes", e:"240.000 ÷ 40.000 = 6."},
-    {t:"mc", q:"EBITDA é o lucro antes de:", o:["Juros, impostos, depreciação e amortização","Apenas impostos","Custos e despesas","Dividendos"], a:0, e:"Earnings Before Interest, Taxes, Depreciation and Amortization."},
-    {t:"mc", q:"Um orçamento flexível:", o:["Ajusta os valores ao volume real de atividade","Nunca muda","Substitui a DRE","É feito só uma vez na vida da empresa"], a:0, e:"Ele recalcula o esperado para o volume que de fato ocorreu."}
+    {t:"mc", q:"EBITDA é o lucro antes de:", o:["Juros, impostos, depreciação e amortização","Apenas os impostos sobre o lucro do período","Todos os custos e as despesas da operação","Dividendos e juros sobre o capital próprio"], a:0, e:"Earnings Before Interest, Taxes, Depreciation and Amortization."},
+    {t:"mc", q:"Um orçamento flexível:", o:["Ajusta os valores ao volume real de atividade","Nunca muda depois de aprovado pela diretoria","Substitui a DRE no relatório de fim de ano","É feito só uma vez na vida da empresa"], a:0, e:"Ele recalcula o esperado para o volume que de fato ocorreu."}
    ]},
   {id:"cust5", title:"Custeio por absorção x variável", icon:"⚗️",
    learn:[
@@ -72,7 +72,7 @@ export default {
       tbl(['Situação','Absorção x Variável'],[['Produção = Vendas','Lucros iguais'],['Produção > Vendas','Absorção mostra lucro maior'],['Produção < Vendas','Absorção mostra lucro menor']])}
    ],
    ex:[
-    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira, direto na DRE","São ignorados","Viram receita"], a:0, e:"É a marca registrada do custeio por absorção: nada de fixo fica de fora do produto."},
+    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira, direto na DRE","São ignorados no cálculo do custo dos produtos","Viram receita no mês em que são pagos"], a:0, e:"É a marca registrada do custeio por absorção: nada de fixo fica de fora do produto."},
     {t:"mc", q:"Qual método é exigido pela Contabilidade societária e fiscal no Brasil?", o:["Custeio por absorção","Custeio variável","Os dois, à escolha da empresa","Nenhum dos dois"], a:0, e:"O absorção é o método oficial para fins societários e fiscais."},
     {t:"tf", q:"No custeio variável, os custos fixos de fábrica também entram no custo do produto.", a:false, e:"No variável, só os custos variáveis entram no produto; os fixos vão direto para a DRE do período."},
     {t:"mc", q:"Se a empresa produziu mais do que vendeu no período, o lucro pelo custeio por absorção tende a ser:", o:["Maior do que pelo custeio variável","Menor do que pelo custeio variável","Sempre igual","Impossível calcular"], a:0, e:"Parte do custo fixo fica no estoque que não foi vendido, reduzindo o custo do período."},
@@ -102,7 +102,7 @@ export default {
     {t:"class", q:"Classifique cada gasto", cats:["Custo","Despesa","Investimento"], items:[["Matéria-prima consumida",0],["Comissão de vendas",1],["Compra de uma máquina nova",2],["Salário do supervisor de fábrica",0]], e:"Custo é da produção; despesa é de vender/administrar; investimento fica no Ativo."},
     {t:"num", q:"Preço de venda de R$ 60 e custo variável de R$ 35 por unidade. Qual a margem de contribuição unitária?", a:25, u:"R$", e:"60 − 35 = 25."},
     {t:"num", q:"Custos fixos de R$ 20.000 e margem de contribuição unitária de R$ 25. Qual o ponto de equilíbrio, em unidades?", a:800, e:"20.000 ÷ 25 = 800."},
-    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira","São ignorados","Viram receita"], a:0, e:"É a diferença central em relação ao custeio variável."},
+    {t:"mc", q:"No custeio por absorção, os custos fixos de fábrica:", o:["Vão para o produto e ficam no estoque até a venda","Viram despesa do período inteira, direto na DRE","São ignorados no cálculo do custo dos produtos","Viram receita no mês em que são pagos"], a:0, e:"É a diferença central em relação ao custeio variável."},
     {t:"tf", q:"Se a produção dobra, o custo fixo total também dobra.", a:false, e:"O custo fixo total não muda com o volume; o que cai é o custo fixo por unidade."},
     {t:"num", q:"Custo de R$ 50 e soma dos percentuais sobre o preço de 50%. Qual o preço de venda pelo mark-up divisor?", a:100, u:"R$", e:"50 ÷ (1 − 0,50) = 50 ÷ 0,50 = 100."}
    ]}

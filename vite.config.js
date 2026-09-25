@@ -3,6 +3,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   server: { port: 5173 },
+  build: {
+    // O currículo inteiro carrega junto de propósito: conquistas, revisão e liberação de trilhas precisam do catálogo
+    // completo, e o PWA guarda tudo para estudar offline. Em arquivo próprio, ele só é baixado de novo quando o conteúdo muda.
+    chunkSizeWarningLimit: 900,
+    rollupOptions: { output: { manualChunks(id){ if (id.includes('/src/content/') && !id.includes('/content/glossary.js')) return 'curriculo'; } } },
+  },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',

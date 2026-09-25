@@ -110,3 +110,32 @@ test('glossário: termos únicos e definições não vazias', () => {
   assert.equal(new Set(names).size, names.length);
   GLOSS.forEach(g => assert.ok(g[1] && g[1].length > 10, g[0]));
 });
+
+test('múltipla escolha: a alternativa certa não se entrega pelo tamanho', () => {
+  // Antes da auditoria, a certa era a mais longa em 66% das perguntas (e mais de 2 vezes maior em 102).
+  const ratio = [], extreme = []; let mc = 0, longest = 0; const perCourse = {};
+  for (const c of COURSES) for (const l of c.lessons) l.ex.forEach((x, i) => {
+    if (x.t !== 'mc') return;
+    mc++;
+    assert.ok(x.o.every(o => !String(o).startsWith('*')), l.id + '#' + i + ' com "*" sobrando');
+    const lens = x.o.map(o => strip(o).length), right = lens[x.a], others = lens.filter((_, k) => k !== x.a);
+    const max = Math.max(...others), mean = others.reduce((a, b) => a + b, 0) / others.length;
+    if (right > max) longest++;
+    if (right >= 40 && right >= 1.6 * max) extreme.push(l.id + '#' + i + ' (' + right + ' x ' + max + ')');
+    (perCourse[c.id] = perCourse[c.id] || []).push(right / mean); ratio.push(right / mean);
+  });
+  const median = a => a.slice().sort((p, q) => p - q)[Math.floor(a.length / 2)];
+  assert.deepEqual(extreme, [], 'alternativa certa muito maior que as outras');
+  assert.ok(longest / mc <= 0.35, 'a certa é a mais longa em ' + Math.round(longest / mc * 100) + '% das perguntas');
+  assert.ok(median(ratio) <= 1.2, 'mediana geral ' + median(ratio).toFixed(2));
+  for (const [id, r] of Object.entries(perCourse)) assert.ok(median(r) <= 1.3, id + ': mediana ' + median(r).toFixed(2));
+});
+
+test('verdadeiro ou falso: as respostas verdadeiras não dominam (58% antes da auditoria)', () => {
+  let t = 0, f = 0; const perCourse = {};
+  for (const c of COURSES) for (const l of c.lessons) for (const x of l.ex) if (x.t === 'tf'){
+    x.a ? t++ : f++; const p = perCourse[c.id] = perCourse[c.id] || { t:0, f:0 }; x.a ? p.t++ : p.f++;
+  }
+  assert.ok(t / (t + f) <= 0.58 && t / (t + f) >= 0.42, 'verdadeiras: ' + Math.round(t / (t + f) * 100) + '%');
+  for (const [id, p] of Object.entries(perCourse)) assert.ok(p.t / (p.t + p.f) <= 0.78, id + ' com ' + p.t + ' verdadeiras e ' + p.f + ' falsas');
+});

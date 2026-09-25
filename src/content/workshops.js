@@ -49,7 +49,7 @@ export const WORKSHOPS = [
     {h:'Leia patrimônio com contexto', b:'<p>Um PL positivo informa que ativos superam passivos pelos valores contábeis. Não garante liquidez: uma empresa pode ter imóveis e pouco dinheiro disponível para dívidas que vencem hoje.</p>'+box('dica','Pergunte: quanto tenho? Quanto devo? Quando vou receber e pagar?')}
    ], ex:[
     nu('Uma consultoria prestou R$ 6.000 de serviços a prazo e consumiu R$ 2.000 em despesas. Sem outros fatos, qual é o lucro?',4000,'6.000 − 2.000 = 4.000, independentemente da data de recebimento.','R$'),
-    mc('Um cliente paga hoje por um serviço já reconhecido no mês anterior. Qual é o efeito?',['Receita nova','*Aumenta Banco e diminui Clientes','Aumenta despesa'],'O direito a receber se transforma em dinheiro.'),
+    mc('Um cliente paga hoje por um serviço já reconhecido no mês anterior. Qual é o efeito?',['Gera uma receita nova no mês do recebimento','*Aumenta Banco e diminui Clientes, sem gerar receita','Aumenta a despesa do mês do recebimento'],'O direito a receber se transforma em dinheiro.'),
     tf('Ter PL positivo garante pagar todas as dívidas que vencem hoje.',false,'Os ativos podem estar em estoques, imóveis ou direitos ainda não recebidos.'),
     nu('Ativos de R$ 18.000 e obrigações de R$ 7.000. Qual é o PL?',11000,'PL = 18.000 − 7.000 = 11.000.','R$'),
     mc('Qual entrada aumenta uma obrigação, sem criar receita?',['Venda de serviço à vista','*Empréstimo recebido','Aporte de capital'],'O empréstimo cria dívida; o aporte aumenta PL.'),
@@ -69,7 +69,7 @@ export const WORKSHOPS = [
     tf('Uma compra omitida dos dois lados pode deixar o balancete equilibrado.',true,'A omissão não cria diferença entre débitos e créditos, mas deixa patrimônio incompleto.'),
     nu('Débitos somam R$ 5.400 e créditos somam R$ 5.100. Qual a diferença a investigar?',300,'5.400 − 5.100 = 300. A diferença orienta a busca, mas não identifica a causa sozinha.','R$'),
     mc('Uma despesa de fevereiro foi registrada em março, pelo valor correto. Qual aspecto falhou?',['Valor','*Período','Equilíbrio aritmético'],'A competência foi atribuída ao período errado.'),
-    mc('Um registro equilibrado tem a conta errada. O melhor próximo passo é:',['Ignorar porque os totais batem','*Conferir a evidência e fazer a correção documentada','Apagar toda a contabilidade'],'A correção precisa refletir o fato e preservar a rastreabilidade.')
+    mc('Um registro equilibrado tem a conta errada. O melhor próximo passo é:',['Ignorar, porque os totais de débito e crédito batem','*Conferir a evidência e corrigir com documentação','Apagar toda a contabilidade e refazer o mês inteiro'],'A correção precisa refletir o fato e preservar a rastreabilidade.')
    ]},
   {courseId:'lanc', id:'oficina-lanc', title:'Fechamento e conciliação do banco', icon:'🏦',
    goal:'Separar diferenças de prazo de movimentos que ainda precisam ser registrados.',
@@ -130,10 +130,10 @@ export const WORKSHOPS = [
    ], ex:[
     nu('Ativo circulante de R$ 24.000 e passivo circulante de R$ 16.000. Qual a liquidez corrente?',1.5,'24.000 ÷ 16.000 = 1,5.','vezes'),
     nu('Lucro líquido de R$ 3.600 e receita líquida de R$ 60.000. Qual a margem líquida?',6,'3.600 ÷ 60.000 × 100 = 6%.','%'),
-    mc('Qual informação ajuda a avaliar um pagamento que vence amanhã?',['Só o lucro anual','*Dinheiro disponível e prazos de recebimento','Só o número de funcionários'],'A questão é a disponibilidade no prazo da obrigação.'),
+    mc('Qual informação ajuda a avaliar um pagamento que vence amanhã?',['Só o lucro acumulado durante o ano inteiro','*Dinheiro disponível e prazos de recebimento','Só o número de funcionários da empresa hoje'],'A questão é a disponibilidade no prazo da obrigação.'),
     tf('Uma empresa com lucro pode enfrentar falta de caixa.',true,'Vendas a prazo e estoques podem prender recursos mesmo com resultado positivo.'),
     nu('Receita de R$ 100.000 e margem líquida de 7%. Qual o lucro líquido?',7000,'100.000 × 0,07 = 7.000.','R$'),
-    mc('Antes de comparar duas margens, confira:',['A cor do relatório','*Se usam a mesma definição e períodos comparáveis','A ordem alfabética das empresas'],'Bases distintas podem produzir uma comparação enganosa.')
+    mc('Antes de comparar duas margens, confira:',['A cor e o layout usados nos dois relatórios','*Se usam a mesma definição e períodos comparáveis','A ordem alfabética dos nomes das duas empresas'],'Bases distintas podem produzir uma comparação enganosa.')
    ]},
   {courseId:'cust', id:'oficina-cust', title:'Pedido extra: vale a pena?', icon:'🧠',
    goal:'Avaliar uma decisão incremental com capacidade, custos e restrições explícitos.',
@@ -180,7 +180,7 @@ export const WORKSHOPS = [
     mc('Para investigar itens omitidos do registro, uma direção útil é:',['Do registro para o item','*Do item físico para o registro','Somente conferir a soma'],'Partir do físico ajuda a avaliar completude.'),
     tf('Um relatório com somas corretas comprova que todos os bens listados existem.',false,'Correção aritmética não comprova existência.'),
     mc('Contagem física correta prova, sozinha, o valor de custo dos produtos?',['Sim','*Não'],'A avaliação requer outros procedimentos e evidências de custo.'),
-    mc('Uma divergência foi encontrada. A resposta adequada é:',['Concluir fraude imediatamente','*Investigar a causa e avaliar o efeito','Excluir a amostra'],'Exceções exigem investigação; não determinam a causa por si só.'),
+    mc('Uma divergência foi encontrada. A resposta adequada é:',['Concluir que houve fraude imediatamente','*Investigar a causa e avaliar o efeito','Excluir a divergência da amostra e seguir'],'Exceções exigem investigação; não determinam a causa por si só.'),
     od('Organize o raciocínio de auditoria:',['Identificar o risco','Planejar o procedimento','Obter e avaliar evidências','Investigar exceções e concluir'],'A conclusão precisa responder ao risco e ser sustentada pela evidência.')
    ]},
   {courseId:'vida', id:'oficina-vida', title:'Um orçamento que enxerga o ano', icon:'🗓️',
@@ -197,7 +197,7 @@ export const WORKSHOPS = [
     nu('Uma conta de R$ 1.800 vence em 6 meses. Nada foi guardado. Sem rendimentos, quanto guardar por mês?',300,'1.800 ÷ 6 = 300. O prazo disponível muda a conta.','R$'),
     tf('Uma despesa anual previsível deve ser ignorada até o mês do pagamento.',false,'Planejá-la ao longo dos meses ajuda a evitar falta de caixa na data.'),
     nu('Uma folga de R$ 600 passa a ter uma nova parcela mensal de R$ 180. Quanto resta?',420,'600 − 180 = 420.','R$'),
-    mc('Para avaliar uma compra parcelada, olhe:',['Só o valor da primeira parcela','*Custo total, prazo e compromissos futuros','Só o limite disponível'],'A parcela ocupa renda futura e o custo total permite comparar opções.')
+    mc('Para avaliar uma compra parcelada, olhe:',['Somente o valor da primeira parcela e o prazo','*Custo total, prazo e compromissos futuros','Só o limite disponível no cartão de crédito'],'A parcela ocupa renda futura e o custo total permite comparar opções.')
    ]},
   {courseId:'imob', id:'oficina-imob-leasing', title:'Leasing no ERP: do contrato aos lançamentos', icon:'🧾',
    goal:'Identificar um arrendamento e acompanhar ativo de direito de uso, passivo, juros, pagamento e depreciação.',
@@ -208,14 +208,14 @@ export const WORKSHOPS = [
     {h:'Reconhecimento inicial e trilha de auditoria', b:'<p>No início do arrendamento, sob as hipóteses simplificadas do caso:</p>'+lanc([['D','Ativo de direito de uso — veículo','21.243,39'],['C','Passivo de arrendamento','21.243,39']])+'<p>O custo do ativo pode incluir outros componentes, como pagamentos feitos até o início, custos diretos iniciais e estimativas de desmontagem/restauração, além de refletir incentivos. Por isso, não copie esta conta sem revisar o contrato e a política contábil.</p>'+box('atencao','O CPC 06 (R2) permite opções de reconhecimento para arrendamentos de curto prazo (até 12 meses no início, sem opção de compra) e para ativos de baixo valor, se os requisitos e a opção aplicável forem atendidos. Não há um limite monetário universal para baixo valor nesta oficina.')},
     {h:'Feche o primeiro mês sem misturar despesas', b:'<p>Com taxa de 1% sobre o saldo inicial, os juros do primeiro mês são R$ 212,43. Dos R$ 1.000 pagos, R$ 787,57 reduzem o passivo. O saldo após pagamento fica em R$ 20.455,82.</p>'+lanc([['D','Despesa financeira — juros','212,43'],['D','Passivo de arrendamento','787,57'],['C','Banco','1.000,00']])+ '<p>Se não houver transferência da propriedade nem opção de compra razoavelmente certa, o ativo é depreciado pelo prazo do arrendamento ou pela vida útil, o que for menor. Neste exemplo simplificado, a depreciação linear em 24 meses é R$ 885,14 por mês.</p>'+lanc([['D','Despesa de depreciação','885,14'],['C','Depreciação acumulada — direito de uso','885,14']])+'<p>Em cada fechamento, concilie saldo do contrato, extrato bancário, juros e depreciação; registre alterações contratuais com data, documento e aprovação.</p><p class="small">Referências: <a href="https://www.cpc.org.br/CPC/Documentos-Emitidos/Pronunciamentos/Pronunciamento?Id=37" target="_blank" rel="noopener noreferrer">CPC 06 (R2) — Arrendamentos</a> e <a href="https://www.ifrs.org/issued-standards/list-of-standards/ifrs-16-leases/" target="_blank" rel="noopener noreferrer">IFRS 16</a>. Os valores desta oficina são didáticos.</p>'}
    ], ex:[
-    mc('O que deve ser verificado antes de cadastrar um contrato como arrendamento?',['Somente se foi assinado digitalmente','*Se existe ativo identificado e a empresa controla o uso no período','Se a parcela cabe no orçamento mensal'],'A análise considera ativo identificado, controle do uso e contraprestação no período.'),
+    mc('O que deve ser verificado antes de cadastrar um contrato como arrendamento?',['Somente se o contrato foi assinado de forma digital pelas duas partes','*Se há um ativo identificado e a empresa controla o seu uso','Se a parcela mensal cabe no orçamento da empresa'],'A análise considera ativo identificado, controle do uso e contraprestação no período.'),
     nu('Qual é o valor presente de 24 parcelas de R$ 1.000 no fim do mês, a 1% ao mês?',21243.39,'1.000 × [1 − (1,01)^−24] ÷ 0,01 ≈ 21.243,39.','R$'),
-    mc('No reconhecimento inicial de um arrendamento, no modelo geral do arrendatário, o lançamento é:',['D Banco / C Receita','*D Ativo de direito de uso / C Passivo de arrendamento','D Despesa de juros / C Banco'],'O ativo e o passivo são reconhecidos no início, conforme o modelo geral e as hipóteses do caso.'),
+    mc('No reconhecimento inicial de um arrendamento, no modelo geral do arrendatário, o lançamento é:',['D Despesa de aluguel / C Passivo de arrendamento','*D Ativo de direito de uso / C Passivo de arrendamento','D Despesa de juros / C Banco, no primeiro mês do contrato'],'O ativo e o passivo são reconhecidos no início, conforme o modelo geral e as hipóteses do caso.'),
     nu('Sobre passivo de R$ 21.243,39, com juros mensais de 1%, quanto são os juros aproximados do primeiro mês?',212.43,'21.243,39 × 0,01 ≈ 212,43.','R$'),
     nu('Na parcela de R$ 1.000, se R$ 212,43 são juros, quanto reduz o passivo?',787.57,'1.000 − 212,43 = 787,57.','R$'),
     nu('Ativo de direito de uso de R$ 21.243,39, depreciado linearmente por 24 meses no exemplo. Qual a depreciação mensal?',885.14,'21.243,39 ÷ 24 ≈ 885,14.','R$'),
     tf('Toda parcela de arrendamento deve ser registrada integralmente como despesa de aluguel no mês do pagamento, no modelo geral do arrendatário.',false,'O modelo geral reconhece ativo de direito de uso e passivo; depois há juros, pagamento e depreciação, com exceções previstas.'),
-    mc('Que evidência melhora a rastreabilidade do contrato no ERP?',['Somente o valor da parcela','*Contrato, parâmetros, memória de cálculo, responsável e alterações aprovadas','Uma anotação sem data'],'Os dados e documentos permitem revisar a classificação e refazer os saldos.')
+    mc('Que evidência melhora a rastreabilidade do contrato no ERP?',['Somente o valor da parcela mensal, sem outros documentos','*Contrato, parâmetros, memória de cálculo e alterações aprovadas','Uma anotação solta, sem data e sem responsável identificado'],'Os dados e documentos permitem revisar a classificação e refazer os saldos.')
    ]}
 ].map(l => ({...l, optional:true, workshop:true}));
 

@@ -64,7 +64,7 @@ export default {
     {t:"num", q:"Lucro líquido de R$ 30.000 e receita líquida de R$ 200.000. Qual a margem líquida?", a:15, s:"%", e:"30.000 ÷ 200.000 = 0,15 = 15%."},
     {t:"num", q:"Lucro líquido de R$ 30.000 e PL de R$ 150.000. Qual o ROE?", a:20, s:"%", e:"30.000 ÷ 150.000 = 0,20 = 20%."},
     {t:"mc", q:"Qual índice de liquidez desconsidera os estoques?", o:["Liquidez seca","Liquidez corrente","Liquidez geral","Endividamento"], a:0, e:"A liquidez seca tira os estoques porque eles demoram mais para virar dinheiro."},
-    {t:"tf", q:"A análise horizontal compara a evolução de um item ao longo do tempo.", a:true, e:"Horizontal = entre períodos. Vertical = dentro do mesmo período."}
+    {t:"tf", q:"A análise horizontal compara cada item com o total do mesmo período.", a:false, e:"Isso é a análise vertical. A horizontal compara a evolução de um item entre períodos diferentes."}
    ]},
   {id:"demo5", title:"DMPL, DVA e notas explicativas", icon:"🗒️",
    learn:[
@@ -104,9 +104,9 @@ export default {
     {t:"mc", q:"Qual demonstração é uma \"fotografia\" de uma data, e não de um período?", o:["Balanço Patrimonial","DRE","DFC","DMPL"], a:0, e:"O Balanço mostra a posição numa data; a DRE e a DFC mostram um período."},
     {t:"num", q:"Receita líquida de R$ 90.000 e CMV de R$ 55.000. Qual o lucro bruto?", a:35000, u:"R$", e:"90.000 − 55.000 = 35.000."},
     {t:"num", q:"Ativo Circulante de R$ 150.000 e Passivo Circulante de R$ 100.000. Qual a liquidez corrente?", a:1.5, e:"150.000 ÷ 100.000 = 1,5."},
-    {t:"tf", q:"No método indireto da DFC, a depreciação é somada de volta ao lucro líquido.", a:true, e:"Ela reduziu o lucro sem tirar dinheiro do caixa."},
+    {t:"tf", q:"No método indireto da DFC, a depreciação é subtraída do lucro líquido.", a:false, e:"Ela reduziu o lucro sem tirar dinheiro do caixa. Por isso é somada de volta, e não subtraída."},
     {t:"class", q:"Em que atividade da DFC entra cada item?", cats:["Operacional","Investimento","Financiamento"], items:[["Recebimento de clientes",0],["Compra de uma máquina",1],["Pagamento de dividendos",2]], e:"Operacional é o dia a dia; investimento são ativos de longo prazo; financiamento envolve sócios e credores."},
-    {t:"mc", q:"Uma empresa lucrativa pode, ainda assim, ficar sem caixa. Por quê?", o:["Porque lucro é apurado por competência, e caixa depende de recebimentos reais","Porque a DRE sempre mente","Porque isso nunca acontece","Porque o Balanço erra o cálculo"], a:0, e:"Vender tudo a prazo, por exemplo, gera lucro contábil sem entrada imediata de caixa."}
+    {t:"mc", q:"Uma empresa lucrativa pode, ainda assim, ficar sem caixa. Por quê?", o:["O lucro segue a competência, e o caixa depende de recebimentos","Porque a DRE sempre apresenta números que não correspondem à realidade","Porque isso nunca acontece em empresas que dão lucro","Porque o Balanço sempre erra o cálculo do caixa da empresa"], a:0, e:"Vender tudo a prazo, por exemplo, gera lucro contábil sem entrada imediata de caixa."}
    ]}
   ]
 };

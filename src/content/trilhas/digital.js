@@ -37,7 +37,7 @@ export default [
     {h:'Roteiro do fechamento', b:ol(['Importe o extrato sem duplicar períodos.','Compare movimentos por valor, data e referência.','Identifique itens sem par e investigue a causa.','Faça ajustes documentados e confira o saldo final.'])}
    ], ex:[
     nu('Saldo inicial de R$ 2.000, entrada de R$ 1.500, saídas de R$ 600 e R$ 25. Qual o saldo final?',2875,'2.000 + 1.500 − 600 − 25 = 2.875.','R$'),
-    mc('A tarifa de R$ 25 ausente do razão exige:',['Aumentar receita','*Registrar a despesa e reduzir Bancos','Apagar o extrato'],'O ajuste depende da evidência da tarifa.'),
+    mc('A tarifa de R$ 25 ausente do razão exige:',['Aumentar a receita do mês para compensar a diferença encontrada','*Registrar a despesa da tarifa e reduzir o saldo de Bancos','Apagar a tarifa do extrato para o saldo bater'],'O ajuste depende da evidência da tarifa.'),
     tf('Saldos iguais dispensam conferir os movimentos individuais.',false,'Omissões e duplicações podem se compensar.'),
     mc('Uma diferença sem explicação deve ser:',['Ajustada para fechar a conta','*Investigada com extrato e comprovantes','Ignorada até o ano seguinte'],'A conciliação documenta a causa antes de ajustar.'),
     od('Ordene a conciliação:',['Importar extrato','Comparar com o razão','Investigar itens sem par','Ajustar com evidência e conferir saldo'],'A evidência precede o ajuste.')
@@ -49,11 +49,11 @@ export default [
     {h:'Agenda mensal e conciliação', b:'<p>No primeiro mês, juros aproximados de R$ 212,43 aumentam o passivo; o pagamento de R$ 1.000 o reduz. O saldo após a parcela fica em R$ 20.455,82. A depreciação do direito de uso é calculada separadamente conforme as hipóteses do contrato.</p>'+box('atencao','Alterações de prazo, pagamentos ou opções podem exigir remensuração. A oficina complementar de Imobilizado aprofunda os lançamentos do mês.')},
     {h:'O que conferir no fechamento', b:ol(['Versão do contrato e parâmetros aprovados.','Agenda de pagamentos e extrato bancário.','Saldo do passivo, juros e direito de uso.','Alterações contratuais, evidências e responsáveis.'])+'<p class="small">Base: <a href="https://www.cpc.org.br/CPC/Documentos-Emitidos/Pronunciamentos/Pronunciamento?Id=37" target="_blank" rel="noopener noreferrer">CPC 06 (R2) — Arrendamentos</a>. Valores didáticos.</p>'}
    ], ex:[
-    mc('Qual informação é necessária para calcular a agenda de um arrendamento?',['Só a cor da van','*Prazo, pagamentos, datas e taxa de desconto','Só o nome do fornecedor'],'A agenda depende do contrato e das hipóteses de mensuração.'),
+    mc('Qual informação é necessária para calcular a agenda de um arrendamento?',['Só a cor e o modelo do veículo arrendado','*Prazo, pagamentos, datas e taxa de desconto','Só o nome do fornecedor e o número do contrato'],'A agenda depende do contrato e das hipóteses de mensuração.'),
     nu('Passivo inicial de R$ 21.243,39 à taxa mensal de 1%. Quanto são os juros aproximados do primeiro mês?',212.43,'21.243,39 × 1% ≈ 212,43.','R$'),
     nu('Parcela de R$ 1.000 menos juros de R$ 212,43. Quanto reduz o passivo?',787.57,'1.000 − 212,43 = 787,57.','R$'),
     tf('Uma mudança contratual nunca altera a agenda registrada no ERP.',false,'Certas modificações podem exigir revisão da mensuração e dos lançamentos.'),
-    mc('Qual item ajuda a revisar o valor calculado meses depois?',['Somente o saldo final','*Contrato, taxa, memória de cálculo e histórico de alterações','Uma imagem sem identificação'],'A trilha de cálculo precisa ser reproduzível.')
+    mc('Qual item ajuda a revisar o valor calculado meses depois?',['Somente o saldo final do passivo no último mês','*Contrato, taxa, memória de cálculo e histórico','Uma imagem da tela, sem data nem identificação'],'A trilha de cálculo precisa ser reproduzível.')
    ]},
   {id:'digital5', title:'Fechamento digital e ECD', icon:'📚',
    learn:[
@@ -65,7 +65,7 @@ export default [
     mc('A ECD está relacionada principalmente a:',['Envio de mensagens da equipe','*Escrituração contábil em formato digital','Controle de ponto dos funcionários'],'A ECD integra o SPED e trata de livros contábeis digitais.'),
     tf('Um arquivo aceito tecnicamente dispensa revisar lançamentos e saldos.',false,'A validação de formato não substitui revisão contábil.'),
     nu('Razão de Bancos R$ 8.400; conciliação indica R$ 8.350. Qual diferença investigar?',50,'8.400 − 8.350 = 50.','R$'),
-    mc('Antes de afirmar um prazo ou obrigação de ECD para uma empresa real, consulte:',['Uma regra fixa para todas','*Orientação oficial vigente para entidade e período','A tela inicial do ERP apenas'],'Aplicabilidade e prazo dependem da regra vigente.'),
+    mc('Antes de afirmar um prazo ou obrigação de ECD para uma empresa real, consulte:',['Uma regra fixa que vale igual para todas as empresas','*A orientação oficial vigente para a entidade e o período','A tela inicial do ERP e o manual do fornecedor do sistema'],'Aplicabilidade e prazo dependem da regra vigente.'),
     od('Ordene o fechamento:',['Conciliar e revisar saldos','Conferir cadastros e plano de contas','Gerar e validar o arquivo','Guardar versão, recibo e evidências'],'O arquivo vem depois da revisão da escrituração.')
    ]},
   {id:'digital6', title:'Permissões, erros e trilha de auditoria', icon:'🔐',
@@ -75,9 +75,9 @@ export default [
     {h:'Automação também amplia erros', b:'<p>Uma regra que classifica errado 100 documentos gera 100 erros consistentes. Monitore exceções e reconcilie amostras após mudanças de regra. Treine a equipe para interromper o fluxo quando a evidência não sustentar o registro.</p>'},
     {h:'Um fechamento reproduzível', b:ol(['Restrinja acesso e reveja perfis periodicamente.','Registre alterações e aprovações.','Faça backup e teste a recuperação.','Concilie dados de origem, razão e relatórios finais.'])}
    ], ex:[
-    mc('Qual informação é mais útil em um log de alteração?',['Só a cor da tela','*Usuário, data, valor anterior e novo valor','Somente o nome do software'],'Esses dados permitem reconstruir a mudança.'),
+    mc('Qual informação é mais útil em um log de alteração?',['Só a cor do tema e o tamanho da fonte da tela','*Usuário, data, valor anterior e novo valor','Somente o nome do software e a versão instalada'],'Esses dados permitem reconstruir a mudança.'),
     tf('Automação elimina a necessidade de monitorar exceções.',false,'Uma regra errada pode repetir o erro em muitos documentos.'),
-    mc('Quem cadastra um fornecedor também aprovar sozinho todos os pagamentos aumenta qual risco?',['Nenhum','*Pagamento indevido ou não detectado','Apenas lentidão'],'Separação de funções e revisão ajudam a reduzir o risco.'),
+    mc('Quem cadastra um fornecedor também aprovar sozinho todos os pagamentos aumenta qual risco?',['Nenhum, porque a mesma pessoa conhece bem o processo','*Pagamento indevido ou fraude não detectada','Apenas lentidão nas aprovações do dia a dia'],'Separação de funções e revisão ajudam a reduzir o risco.'),
     mc('Um backup é mais confiável quando:',['Nunca é aberto','*A recuperação é testada','Só existe no mesmo computador'],'O teste confirma que os dados podem ser restaurados.'),
     od('Organize a resposta a uma regra automática errada:',['Interromper ou limitar a regra','Identificar documentos afetados','Corrigir com histórico e aprovação','Reconciliar os saldos resultantes'],'A correção precisa ser rastreável e completa.')
    ]}

@@ -2,7 +2,7 @@ import { $, bindActs } from '../dom.js';
 import { cloudAvailable, isLoggedIn } from '../../engine/sync-supabase.js';
 import { S, today, nextLesson, doneCount, curStreak, courseComplete, courseUnlocked, lessonsDone } from '../../engine/state.js';
 import { save } from '../../engine/storage.js';
-import { challengeSpots } from '../../engine/learning.js';
+import { challengeSpots, sampleItems } from '../../engine/learning.js';
 import { trainingSpots, previousCourseOf } from '../../engine/training.js';
 import { DUMBBELL } from '../components/icons.js';
 import { pick } from '../../engine/random.js';
@@ -85,7 +85,7 @@ export function lockedCourse(c){
     (previous ? '<button class="btn primary" data-s="test">Fazer o teste e liberar</button>' : '') +
     '<button class="btn ghost" data-s="un">Liberar sem teste</button><button class="btn ghost" data-s="x">Voltar</button>',
     {
-      test: async () => { const [{ startSession }, { sampleItems }] = await Promise.all([import('./quiz.js'), import('../../engine/learning.js')]);
+      test: async () => { const { startSession } = await import('./quiz.js');
         startSession({ kind:'unlock', course:c, items:sampleItems(previous.lessons.filter(l => !l.optional), 10), hearts:3 }); },
       un: async () => { S.unlocked[c.id] = true; save(); (await import('./path.js')).openPath(c); }
     });

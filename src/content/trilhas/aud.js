@@ -14,11 +14,11 @@ export default {
       box('dica','No Brasil, as normas de auditoria são as NBC TA, convergentes com as normas internacionais (ISA).')}
    ],
    ex:[
-    {t:"mc", q:"Qual é o objetivo da auditoria das demonstrações financeiras?", o:["Emitir uma opinião sobre a adequação das demonstrações","Fazer a contabilidade da empresa","Descobrir todas as fraudes possíveis","Calcular os impostos"], a:0, e:"O produto final é a opinião do auditor."},
+    {t:"mc", q:"Qual é o objetivo da auditoria das demonstrações financeiras?", o:["Emitir uma opinião sobre a adequação das demonstrações","Fazer a contabilidade da empresa no dia a dia","Descobrir todas as fraudes que existirem na empresa","Calcular os impostos que a empresa deve pagar"], a:0, e:"O produto final é a opinião do auditor."},
     {t:"tf", q:"A auditoria garante com certeza absoluta que não há erros nas demonstrações.", a:false, e:"Ela oferece segurança razoável, não absoluta."},
     {t:"match", pairs:[["Auditoria interna","Área da empresa, foca em controles"],["Auditoria externa","Firma independente, opina sobre as demonstrações"],["Ceticismo profissional","Avaliar criticamente as evidências"],["NBC TA","Normas brasileiras de auditoria"]], e:"Conceitos básicos do mundo da auditoria."},
     {t:"tf", q:"Um auditor externo pode fazer a contabilidade da empresa que ele mesmo audita.", a:false, e:"Isso comprometeria a independência: ele auditaria o próprio trabalho."},
-    {t:"mc", q:"A auditoria independente é obrigatória por lei para:", o:["Companhias abertas e sociedades de grande porte","Todo MEI","Somente órgãos públicos","Nenhuma empresa"], a:0, e:"Quem tem investidores no mercado ou grande porte precisa de auditoria externa."}
+    {t:"mc", q:"A auditoria independente é obrigatória por lei para:", o:["Companhias abertas e sociedades de grande porte","Todo MEI, mesmo com faturamento muito pequeno","Somente os órgãos públicos e as autarquias","Nenhuma empresa, porque a auditoria é sempre voluntária"], a:0, e:"Quem tem investidores no mercado ou grande porte precisa de auditoria externa."}
    ]},
   {id:"aud2", title:"Risco e materialidade", icon:"🎲",
    learn:[
@@ -32,7 +32,7 @@ export default {
    ex:[
     {t:"mc", q:"Qual componente do risco de auditoria o auditor controla diretamente?", o:["Risco de detecção","Risco inerente","Risco de controle","Risco de mercado"], a:0, e:"Ele ajusta o risco de detecção mudando a natureza, a época e a extensão dos testes."},
     {t:"tf", q:"Se os controles internos são fracos, o auditor tende a aumentar os seus testes.", a:true, e:"Risco de controle alto exige menor risco de detecção, ou seja, mais testes."},
-    {t:"mc", q:"Materialidade é:", o:["O valor a partir do qual um erro pode influenciar decisões","O preço cobrado pelo auditor","O número de documentos examinados","O total de ativos físicos"], a:0, e:"Ela orienta onde o auditor concentra o trabalho."},
+    {t:"mc", q:"Materialidade é:", o:["O valor a partir do qual um erro influencia decisões","O preço cobrado pelo auditor pelo trabalho realizado","O número de documentos examinados pelo auditor","O total dos ativos físicos que a empresa possui"], a:0, e:"Ela orienta onde o auditor concentra o trabalho."},
     {t:"match", pairs:[["Risco inerente","Suscetibilidade natural a erro"],["Risco de controle","Controles da empresa falharem"],["Risco de detecção","Testes do auditor não acharem o erro"]], e:"Os três componentes do risco de auditoria."},
     {t:"num", q:"Lucro antes dos impostos de R$ 2.000.000 e materialidade definida em 5%. Qual o valor da materialidade?", a:100000, u:"R$", e:"2.000.000 × 5% = 100.000."}
    ]},
@@ -44,11 +44,11 @@ export default {
     {h:"Preventivos x detectivos", b:ul(['<b>Preventivos</b> evitam o erro antes que aconteça: senha, dupla aprovação.','<b>Detectivos</b> encontram o erro depois: conciliações, revisões, contagens.'])}
    ],
    ex:[
-    {t:"mc", q:"Segregação de funções significa:", o:["Separar entre pessoas diferentes as tarefas de autorizar, registrar e guardar ativos","Concentrar tudo em uma pessoa de confiança","Demitir quem erra","Eliminar a supervisão"], a:0, e:"Assim, ninguém consegue cometer e esconder um erro ou fraude sozinho."},
+    {t:"mc", q:"Segregação de funções significa:", o:["Separar entre pessoas diferentes autorizar, registrar e guardar","Concentrar tudo em uma só pessoa de confiança, ligada à diretoria","Demitir quem comete erros nas tarefas de controle","Eliminar a supervisão para agilizar o trabalho dos setores"], a:0, e:"Assim, ninguém consegue cometer e esconder um erro ou fraude sozinho."},
     {t:"class", q:"Preventivo ou detectivo?", cats:["Preventivo","Detectivo"], items:[["Dupla aprovação de pagamentos",0],["Conciliação bancária mensal",1],["Senha de acesso ao sistema",0],["Contagem física do estoque",1],["Revisão de relatório de exceções",1]], e:"Preventivo age antes; detectivo encontra depois."},
     {t:"tf", q:"Uma mesma pessoa aprovar, pagar e registrar as compras é um bom controle.", a:false, e:"Isso viola a segregação de funções."},
     {t:"match", pairs:[["Ambiente de controle","Cultura e ética da organização"],["Avaliação de riscos","Identificar o que pode dar errado"],["Atividades de controle","Aprovações, conciliações, segregação"],["Monitoramento","Avaliar se os controles funcionam"]], e:"Quatro dos cinco componentes do COSO."},
-    {t:"mc", q:"A conciliação bancária compara:", o:["O saldo contábil com o extrato do banco","O estoque com as vendas","Os salários com os impostos","A DRE com a DFC"], a:0, e:"Diferenças apontam lançamentos faltando, duplicados ou erros."}
+    {t:"mc", q:"A conciliação bancária compara:", o:["O saldo contábil com o extrato do banco","O estoque contábil com as vendas do período","Os salários pagos com os impostos do mês","A DRE com a DFC do mesmo período"], a:0, e:"Diferenças apontam lançamentos faltando, duplicados ou erros."}
    ]},
   {id:"aud4", title:"Evidências e procedimentos", icon:"🧪",
    learn:[
@@ -60,7 +60,7 @@ export default {
    ],
    ex:[
     {t:"match", pairs:[["Confirmação externa","Carta enviada ao banco pedindo o saldo"],["Inspeção","Examinar a nota fiscal"],["Recálculo","Refazer a conta da depreciação"],["Observação","Acompanhar a contagem do estoque"]], e:"Cada procedimento gera um tipo de evidência."},
-    {t:"mc", q:"Qual evidência é, em geral, a mais confiável?", o:["Confirmação enviada por um banco diretamente ao auditor","Declaração verbal de um gerente","Cópia de uma planilha interna","E-mail entre funcionários"], a:0, e:"É externa, documental e obtida diretamente pelo auditor."},
+    {t:"mc", q:"Qual evidência é, em geral, a mais confiável?", o:["Confirmação do banco enviada direto ao auditor","Declaração verbal de um gerente da área auditada","Cópia de uma planilha interna feita pela empresa","E-mail trocado entre funcionários da própria empresa"], a:0, e:"É externa, documental e obtida diretamente pelo auditor."},
     {t:"tf", q:"Evidência suficiente se refere à quantidade; evidência apropriada, à qualidade.", a:true, e:"Suficiência = quantidade. Adequação = relevância e confiabilidade."},
     {t:"mc", q:"Contar fisicamente os estoques testa principalmente a asserção de:", o:["Existência","Integridade","Classificação","Corte"], a:0, e:"A contagem confirma que o estoque registrado de fato existe."},
     {t:"mc", q:"Verificar se vendas de 2 de janeiro foram registradas em dezembro testa a asserção de:", o:["Corte","Existência","Direitos e obrigações","Avaliação"], a:0, e:"Corte verifica se as transações estão no período correto."}
@@ -76,7 +76,7 @@ export default {
     {t:"class", q:"Qual opinião combina com cada situação?", cats:["Sem ressalva","Com ressalva","Adversa","Abstenção"], items:[["Tudo adequado",0],["Distorção relevante em um item isolado",1],["Distorções relevantes e generalizadas",2],["Falta de evidência com possíveis efeitos generalizados",3]], e:"A gravidade e a abrangência do problema definem o tipo de opinião."},
     {t:"tf", q:"Um parágrafo de ênfase muda a opinião do auditor.", a:false, e:"A ênfase só destaca algo já divulgado; a opinião continua a mesma."},
     {t:"mc", q:"O auditor obteve evidências e concluiu que as demonstrações estão erradas de forma generalizada. A opinião é:", o:["Adversa","Abstenção","Com ressalva","Sem ressalva"], a:0, e:"Com evidências e erros generalizados, a opinião é adversa. Abstenção é quando faltam evidências."},
-    {t:"mc", q:"Os Principais Assuntos de Auditoria (PAA) são:", o:["Os temas que mais exigiram atenção do auditor","Previsões de lucro da empresa","A lista de clientes do auditor","Os honorários da auditoria"], a:0, e:"Eles dão transparência sobre as áreas mais sensíveis da auditoria."},
+    {t:"mc", q:"Os Principais Assuntos de Auditoria (PAA) são:", o:["Os temas que mais exigiram atenção do auditor","As previsões de lucro que a empresa divulga","A lista de clientes atendidos pelo auditor","Os honorários cobrados pela auditoria no ano"], a:0, e:"Eles dão transparência sobre as áreas mais sensíveis da auditoria."},
     {t:"tf", q:"A abstenção de opinião ocorre quando o auditor não consegue evidência suficiente e os possíveis efeitos são relevantes e generalizados.", a:true, e:"Nesse caso, ele não tem base para opinar."}
    ]},
   {id:"aud6", title:"Fraude x erro", icon:"🎭",
@@ -88,7 +88,7 @@ export default {
       box('atencao','Fraudes costumam ser mais difíceis de detectar do que erros, porque envolvem conluio, documentos forjados e omissões deliberadas.')}
    ],
    ex:[
-    {t:"mc", q:"O que diferencia fraude de erro?", o:["A intenção: fraude é deliberada, erro não","O valor envolvido","Quem descobriu o problema","O tipo de empresa"], a:0, e:"Fraude é intencional; erro é não intencional."},
+    {t:"mc", q:"O que diferencia fraude de erro?", o:["A intenção: fraude é deliberada, erro não","O valor envolvido, que é sempre maior na fraude","Quem descobriu o problema primeiro na empresa","O tipo de empresa em que o problema ocorreu"], a:0, e:"Fraude é intencional; erro é não intencional."},
     {t:"match", pairs:[["Pressão","Uma necessidade ou incentivo para fraudar"],["Oportunidade","Controles fracos que permitem agir sem ser percebido"],["Racionalização","A justificativa que a pessoa dá para si mesma"]], e:"Os três elementos do triângulo da fraude."},
     {t:"tf", q:"A responsabilidade primária por prevenir e detectar fraudes no dia a dia é da administração da empresa.", a:true, e:"Os controles internos, mantidos pela administração, são a primeira linha de defesa."},
     {t:"mc", q:"Um funcionário que desvia dinheiro do caixa para uso pessoal comete:", o:["Apropriação indevida de ativos","Manipulação de resultados","Um erro contábil","Uma estimativa incorreta"], a:0, e:"É o desvio de um ativo específico, diferente de maquiar o resultado da empresa toda."},
@@ -101,7 +101,7 @@ export default {
    ex:[
     {t:"mc", q:"A auditoria das demonstrações financeiras oferece:", o:["Segurança razoável, não certeza absoluta","Certeza absoluta de que não há erros","Garantia de lucro futuro","Aprovação do plano de negócios"], a:0, e:"Ela usa testes e amostragem, não examina 100% das transações."},
     {t:"num", q:"Lucro antes dos impostos de R$ 800.000 e materialidade de 5%. Qual o valor da materialidade?", a:40000, u:"R$", e:"800.000 × 5% = 40.000."},
-    {t:"mc", q:"Segregação de funções significa:", o:["Pessoas diferentes autorizam, registram e guardam os ativos","Uma só pessoa de confiança cuida de tudo","Eliminar toda supervisão","Trocar de contador a cada ano"], a:0, e:"Assim ninguém consegue cometer e esconder um erro ou fraude sozinho."},
+    {t:"mc", q:"Segregação de funções significa:", o:["Pessoas diferentes autorizam, registram e guardam","Uma só pessoa de confiança cuida de todo o processo","Eliminar toda supervisão para ganhar agilidade","Trocar de contador a cada ano, por segurança"], a:0, e:"Assim ninguém consegue cometer e esconder um erro ou fraude sozinho."},
     {t:"match", pairs:[["Confirmação externa","Resposta direta de um terceiro, como um banco"],["Recálculo","Refazer as contas"],["Observação","Ver um processo acontecendo, como a contagem do estoque"]], e:"Cada procedimento produz um tipo de evidência."},
     {t:"tf", q:"Um parágrafo de ênfase no relatório do auditor muda a opinião emitida.", a:false, e:"A ênfase só destaca algo já divulgado corretamente; a opinião continua a mesma."},
     {t:"mc", q:"Distorções relevantes e generalizadas nas demonstrações levam a uma opinião:", o:["Adversa","Sem ressalva","Sempre com ressalva","Não é preciso opinar"], a:0, e:"Quando o problema é ao mesmo tempo relevante e espalhado pelas demonstrações, a opinião é adversa."}

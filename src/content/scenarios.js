@@ -216,7 +216,7 @@ export const SALAO = {
       tx('Serviços pagos via Pix: R$ 2.500.', [['Bancos',2500]], [['Receita de serviços',2500]], '', { short:'Serviços pagos via Pix' }),
       tx('Atendeu um evento de uma empresa por R$ 1.800, para receber em 30 dias.', [['Clientes',1800]], [['Receita de serviços',1800]], '', { short:'Evento a receber em 30 dias', why:tf('O serviço do evento, mesmo recebido só daqui a 30 dias, é receita deste mês.', true, 'Competência: o serviço foi prestado agora.') }),
       tx('Pagou R$ 700 à manicure parceira pelos serviços do mês.', [['Despesa com serviços de terceiros',700]], [['Bancos',700]], '', { short:'Pagamento da manicure parceira' }),
-      tx('Comprou uma cadeira nova por R$ 900, à vista, pelo banco.', [['Móveis e utensílios',900]], [['Bancos',900]], '', { short:'Compra de cadeira à vista', why:mc('A cadeira nova de R$ 900 é:', ['*Um ativo (móveis e utensílios)','Uma despesa do mês','Uma receita','Um passivo'], 'Ela será usada por anos: vai para o ativo.') })
+      tx('Comprou uma cadeira nova por R$ 900, à vista, pelo banco.', [['Móveis e utensílios',900]], [['Bancos',900]], '', { short:'Compra de cadeira à vista', why:mc('A cadeira nova de R$ 900 é:', ['*Um ativo, na conta de móveis e utensílios','Uma despesa do mês em que foi comprada','Uma receita do salão no mês','Um passivo da empresa com o fornecedor'], 'Ela será usada por anos: vai para o ativo.') })
     ]},
     { title:'Contas do mês', icon:'🧾', story:'Último episódio do mês: energia a pagar, fornecedor pago, o dinheiro do evento chegando e o penteado da noiva finalmente feito.', tx:[
       tx('Energia do mês, R$ 280, a pagar no mês seguinte.', [['Despesa com energia',280]], [['Contas a pagar',280]], '', { short:'Energia do mês a pagar' }),

@@ -5,7 +5,7 @@ import { initCloud, syncDown, onAuthChange } from './engine/sync-supabase.js';
 import { flush } from './engine/storage.js';
 import { mergeProgress } from './engine/merge.js';
 import { sfx } from './ui/components/sound.js';
-import { go, CUR, closeSheet, renderTop } from './ui/router.js';
+import { go, CUR, closeSheet, renderTop, trapFocus } from './ui/router.js';
 import { renderHome } from './ui/screens/home.js';
 import { registerSW } from 'virtual:pwa-register';
 import { toast } from './ui/components/toast.js';
@@ -72,7 +72,7 @@ $$('#bottomnav button').forEach(b => b.addEventListener('click', async () => {
 }));
 $('#g-search').addEventListener('input', async e => (await screen.glossary()).renderGlossary(e.target.value));
 document.addEventListener('keydown', async e => {
-  if ($('#sheet-root').classList.contains('open')){ if (e.key === 'Escape') closeSheet(); return; }
+  if ($('#sheet-root').classList.contains('open')){ if (e.key === 'Escape') closeSheet(); else if (e.key === 'Tab') trapFocus(e); return; }
   if (CUR !== 'quiz') return;
   if (e.key === 'Enter') e.preventDefault();
   const { SES, R, primary } = await loadQuiz();

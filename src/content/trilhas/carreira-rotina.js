@@ -28,7 +28,7 @@ export default [
   mc("Numa compra de mercadoria, qual arquivo você guarda como a nota fiscal?",["*O XML da NF-e","Só a foto do DANFE","O boleto","O pedido de compra"],"A NF-e existe só em meio digital. O XML é o documento."),
   mc("Um consultor mandou a nota do serviço prestado. Que documento é?",["*NFS-e","NF-e modelo 55","NFC-e","CT-e"],"Serviço é documentado pela nota fiscal de serviço."),
   cl("A compra vem com NF-e (mercadoria) ou NFS-e (serviço)?",["NF-e","NFS-e"],"Compra de 50 cadeiras:0|Manutenção do ar-condicionado:1|Consultoria jurídica:1|Compra de cabos e conectores:0|Limpeza do escritório:1|Compra de toner:0","Mercadoria circula com NF-e; serviço é documentado por NFS-e."),
-  mc("Desde 2026, pela LC 214/2025, os municípios precisam:",["*Permitir a NFS-e de padrão nacional ou compartilhar suas notas com o ambiente nacional","Parar de cobrar ISS","Usar a NF-e para serviços","Acabar com a nota de serviço"],"É o art. 62 da LC 214/2025, que prepara o terreno para o IBS e a CBS."),
+  mc("Desde 2026, pela LC 214/2025, os municípios precisam:",["*Permitir a NFS-e nacional ou compartilhar suas notas com o ambiente nacional","Deixar de cobrar o ISS sobre todos os serviços prestados dentro do município","Passar a usar a NF-e de mercadorias também para os serviços em geral","Extinguir a nota de serviço e emitir só recibo simples ao cliente"],"É o art. 62 da LC 214/2025, que prepara o terreno para o IBS e a CBS."),
   tf("O modelo 65 identifica a NFC-e, usada nas vendas ao consumidor final.",true,"O modelo 55 é a NF-e; o 65, a NFC-e.")
  ]},
 {id:"rot2", title:"Chave de acesso e consulta", icon:"🔑",
@@ -42,11 +42,11 @@ export default [
  ],
  ex:[
   nu("Quantos dígitos tem a chave de acesso de uma NF-e?",44,"UF, ano e mês, CNPJ, modelo, série, número, tipo de emissão, código numérico e dígito verificador.","dígitos"),
-  mc("Na chave de acesso de uma NF-e, os dígitos 3 a 6 são “2609”. Isso indica:",["*Setembro de 2026, o mês da emissão","O número da nota","A série 2609","O estado do emitente"],"Depois do código da UF vêm o ano e o mês (AAMM)."),
-  mc("A chave de acesso mostra um CNPJ diferente do fornecedor do pedido. O que fazer?",["*Não lançar e verificar com compras e com o fornecedor: a nota pode ser de outro emitente","Lançar assim mesmo","Trocar o fornecedor no sistema","Pagar e investigar depois"],"O CNPJ na chave é o de quem emitiu a nota."),
+  mc("Na chave de acesso de uma NF-e, os dígitos 3 a 6 são “2609”. Isso indica:",["*Setembro de 2026, o mês e o ano da emissão","O número sequencial da nota dentro da série","A série 2609, usada pelo emitente da nota","O estado do emitente e o código do município"],"Depois do código da UF vêm o ano e o mês (AAMM)."),
+  mc("A chave de acesso mostra um CNPJ diferente do fornecedor do pedido. O que fazer?",["*Não lançar e checar com compras e com o fornecedor se é outro emitente","Lançar assim mesmo, porque o CNPJ da chave costuma vir errado","Trocar o fornecedor no sistema para o CNPJ que aparece na chave da nota","Pagar a nota e só investigar a diferença de CNPJ depois do pagamento"],"O CNPJ na chave é o de quem emitiu a nota."),
   cl("Consultada pela chave, a NF-e pode seguir para lançamento?",["Pode seguir","Não lance"],"Autorizada, sem eventos:0|Cancelada:1|Uso denegado:1|Autorizada, com carta de correção de endereço:0","Só nota autorizada vale. A carta de correção fica guardada junto com a nota."),
   tf("O número 55 na posição do modelo indica uma NF-e.",true,"55 é a NF-e; 65, a NFC-e."),
-  mc("O fornecedor mandou só o PDF do DANFE. O que pedir?",["*O XML da nota, que é o documento fiscal","Nada: o PDF basta","Uma foto da nota","O boleto"],"Sem o XML, a empresa não tem a nota de fato."),
+  mc("O fornecedor mandou só o PDF do DANFE. O que pedir?",["*O arquivo XML da nota, que é o documento fiscal de fato","Nada: o PDF do DANFE já basta para lançar a nota","Uma foto do DANFE impresso, com o carimbo do motorista","O boleto de cobrança, que substitui a nota nesses casos"],"Sem o XML, a empresa não tem a nota de fato."),
   od("Ordene a checagem de uma NF-e recebida:",["Importar o XML","Consultar o status pela chave","Verificar eventos, como cancelamento ou correção","Seguir para a conferência com o pedido"],"Primeiro a nota existe e vale; depois, se está certa.")
  ]},
 {id:"rot3", title:"CFOP, NCM e código de serviço", icon:"🔢",
@@ -76,10 +76,10 @@ export default [
  ],
  ex:[
   cl("Qual evento de manifestação registrar?",["Confirmação","Não realizada","Desconhecimento"],"A mercadoria chegou exatamente como na nota:0|A entrega foi recusada por avaria:1|Nota de um fornecedor com quem a empresa nunca negociou:2|O pedido foi cancelado e a mercadoria não veio:1|Tudo recebido e conferido:0","Confirmação quando deu certo; não realizada quando não aconteceu; desconhecimento quando ninguém pediu."),
-  mc("O evento Ciência da Emissão significa:",["*Que a empresa sabe que a nota existe, mas ainda não concluiu se a operação ocorreu","Que a mercadoria foi recebida e conferida","Que a nota foi cancelada","Que o fornecedor foi pago"],"É um aviso de recebimento da informação, não uma conclusão."),
+  mc("O evento Ciência da Emissão significa:",["*Que a empresa sabe da nota, mas ainda não confirmou a operação","Que a mercadoria foi recebida, conferida e aceita pela empresa","Que a nota foi cancelada pelo fornecedor e perdeu a validade","Que o fornecedor já foi pago e o título foi baixado no sistema"],"É um aviso de recebimento da informação, não uma conclusão."),
   nu("Desde 01/06/2026, em até quantos dias da autorização da NF-e se registra a Confirmação, o Desconhecimento ou a Operação não Realizada?",90,"Era 180 dias até 31/05/2026. O Ajuste SINIEF 14/26 reduziu para 90.","dias"),
   tf("Desconhecimento da Operação é o evento para uma nota emitida contra o CNPJ da empresa por algo que ninguém pediu.",true,"Ele registra que a empresa não reconhece aquela operação."),
-  mc("Uma NF-e de R$ 30.000 de um fornecedor desconhecido aparece entre as notas destinadas à empresa. O que fazer?",["*Confirmar com compras e, se ninguém pediu, registrar Desconhecimento da Operação","Lançar e pagar","Ignorar, porque não foi pedida","Registrar Confirmação da Operação"],"Sem manifestação, a nota fica no nome da empresa como se a compra fosse real."),
+  mc("Uma NF-e de R$ 30.000 de um fornecedor desconhecido aparece entre as notas destinadas à empresa. O que fazer?",["*Confirmar com compras e, se ninguém pediu, registrar o Desconhecimento","Lançar a nota e programar o pagamento normalmente","Ignorar a nota, porque a empresa não fez nenhum pedido desse fornecedor","Registrar a Confirmação da Operação para evitar problemas depois"],"Sem manifestação, a nota fica no nome da empresa como se a compra fosse real."),
   od("Ordene o tratamento de uma nota destinada à empresa:",["Localizar a nota emitida contra o CNPJ","Verificar com compras se há pedido","Conferir o recebimento","Registrar o evento conclusivo"],"Descobrir, verificar, conferir e responder.")
  ]},
 
@@ -94,9 +94,9 @@ export default [
  ex:[
   cl("Na NF-e, o erro cabe em carta de correção?",["Cabe CC-e","Não cabe"],"Nome do transportador errado:0|Valor unitário menor que o combinado:1|Parcelas de venda a prazo a incluir:1|Data de saída errada:1|Complemento do endereço de entrega:0|Base de cálculo do ICMS errada:1","Se mexe no imposto, no valor, nas partes, nas datas ou nas parcelas, a CC-e não serve."),
   tf("A empresa que recebeu a NF-e pode emitir a carta de correção.",false,"Só o emitente da nota pode emitir a CC-e."),
-  mc("O fornecedor emitiu três cartas de correção para a mesma NF-e. Qual vale?",["*A última, que precisa consolidar todas as correções anteriores","A primeira","Todas, somadas","Nenhuma"],"É a regra do § 4º da cláusula décima quarta-A."),
-  mc("A NF-e veio com a data de saída errada. Cabe carta de correção?",["*Não: data de emissão ou de saída não pode ser corrigida por CC-e","Sim, sempre","Sim, se o valor não mudar","Só com autorização do cliente"],"Datas estão entre as vedações."),
-  mc("A NF-e de R$ 12.000 deveria ser de R$ 10.000. Qual o caminho?",["*O fornecedor cancela e emite outra nota, se ainda estiver no prazo; se não, trata-se por devolução ou recusa","Carta de correção com o valor certo","Lançar R$ 10.000 e ignorar a diferença","Pagar R$ 12.000 e pedir desconto depois"],"Valor não se corrige por CC-e."),
+  mc("O fornecedor emitiu três cartas de correção para a mesma NF-e. Qual vale?",["*A última, que deve reunir as correções anteriores","A primeira, porque as seguintes não substituem a original","Todas elas, somadas na ordem em que foram enviadas","Nenhuma, porque só a nota original tem valor fiscal"],"É a regra do § 4º da cláusula décima quarta-A."),
+  mc("A NF-e veio com a data de saída errada. Cabe carta de correção?",["*Não: datas não podem ser corrigidas por CC-e","Sim, sempre: a carta corrige qualquer campo digitado errado","Sim, se o valor da nota não mudar com a correção","Só com autorização escrita do cliente que recebeu a nota"],"Datas estão entre as vedações."),
+  mc("A NF-e de R$ 12.000 deveria ser de R$ 10.000. Qual o caminho?",["*Cancelamento e nova nota, se no prazo; depois disso, devolução ou recusa","Uma carta de correção informando que o valor certo é R$ 10.000, e lançar","Lançar R$ 10.000 e ignorar a diferença que veio destacada na nota","Pagar R$ 12.000 e pedir o desconto na compra seguinte"],"Valor não se corrige por CC-e."),
   od("Ordene o tratamento de um erro que cabe em carta de correção:",["Identificar o erro","Pedir a CC-e ao fornecedor","Consultar o evento pela chave","Guardar o XML da CC-e com a nota"],"A correção só existe depois de registrada.")
  ]},
 {id:"rot6", title:"Cancelar, recusar ou devolver", icon:"↩️",
@@ -109,10 +109,10 @@ export default [
  ex:[
   cl("Qual caminho resolve o caso?",["Cancelar","Devolver","Complementar"],"Nota emitida há 3 horas, mercadoria ainda no fornecedor:0|Mercadoria recebida com defeito, precisa voltar:1|Nota saiu com preço menor que o combinado:2|Nota duplicada emitida hoje, nada saiu do estoque:0|Parte do lote veio errada e foi devolvida:1","Cancelamento só no prazo e sem circulação; depois, devolução ou complemento."),
   nu("Em até quantas horas da autorização o emitente pode cancelar uma NF-e, se a mercadoria não circulou?",24,"É a regra geral da cláusula décima segunda do Ajuste SINIEF 07/2005.","horas"),
-  mc("A NF-e foi autorizada há dois dias, e a mercadoria já chegou com valor acima do combinado. O fornecedor pode cancelar a nota?",["*Não: passou do prazo e a mercadoria circulou; resolve-se com devolução ou outro procedimento","Sim, a qualquer momento","Sim, se a empresa pedir","Só com carta de correção"],"Depois de 24 horas ou da circulação, não há cancelamento."),
+  mc("A NF-e foi autorizada há dois dias, e a mercadoria já chegou com valor acima do combinado. O fornecedor pode cancelar a nota?",["*Não: passou do prazo e a mercadoria circulou; o caminho é a devolução","Sim, a qualquer momento, desde que o fornecedor avise o cliente por e-mail","Sim, se a empresa compradora pedir o cancelamento por escrito","Só com uma carta de correção informando o valor combinado"],"Depois de 24 horas ou da circulação, não há cancelamento."),
   tf("A nota complementar serve para acrescentar valor ou imposto que faltou na nota original.",true,"Ela complementa, nunca reduz."),
   mc("Na recusa da mercadoria no recebimento, qual evento de manifestação combina?",["*Operação não Realizada","Confirmação da Operação","Ciência da Emissão","Desconhecimento da Operação"],"A operação é da empresa, mas não se efetivou."),
-  mc("Numa compra entre empresas, quem costuma emitir a nota de devolução?",["*A empresa que devolve a mercadoria, citando a nota original","O banco","A transportadora","Ninguém: basta devolver"],"A devolução também é uma operação e precisa de documento.")
+  mc("Numa compra entre empresas, quem costuma emitir a nota de devolução?",["*A empresa que devolve a mercadoria, citando a nota original","O banco do comprador, quando a mercadoria já foi paga no boleto","A transportadora que fez a entrega da mercadoria","Ninguém: basta devolver a mercadoria com um bilhete"],"A devolução também é uma operação e precisa de documento.")
  ]},
 {id:"rot7", title:"Notas de serviço com problema", icon:"🛠️",
  goal:"Tratar erros em notas de serviço, sabendo que as regras dependem do município.",
@@ -124,10 +124,10 @@ export default [
  ],
  ex:[
   tf("A NFS-e tem um prazo nacional único de 24 horas para cancelamento, igual ao da NF-e.",false,"Na NFS-e, as regras são do município."),
-  mc("A medição aprovada foi de R$ 18.000, mas a NFS-e veio de R$ 20.000. O que fazer?",["*Não lançar e pedir ao prestador o cancelamento ou a substituição da nota pelo valor medido","Lançar R$ 20.000","Lançar R$ 18.000 e ignorar a nota","Pagar a diferença no mês seguinte"],"A nota precisa refletir o que foi aprovado."),
+  mc("A medição aprovada foi de R$ 18.000, mas a NFS-e veio de R$ 20.000. O que fazer?",["*Não lançar e pedir ao prestador a substituição da nota pelo valor medido","Lançar os R$ 20.000 e pagar o valor total da nota que foi emitida pelo prestador","Lançar R$ 18.000 e ignorar a nota que o prestador enviou por e-mail","Pagar os R$ 18.000 e a diferença de R$ 2.000 só no mês seguinte"],"A nota precisa refletir o que foi aprovado."),
   cl("Isto aparece para conferir numa NFS-e?",["Conferir","Não se aplica"],"CNPJ do tomador:0|Competência do serviço:0|Item da LC 116 e município:0|NCM da mercadoria:1|Retenções destacadas:0|Canhoto de entrega:1","NCM e canhoto são de mercadoria, não de serviço."),
-  mc("A nota de consultoria veio com competência de maio, mas o serviço foi prestado em abril. Por que isso importa?",["*A despesa e os tributos seguem a competência: o mês errado distorce o fechamento e as apurações","Não importa, o valor é o mesmo","Só importa para o fornecedor","Só muda a data do pagamento"],"Competência é o mês do fato, não o da emissão."),
-  mc("A NFS-e de vigilância veio sem ISS retido. O serviço é o item 11.02 da LC 116. O que fazer?",["*Verificar com o fiscal: pela LC 116, a empresa tomadora responde pelo ISS desse serviço","Pagar o valor cheio e esquecer","Reter 11% de ISS","Devolver o serviço"],"Vigilância está na lista do art. 6º, § 2º, II, da LC 116."),
+  mc("A nota de consultoria veio com competência de maio, mas o serviço foi prestado em abril. Por que isso importa?",["*Despesa e tributos seguem a competência: o mês errado distorce o fechamento","Não importa, porque o valor da nota continua sendo exatamente o mesmo em qualquer mês","Só importa para o fornecedor, que precisa declarar a receita","Só muda a data em que o pagamento será feito ao prestador"],"Competência é o mês do fato, não o da emissão."),
+  mc("A NFS-e de vigilância veio sem ISS retido. O serviço é o item 11.02 da LC 116. O que fazer?",["*Verificar com o fiscal: pela LC 116, quem responde pelo ISS é o tomador","Pagar o valor cheio ao prestador e esquecer o assunto","Reter 11% de ISS, que é o percentual padrão para todos os serviços da lista","Devolver o serviço ao prestador e pedir outra empresa"],"Vigilância está na lista do art. 6º, § 2º, II, da LC 116."),
   od("Ordene o tratamento de uma NFS-e com erro:",["Identificar o erro","Avisar o prestador","Pedir o cancelamento ou a substituição","Conferir a nova nota antes de lançar"],"Nota errada não entra no sistema.")
  ]},
 
@@ -145,7 +145,7 @@ export default [
   nu("Nota de auditoria de R$ 8.000, de um fornecedor fora do Simples. Quanto se retém de IRRF (1,5%)?",120,"1,5% de 8.000 = 120.","R$"),
   nu("Nota de auditoria de R$ 8.000, de um fornecedor fora do Simples. Quanto se retém de PIS, COFINS e CSLL juntos (4,65%)?",372,"4,65% de 8.000 = 372.","R$"),
   mc("O fornecedor de consultoria é optante do Simples Nacional. E a retenção de PIS, COFINS e CSLL?",["*Não se retém","Retém 4,65% normalmente","Retém em dobro","Retém só a CSLL"],"A Lei 10.833/2003, art. 32, afasta a retenção nos pagamentos a optantes do Simples."),
-  mc("Serviço de vigilância prestado a uma empresa. Pela LC 116, quem responde pelo ISS?",["*A empresa tomadora do serviço","Só o prestador","O banco","Ninguém"],"Vigilância (11.02) está na lista do art. 6º, § 2º, II."),
+  mc("Serviço de vigilância prestado a uma empresa. Pela LC 116, quem responde pelo ISS?",["*A empresa tomadora, que contratou o serviço","Somente o prestador, que emitiu a nota fiscal","O banco que faz o pagamento do serviço","Ninguém, porque vigilância não paga ISS"],"Vigilância (11.02) está na lista do art. 6º, § 2º, II."),
   tf("O INSS de 11% é retido nos serviços prestados com cessão de mão de obra.",true,"É o art. 31 da Lei 8.212/1991."),
   od("Ordene a análise de uma nota de serviço antes de pagar:",["Identificar o serviço","Ver se o fornecedor é do Simples","Checar a regra do ISS","Calcular e registrar as retenções"],"Serviço, regime, município e cálculo.")
  ]},
@@ -159,11 +159,11 @@ export default [
  ],
  ex:[
   nu("Nota de manutenção de R$ 200. Quanto daria a retenção de PIS, COFINS e CSLL (4,65%)?",9.3,"4,65% de 200 = 9,30.","R$"),
-  mc("Nota de manutenção de R$ 200: a retenção de PIS, COFINS e CSLL daria R$ 9,30. Ela é feita?",["*Não: retenção de até R$ 10 é dispensada","Sim, sempre","Sim, somando com o mês","Só se o fornecedor pedir"],"O limite de dispensa é o valor retido de até R$ 10."),
+  mc("Nota de manutenção de R$ 200: a retenção de PIS, COFINS e CSLL daria R$ 9,30. Ela é feita?",["*Não: retenção de até R$ 10 é dispensada pela lei","Sim, sempre: toda nota de serviço sofre retenção","Sim, somando com as outras notas do mês","Só se o fornecedor pedir a retenção por escrito"],"O limite de dispensa é o valor retido de até R$ 10."),
   cl("A retenção de PIS, COFINS e CSLL (4,65%) é feita ou dispensada?",["Retém","Dispensada"],"Nota de R$ 150:1|Nota de R$ 1.000:0|Nota de R$ 210:1|Nota de R$ 400:0","150 → 6,98; 1.000 → 46,50; 210 → 9,77; 400 → 18,60. Só retém acima de R$ 10."),
   tf("Hoje, a retenção de PIS, COFINS e CSLL é dispensada para pagamentos de até R$ 5.000.",false,"Essa regra foi trocada em 2015 pelo limite de R$ 10 no valor retido."),
   nu("Qual o menor valor de nota, em reais inteiros, em que a retenção de 4,65% passa de R$ 10?",216,"215 × 4,65% = 9,9975, ainda dispensada. 216 × 4,65% = 10,04: retém.","R$"),
-  mc("A nota destaca R$ 50 de PIS, COFINS e CSLL retidos, mas 4,65% de R$ 1.000 dá R$ 46,50. O que fazer?",["*Falar com o fornecedor antes de pagar: o destaque não bate com a alíquota","Pagar como está","Reter R$ 50 e esquecer","Não reter nada"],"Retenção errada é problema de quem paga.")
+  mc("A nota destaca R$ 50 de PIS, COFINS e CSLL retidos, mas 4,65% de R$ 1.000 dá R$ 46,50. O que fazer?",["*Falar com o fornecedor antes de pagar: o destaque não bate","Pagar como está, porque o fornecedor sabe o que destacou na nota","Reter R$ 50, como está na nota, e esquecer a diferença","Não reter nada, porque a nota está com erro de cálculo"],"Retenção errada é problema de quem paga.")
  ]},
 {id:"rot10", title:"Do bruto ao líquido: o lançamento", icon:"📒",
  goal:"Calcular todas as retenções de uma nota e fazer o lançamento com as contas a recolher.",
@@ -213,11 +213,11 @@ export default [
  ex:[
   nu("Fornecedor A: R$ 10.000 mais R$ 800 de frete. Qual o custo total?",10800,"10.000 + 800 = 10.800.","R$"),
   nu("Fornecedor C: R$ 9.800 mais R$ 900 de frete. Qual o custo total?",10700,"9.800 + 900 = 10.700.","R$"),
-  mc("Qual proposta escolher no mapa de cotação?" + COTACAO,["*B: menor custo total e entrega mais rápida","C: menor preço do item","A: prazo de pagamento","Tanto faz"],"B custa 10.300 no total e entrega em 7 dias."),
+  mc("Qual proposta escolher no mapa de cotação?" + COTACAO,["*B: menor custo total e a entrega mais rápida das três","C: menor preço do item, sem olhar o custo total","A: melhor prazo de pagamento entre as três propostas","Tanto faz: as três propostas são equivalentes"],"B custa 10.300 no total e entrega em 7 dias."),
   tf("O mapa de cotação deve comparar o custo total, não só o preço do item.",true,"Frete, impostos e condições mudam o resultado."),
-  mc("Por que confirmar o regime tributário do fornecedor antes de comprar?",["*Porque ele muda as retenções no pagamento","Porque muda o preço do frete","Porque define o prazo de entrega","Não precisa confirmar"],"Fornecedor do Simples, por exemplo, não sofre retenção de PIS, COFINS e CSLL."),
+  mc("Por que confirmar o regime tributário do fornecedor antes de comprar?",["*Porque ele muda as retenções no pagamento","Porque muda o preço do frete cobrado na entrega","Porque define o prazo de entrega da compra","Não precisa confirmar antes de comprar"],"Fornecedor do Simples, por exemplo, não sofre retenção de PIS, COFINS e CSLL."),
   od("Ordene a cotação:",["Pedir propostas por escrito","Montar o mapa de cotação","Escolher e justificar","Emitir a OC para aprovação"],"Comparar com critério e documentar."),
-  mc("O fornecedor escolhido mandou por e-mail uma conta bancária nova. O que fazer?",["*Confirmar por um canal oficial já conhecido antes de cadastrar","Cadastrar na hora","Responder ao mesmo e-mail pedindo confirmação","Pagar na conta antiga sem avisar"],"Troca de conta por e-mail é um golpe comum.")
+  mc("O fornecedor escolhido mandou por e-mail uma conta bancária nova. O que fazer?",["*Confirmar por um canal já conhecido antes de cadastrar","Cadastrar a conta nova na hora, para agilizar o pagamento","Responder ao mesmo e-mail pedindo que confirmem a conta","Pagar na conta antiga sem avisar o fornecedor"],"Troca de conta por e-mail é um golpe comum.")
  ]},
 {id:"rot13", title:"Recebimento e aceite", icon:"📦",
  goal:"Receber mercadorias e aceitar serviços com registro de cada divergência.",
@@ -229,10 +229,10 @@ export default [
  ],
  ex:[
   cl("No recebimento, o que fazer?",["Receber","Com ressalva","Recusar"],"Tudo conforme a nota e a OC:0|Faltaram 2 de 50 caixas:1|Produto diferente do pedido:2|Uma caixa amassada, conteúdo intacto:1|Entrega sem nota fiscal:2","Divergência parcial se ressalva; produto errado ou sem nota se recusa."),
-  mc("Para que serve o canhoto do DANFE assinado?",["*Comprovar que a mercadoria foi entregue","Pagar o fornecedor","Cancelar a nota","Substituir o XML"],"Por isso a ressalva deve ser escrita antes da assinatura."),
+  mc("Para que serve o canhoto do DANFE assinado?",["*Comprovar que a mercadoria foi entregue","Pagar o fornecedor sem precisar do boleto","Cancelar a nota quando há divergência","Substituir o XML da nota no sistema"],"Por isso a ressalva deve ser escrita antes da assinatura."),
   nu("OC de 50 caixas a R$ 40. Chegaram 48, mas a nota cobra as 50. Quanto a nota cobra a mais do que foi recebido?",80,"2 caixas × 40 = 80.","R$"),
   tf("A nota de um serviço deve ser lançada só depois do aceite da área que recebeu o serviço.",true,"Sem aceite, não há prova de que o serviço foi prestado como combinado."),
-  mc("Faltaram itens na entrega e o motorista precisa ir embora. O que fazer?",["*Receber com ressalva, anotar a falta no canhoto e no registro de recebimento, e avisar compras","Assinar sem ressalva","Recusar tudo sem registrar","Deixar para conferir amanhã"],"A ressalva protege a empresa na hora de cobrar a diferença."),
+  mc("Faltaram itens na entrega e o motorista precisa ir embora. O que fazer?",["*Receber com ressalva, anotar a falta no canhoto e avisar compras","Assinar sem ressalva e resolver a falta depois, por telefone, com o fornecedor","Recusar tudo sem registrar nada e mandar o motorista embora","Deixar para conferir amanhã e assinar o canhoto agora mesmo"],"A ressalva protege a empresa na hora de cobrar a diferença."),
   od("Ordene o recebimento de mercadoria:",["Conferir volumes","Conferir itens e quantidades com a nota e a OC","Registrar divergências","Dar entrada no sistema"],"Conferir antes de registrar.")
  ]},
 {id:"rot14", title:"Contratos: reajuste, aditivo e glosa", icon:"📑",
@@ -248,8 +248,8 @@ export default [
   nu("Contrato de R$ 20.000, reajustado por um índice acumulado de 5,06%. Qual o novo valor?",21012,"20.000 × 1,0506 = 21.012.","R$"),
   tf("Pela Lei 10.192/2001, um contrato pode prever reajuste a cada 6 meses.",false,"Reajuste com periodicidade inferior a um ano é nulo."),
   nu("Contrato de R$ 20.000 com glosa de 3% por atendimento fora do prazo. Qual a glosa?",600,"3% de 20.000 = 600.","R$"),
-  mc("O fornecedor pede reajuste 8 meses depois da assinatura do contrato. O que responder?",["*Que o reajuste só vale depois de 12 meses, na data-base do contrato","Aceitar","Dar metade agora","Rescindir o contrato"],"A lei exige periodicidade anual."),
-  mc("O escopo do serviço aumentou e o valor vai mudar. O que formaliza isso?",["*Um aditivo contratual assinado","Um e-mail do gestor","Uma nota com valor maior","Uma ligação"],"Sem aditivo, não se paga valor diferente do contrato."),
+  mc("O fornecedor pede reajuste 8 meses depois da assinatura do contrato. O que responder?",["*Que só cabe reajuste após 12 meses, na data-base","Aceitar o pedido, porque o fornecedor sempre tem razão","Dar metade do reajuste agora e a outra metade depois","Rescindir o contrato e procurar outro fornecedor"],"A lei exige periodicidade anual."),
+  mc("O escopo do serviço aumentou e o valor vai mudar. O que formaliza isso?",["*Um aditivo contratual assinado pelas duas partes","Um e-mail do gestor pedindo o novo valor à empresa","Uma nota fiscal emitida com o valor maior","Uma ligação combinando o valor com o fornecedor"],"Sem aditivo, não se paga valor diferente do contrato."),
   cl("É reajuste, aditivo ou glosa?",["Reajuste","Aditivo","Glosa"],"Atualização anual pelo IPCA:0|Inclusão de um novo andar na limpeza:1|Desconto por atendimento fora do prazo do SLA:2|Prorrogação do prazo do contrato:1|Correção pelo IGP-M na data-base:0","Índice é reajuste; mudança de escopo ou prazo é aditivo; descumprimento de SLA é glosa.")
  ]},
 
@@ -264,9 +264,9 @@ export default [
  ex:[
   cl("Na caixa de notas da segunda-feira, o que fazer com cada nota?",["Lançar","Pedir correção","Não lançar"],"Toner com OC e recebimento conferidos:0|NF-e com status cancelada:2|NF-e com endereço de entrega errado:1|Nota de R$ 30.000 de fornecedor desconhecido:2|Consultoria sem as retenções destacadas:1","Lança o que está conferido; corrige o que tem conserto; barra o que não vale."),
   nu("Consultoria de R$ 8.000, fornecedor fora do Simples, IRRF de 1,5% e PIS/COFINS/CSLL de 4,65%, sem ISS retido. Quanto se paga ao consultor?",7508,"IRRF 120 + PIS/COFINS/CSLL 372 = 492. 8.000 − 492 = 7.508.","R$"),
-  mc("Nota de manutenção de R$ 200, de fornecedor fora do Simples. Quanto se paga?",["*R$ 200: a retenção de R$ 9,30 é dispensada","R$ 190,70","R$ 197","R$ 188"],"Retenção de até R$ 10 é dispensada, e manutenção, em regra, não sofre IRRF."),
-  mc("Uma NF-e de R$ 30.000 de um fornecedor desconhecido está nas notas destinadas à empresa. O que fazer?",["*Confirmar com compras e registrar Desconhecimento da Operação","Lançar","Pagar e investigar depois","Pedir carta de correção"],"Sem pedido e sem recebimento, a empresa não reconhece a operação."),
-  mc("A NF-e de cabos veio com o endereço de entrega digitado errado, sem trocar o destinatário. O que pedir?",["*Carta de correção ao fornecedor","Cancelamento da nota","Nota complementar","Nada"],"Endereço, sem mudar as partes, cabe em CC-e."),
+  mc("Nota de manutenção de R$ 200, de fornecedor fora do Simples. Quanto se paga?",["*R$ 200: a retenção de R$ 9,30 é dispensada","R$ 190,70: desconta-se a retenção de R$ 9,30","R$ 197: desconta-se apenas o IRRF de 1,5%","R$ 188: desconta-se 6% de tributos sobre a nota"],"Retenção de até R$ 10 é dispensada, e manutenção, em regra, não sofre IRRF."),
+  mc("Uma NF-e de R$ 30.000 de um fornecedor desconhecido está nas notas destinadas à empresa. O que fazer?",["*Confirmar com compras e registrar Desconhecimento da Operação","Lançar a nota e programar o pagamento para o vencimento","Pagar a nota e investigar depois que o dinheiro já tiver saído da conta","Pedir uma carta de correção ao fornecedor desconhecido"],"Sem pedido e sem recebimento, a empresa não reconhece a operação."),
+  mc("A NF-e de cabos veio com o endereço de entrega digitado errado, sem trocar o destinatário. O que pedir?",["*Uma carta de correção ao fornecedor (CC-e)","O cancelamento da nota e a emissão de outra","Uma nota complementar com o endereço certo","Nada: o endereço não precisa estar certo na nota"],"Endereço, sem mudar as partes, cabe em CC-e."),
   od("Ordene a manhã:",["Separar as notas por situação","Resolver o que trava pagamentos do dia","Pedir correções aos fornecedores","Lançar as notas conferidas"],"Organizar, destravar, corrigir e lançar."),
   ep("Explique ao gestor, em três frases, o que você fez com a caixa de notas da segunda-feira.","Lancei as notas conferidas, como a do toner. Barrei a NF-e cancelada e a de R$ 30.000 de fornecedor desconhecido, que registrei como Desconhecimento da Operação. Pedi carta de correção da nota de cabos e calculei as retenções da consultoria, que vou alinhar com o fornecedor antes do pagamento.",[["Lançou as notas conferidas","lanc","confer","toner"],["Barrou notas com problema","cancelad","desconhec","barr","segur","nao lanc","nao pag"],["Pediu correções ou calculou retenções","cce","carta","correc","retenc","irrf","retid"]],"O que foi lançado, o que foi barrado e o que ficou pendente.")
  ]},
@@ -284,7 +284,7 @@ export default [
   nu("O fornecedor pediu 9% sobre R$ 12.000, mas o IPCA acumulado é de 4,8%. Qual a diferença mensal entre o pedido e o reajuste do contrato?",504,"13.080 − 12.576 = 504.","R$"),
   nu("Contrato de R$ 12.000 com glosa de 3% por atendimento fora do prazo. Qual a glosa do mês?",360,"3% de 12.000 = 360.","R$"),
   tf("Num contrato com renovação automática, se ninguém avisar até o prazo, ele renova.",true,"Por isso o prazo de aviso vai para o controle de contratos."),
-  mc("Qual é o melhor encaminhamento para o contrato de manutenção?",["*Levar ao gestor até 31/08: renovar com reajuste pelo IPCA (R$ 12.576), aplicar a glosa prevista e formalizar em aditivo se algo mudar","Aceitar os 9% para não criar atrito","Deixar renovar sem olhar","Cancelar o contrato sozinho"],"Data, números e proposta. A decisão é do gestor."),
+  mc("Qual é o melhor encaminhamento para o contrato de manutenção?",["*Levar ao gestor até 31/08: renovar com reajuste pelo IPCA (R$ 12.576) e aplicar a glosa prevista","Aceitar o reajuste de 9% pedido pelo fornecedor, para não criar atrito com quem presta um bom serviço","Deixar o contrato renovar automaticamente, sem conferir reajuste nem glosas do período","Cancelar o contrato por conta própria e abrir uma nova cotação com outros fornecedores"],"Data, números e proposta. A decisão é do gestor."),
   ep("Escreva um e-mail curto ao gestor sobre o contrato de manutenção que vence em 30/09/2026.","O contrato de manutenção renova sozinho em 30/09, e o prazo para avisar se não quisermos renovar é 31/08. O fornecedor pediu 9% de reajuste, mas o contrato prevê o IPCA, de 4,8%, o que dá R$ 12.576 por mês, R$ 504 a menos que o pedido. Houve atendimento fora do prazo em julho, com glosa de R$ 360. Proponho renovar pelo índice do contrato.",[["Prazo de decisão","31/08","prazo","aviso","renov"],["Reajuste pelo índice","ipca","4,8","12.576","12576","indice"],["Pedido do fornecedor acima do contrato","9%","acima","pedido","pediu"],["Glosa ou SLA","glosa","sla","atraso","fora do prazo"]],"Prazo, números, histórico e proposta.")
  ]}
 ];

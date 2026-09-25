@@ -32,7 +32,7 @@ export default {
     {t:"num", q:"No Lucro Presumido, um comércio teve receita trimestral de R$ 500.000 e a presunção é de 8%. Qual a base de cálculo do IRPJ?", a:40000, u:"R$", e:"500.000 × 8% = 40.000."},
     {t:"tf", q:"No Lucro Real, uma empresa com prejuízo paga IRPJ normalmente, mesmo sem lucro.", a:false, e:"No Lucro Real o IRPJ incide sobre o lucro; sem lucro, não há imposto."},
     {t:"match", pairs:[["Simples Nacional","Guia única para pequenas empresas"],["Lucro Presumido","Base definida por percentual da receita"],["Lucro Real","Imposto sobre o lucro contábil ajustado"],["MEI","Faturamento de até R$ 81 mil por ano"]], e:"Cada regime tem um público e um jeito de calcular."},
-    {t:"mc", q:"O adicional de 10% do IRPJ incide sobre:", o:["O lucro que exceder R$ 20 mil por mês","Toda a receita","O prejuízo","Os dividendos"], a:0, e:"Só a parcela acima de R$ 20 mil mensais (R$ 240 mil por ano) paga o adicional."}
+    {t:"mc", q:"O adicional de 10% do IRPJ incide sobre:", o:["O lucro que exceder R$ 20 mil por mês","Toda a receita bruta da empresa no mês","O prejuízo apurado no período pela empresa","Os dividendos pagos aos sócios no ano"], a:0, e:"Só a parcela acima de R$ 20 mil mensais (R$ 240 mil por ano) paga o adicional."}
    ]},
   {id:"trib3", title:"Consumo e a Reforma Tributária", icon:"🔄",
    learn:[
@@ -61,10 +61,10 @@ export default {
     {h:"O critério central", b:tbl(['','Elisão','Evasão'],[['Meios','Lícitos','Ilícitos'],['Quando','Antes do fato gerador, em regra','Antes ou depois, escondendo o fato'],['Consequência','Economia legítima de tributos','Crime, multa e cobrança retroativa']]) + box('regra','A pergunta que separa as duas: o meio usado para pagar menos imposto é permitido por lei?')}
    ],
    ex:[
-    {t:"mc", q:"O que é elisão fiscal?", o:["Reduzir tributos por meios lícitos, previstos ou não vedados por lei","Deixar de emitir nota fiscal","Omitir receita da Receita Federal","Qualquer forma de reduzir imposto, lícita ou não"], a:0, e:"Elisão é sempre por meios legais."},
+    {t:"mc", q:"O que é elisão fiscal?", o:["Reduzir tributos por meios lícitos, dentro da lei","Deixar de emitir nota fiscal das vendas","Omitir receita da Receita Federal para pagar menos","Qualquer forma de reduzir imposto, lícita ou não"], a:0, e:"Elisão é sempre por meios legais."},
     {t:"tf", q:"Escolher, entre dois regimes tributários permitidos para a empresa, aquele que resulta em menos imposto a pagar é elisão fiscal.", a:true, e:"É uma escolha lícita dentro do que a lei permite."},
     {t:"tf", q:"Emitir uma nota fiscal com valor menor do que o real para pagar menos imposto é elisão fiscal.", a:false, e:"Isso é evasão (sonegação): um meio ilícito, e não apenas uma escolha entre opções legais."},
-    {t:"mc", q:"Sonegação fiscal é:", o:["Crime, além de gerar multa e cobrança do tributo com juros","Apenas uma infração administrativa leve","Permitida se o valor for pequeno","O mesmo que elisão fiscal"], a:0, e:"A Lei nº 8.137/1990 tipifica crimes contra a ordem tributária."},
+    {t:"mc", q:"Sonegação fiscal é:", o:["Crime, com multa e cobrança do tributo com juros","Apenas uma infração administrativa leve, sem multa","Permitida se o valor for pequeno o bastante","O mesmo que elisão fiscal, só com outro nome"], a:0, e:"A Lei nº 8.137/1990 tipifica crimes contra a ordem tributária."},
     {t:"match", pairs:[["Elisão fiscal","Redução lícita da carga tributária"],["Evasão fiscal","Redução por meios ilícitos, como omitir receita"],["Fato gerador","O evento que faz nascer a obrigação de pagar o tributo"]], e:"O critério central é sempre a licitude do meio usado."}
    ]},
   {id:"trib5", title:"Revisão: tributos", icon:"🔄",

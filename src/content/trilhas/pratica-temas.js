@@ -15,7 +15,7 @@ export default [
   nu("Seu Jorge quer ganhar 50% sobre o custo do tomate (R$ 4 o kg). Por quanto vende o kg?",6,"4 × 1,5 = 6.","R$"),
   nu("Tomate R$ 80 + banana R$ 60 + aluguel R$ 40. Quanto ele gasta para montar a barraca?",180,"80 + 60 + 40 = 180.","R$"),
   tf("O aluguel da barraca também precisa ser coberto pelas vendas do dia.",true,"Todo gasto do dia entra na conta."),
-  mc("Se o tomate estraga e ele joga fora 2 kg, o custo de cada kg vendido:",["*Aumenta, porque o mesmo gasto é dividido por menos quilos","Diminui","Fica igual","Vira zero"],"R$ 80 ÷ 18 kg ≈ R$ 4,44.")
+  mc("Se o tomate estraga e ele joga fora 2 kg, o custo de cada kg vendido:",["*Aumenta, porque o gasto é dividido por menos quilos","Diminui, porque ele passa a vender menos tomates","Fica igual, porque o preço de compra não mudou","Vira zero, porque o tomate estragado não tem custo"],"R$ 80 ÷ 18 kg ≈ R$ 4,44.")
  ]},
 {id:"feira2", title:"Troco, desconto e pechincha", icon:"🪙",
  learn:[
@@ -40,7 +40,7 @@ export default [
   nu("Venda de R$ 150 no crédito com taxa de 3%. Qual a taxa em reais?",4.5,"3% de 150 = 4,50.","R$"),
   cl("Quando o dinheiro chega, em geral?",["Na hora","Depois"],"Pix:0|Dinheiro:0|Cartão de crédito:1|Cartão de débito:1","Crédito e débito dependem da administradora."),
   tf("A receita de uma venda no cartão é o valor da venda, e a taxa é uma despesa.",true,"Assim a taxa fica visível."),
-  mc("Para não perder dinheiro com troco errado e notas falsas, Seu Jorge pode:",["*Incentivar o Pix e conferir as notas","Aceitar qualquer nota","Não dar troco","Vender fiado sempre"],"Menos dinheiro vivo, menos risco."),
+  mc("Para não perder dinheiro com troco errado e notas falsas, Seu Jorge pode:",["*Incentivar o Pix e conferir as notas recebidas","Aceitar qualquer nota sem conferir com atenção","Não dar troco e arredondar sempre para cima","Vender fiado sempre, para evitar o dinheiro em espécie"],"Menos dinheiro vivo, menos risco."),
   nu("No dia: R$ 300 em dinheiro, R$ 450 em Pix e R$ 250 no débito (taxa 2%). Quanto entra no total, depois da taxa?",995,"300 + 450 + 245 = 995.","R$")
  ]},
 {id:"feira4", title:"Fechando o sábado", icon:"🧮",
@@ -53,7 +53,7 @@ export default [
   nu("Comprou R$ 700 de mercadoria e sobraram R$ 180 em bom estado. Qual o custo do que foi vendido?",520,"700 − 180 = 520.","R$"),
   tf("A mercadoria que sobrou em bom estado é despesa do sábado.",false,"Continua sendo estoque."),
   nu("Com lucro de R$ 435 por sábado, quanto ele ganha em 4 sábados?",1740,"435 × 4 = 1.740.","R$"),
-  mc("Seu Jorge vendeu R$ 1.000 e ficou com R$ 900 no bolso. Isso significa:",["*Vendas não são lucro: parte do dinheiro repõe o custo","Que ele teve lucro de R$ 900","Que ele teve prejuízo","Nada"],"Do que entrou, é preciso descontar o custo."),
+  mc("Seu Jorge vendeu R$ 1.000 e ficou com R$ 900 no bolso. Isso significa:",["*Venda não é lucro: parte do dinheiro repõe o custo","Que ele teve lucro de R$ 900 no sábado inteiro","Que ele teve prejuízo de R$ 100 no sábado","Nada de importante: vendas e lucro são a mesma coisa"],"Do que entrou, é preciso descontar o custo."),
   od("Ordene o fechamento do dia:",["Somar as vendas","Contar a mercadoria que sobrou","Calcular o custo do que foi vendido","Descontar as despesas do dia","Chegar ao lucro"],"Das vendas ao lucro.")
  ]},
 
@@ -94,7 +94,7 @@ export default [
   nu("Venda de 50 unidades a custo médio de R$ 8,80. CMV?",440,"50 × 8,80 = 440.","R$"),
   nu("Depois da venda, restam 50 un a R$ 8,80. Nova compra de 50 un a R$ 11,20. Nova média?",10,"(440 + 560) ÷ 100 = 10.","R$"),
   tf("Uma venda altera o custo médio unitário do estoque.",false,"Só as compras mudam a média."),
-  mc("Com preços subindo, comparado ao PEPS, o custo médio tende a dar:",["*CMV maior e estoque final menor","CMV menor","O mesmo CMV sempre","Estoque final maior"],"A média inclui custos mais altos na saída."),
+  mc("Com preços subindo, comparado ao PEPS, o custo médio tende a dar:",["*CMV maior e estoque final menor que no PEPS","CMV menor e estoque final igual ao do PEPS","O mesmo CMV sempre, em qualquer situação","CMV igual e estoque final maior que o do PEPS"],"A média inclui custos mais altos na saída."),
   fl("No custo médio, a média é recalculada a cada {compra}.",["venda","mês"],"Média ponderada móvel.")
  ]},
 {id:"mercado4", title:"Quebras e validade", icon:"🗑️",
@@ -108,7 +108,7 @@ export default [
   nu("Sistema: 120 caixas de leite. Contagem: 112. Custo de R$ 45 por caixa. Valor da perda?",360,"8 × 45 = 360.","R$"),
   tf("Produto vencido descartado continua no estoque até o fim do ano.",false,"Deve ser baixado quando descartado."),
   cl("Causa comum de quebra?",["Sim","Não"],"Produto vencido:0|Embalagem danificada:0|Furto:0|Venda normal com nota:1","Quebra é saída sem venda."),
-  mc("Uma boa forma de reduzir quebras por validade é:",["*Colocar na frente os produtos que vencem antes","Comprar sempre o dobro","Esconder os vencidos","Não contar o estoque"],"PEPS físico na prateleira.")
+  mc("Uma boa forma de reduzir quebras por validade é:",["*Colocar na frente os produtos que vencem antes","Comprar sempre o dobro, para nunca faltar produto","Esconder os vencidos no fundo da prateleira","Não contar o estoque para evitar surpresas"],"PEPS físico na prateleira.")
  ]},
 
 /* ---------------- Custos: Hamburgueria do Beto ---------------- */
@@ -123,7 +123,7 @@ export default [
   cl("Custo variável ou fixo da hamburgueria?",["Variável","Fixo"],"Carne do lanche:0|Aluguel do ponto:1|Embalagem:0|Salário do gerente:1|Pão:0","Variável muda com cada lanche vendido."),
   tf("A embalagem de viagem é um custo variável.",true,"Cada lanche vendido usa uma."),
   nu("Custo variável de R$ 11 por lanche. Quanto custam os ingredientes de 300 lanches?",3300,"300 × 11 = 3.300.","R$"),
-  mc("A ficha técnica serve principalmente para:",["*Saber o custo de cada produto e controlar o preço","Pagar o aluguel","Contratar funcionários","Fazer propaganda"],"Custo por unidade.")
+  mc("A ficha técnica serve principalmente para:",["*Saber o custo de cada produto e controlar o preço","Calcular o valor do aluguel que será pago no mês","Definir quantos funcionários serão contratados","Escolher a propaganda e as promoções do mês"],"Custo por unidade.")
  ]},
 {id:"burger2", title:"Margem de contribuição do lanche", icon:"💵",
  learn:[
@@ -135,7 +135,7 @@ export default [
   nu("Preço R$ 30, custo variável R$ 11, taxa do aplicativo de 20% do preço. Margem?",13,"30 − 11 − 6 = 13.","R$"),
   nu("Combo por R$ 42 com custo variável de R$ 16 e taxa de 20%. Margem?",17.6,"42 − 16 − 8,40 = 17,60.","R$"),
   tf("A taxa do aplicativo é uma despesa variável, porque acompanha cada venda.",true,"Muda com o volume vendido."),
-  mc("Para melhorar a margem no aplicativo, Beto pode:",["*Ter preço um pouco maior no aplicativo ou reduzir custos variáveis","Aumentar o aluguel","Contratar mais gente","Nada"],"A margem depende de preço e variáveis."),
+  mc("Para melhorar a margem no aplicativo, Beto pode:",["*Subir um pouco o preço no app ou reduzir custos variáveis","Aumentar o aluguel da loja para cobrir a taxa do app","Contratar mais gente para atender os pedidos do app","Nada: a margem do aplicativo já é a ideal para ele"],"A margem depende de preço e variáveis."),
   fl("Margem de contribuição = preço − custos e despesas {variáveis}.",["fixos","totais"],"O que sobra para pagar os fixos.")
  ]},
 {id:"burger3", title:"Quantos lanches para empatar?", icon:"⚖️",
@@ -149,7 +149,7 @@ export default [
   nu("Vendendo 900 lanches com margem de R$ 16 e fixos de R$ 12.000, qual o lucro?",2400,"900 × 16 − 12.000 = 2.400.","R$"),
   tf("Se o aluguel subir, o ponto de equilíbrio sobe.",true,"Mais custo fixo para cobrir."),
   nu("Beto reduziu o custo variável e a margem foi para R$ 20. Novo ponto de equilíbrio?",600,"12.000 ÷ 20 = 600.","lanches"),
-  mc("Vender 700 lanches no mês significa:",["*Prejuízo, porque está abaixo dos 750","Lucro","Empate","Não dá para saber"],"Abaixo do ponto de equilíbrio.")
+  mc("Vender 700 lanches no mês significa:",["*Prejuízo, porque está abaixo dos 750 lanches","Lucro, porque o mês teve muitas vendas","Empate, porque está perto do ponto de equilíbrio","Não dá para saber sem olhar o preço do lanche"],"Abaixo do ponto de equilíbrio.")
  ]},
 {id:"burger4", title:"Promoção vale a pena?", icon:"🎉",
  learn:[
@@ -161,7 +161,7 @@ export default [
   nu("Terça sem promoção: 20 lanches com margem de R$ 19. Margem total?",380,"20 × 19 = 380.","R$"),
   nu("Com promoção: 25 lanches com margem de R$ 19 e 25 com margem de R$ 4. Margem total?",575,"475 + 100 = 575.","R$"),
   tf("Nesse exemplo, a promoção aumenta a margem total da terça.",true,"575 é maior que 380."),
-  mc("Uma promoção com preço abaixo do custo variável:",["*Reduz o resultado a cada unidade vendida","Sempre aumenta o lucro","Não afeta nada","Reduz os custos fixos"],"Margem negativa em cada venda."),
+  mc("Uma promoção com preço abaixo do custo variável:",["*Reduz o resultado da empresa a cada unidade vendida","Sempre aumenta o lucro, porque atrai mais clientes","Não afeta nada, pois os custos fixos continuam iguais","Reduz os custos fixos por lanche vendido"],"Margem negativa em cada venda."),
   tf("Na decisão da promoção, o aluguel da loja deve ser dividido de novo pelos lanches extras.",false,"O aluguel já existe de qualquer forma.")
  ]},
 
@@ -202,7 +202,7 @@ export default [
   nu("Clientes 60 mil e receita anual 1.200 mil. Prazo médio de recebimento em dias?",18,"60 ÷ 1.200 × 360 = 18.","dias"),
   nu("Estocagem 64 dias, recebimento 18 e pagamento 38. Ciclo financeiro?",44,"64 + 18 − 38 = 44.","dias"),
   tf("Negociar prazo maior com fornecedores reduz o ciclo financeiro.",true,"O prazo de pagamento é subtraído."),
-  mc("Qual ação reduz o ciclo financeiro da farmácia?",["*Comprar remédios em menor quantidade e com mais frequência","Aumentar o estoque parado","Dar mais prazo aos convênios","Pagar fornecedores antes do vencimento"],"Menos dias de estoque."),
+  mc("Qual ação reduz o ciclo financeiro da farmácia?",["*Comprar em menor quantidade e com mais frequência","Aumentar o estoque de itens parados na prateleira","Dar mais prazo de pagamento aos convênios","Pagar os fornecedores antes do vencimento dos títulos"],"Menos dias de estoque."),
   fl("Ciclo financeiro = estocagem + recebimento − {pagamento}.",["lucro","venda"],"Tempo que a empresa financia a operação.")
  ]},
 
@@ -217,7 +217,7 @@ export default [
   mt([["Salário bruto","Valor antes dos descontos"],["Descontos","Previdência, IR, benefícios"],["Salário líquido","O que cai na conta"]],"Termos do holerite."),
   tf("O orçamento pessoal deve partir do salário líquido.",true,"É o dinheiro que realmente entra."),
   nu("Bruto de R$ 3.000 com descontos totais de R$ 420. Líquido?",2580,"3.000 − 420 = 2.580.","R$"),
-  mc("Ana viu 'FGTS' no holerite, mas o valor não saiu do salário dela. Isso porque:",["*O FGTS é depositado pelo empregador, sem desconto do salário","É um erro","É um desconto escondido","É uma multa"],"É um depósito feito pela empresa em conta vinculada."),
+  mc("Ana viu 'FGTS' no holerite, mas o valor não saiu do salário dela. Isso porque:",["*O FGTS é depositado pelo empregador, fora do salário","É um erro do sistema de folha da empresa","É um desconto que a empresa esconde do funcionário no salário","É uma multa cobrada pelo atraso do salário"],"É um depósito feito pela empresa em conta vinculada."),
   nu("Descontos totais de R$ 350 sobre bruto de R$ 2.500. Que % do bruto foi descontado?",14,"350 ÷ 2.500 = 14%.","%")
  ]},
 {id:"emprego2", title:"O orçamento da Ana", icon:"🗓️",
@@ -231,7 +231,7 @@ export default [
   tf("Guardar só o que sobra no fim do mês costuma funcionar melhor do que guardar no dia do salário.",false,"O que sobra no fim costuma ser nada."),
   cl("Necessidade ou desejo?",["Necessidade","Desejo"],"Aluguel:0|Transporte para o trabalho:0|Tênis de marca novo:1|Mercado:0|Streaming extra:1","Necessidade é o essencial para viver e trabalhar."),
   nu("Ana gasta R$ 40 por semana em lanches. Quanto isso dá em um mês de 4 semanas?",160,"40 × 4 = 160.","R$"),
-  mc("Uma compra parcelada em 10 vezes:",["*Compromete o orçamento dos próximos 10 meses","Só afeta o mês da compra","Não precisa ser anotada","Não tem custo se não tiver juros"],"Cada parcela reduz a folga futura.")
+  mc("Uma compra parcelada em 10 vezes:",["*Compromete o orçamento dos próximos 10 meses","Só afeta o orçamento do mês em que a compra foi feita","Não precisa ser anotada no orçamento","Não tem nenhum custo, se não tiver juros"],"Cada parcela reduz a folga futura.")
  ]},
 {id:"emprego3", title:"13º, férias e a reserva", icon:"🎁",
  learn:[
@@ -280,8 +280,8 @@ export default [
   {h:"Diferenças encontradas", b:box('exemplo','Em 40 itens testados, 3 tinham diferença. O auditor investiga as causas e amplia o teste se o erro puder ser relevante.')}
  ],
  ex:[
-  mc("Pegar itens do sistema e procurá-los na prateleira testa principalmente:",["*Se os itens registrados existem","Se o preço está certo","Se o balanço fecha","Se houve lucro"],"Existência."),
-  mc("Pegar itens da prateleira e procurá-los no sistema testa principalmente:",["*Se tudo o que existe foi registrado","Se os itens existem","A receita","O caixa"],"Integridade."),
+  mc("Pegar itens do sistema e procurá-los na prateleira testa principalmente:",["*Se os itens registrados realmente existem","Se o preço de venda de cada item está certo","Se o balanço da loja fecha no fim do mês","Se a loja teve lucro no mês da contagem"],"Existência."),
+  mc("Pegar itens da prateleira e procurá-los no sistema testa principalmente:",["*Se tudo o que existe está registrado no sistema","Se os itens registrados realmente existem na loja","A receita reconhecida pela loja no mês","O saldo do caixa da loja no fim do dia"],"Integridade."),
   nu("Em 40 itens testados, 3 tinham diferença. Qual o % com diferença?",7.5,"3 ÷ 40 = 7,5%.","%"),
   tf("O auditor apenas lê o relatório de contagem, sem ir ao local.",false,"Ele acompanha e faz contagens-teste."),
   nu("Sistema: 200 calças a R$ 60. Contagem: 188. Valor da diferença?",720,"12 × 60 = 720.","R$"),
@@ -296,7 +296,7 @@ export default [
   nu("Vendas no cartão no sistema: R$ 50.000. Taxas: R$ 1.250. Quanto deveria ter sido depositado?",48750,"50.000 − 1.250 = 48.750.","R$"),
   nu("Depósitos da administradora somaram R$ 47.750, mas o esperado era R$ 48.750. Diferença a investigar?",1000,"48.750 − 47.750 = 1.000.","R$"),
   tf("Muitas devoluções logo após o fechamento do ano merecem atenção do auditor.",true,"Podem indicar receita inflada."),
-  mc("Uma venda registrada em 30/12 e 'devolvida' em 02/01, sem troca de mercadoria, pode indicar:",["*Receita registrada sem ter acontecido","Boa gestão","Nada","Erro do cliente"],"Sinal de alerta."),
+  mc("Uma venda registrada em 30/12 e 'devolvida' em 02/01, sem troca de mercadoria, pode indicar:",["*Receita registrada sem que a venda tenha acontecido","Boa gestão comercial, com clientes satisfeitos","Nada de relevante, pois devolução é normal","Erro do cliente ao preencher a devolução"],"Sinal de alerta."),
   cl("Evidência útil para testar a receita do cartão?",["Sim","Não"],"Extrato da administradora:0|Depósitos no banco:0|Opinião do vendedor sobre o mês:1|Relatório de vendas do sistema:0","Evidência documental e de terceiros é mais forte."),
   fl("Comparar o sistema com o extrato da administradora é uma {conciliação}.",["depreciação","provisão"],"Confronto de duas fontes.")
  ]},
@@ -309,7 +309,7 @@ export default [
  ],
  ex:[
   od("Ordene a rotina com os documentos:",["Separar por cliente","Conferir se o documento é da empresa certa","Classificar e lançar","Guardar vinculado ao lançamento"],"Organizar antes de lançar."),
-  mc("Chegou a nota de compra de um computador com CNPJ de outro cliente. O que fazer?",["*Devolver para correção ou lançar no cliente certo","Lançar no cliente que enviou","Ignorar","Lançar como receita"],"Entidade certa."),
+  mc("Chegou a nota de compra de um computador com CNPJ de outro cliente. O que fazer?",["*Devolver para correção ou lançar no cliente certo","Lançar no cliente que enviou a nota, mesmo com o CNPJ errado","Ignorar a nota e não avisar o cliente","Lançar a nota como receita do cliente"],"Entidade certa."),
   tf("Um calendário de obrigações por cliente ajuda a não perder prazos.",true,"Organização evita multas."),
   cl("Tem prazo curto e fixo?",["Prioridade","Pode esperar"],"Folha de pagamento do mês:0|Guia de tributo vencendo amanhã:0|Arquivar notas do ano passado:1|Organizar a pasta de fotos:1","Prazo manda na prioridade."),
   en("Chegou o recibo do aluguel de março do salão, pago pelo banco: R$ 1.300.","Despesa de aluguel","Bancos",["Receita de serviços","Fornecedores"],"Despesa do mês paga pelo banco."),
@@ -335,7 +335,7 @@ export default [
  ],
  ex:[
   od("Ordene o fechamento:",["Conciliar os bancos","Conferir clientes, fornecedores e estoque","Lançar provisões e depreciação","Revisar e fechar o balancete","Enviar os relatórios ao cliente"],"Conferir antes de fechar."),
-  mc("A energia do mês veio três vezes maior que no mês anterior. Primeiro passo:",["*Verificar o documento e o lançamento","Ignorar","Apagar o lançamento","Dividir por três"],"Revisão analítica."),
+  mc("A energia do mês veio três vezes maior que no mês anterior. Primeiro passo:",["*Verificar o documento e o lançamento feito no sistema","Ignorar a diferença, porque energia varia todo mês","Apagar o lançamento e refazer com o valor médio","Dividir o valor por três para chegar ao normal"],"Revisão analítica."),
   en("Provisão de férias do mês de um funcionário: R$ 280.","Despesa com férias","Férias a pagar",["Bancos","Receita de serviços"],"Despesa do mês e obrigação futura."),
   tf("Se o balancete fecha, o fechamento está automaticamente correto.",false,"Balancete fechado não prova ausência de erro de classificação."),
   nu("Energia de R$ 450 em fevereiro e R$ 1.350 em março. Quantas vezes maior?",3,"1.350 ÷ 450 = 3.","vezes"),
@@ -379,7 +379,7 @@ export default [
   nu("Vendido por 130.000. Ganho na venda?",20000,"130.000 − 110.000 = 20.000.","R$"),
   nu("Se fosse vendido por 95.000, qual seria a perda?",15000,"110.000 − 95.000 = 15.000.","R$"),
   tf("Na venda, a depreciação acumulada do caminhão também é baixada.",true,"Ela pertence ao bem vendido."),
-  mc("Ganho na venda de imobilizado aparece na DRE como:",["*Outras receitas (não é receita de vendas da atividade)","Receita de serviços de transporte","Redução do CMV","Aumento do capital"],"Não é a atividade principal."),
+  mc("Ganho na venda de imobilizado aparece na DRE como:",["*Outras receitas, fora da receita da atividade","Receita de serviços de transporte prestados","Redução do custo das mercadorias vendidas","Aumento do capital social da transportadora"],"Não é a atividade principal."),
   tf("O valor contábil de um bem é sempre igual ao preço que ele vale no mercado.",false,"É custo menos depreciação acumulada.")
  ]}
 ];

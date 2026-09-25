@@ -63,7 +63,7 @@ export default [
   nu("Juros simples: R$ 2.000 a 3% ao mês por 4 meses. Quanto de juros?",240,"2.000 × 0,03 × 4 = 240.","R$","J = C × i × t."),
   nu("Juros simples: R$ 2.000 a 3% ao mês por 4 meses. Qual o montante (capital + juros)?",2240,"Os juros são 2.000 × 3% × 4 = 240. Montante: 2.000 + 240 = 2.240.","R$"),
   nu("Juros compostos: R$ 1.000 a 10% ao mês por 2 meses. Qual o montante?",1210,"1.000 × 1,1 = 1.100; 1.100 × 1,1 = 1.210.","R$","Aplique 10% duas vezes seguidas."),
-  mc("Em juros compostos, a taxa incide sobre:",["*O montante acumulado até o período anterior","Sempre o capital inicial","Apenas os juros","Nada"],"É o famoso juros sobre juros."),
+  mc("Em juros compostos, a taxa incide sobre:",["*O montante acumulado até o período anterior","Sempre o capital inicial, em todos os períodos","Apenas os juros calculados no primeiro período","Nada, porque a taxa é aplicada só no fim"],"É o famoso juros sobre juros."),
   tf("Com mesma taxa e prazo maior que um período, juros compostos rendem mais que juros simples.",true,"Os juros também passam a render juros."),
   mt([["Capital","Valor inicial"],["Taxa","Percentual por período"],["Montante","Capital + juros"],["Juros","Preço do dinheiro no tempo"]],"Vocabulário básico de matemática financeira."),
   mc("Para uma empresa que pegou empréstimo, os juros pagos são:",["*Despesa financeira","Receita financeira","Capital social","Ativo"],"Juros pagos reduzem o resultado."),
@@ -78,7 +78,7 @@ export default [
  ],
  ex:[
   cl("Que tipo de atividade é?",["Comércio","Indústria","Serviços"],"Loja de roupas:0|Fábrica de móveis:1|Salão de beleza:2|Mercadinho:0|Escritório de contabilidade:2|Fábrica de sorvetes:1","Comércio revende; indústria transforma; serviços vende trabalho."),
-  mc("O que é o CNPJ?",["*O cadastro da empresa na Receita Federal","O CPF do dono","Um tipo de imposto","Um livro contábil"],"Cadastro Nacional da Pessoa Jurídica."),
+  mc("O que é o CNPJ?",["*O cadastro da empresa na Receita Federal","O número do CPF do dono da empresa","Um tipo de imposto federal sobre o lucro","Um livro contábil obrigatório para as empresas"],"Cadastro Nacional da Pessoa Jurídica."),
   tf("O MEI pode faturar até R$ 81 mil por ano.",true,"Esse é o limite anual do MEI."),
   mt([["MEI","Até R$ 81 mil por ano"],["LTDA","Sócios respondem até o capital"],["S.A.","Capital dividido em ações"],["SLU","Limitada com um só sócio"]],"Principais formatos de empresa."),
   wr("Qual a sigla do cadastro que funciona como o “CPF da empresa”?",["cnpj"],"CNPJ."),
@@ -127,7 +127,7 @@ export default [
   en("A empresa deposita R$ 1.000 do caixa na conta bancária.","Bancos","Caixa",["Capital social","Receita de vendas"],"Bancos aumenta e Caixa diminui.","Uma conta de Ativo sobe e outra desce."),
   tf("Depositar dinheiro do caixa no banco aumenta o total disponível.",false,"É só uma troca entre contas do Ativo."),
   cl("Onde fica cada valor?",["Caixa","Bancos","Aplicações"],"Dinheiro na gaveta:0|Saldo da conta corrente:1|CDB de liquidez diária:2|Pix recebido:1|Troco no cofre:0","Espécie é Caixa; conta corrente é Bancos; investimento é Aplicação."),
-  mc("O que forma o “Disponível” da empresa?",["*Caixa, bancos e aplicações de liquidez imediata","Estoques e máquinas","Fornecedores","Capital social"],"É o dinheiro que pode ser usado agora."),
+  mc("O que forma o “Disponível” da empresa?",["*Caixa, bancos e aplicações de liquidez imediata","Estoques, máquinas e outros bens da empresa","Fornecedores e outras dívidas de curto prazo","Capital social e reservas de lucros dos sócios"],"É o dinheiro que pode ser usado agora."),
   wr("Qual conta registra o dinheiro em espécie guardado na empresa?",["caixa"],"Caixa = dinheiro físico."),
   nu("Caixa R$ 800, Bancos R$ 5.200 e aplicação de liquidez imediata R$ 2.000. Qual o disponível?",8000,"800 + 5.200 + 2.000 = 8.000.","R$")
  ]},
@@ -156,7 +156,7 @@ export default [
  ex:[
   nu("Vendas de 4 semanas: 200, 180, 220 e 240. Qual a média semanal?",210,"(200+180+220+240) ÷ 4 = 840 ÷ 4 = 210.","R$"),
   nu("60 unidades a R$ 10 e 40 unidades a R$ 15. Qual a média ponderada por unidade?",12,"(60×10 + 40×15) ÷ 100 = (600+600) ÷ 100 = 12.","R$","Pondere pela quantidade de cada lote."),
-  mc("Na média ponderada, o que muda em relação à média simples?",["*Cada valor pesa proporcionalmente à sua quantidade","Todos os valores viram iguais","Só o maior valor conta","O resultado nunca muda"],"Lotes maiores puxam mais a média para o seu preço."),
+  mc("Na média ponderada, o que muda em relação à média simples?",["*Cada valor pesa de acordo com a sua quantidade","Todos os valores passam a valer exatamente o mesmo","Só o maior valor da lista entra no cálculo","O resultado nunca muda, seja qual for o peso"],"Lotes maiores puxam mais a média para o seu preço."),
   tf("Estimar um resultado antes de calcular com exatidão ajuda a perceber erros grosseiros.",true,"Arredondar os números dá uma ideia da ordem de grandeza esperada."),
   nu("Estoque inicial de R$ 8.000 e final de R$ 10.000. Qual o estoque médio do período?",9000,"(8.000 + 10.000) ÷ 2 = 9.000.","R$","Estoque médio é a média entre inicial e final."),
   wr("Quando cada valor tem um peso diferente na conta, a média se chama média ___.",["ponderada"],"Média ponderada.")

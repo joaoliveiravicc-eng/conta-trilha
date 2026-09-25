@@ -55,7 +55,7 @@ export default {
     {t:"entry", q:"Compra de mercadorias a prazo, R$ 3.000.", accts:["Estoques","Fornecedores","Caixa","Clientes"], d:["Estoques"], c:["Fornecedores"], e:"Estoques aumenta (débito) e nasce a dívida com Fornecedores (crédito)."},
     {t:"entry", q:"Pagamento de R$ 3.000 ao fornecedor, pelo banco.", accts:["Fornecedores","Bancos","Estoques","Despesas gerais"], d:["Fornecedores"], c:["Bancos"], e:"A dívida (Passivo) diminui: débito. O dinheiro no banco (Ativo) diminui: crédito."},
     {t:"entry", q:"Recebimento de R$ 1.500 de um cliente, em dinheiro.", accts:["Caixa","Clientes","Receita de vendas","Fornecedores"], d:["Caixa"], c:["Clientes"], e:"Caixa aumenta (débito) e o direito a receber de Clientes diminui (crédito). A receita já tinha sido registrada na venda."},
-    {t:"tf", q:"Em um lançamento correto, a soma dos débitos é igual à soma dos créditos.", a:true, e:"É o princípio das partidas dobradas."},
+    {t:"tf", q:"Em um lançamento correto, o total de débitos pode ser diferente do total de créditos.", a:false, e:"Não pode: pelas partidas dobradas, débitos e créditos de um lançamento têm o mesmo valor."},
     {t:"mc", q:"Ao pagar uma dívida com fornecedor, o que acontece com Ativo e Passivo?", o:["Ambos diminuem","Ambos aumentam","O Ativo aumenta e o Passivo diminui","Nada muda"], a:0, e:"Sai dinheiro (Ativo diminui) e a dívida acaba (Passivo diminui)."}
    ]},
   {id:"dc4", title:"Tipos de fatos contábeis", icon:"🔀",
@@ -83,9 +83,9 @@ export default {
     {h:"Transferência e complemento", b:ul(['<b>Transferência</b>: corrige de uma vez, debitando a conta certa e creditando a errada.','<b>Complemento</b>: se lançou valor a menor, lança-se só a diferença.']) + lanc([['D','Despesa com energia','500'],['C','Despesa de aluguel','500']])}
    ],
    ex:[
-    {t:"mc", q:"Como se corrige um lançamento errado?", o:["Com um estorno e, depois, o lançamento correto","Apagando o lançamento","Rasurando o livro","Ignorando o erro"], a:0, e:"A contabilidade corrige deixando rastro."},
+    {t:"mc", q:"Como se corrige um lançamento errado?", o:["Com um estorno e, depois, o lançamento correto","Apagando o lançamento errado do livro contábil","Rasurando a página do livro com corretivo","Ignorando o erro quando ele for pequeno demais"], a:0, e:"A contabilidade corrige deixando rastro."},
     {t:"entry", q:"Estorne o lançamento feito por engano: D Despesa de aluguel / C Caixa, R$ 500.", d:["Caixa"], c:["Despesa de aluguel"], accts:["Caixa","Despesa de aluguel","Despesa com energia","Bancos"], e:"O estorno inverte débito e crédito.", h:"Inverta os lados do lançamento original."},
-    {t:"tf", q:"Um estorno é o lançamento original com débito e crédito invertidos.", a:true, e:"Assim os saldos voltam ao que eram."},
+    {t:"tf", q:"Um estorno repete o lançamento original, com os mesmos débitos e créditos.", a:false, e:"O estorno inverte débito e crédito para anular o efeito do lançamento original."},
     {t:"num", q:"Uma venda de R$ 1.500 foi lançada como R$ 1.200. Qual o valor do lançamento complementar?", a:300, e:"Falta a diferença: 1.500 − 1.200 = 300.", u:"R$"},
     {t:"wr", q:"Como se chama o lançamento que anula outro, invertendo débito e crédito?", a:["estorno"], e:"Estorno."},
     {t:"ew", q:"Uma despesa de energia de R$ 200 foi lançada em Despesa de aluguel. Escreva o lançamento de transferência que corrige direto.", d:["Despesa com energia"], c:["Despesa de aluguel"], e:"Debita-se a conta certa e credita-se a errada.", h:"Qual conta precisa receber o valor?"}
@@ -102,11 +102,11 @@ export default {
     {h:"E se der prejuízo?", b:`<p>Se as despesas superarem as receitas, a ARE fica com saldo devedor, e o lançamento final se inverte: <b>D Lucros ou prejuízos acumulados / C Apuração do Resultado do Exercício</b>. O prejuízo reduz o Patrimônio Líquido.</p>`}
    ],
    ex:[
-    {t:"mc", q:"Por que as contas de receita e despesa precisam ser encerradas no fim do período?", o:["Porque são temporárias e devem zerar para o próximo período começar do zero","Porque são contas de Ativo","Porque o Fisco exige a cada semana","Elas nunca são encerradas"], a:0, e:"Diferente de Ativo, Passivo e PL, que são permanentes."},
+    {t:"mc", q:"Por que as contas de receita e despesa precisam ser encerradas no fim do período?", o:["Porque são temporárias e devem zerar para o próximo período","Porque são contas de Ativo e precisam ser fechadas todo ano","Porque o Fisco exige o encerramento toda semana","Elas nunca são encerradas, só as de Ativo"], a:0, e:"Diferente de Ativo, Passivo e PL, que são permanentes."},
     {t:"tf", q:"Ao encerrar uma conta de receita, ela é debitada, pois normalmente tem saldo credor.", a:true, e:"Debitar uma conta credora zera o seu saldo."},
-    {t:"mc", q:"Para onde vai o saldo de todas as contas de receita e despesa no encerramento?", o:["Para a Apuração do Resultado do Exercício","Direto para o Caixa","Para a conta de Clientes","Para o Passivo Circulante"], a:0, e:"A ARE reúne temporariamente todas as receitas e despesas do período."},
+    {t:"mc", q:"Para onde vai o saldo de todas as contas de receita e despesa no encerramento?", o:["Para a Apuração do Resultado do Exercício","Direto para o Caixa, como um recebimento","Para a conta de Clientes da empresa","Para o Passivo Circulante, como dívida"], a:0, e:"A ARE reúne temporariamente todas as receitas e despesas do período."},
     {t:"num", q:"Depois de encerradas as contas, a Apuração do Resultado do Exercício tem receitas totais de R$ 80.000 e despesas totais de R$ 65.000. Qual o resultado?", a:15000, u:"R$", e:"80.000 − 65.000 = 15.000 de lucro."},
-    {t:"mc", q:"O lucro apurado na ARE é transferido, no fechamento, para:", o:["Uma conta do Patrimônio Líquido, como Lucros acumulados","O Ativo Circulante","O Passivo Não Circulante","A conta Caixa"], a:0, e:"O lucro pertence aos sócios, por isso engorda o PL."},
+    {t:"mc", q:"O lucro apurado na ARE é transferido, no fechamento, para:", o:["O Patrimônio Líquido, como Lucros acumulados","O Ativo Circulante, na conta de Clientes da empresa","O Passivo Não Circulante, como dívida","A conta Caixa, aumentando o dinheiro"], a:0, e:"O lucro pertence aos sócios, por isso engorda o PL."},
     {t:"tf", q:"Se as despesas superarem as receitas na apuração, o resultado reduz o Patrimônio Líquido.", a:true, e:"Um prejuízo diminui o PL, ao contrário do lucro."}
    ]},
   {id:"dc7", title:"Revisão: débito e crédito", icon:"🔄",
@@ -118,7 +118,7 @@ export default {
     {t:"entry", q:"Pagamento de uma conta de energia, R$ 400, em dinheiro.", accts:["Despesa com energia","Caixa","Fornecedores","Receita de vendas"], d:["Despesa com energia"], c:["Caixa"], e:"A despesa aumenta (débito) e o Caixa diminui (crédito)."},
     {t:"tf", q:"Um fato permutativo, como transferir dinheiro do Caixa para o Banco, altera o Patrimônio Líquido.", a:false, e:"Permutativo só troca valores entre contas do Ativo; quem altera o PL são receitas e despesas."},
     {t:"num", q:"Uma conta tem débitos de R$ 3.000 e créditos de R$ 4.500. Qual o saldo e de que tipo?", a:1500, u:"R$", e:"4.500 − 3.000 = 1.500, saldo credor (o lado do crédito é maior)."},
-    {t:"mc", q:"Ao encerrar as contas de resultado no fim do período, uma conta de receita é:", o:["Debitada, para zerar seu saldo credor","Creditada de novo","Transferida direto para o Ativo","Ignorada"], a:0, e:"Debitar uma conta que normalmente é credora zera o seu saldo."},
+    {t:"mc", q:"Ao encerrar as contas de resultado no fim do período, uma conta de receita é:", o:["Debitada, para zerar seu saldo credor","Creditada de novo, para dobrar o saldo credor","Transferida direto para o Ativo da empresa","Ignorada, porque receita não é encerrada"], a:0, e:"Debitar uma conta que normalmente é credora zera o seu saldo."},
     {t:"wr", q:"Como se chama o lançamento que corrige um erro invertendo débito e crédito do lançamento original?", a:["estorno"], e:"Estorno."}
    ]}
   ]

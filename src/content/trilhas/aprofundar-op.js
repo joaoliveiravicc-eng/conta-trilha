@@ -13,7 +13,7 @@ export default [
   od("Ordene o caminho de uma venda no ERP:",["Pedido de venda","Emissão da nota fiscal","Baixa do estoque","Conta a receber no financeiro","Lançamento na contabilidade"],"Da venda ao registro contábil."),
   mt([["Comercial","Pedido do cliente"],["Fiscal","Nota fiscal"],["Estoque","Baixa da mercadoria"],["Financeiro","Título a receber"]],"Cada módulo, sua parte."),
   tf("Um erro no cadastro de um produto pode afetar todas as vendas dele na contabilidade.",true,"A integração repete o cadastro."),
-  mc("A vantagem principal da integração entre módulos é:",["*Registrar o fato uma vez e reaproveitar os dados","Dispensar a conferência","Eliminar a nota fiscal","Aumentar o estoque"],"Menos digitação, menos erro."),
+  mc("A vantagem principal da integração entre módulos é:",["*Registrar o fato uma vez e reaproveitar os dados","Dispensar a conferência dos lançamentos feitos","Eliminar a necessidade de emitir nota fiscal","Aumentar o estoque da empresa automaticamente"],"Menos digitação, menos erro."),
   tf("Com o ERP integrado, a contabilidade não precisa mais conferir nada.",false,"Conciliações e revisões continuam necessárias."),
   fl("A baixa da mercadoria vendida acontece no módulo de {estoque}.",["folha","ponto"],"Controle das quantidades.")
  ]},
@@ -23,12 +23,12 @@ export default [
   {h:"Para que serve", b:ul(['Saber quanto custa cada área.','Comparar filiais.','Cobrar responsáveis pelo orçamento de cada área.'])}
  ],
  ex:[
-  mc("A diferença entre conta contábil e centro de custo é:",["*A conta diz o que foi gasto; o centro de custo diz onde","São a mesma coisa","Centro de custo é o banco","Conta é só para receitas"],"Duas dimensões do mesmo lançamento."),
+  mc("A diferença entre conta contábil e centro de custo é:",["*A conta diz o que foi gasto; o centro de custo diz onde","São a mesma coisa, só mudam os nomes nos relatórios","O centro de custo é o banco onde o dinheiro está","A conta é usada só para receitas, e o centro só para despesas"],"Duas dimensões do mesmo lançamento."),
   cl("Qual centro de custo?",["Produção","Comercial","Administrativo"],"Manutenção das máquinas:0|Comissão de vendedores:1|Honorários do contador:2|Matéria-prima consumida:0|Propaganda:1","Pergunte: em qual área o gasto foi usado?"),
   tf("Com centros de custo, dá para comparar o gasto de duas filiais.",true,"Cada filial vira um centro."),
   nu("Energia total de R$ 6.000: fábrica consome 70%. Quanto vai para o centro Produção?",4200,"70% de 6.000 = 4.200.","R$"),
   fl("A conta contábil mostra o que foi gasto; o {centro de custo} mostra onde.",["plano de contas","balancete"],"Dimensão de área."),
-  mc("Um gestor quer saber quanto a filial Norte gastou. O que ajuda?",["*Lançamentos com centro de custo por filial","Somar só o caixa","Olhar só o Balanço","Contar os funcionários"],"Centro de custo separa por área.")
+  mc("Um gestor quer saber quanto a filial Norte gastou. O que ajuda?",["*Lançamentos com centro de custo por filial","Somar apenas o saldo do caixa de cada dia","Olhar somente o Balanço Patrimonial da empresa","Contar o número de funcionários da filial"],"Centro de custo separa por área.")
  ]},
 {id:"digitalx3", title:"Indicadores e painéis", icon:"📊",
  learn:[
@@ -38,7 +38,7 @@ export default [
  ex:[
   nu("Contas a receber de R$ 80.000, das quais R$ 12.000 estão vencidas. Qual o % vencido?",15,"12.000 ÷ 80.000 = 15%.","%"),
   tf("Um painel com dezenas de indicadores é sempre melhor.",false,"Poucos e bem definidos ajudam mais a decidir."),
-  mc("O faturamento do painel não bate com a DRE. O que fazer?",["*Conciliar as fontes antes de usar o número","Usar o maior","Ignorar a DRE","Apagar o painel"],"Número sem conciliação não sustenta decisão."),
+  mc("O faturamento do painel não bate com a DRE. O que fazer?",["*Conciliar as fontes antes de usar o número","Usar o maior dos dois números, por segurança","Ignorar a DRE e ficar só com o painel","Apagar o painel para não haver dois números"],"Número sem conciliação não sustenta decisão."),
   cl("Bom indicador para um painel mensal?",["Sim","Não"],"Margem bruta do mês:0|Saldo de caixa:0|Cor preferida do gerente:1|Recebíveis vencidos:0|Número de cadeiras do escritório:1","Precisa ajudar a decidir."),
   nu("Receita do mês de R$ 250.000 e lucro bruto de R$ 75.000. Margem bruta em %?",30,"75.000 ÷ 250.000 = 30%.","%"),
   fl("O painel que reúne indicadores do negócio também é chamado de {dashboard}.",["balancete","razonete"],"Visão rápida para decidir.")
@@ -50,7 +50,7 @@ export default [
  ],
  ex:[
   tf("Salário e CPF de funcionários são dados pessoais.",true,"Identificam ou se referem a uma pessoa."),
-  mc("Quem deveria acessar a folha de pagamento?",["*Só quem precisa para trabalhar com ela","Todos da empresa","Qualquer fornecedor","Ninguém nunca"],"Acesso pelo princípio da necessidade."),
+  mc("Quem deveria acessar a folha de pagamento?",["*Só quem precisa do acesso para trabalhar com ela","Todas as pessoas da empresa, por transparência","Qualquer fornecedor que peça o acesso","Ninguém, nem mesmo o pessoal do RH"],"Acesso pelo princípio da necessidade."),
   tf("Backup que nunca foi testado garante a recuperação dos dados.",false,"Só um teste de restauração comprova."),
   cl("Prática segura ou arriscada?",["Segura","Arriscada"],"Acesso em dois passos:0|Senha compartilhada no grupo:1|Backup testado:0|Planilha de salários enviada para e-mail pessoal:1|Perfis por função:0","Menos acesso e mais controle."),
   fl("A lei brasileira de proteção de dados pessoais é a {LGPD}.",["CLT","NBC"],"Lei Geral de Proteção de Dados."),
@@ -67,7 +67,7 @@ export default [
   nu("Máquina de R$ 50.000, valor residual R$ 5.000, vida útil 9 anos. Depreciação anual?",5000,"(50.000 − 5.000) ÷ 9 = 5.000.","R$"),
   nu("Computador de R$ 6.000, sem valor residual, vida útil 3 anos. Depreciação mensal?",166.67,"6.000 ÷ 36 meses ≈ 166,67.","R$",undefined,0.02),
   tf("O valor residual reduz a base que será depreciada.",true,"Deprecia-se custo menos residual."),
-  mc("A vida útil de um bem é:",["*O período em que a empresa espera usá-lo","Sempre 10 anos","O prazo da garantia","O prazo do financiamento"],"É uma estimativa de uso."),
+  mc("A vida útil de um bem é:",["*O período em que a empresa espera usá-lo","Sempre 10 anos, para qualquer tipo de bem","O prazo de garantia dado pelo fabricante","O prazo do financiamento usado na compra"],"É uma estimativa de uso."),
   nu("Veículo de R$ 80.000, residual R$ 16.000, depreciação anual de R$ 16.000. Qual a vida útil em anos?",4,"(80.000 − 16.000) ÷ 16.000 = 4.","anos"),
   fl("Depreciação anual = (custo − {valor residual}) ÷ vida útil.",["depreciação acumulada","receita"],"Base depreciável.")
  ]},
@@ -81,7 +81,7 @@ export default [
   en("Pagou pelo banco R$ 800 de manutenção preventiva da máquina.","Despesa de manutenção","Bancos",["Máquinas e equipamentos","Fornecedores"],"Mantém, não melhora: despesa."),
   en("Pagou pelo banco R$ 25.000 por uma ampliação que aumenta a capacidade da máquina.","Máquinas e equipamentos","Bancos",["Despesa de manutenção","Caixa"],"Aumenta o benefício futuro: ativo."),
   tf("Todo gasto com um bem do imobilizado vira ativo.",false,"Manutenção comum é despesa."),
-  mc("Um gasto que aumenta a vida útil de um caminhão de 5 para 8 anos é:",["*Adicionado ao custo do ativo","Despesa do mês","Receita","Passivo"],"Gera benefício futuro adicional."),
+  mc("Um gasto que aumenta a vida útil de um caminhão de 5 para 8 anos é:",["*Somado ao custo do caminhão, no ativo","Despesa do mês em que o gasto foi pago","Receita do período, porque o caminhão rende mais","Passivo, por ser uma obrigação com o fornecedor"],"Gera benefício futuro adicional."),
   fl("Gastos que apenas mantêm o bem funcionando são {despesa} do período.",["ativo","receita"],"Não aumentam o benefício futuro.")
  ]},
 {id:"imobx3", title:"Depreciação, amortização e exaustão", icon:"🪨",
@@ -106,7 +106,7 @@ export default [
   tf("O terreno de uma fábrica é depreciado como o prédio.",false,"Terreno, em regra, não se deprecia."),
   nu("Imóvel de R$ 900.000, sendo R$ 300.000 de terreno. Edifício com vida útil de 25 anos, sem residual. Depreciação anual?",24000,"600.000 ÷ 25 = 24.000.","R$"),
   en("Comprou um imóvel pelo banco: terreno R$ 200.000 e edificação R$ 500.000.","Terrenos+Edificações","Bancos",["Despesa de aluguel","Estoques"],"Separe o terreno da construção."),
-  mc("Por que separar terreno e edifício na compra?",["*Porque só o edifício é depreciado","Para pagar menos imposto","Porque o banco exige","Não é preciso separar"],"Base de depreciação diferente."),
+  mc("Por que separar terreno e edifício na compra?",["*Porque só o edifício é depreciado, e o terreno não","Para pagar menos imposto na compra do imóvel","Porque o banco exige a separação dos valores","Não é preciso separar os dois valores"],"Base de depreciação diferente."),
   mc("Um terreno comprado por uma loteadora para revender é:",["*Estoque","Imobilizado","Intangível","Despesa"],"A finalidade define a classificação."),
   fl("Na compra de imóvel, só a {edificação} entra na base de depreciação.",["área","escritura"],"O terreno fica fora.")
  ]},
@@ -134,7 +134,7 @@ export default [
   nu("Consumo de 30 unidades por dia, prazo de entrega de 4 dias e estoque de segurança de 50. Ponto de pedido?",170,"30 × 4 + 50 = 170.","unidades"),
   nu("Consumo de 12 por dia e prazo de 10 dias, sem estoque de segurança. Ponto de pedido?",120,"12 × 10 = 120.","unidades"),
   tf("O estoque de segurança protege contra atrasos do fornecedor.",true,"É uma folga."),
-  mc("Estoque de segurança muito alto tende a:",["*Prender dinheiro em mercadoria parada","Aumentar o caixa","Eliminar os custos","Aumentar o giro"],"Mais estoque, mais recursos parados."),
+  mc("Estoque de segurança muito alto tende a:",["*Prender dinheiro em mercadoria parada","Aumentar o caixa disponível da empresa","Eliminar os custos de armazenagem","Aumentar o giro do estoque no ano"],"Mais estoque, mais recursos parados."),
   nu("Ponto de pedido de 200, consumo de 25 por dia e prazo de 6 dias. Qual o estoque de segurança?",50,"200 − 25 × 6 = 50.","unidades"),
   fl("Ponto de pedido = consumo diário × prazo de entrega + estoque de {segurança}.",["giro","venda"],"Folga contra imprevistos.")
  ]},
@@ -148,7 +148,7 @@ export default [
   nu("Com giro de 6 vezes no ano (ano de 360 dias), quantos dias o estoque fica parado em média?",60,"360 ÷ 6 = 60.","dias"),
   nu("Estoque inicial 16.000 e final 24.000. Qual o estoque médio?",20000,"(16.000 + 24.000) ÷ 2 = 20.000.","R$"),
   tf("Um giro maior significa que o estoque fica menos tempo parado.",true,"Roda mais vezes no período."),
-  mc("O que tende a acontecer com o caixa se o estoque gira mais devagar?",["*Mais dinheiro fica preso no estoque","O caixa aumenta sozinho","Nada muda","O lucro dobra"],"Estoque parado prende recursos."),
+  mc("O que tende a acontecer com o caixa se o estoque gira mais devagar?",["*Mais dinheiro fica preso no estoque por mais tempo","O caixa aumenta sozinho, sem fazer nada","Nada muda, porque o giro não afeta o caixa","O lucro dobra, porque as vendas ficam maiores"],"Estoque parado prende recursos."),
   fl("Prazo médio de estocagem = 360 ÷ {giro}.",["CMV","lucro"],"Converte o giro em dias.")
  ]},
 {id:"estoqx4", title:"Custo ou valor realizável?", icon:"🏷️",
@@ -161,7 +161,7 @@ export default [
   nu("Estoque com custo de 2.000 e VRL de 1.700. Qual a perda a reconhecer?",300,"2.000 − 1.700 = 300.","R$"),
   nu("Custo R$ 500; preço de venda R$ 800; gastos para vender R$ 60. Por quanto o estoque fica mensurado?",500,"VRL = 740, maior que o custo: fica pelo custo, 500.","R$"),
   tf("Se o VRL for maior que o custo, o estoque é aumentado até o VRL.",false,"Fica pelo custo: o menor dos dois."),
-  mc("Mercadorias fora de moda tiveram o preço de venda reduzido abaixo do custo. O que fazer?",["*Reduzir o estoque ao VRL e reconhecer a perda","Manter pelo custo","Aumentar o estoque","Lançar como receita"],"Não se mantém ativo acima do que ele deve render."),
+  mc("Mercadorias fora de moda tiveram o preço de venda reduzido abaixo do custo. O que fazer?",["*Reduzir o estoque ao VRL e reconhecer a perda","Manter o estoque pelo custo original de compra","Aumentar o valor do estoque pelo preço antigo","Lançar a diferença como receita do período"],"Não se mantém ativo acima do que ele deve render."),
   fl("O estoque é mensurado pelo menor valor entre o custo e o valor {realizável líquido}.",["de mercado bruto","histórico"],"Regra de mensuração de estoques.")
  ]}
 ];

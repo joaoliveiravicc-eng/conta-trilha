@@ -18,7 +18,7 @@ export function go(name){
   const tab = TAB_OF[name];
   $('#bottomnav').hidden = !tab;
   $('#topbar').style.display = (tab && name !== 'path') ? '' : 'none';
-  $$('#bottomnav button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  $$('#bottomnav button').forEach(b => { const on = b.dataset.tab === tab; b.classList.toggle('on', on); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
   document.body.classList.toggle('has-nav', !!tab);
   CUR = name; window.scrollTo(0, 0);
 }
@@ -33,15 +33,30 @@ export function renderTop(){
 }
 
 /* ---------- sheet (modal) ---------- */
+let lastFocus = null;
 export function sheet(html, map){
   const root = $('#sheet-root');
+  if (!root.classList.contains('open')) lastFocus = document.activeElement;
   root.innerHTML = '<div class="sheet-bg"></div><div class="sheet" role="dialog" aria-modal="true">' + html + '</div>';
   root.classList.add('open');
   $('.sheet-bg', root).onclick = closeSheet;
   $$('[data-s]', root).forEach(b => b.onclick = () => { const fn = map && map[b.dataset.s]; closeSheet(); if (fn) fn(); });
+  const title = $('.sheet h3', root); if (title){ title.id = 'sheet-title'; $('.sheet', root).setAttribute('aria-labelledby', 'sheet-title'); }
   const f = $('.sheet .btn', root); if (f) f.focus();
 }
-export function closeSheet(){ const r = $('#sheet-root'); r.classList.remove('open'); r.innerHTML = ''; }
+/* Mantém o Tab dentro da folha aberta (o main.js chama isto no keydown). */
+export function trapFocus(e){
+  const items = $$('#sheet-root .sheet button:not([disabled])'); if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  else if (!items.includes(document.activeElement)){ e.preventDefault(); first.focus(); }
+}
+export function closeSheet(){
+  const r = $('#sheet-root'); r.classList.remove('open'); r.innerHTML = '';
+  if (lastFocus && document.contains(lastFocus) && lastFocus.focus) lastFocus.focus();
+  lastFocus = null;
+}
 
 /* ---------- HOME: anel de progresso e missões ---------- */
 export function ring(pct, done){

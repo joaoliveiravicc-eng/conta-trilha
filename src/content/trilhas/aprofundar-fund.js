@@ -53,7 +53,7 @@ export default [
   nu("Saldo inicial R$ 500, entradas R$ 800, saídas R$ 1.600. Quanto dinheiro faltaria para pagar tudo?",300,"500 + 800 = 1.300 disponíveis; 1.600 − 1.300 = 300 faltando.","R$"),
   cl("Entrada ou saída de caixa?",["Entrada","Saída"],"Recebimento de cliente:0|Pagamento de fornecedor:1|Empréstimo recebido do banco:0|Pagamento de salários:1|Venda à vista:0","Olhe para o dinheiro: chegou ou saiu?"),
   tf("Uma venda a prazo aumenta o caixa no dia da venda.",false,"O dinheiro só entra no recebimento."),
-  mc("A projeção mostra saldo negativo daqui a duas semanas. Uma boa atitude é:",["*Planejar agora: cobrar clientes, negociar prazos ou buscar recursos","Esperar para ver","Parar de registrar as saídas","Ignorar, pois é só projeção"],"Projetar serve para agir antes do problema."),
+  mc("A projeção mostra saldo negativo daqui a duas semanas. Uma boa atitude é:",["*Planejar agora: cobrar clientes ou negociar prazos","Esperar para ver se o saldo realmente fica negativo","Parar de registrar as saídas para o saldo melhorar","Ignorar, pois é só uma projeção e pode mudar"],"Projetar serve para agir antes do problema."),
   fl("Saldo final = saldo inicial + {entradas} − saídas.",["receitas","lucros"],"Fluxo de caixa olha o dinheiro, não a receita.")
  ]},
 
@@ -65,7 +65,7 @@ export default [
  ],
  ex:[
   tf("O carro pessoal do sócio, usado só pela família, deve estar no Ativo da empresa.",false,"Pertence ao sócio, não à empresa."),
-  mc("O sócio usa o cartão da empresa para uma viagem de férias pessoal. Isso é:",["*Retirada do sócio, não despesa da empresa","Despesa de viagem da empresa","Receita","Investimento da empresa"],"O gasto não é da atividade da empresa."),
+  mc("O sócio usa o cartão da empresa para uma viagem de férias pessoal. Isso é:",["*Retirada do sócio, e não despesa da empresa","Despesa de viagem da empresa, dedutível no mês","Receita financeira, porque usa o cartão da empresa","Investimento da empresa em relacionamento com o sócio"],"O gasto não é da atividade da empresa."),
   cl("É da empresa ou do sócio?",["Empresa","Sócio"],"Máquina usada na produção:0|Apartamento onde o sócio mora:1|Estoque da loja:0|Conta de luz da casa do sócio:1|Aluguel do galpão da empresa:0","Olhe quem é o dono e para que serve."),
   wr("Qual princípio diz que o patrimônio da empresa é separado do dos sócios?",["entidade","principio da entidade"],"Princípio da entidade."),
   tf("Separar as contas ajuda a saber se o negócio dá lucro de verdade.",true,"Misturar despesas pessoais distorce o resultado."),
@@ -80,7 +80,7 @@ export default [
   tf("Pela continuidade, supõe-se que a empresa seguirá operando no futuro previsível.",true,"É a base de várias mensurações."),
   mc("Uma empresa tem forte indício de que um cliente não vai pagar. Pela prudência, ela:",["*Reconhece a perda esperada","Ignora até o vencimento","Aumenta a receita","Registra o valor em dobro"],"Não manter no ativo um valor que provavelmente não se realizará."),
   tf("Prudência significa reduzir o lucro de propósito para pagar menos imposto.",false,"Isso seria distorcer a informação."),
-  mc("Se a empresa vai encerrar as atividades em breve:",["*A premissa de continuidade deixa de valer e isso precisa ser informado","Nada muda","Ela deve dobrar a depreciação","Os ativos somem"],"A base de preparação muda."),
+  mc("Se a empresa vai encerrar as atividades em breve:",["*A continuidade deixa de valer, e isso precisa ser informado","Nada muda na forma de contabilizar e avaliar o patrimônio da empresa","Ela deve dobrar a depreciação de todos os bens","Os ativos somem do balanço no dia do anúncio"],"A base de preparação muda."),
   fl("Não superestimar ativos nem subestimar passivos é agir com {prudência}.",["otimismo","pressa"],"Cautela diante da incerteza."),
   cl("Atitude prudente ou não?",["Prudente","Não prudente"],"Reconhecer perda provável com cliente:0|Registrar venda que ainda não aconteceu:1|Revisar estoque obsoleto:0|Ignorar dívida já assumida:1","Prudência evita números inflados.")
  ]},
@@ -107,7 +107,7 @@ export default [
   tf("O custo histórico é verificável porque há documento da compra.",true,"Por isso é objetivo."),
   mt([["Custo histórico","Valor pago na aquisição"],["Valor justo","Preço de venda entre partes independentes"],["Documento de compra","Prova do custo"]],"Bases de mensuração."),
   tf("Por usar o custo histórico, a empresa nunca reconhece perda de valor de um bem.",false,"Perdas de valor são reconhecidas."),
-  mc("Qual item costuma ser medido a valor justo?",["*Ações negociadas em bolsa mantidas para negociação","Máquina da fábrica","Estoque de mercadorias","Móveis do escritório"],"Há preço de mercado observável."),
+  mc("Qual item costuma ser medido a valor justo?",["*Ações negociadas em bolsa, mantidas para negociação","Uma máquina usada há anos na fábrica da empresa","O estoque de mercadorias que será revendido aos clientes","Os móveis usados no escritório da empresa"],"Há preço de mercado observável."),
   fl("O valor pago na aquisição de um bem é o custo {histórico}.",["futuro","justo"],"Base mais usada para ativos operacionais.")
  ]},
 
@@ -122,7 +122,7 @@ export default [
   nu("Venda de R$ 8.000: R$ 3.000 à vista e o resto a prazo. Quanto vai para Clientes?",5000,"8.000 − 3.000 = 5.000.","R$"),
   tf("Num lançamento composto, a soma dos débitos precisa ser igual à soma dos créditos.",true,"É o método das partidas dobradas."),
   en("Pagamento de salários de R$ 6.000: R$ 1.000 em dinheiro e R$ 5.000 pelo banco (salários já estavam a pagar).","Salários a pagar","Caixa+Bancos",["Despesa com salários","Receita de serviços"],"Baixa a dívida; saem o dinheiro e o banco."),
-  mc("Débitos de R$ 12.000 e créditos de R$ 11.500. O que isso indica?",["*Há erro: o lançamento não fecha","Está correto","A empresa teve lucro","Faltou receita"],"Débitos e créditos precisam fechar."),
+  mc("Débitos de R$ 12.000 e créditos de R$ 11.500. O que isso indica?",["*Há erro: os dois lados do lançamento não fecham","Está correto, pois a diferença é pequena","A empresa teve lucro de R$ 500 no período","Faltou lançar uma receita de R$ 500"],"Débitos e créditos precisam fechar."),
   nu("Compra de R$ 9.000: R$ 2.500 em dinheiro, R$ 3.500 pelo banco e o resto a prazo. Quanto fica a pagar ao fornecedor?",3000,"9.000 − 2.500 − 3.500 = 3.000.","R$")
  ]},
 {id:"dcx2", title:"Balancete de verificação", icon:"⚖️",
@@ -148,7 +148,7 @@ export default [
   nu("Veículo de R$ 90.000 com depreciação acumulada de R$ 36.000. Valor contábil?",54000,"90.000 − 36.000 = 54.000.","R$"),
   tf("Devoluções de vendas reduzem a receita e têm saldo devedor.",true,"Natureza oposta à receita, que é credora."),
   cl("Qual grupo a conta reduz?",["Ativo","Receita"],"Depreciação acumulada:0|Devoluções de vendas:1|Perdas estimadas com clientes:0|Descontos concedidos na venda:1","Redutora fica no grupo que reduz."),
-  mc("Por que usar Depreciação acumulada em vez de reduzir direto a conta Máquinas?",["*Para manter visível o custo original e quanto já foi depreciado","Porque é obrigatório apagar o custo","Para aumentar o lucro","Não há motivo"],"Mais informação no Balanço."),
+  mc("Por que usar Depreciação acumulada em vez de reduzir direto a conta Máquinas?",["*Para manter visíveis o custo e a depreciação já feita","Porque a lei obriga a apagar o custo original","Para aumentar o lucro da empresa no período","Não há motivo: dá no mesmo reduzir direto a máquina"],"Mais informação no Balanço."),
   fl("Uma conta com saldo oposto ao do grupo em que está é uma conta {redutora}.",["sintética","de resultado"],"Reduz o grupo sem apagar o original.")
  ]},
 {id:"dcx4", title:"Contas de resultado no razonete", icon:"📒",
@@ -158,7 +158,7 @@ export default [
  ],
  ex:[
   mc("Uma despesa de energia de R$ 400 é lançada:",["*A débito na despesa","A crédito na despesa","A débito na receita","Não é lançada"],"Despesa aumenta a débito."),
-  tf("Receita de serviços tem saldo normal credor.",true,"Receita aumenta o PL, que é credor."),
+  tf("Receita de serviços tem saldo normal devedor.",false,"Receita aumenta o patrimônio líquido, que é credor: o saldo normal da receita é credor."),
   nu("Receitas lançadas no mês: 4.000 e 2.500. Despesas: 1.200 e 800. Qual o lucro?",4500,"6.500 − 2.000 = 4.500.","R$"),
   en("Prestou serviço de R$ 1.500 e recebeu à vista.","Caixa","Receita de serviços",["Despesa com salários","Clientes"],"Entra dinheiro; reconhece a receita."),
   en("Pagou a conta de energia do mês, R$ 350, pelo banco.","Despesa com energia","Bancos",["Receita de vendas","Fornecedores"],"Reconhece a despesa; sai do banco."),
@@ -215,7 +215,7 @@ export default [
   en("Em abril, pagou pelo banco a conta de energia de março, R$ 900, já registrada.","Contas a pagar","Bancos",["Despesa com energia","Caixa"],"Só baixa a obrigação."),
   tf("Ao pagar em abril a energia de março, reconhece-se de novo a despesa.",false,"Seria contar duas vezes."),
   en("Salários de dezembro, R$ 12.000, serão pagos no 5º dia útil de janeiro. Registre em dezembro.","Despesa com salários","Salários a pagar",["Bancos","Caixa"],"Despesa de dezembro, paga depois."),
-  mc("Por que reconhecer a despesa no mês do consumo?",["*Para o resultado de cada mês refletir o que foi usado nele","Para pagar menos","Porque o banco exige","Não há motivo"],"É o regime de competência."),
+  mc("Por que reconhecer a despesa no mês do consumo?",["*Para o resultado do mês refletir o que foi usado nele","Para pagar menos impostos em todos os meses","Porque o banco exige o registro no mês do uso","Não há motivo: pode ser em qualquer mês"],"É o regime de competência."),
   nu("Em março: aluguel 3.000 (pago), energia 800 (a pagar), salários 5.000 (a pagar). Total de despesas de março?",8800,"Todas são de março, pagas ou não: 8.800.","R$")
  ]}
 ];

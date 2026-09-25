@@ -36,7 +36,7 @@ imob6:{ learn:[
  ], ex:[
   od("Ordene a vida de um bem do imobilizado:",["Aquisição pelo custo","Depreciação ao longo do uso","Revisão de vida útil e de perdas","Baixa na venda ou descarte"],"Do custo à baixa."),
   nu("Máquina: custo 30.000, depreciação acumulada 12.000, vendida por 20.000. Ganho na venda?",2000,"Valor contábil 18.000; 20.000 − 18.000 = 2.000.","R$"),
-  mc("Software com licença de 3 anos é:",["*Intangível amortizado em 3 anos","Imobilizado depreciado","Estoque","Despesa imediata sempre"],"Intangível com vida útil definida.")
+  mc("Software com licença de 3 anos é:",["*Intangível, amortizado ao longo dos 3 anos","Imobilizado depreciado ao longo de 3 anos","Estoque de mercadorias para revenda","Despesa imediata, sempre, no mês da compra"],"Intangível com vida útil definida.")
 ]},
 estoq7:{ learn:[
   {h:"PEPS e custo médio lado a lado", b:box('exemplo','Lote 1: 10 un a R$ 5. Lote 2: 10 un a R$ 7. Venda de 10 un. PEPS: CMV = 50 (sai o lote antigo). Custo médio: (50 + 70) ÷ 20 = R$ 6 por unidade, CMV = 60.') + box('dica','Com preços subindo, o PEPS gera CMV menor e estoque final maior que o custo médio.')}
@@ -57,7 +57,7 @@ cust7:{ learn:[
  ], ex:[
   nu("Preço 50, custo variável 30, custos fixos 10.000. Lucro vendendo 800 unidades?",6000,"MC 20 × 800 = 16.000; 16.000 − 10.000 = 6.000.","R$"),
   tf("O custo variável por unidade tende a ser constante quando a produção muda.",true,"O total varia; o unitário, em geral, não."),
-  mc("Um pedido extra, com capacidade ociosa, vale a pena se o preço cobrir:",["*Os custos variáveis e ainda gerar margem de contribuição","Todos os custos fixos da empresa","Só o frete","Nada, nunca vale"],"Os fixos já existem de qualquer jeito.")
+  mc("Um pedido extra, com capacidade ociosa, vale a pena se o preço cobrir:",["*Os custos variáveis e ainda gerar alguma margem","Todos os custos fixos da empresa no período","Somente o custo do frete da entrega do pedido","Nada: pedido extra nunca vale a pena para a empresa"],"Os fixos já existem de qualquer jeito.")
 ]},
 trib5:{ learn:[
   {h:"Resumo sem números que mudam", b:ul(['Tributo nasce de um fato previsto em lei (fato gerador).','Regimes tributários mudam a forma de apuração.','Planejar dentro da lei é elisão; fraudar é evasão.']) + box('atencao','Alíquotas e regras mudam com a legislação: sempre confira a fonte oficial e a data de vigência.')}
@@ -70,7 +70,7 @@ aud7:{ learn:[
   {h:"O fluxo de uma auditoria", b:ol(['Entender a empresa e os riscos.','Definir a materialidade.','Testar controles e saldos, com evidências.','Avaliar distorções encontradas.','Emitir a opinião no relatório.'])}
  ], ex:[
   od("Ordene as fases da auditoria:",["Entender a empresa e os riscos","Definir a materialidade","Obter evidências","Avaliar as distorções","Emitir a opinião"],"Planejar, executar, concluir."),
-  mc("A opinião é emitida:",["*Depois de avaliar as evidências e as distorções","Antes de planejar","Pela própria empresa","Sem evidências"],"É a conclusão do trabalho."),
+  mc("A opinião é emitida:",["*Depois de avaliar as evidências e as distorções","Antes de planejar o trabalho, para poupar tempo","Pela própria empresa, com base no seu balanço","Mesmo sem evidências, se o auditor confiar na diretoria"],"É a conclusão do trabalho."),
   tf("Controle interno fraco tende a exigir mais testes de saldos.",true,"Mais risco, mais evidência.")
 ]},
 vida5:{ learn:[
@@ -90,7 +90,7 @@ vida1:{ learn:[
 ]},
 vida2:{ ex:[
   nu("Gastos fixos de R$ 2.200 e variáveis de R$ 1.300, renda de R$ 4.000. Quanto sobra?",500,"4.000 − 3.500 = 500.","R$"),
-  mc("Qual gasto é mais fácil de cortar rápido?",["*Variáveis, como delivery e lazer","Aluguel","Parcela de financiamento","Plano de saúde"],"Variáveis dependem de escolhas do mês."),
+  mc("Qual gasto é mais fácil de cortar rápido?",["*Os variáveis, como delivery e lazer","O aluguel da moradia","A parcela do financiamento do carro","O plano de saúde da família"],"Variáveis dependem de escolhas do mês."),
   tf("Anotar os gastos por algumas semanas ajuda a descobrir para onde vai o dinheiro.",true,"Sem registro, não há controle.")
 ]},
 vida3:{ ex:[
@@ -111,7 +111,7 @@ antes3:{ ex:[
 ]},
 antes6:{ ex:[
   nu("Preço à vista R$ 900 ou 3 parcelas de R$ 330. Quanto se paga a mais no parcelado?",90,"3 × 330 = 990; 990 − 900 = 90.","R$"),
-  mc("Para a loja, uma venda parcelada no boleto próprio gera:",["*Um valor a receber de clientes","Uma dívida","Um estoque","Uma despesa"],"É um direito até o pagamento."),
+  mc("Para a loja, uma venda parcelada no boleto próprio gera:",["*Um direito: valor a receber de clientes","Uma dívida da loja com a administradora","Um aumento imediato do estoque da loja","Uma despesa da loja no mês da venda"],"É um direito até o pagamento."),
   tf("Parcelar sem juros significa que o preço total é igual ao preço à vista.",true,"Se não houver juros nem desconto à vista.")
 ]},
 antes8:{ ex:[
@@ -137,7 +137,7 @@ digital1:{ ex:[
   mc("A data que define a competência de um serviço é:",["*A da prestação do serviço","A do pagamento","A da importação do arquivo","A do backup"],"Competência segue o fato.")
 ]},
 digital2:{ ex:[
-  mc("Uma regra do ERP lança toda compra do fornecedor X como despesa. X passou a vender máquinas. O que fazer?",["*Revisar a regra para separar o que é imobilizado","Manter a regra","Apagar o fornecedor","Lançar tudo como receita"],"A regra deve seguir o fato, não o fornecedor."),
+  mc("Uma regra do ERP lança toda compra do fornecedor X como despesa. X passou a vender máquinas. O que fazer?",["*Revisar a regra e separar o que passa a ser imobilizado","Manter a regra como está, pois ela sempre funcionou até agora","Apagar o fornecedor X e cadastrar outro com o mesmo nome","Lançar tudo como receita, porque compra de máquina gera ganho"],"A regra deve seguir o fato, não o fornecedor."),
   tf("Testar uma regra num lote pequeno antes de ativá-la para todos reduz o risco.",true,"Erros ficam contidos."),
   nu("Mercadoria de R$ 3.000 com frete de compra de R$ 150. Valor do estoque?",3150,"3.000 + 150 = 3.150.","R$")
 ]},
@@ -158,7 +158,7 @@ digital5:{ ex:[
 ]},
 digital6:{ ex:[
   cl("Tarefas que deveriam ficar com pessoas diferentes?",["Separar","Pode juntar"],"Cadastrar fornecedor e aprovar pagamento:0|Lançar e conciliar o próprio banco sem revisão:0|Consultar relatório e imprimir relatório:1","Separe quem registra de quem aprova."),
-  mc("O log de alteração mais útil registra:",["*Quem alterou, quando, o valor anterior e o novo","Só a data do dia","Só o nome do sistema","Nada"],"Permite reconstruir a mudança."),
+  mc("O log de alteração mais útil registra:",["*Quem alterou, quando, o valor anterior e o novo","Só a data do dia em que houve a alteração feita","Só o nome do sistema em que foi feita a alteração","Nada: o log só serve para o suporte do sistema"],"Permite reconstruir a mudança."),
   tf("Revisar uma amostra de lançamentos automáticos ajuda a detectar regras erradas.",true,"Monitorar exceções continua necessário.")
 ]},
 /* ---------- imobilizado ---------- */
@@ -179,7 +179,7 @@ imob4:{ ex:[
 ]},
 imob5:{ ex:[
   nu("Valor contábil 500.000; valor justo menos despesas de venda 380.000; valor em uso 420.000. Perda por impairment?",80000,"Recuperável = maior entre 380 e 420 = 420; 500 − 420 = 80 mil.","R$"),
-  mc("Valor recuperável é o maior entre:",["*Valor justo menos despesas de venda e valor em uso","Custo e valor residual","Preço de compra e preço de venda","Depreciação e amortização"],"Definição de valor recuperável."),
+  mc("Valor recuperável é o maior entre:",["*Valor justo menos despesas de venda e valor em uso","O custo do bem e o seu valor residual final","O preço de compra e o preço de venda do bem","A depreciação acumulada e a amortização do período"],"Definição de valor recuperável."),
   tf("Se o valor recuperável for maior que o valor contábil, não há perda a reconhecer.",true,"O ativo não está acima do que pode render.")
 ]},
 /* ---------- custos, tributos, auditoria ---------- */
@@ -198,6 +198,6 @@ trib4:{ ex:[
 aud6:{ ex:[
   mt([["Pressão","Metas ou dívidas que motivam"],["Oportunidade","Controles fracos"],["Racionalização","Justificativa que a pessoa se dá"]],"Os três lados do triângulo da fraude."),
   cl("Fraude ou erro?",["Fraude","Erro"],"Lançamento esquecido por distração:1|Nota fiscal falsa para desviar dinheiro:0|Soma errada na planilha:1|Esconder dívida para melhorar o balanço:0","A diferença é a intenção."),
-  mc("Qual controle reduz a oportunidade de fraude no caixa?",["*Separar quem recebe de quem registra e concilia","Uma só pessoa fazendo tudo","Não contar o caixa","Não guardar comprovantes"],"Segregação de funções.")
+  mc("Qual controle reduz a oportunidade de fraude no caixa?",["*Separar quem recebe de quem registra e concilia","Deixar uma só pessoa fazendo todas as tarefas do caixa","Não contar o caixa para evitar filas no atendimento","Não guardar comprovantes, para reduzir o volume de papel"],"Segregação de funções.")
 ]}
 };
