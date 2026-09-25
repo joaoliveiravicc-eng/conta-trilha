@@ -236,3 +236,15 @@ table.xl td.mk{outline:2px solid var(--green);outline-offset:-2px;background:var
   .tblwrap code,.eqn{overflow-wrap:anywhere;}
 }
 .tblwrap code{font-size:.92em;}
+/* Fórmulas longas, sem espaços, quebram a linha em vez de vazar a tela. As tabelas não. */
+.qq,.callout .cl-b,.lc p,.lc li,.opt,.fb-ans{overflow-wrap:anywhere;}
+.qq table,.lc table{overflow-wrap:normal;}
+@media (max-width:360px){
+  table{font-size:.72rem;}
+  th,td{padding:6px 4px;}
+  table.xl,#s-learn table.xl{font-size:.62rem;}
+  table.xl th,table.xl td,#s-learn table.xl th,#s-learn table.xl td{padding:3px 3px;}
+  table.xl th.xr,table.xl th.xc{width:16px;padding:3px 2px;}
+  #s-learn .lbody{padding-left:12px;padding-right:12px;}
+  .theory-card,.quick-check{padding:16px 12px;}
+}

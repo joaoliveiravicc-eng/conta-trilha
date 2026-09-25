@@ -5,8 +5,8 @@ import { fresh, normalize, setState, S, courseComplete, courseUnlocked, lessonUn
 import { checkpointId, unitComplete, checkpointItems, checkpointRecord, reviewRecord, dueLessons, spacedItems } from '../src/engine/learning.js';
 
 test('currículo: referências, chaves persistidas e respostas válidas',()=>{
-  assert.equal(COURSES.length,15);
-  assert.equal(TOTAL_LESSONS,254);
+  assert.equal(COURSES.length,16);
+  assert.equal(TOTAL_LESSONS,267);
   const ids=new Set(), keys=new Set(); let workshops=0, questions=0;
   for(const c of COURSES){
     assert.ok(c.goals.length>=2);
@@ -141,7 +141,7 @@ test('teste para pular sorteia de todas as lições, sem repetir',async()=>{
   assert.ok(seen.size>=lessons.length-1, 'lições cobertas: '+seen.size);
 });
 
-test('área Carreira: trilhas completas e a entrevista liberada desde o início',async()=>{
+test('área Carreiras: trilhas completas e liberadas desde o início',async()=>{
   const { AREAS } = await import('../src/content/areas.js');
   const area=AREAS.find(a=>a.id==='carreiras'); assert.ok(area);
   for(const id of area.courseIds.filter(id=>id.startsWith('car_'))){
@@ -149,6 +149,6 @@ test('área Carreira: trilhas completas e a entrevista liberada desde o início'
     assert.ok(c.goals.length>=2,id);
     for(const l of c.lessons){ assert.ok(l.learn.length>=2,l.id+' teoria'); assert.ok(l.ex.length>=5,l.id+' exercícios'); }
   }
-  const entrevista=COURSES.find(c=>c.id==='car_entrevista');
-  if(entrevista){ setState(normalize({v:6,done:{},area:'carreiras',onboarded:true})); assert.equal(courseUnlocked(entrevista),true); }
+  setState(normalize({v:6,done:{},area:'carreiras',onboarded:true}));
+  for(const id of area.courseIds.filter(id=>id.startsWith('car_'))) assert.equal(courseUnlocked(COURSES.find(c=>c.id===id)),true,id+' liberada');
 });
