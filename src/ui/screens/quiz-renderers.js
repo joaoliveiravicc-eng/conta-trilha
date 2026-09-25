@@ -289,12 +289,16 @@ export function rExpl(x, m, on){
     ready: () => ta.value.trim().length >= 8,
     check(){ res = evalExpl(ta.value, x); return res.ok; },
     ai: () => AI && AI.review(x, ta.value),
+    canVeto: true,
     reveal(ok, ai){
       ta.disabled = true;
       /* ideias que a IA reconheceu com outras palavras também aparecem marcadas */
-      const hits = (ai && ai.hits) || res.hits, n = hits.filter(Boolean).length;
-      const list = x.k.map((g, i) => '<li class="' + (hits[i] ? 'hit' : 'miss') + '">' + (hits[i] ? '✅' : '⭕') + ' ' + g[0] + '</li>').join('');
-      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">Ideias identificadas (' + n + ' de ' + x.k.length + '):</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
+      const hits = (ai && ai.hits) || res.hits, n = hits.filter(Boolean).length, vetoed = !!(ai && ai.veto);
+      /* barrada pela IA: as palavras certas aparecem, mas a relação entre elas está errada */
+      const mark = i => vetoed && hits[i] ? '⚠️' : hits[i] ? '✅' : '⭕';
+      const list = x.k.map((g, i) => '<li class="' + (hits[i] && !vetoed ? 'hit' : 'miss') + '">' + mark(i) + ' ' + g[0] + '</li>').join('');
+      const head = vetoed ? 'As ideias aparecem (' + n + ' de ' + x.k.length + '), mas a relação entre elas está errada:' : 'Ideias identificadas (' + n + ' de ' + x.k.length + '):';
+      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">' + head + '</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
     },
     typed: () => ta.value.trim(),
     learn(){}

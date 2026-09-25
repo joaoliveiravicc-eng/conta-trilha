@@ -48,6 +48,7 @@ function tick(){
   $('#q-hearts').innerHTML = heartsHtml();
   if (Date.now() >= SES.deadline){ stopClock(); SES.timeout = true; failScreen(); }
 }
+function sessionCount(){ const c = $('#q-body .session-context span:last-child'); if (c) c.textContent = SES.done + ' de ' + SES.total + ' concluídas'; }
 function setBtn(txt, dis){ const b = $('#q-btn'); b.textContent = txt; b.disabled = !!dis; }
 function bentoQuiz(mood){ const w = $('#q-bento'); if (w) w.innerHTML = bento(mood); }
 export function renderItem(){
@@ -74,7 +75,11 @@ export function primary(){
     if (!R.ready()) return;
     let ok = R.check(), ai = null;
     /* as regras recusaram uma resposta escrita: o corretor inteligente dá uma segunda olhada */
-    if (!ok && R.ai){ ai = R.ai(); if (ai && ai.verdict === 'right') ok = true; }
+    if (R.ai && (!ok || R.canVeto)){
+      ai = R.ai();
+      if (ai && ai.verdict === 'right') ok = true;
+      else if (ai && ai.veto) ok = false;          /* papéis trocados ou oposto do assunto */
+    }
     resolve(ok, ai);
   }
   else nextItem();
@@ -104,6 +109,7 @@ function resolve(ok, ai){
   }
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
+  sessionCount();
   const foot = $('#q-foot'); foot.className = 'foot ' + (ok ? 'ok' : 'bad');
   let title = ok ? '✅ ' + pick(PRAISE) : '❌ Não foi dessa vez';
   if (ok && [3, 5, 8, 12].indexOf(SES.combo) >= 0) title = '🔥 ' + SES.combo + ' seguidas! ' + pick(PRAISE);
@@ -138,6 +144,7 @@ function acceptMine(){
   sfx.ok(); bentoQuiz('happy');
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
+  sessionCount();
   $('#q-foot').className = 'foot ok';
   $('#fb-t').innerHTML = '✅ Combinado: contei como certa';
   $('#fb-bento').innerHTML = bento('happy', undefined, 'react');

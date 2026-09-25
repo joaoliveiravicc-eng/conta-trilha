@@ -21,8 +21,16 @@ export const STOPWORDS = new Set(('o a os as um uma uns umas de da do das dos e 
   'então também tambem ja já so só mesmo muito muita pouco pouca bem qual quais cada todo toda todos todas ' +
   'tudo algo algum alguma vai vão vao há ha sobre entre quanto quanta aí ai lá la aqui').split(' ').map(w => normTxt(w)));
 const NEGATION = new Set(['nao', 'nem', 'nunca', 'jamais', 'sem', 'ninguem', 'nenhum', 'nenhuma']);
+const FUNCTION_WORDS = new Set('o a os as um uma uns umas de da do das dos e ou em no na nos nas ao aos com por para pra pro pelo pela pelos pelas que se'.split(' '));
+/* Palavras de contraste ("diferente de", "ao contrário de", "em vez de", "ao invés de") e
+   conceitos de contraste ("independentemente de", "não importa"). */
+const CONTRAST = new Set(['diferente', 'diferentemente', 'contrario', 'inves', 'vez']);
+const OF = new Set(['de', 'do', 'da', 'dos', 'das']);
+const CONTRAST_CONCEPTS = new Set(['independente_de']);
+/* Conjunções que abrem outra oração: a negação ou o contraste não passa delas. */
+const SUBORD = new Set(['quando', 'porque', 'pois', 'caso', 'enquanto', 'embora', 'mas', 'porem', 'entao', 'logo']);
 /* Verbos auxiliares são transparentes para a negação: em "não pode ter vínculo", o negado é "vínculo". */
-const AUX = new Set(['pode', 'podem', 'poder', 'deve', 'devem', 'ter', 'tem', 'teve', 'tinha', 'precisa', 'precisam', 'consegue', 'conseguem', 'esta', 'estao', 'estar', 'fica', 'ficar', 'seja', 'sejam', 'vai', 'vao', 'dar', 'da', 'haver', 'houver'].map(w => w));
+const AUX = new Set(['pode', 'podem', 'poder', 'deve', 'devem', 'ter', 'tem', 'teve', 'tinha', 'precisa', 'precisam', 'precisar', 'precisando', 'consegue', 'conseguem', 'esta', 'estao', 'estar', 'fica', 'ficar', 'seja', 'sejam', 'vai', 'vao', 'dar', 'da', 'haver', 'houver'].map(w => w));
 
 /* Radical leve: tira plural, gênero e terminações verbais/nominais comuns, mantendo
    pelo menos 3 letras. "receber", "recebimento" e "recebido" viram "receb";
@@ -77,7 +85,8 @@ function buildIndex(){
   for (const [id, terms] of Object.entries(CONCEPTS)){
     for (const raw of terms){
       const weak = raw.startsWith('~'), toks = tokenize(weak ? raw.slice(1) : raw);
-      if (!toks.length || toks.every(t => t.stop)) continue;
+      /* termo só de palavras vazias: vale para "bem", não para artigo ou preposição ("das") */
+      if (!toks.length || (toks.every(t => t.stop) && (toks.length > 1 || FUNCTION_WORDS.has(toks[0].w)))) continue;
       const key = toks[0].stop || toks[0].neg ? toks[0].w : toks[0].s;
       const entry = { id, weak, toks, term:raw.replace(/^~/, '') };
       if (!byFirst.has(key)) byFirst.set(key, []);
@@ -150,27 +159,42 @@ export function analyze(text){
     if (!best.length) continue;
     const n = bestLen;
     for (let j = 0; j < n; j++) used[i + j] = true;
-    const ids = new Map();
-    best.forEach(e => { const prev = ids.get(e.id); if (!prev || (prev.weak && !e.weak)) ids.set(e.id, e); });
+    /* por conceito: termo forte antes de aproximado; entre iguais, o que foi escrito exatamente */
     const said = toks.slice(i, i + n).map(t => t.w).join(' ');
+    const ids = new Map();
+    best.forEach(e => { const prev = ids.get(e.id); if (!prev || (prev.weak && !e.weak) || (prev.weak === e.weak && normTxt(e.term) === said && normTxt(prev.term) !== said)) ids.set(e.id, e); });
     ids.forEach(e => matches.push({ id:e.id, weak:e.weak, term:e.term, exact:normTxt(e.term) === said, start:i, end:i + n }));
   }
-  /* "não", "nem", "nunca", "sem" soltos negam as duas palavras de conteúdo seguintes, sem
-     passar da vírgula. No fim de um trecho ("absoluta não"), negam a palavra anterior. */
+  /* Negação e contraste:
+     - "não", "nem", "nunca", "sem" soltos negam as duas palavras de conteúdo seguintes, sem
+       passar da vírgula; no fim de um trecho ("absoluta não"), negam a palavra anterior;
+     - contraste ("independentemente de", "não importa", "diferente de", "ao contrário de",
+       "em vez de") nega até quatro palavras de conteúdo seguintes, no mesmo trecho.
+     Cada conceito também guarda se o seu trecho já tinha negação ou contraste antes dele
+     (hedged): a IA só recusa uma resposta por contradição quando a frase afirma sem ressalva. */
   const negate = j => { toks[j].negated = true; matches.forEach(m => { if (j >= m.start && j < m.end) m.neg = true; }); };
-  toks.forEach((t, i) => {
-    if (!t.neg || used[i]) return;
-    if (t.end){
-      for (let j = i - 1; j >= 0 && !toks[j].end; j--) if (!toks[j].stop){ negate(j); break; }
-      return;
-    }
+  const spread = (from, limit) => {
     let seen = 0;
-    for (let j = i + 1; j < toks.length && seen < 2; j++){
+    for (let j = from; j < toks.length && seen < limit; j++){
+      if (seen && SUBORD.has(toks[j].w)) break;          /* "...crédito caro quando surgir um problema": o "quando" abre outra oração */
       if (toks[j].stop || (AUX.has(toks[j].w) && !matches.some(m => m.start === j))){ if (toks[j].end) break; continue; }
       seen++; negate(j);
       if (toks[j].end) break;
     }
+  };
+  const triggers = new Set();
+  toks.forEach((t, i) => {
+    if (used[i]) return;
+    if (t.neg){
+      triggers.add(i);
+      if (t.end){ for (let j = i - 1; j >= 0 && !toks[j].end; j--) if (!toks[j].stop){ negate(j); break; } }
+      else spread(i + 1, 2);
+    } else if (CONTRAST.has(t.w) && !t.end && toks[i + 1] && OF.has(toks[i + 1].w)){ triggers.add(i); spread(i + 2, 4); }
   });
+  matches.forEach(m => { if (CONTRAST_CONCEPTS.has(m.id)){ triggers.add(m.start); if (!toks[m.end - 1].end) spread(m.end, 4); } });
+  let open = false;
+  toks.forEach((t, i) => { t.hedged = open; if (triggers.has(i)) open = true; if (t.end) open = false; });
+  matches.forEach(m => { m.hedged = toks[m.start].hedged; });
   const free = toks.filter((t, i) => !used[i] && !t.stop && !t.neg);
   return { matches, tokens:toks, free };
 }

@@ -132,8 +132,8 @@ export const CASES = [
   ['fj15#5','Porque a empresa não vendeu nada.','wrong'], ['fj15#5','Porque o lucro é mentira.','wrong']
 ];
 
-/* Respostas erradas que o corretor por palavras-chave (antes da IA) já aceita.
-   A IA não rebaixa respostas, então elas ficam registradas aqui como limite conhecido. */
+/* Respostas erradas que o corretor por palavras-chave aceita (papéis trocados, oposto do
+   assunto). A IA recusa estas mesmo assim: são as únicas situações em que ela rebaixa. */
 export const KNOWN_KEYWORD_LEAKS = [
   ['base4#8','É registrar só quando o dinheiro entra ou sai do caixa.'],
   ['dc2#9','Porque a receita tem natureza devedora e aumenta o patrimônio.'],

@@ -83,10 +83,15 @@ segunda olhada, sem internet e sem custo:
 - entende sinônimos e palavras da mesma família ("calote" = inadimplência, "checar" = comparar);
 - conhece os opostos da contabilidade (débito × crédito, aumenta × diminui) e as negações
   ("absoluta não, razoável"), e recusa chutes com dois termos ("fixo ou variável");
-- nas explicações, procura cada ideia da questão também por sinônimos, ancorada na resposta-modelo.
+- nas explicações, procura cada ideia da questão também por sinônimos, ancorada na resposta-modelo;
+- entende contraste ("diferente do regime de caixa...", "independentemente de quando...");
+- quando a resposta é outro conceito, explica o que ele significa (glossário do app ou `DEFINITIONS`).
 
-Ele só aceita respostas que as regras recusaram, nunca rebaixa uma resposta aceita. Quando fica
-em dúvida, sugere e a pessoa decide ("Minha resposta estava certa" aprende a resposta).
+Em geral ele só aceita o que as regras recusaram. Há duas situações em que ele recusa mesmo
+com as palavras-chave certas, porque a resposta afirma algo errado: papéis trocados numa
+pergunta "qual a diferença entre A e B" ("custo é o gasto com vendas e despesa é o da fábrica")
+e o oposto do próprio assunto ("natureza devedora" numa pergunta sobre "aumenta a crédito").
+Quando fica em dúvida, sugere e a pessoa decide ("Minha resposta estava certa" aprende a resposta).
 
 O conhecimento fica em `src/content/lexicon.js`: conceitos com seus sinônimos (um `~` marca
 termo aproximado, que só gera sugestão) e os pares de opostos. Para ampliar, acrescente termos
@@ -96,10 +101,12 @@ ao conceito certo e rode:
 npm test                         # inclui as garantias da IA (tests/ai.test.js)
 node tests/ai-eval.mjs           # relatório: regras x regras + IA nas respostas de teste
 node tests/ai-holdout-eval.mjs   # respostas escritas sem olhar a base (mede generalização)
+node tests/ai-holdout2-eval.mjs  # terceiro conjunto: papéis trocados, contrastes, gírias
 ```
 
-As respostas de teste ficam em `tests/ai-cases.js` e `tests/ai-holdout.js`. Nenhuma resposta
-marcada como errada pode ser aceita ou sugerida.
+As respostas de teste ficam em `tests/ai-cases.js`, `tests/ai-holdout.js` e `tests/ai-holdout2.js`.
+Nenhuma resposta marcada como errada pode ser aceita ou sugerida, e toda questão escrita ou
+ideia de explicação nova precisa ter conceito na base (o `npm test` avisa).
 
 ## Conta e sincronização
 
