@@ -44,7 +44,8 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
    de Mercadorias" e "Contabilidade para a Vida".
 2. Cada lição é um objeto `{ id, title, icon, learn:[...], ex:[...] }`. `learn` são os
    cartões de teoria (use os helpers `T`, `box`, `eq`, `tbl`, `lanc`, `ul`, `ol` de
-   `content/render-helpers.js` para formatar). `ex` são os exercícios — use as
+   `content/render-helpers.js` para formatar; um cartão pode ter `check:mc(...)` com a
+   própria pergunta rápida). `ex` são os exercícios — use as
    funções-fábrica de `engine/exercises/factories.js` (`mc`, `tf`, `fl`, `mt`, `en`,
    `cl`, `nu`, `wr`, `ew`, `od`, `ep`, `ts`), documentadas ali mesmo.
 3. Para adicionar uma lição totalmente nova a uma trilha, dá pra colocá-la direto no
@@ -72,6 +73,65 @@ supabase/      Migration SQL da tabela de progresso (ver "Sync com Supabase" aba
 8. Bônus de exercícios para uma lição já existente vão em `src/content/extra.js`.
 
 Nenhuma mudança de conteúdo deveria exigir tocar em `engine/` ou `ui/`.
+
+## Como o app ensina
+
+Cada lição segue o ciclo **ver → lembrar → praticar → revisar**, com técnicas de
+aprendizagem que têm boa evidência (prática de recuperação, feedback explicativo e
+revisão espaçada):
+
+- **Mapa da lição**: no primeiro cartão, as partes que vêm pela frente, o tempo e o número
+  de exercícios. Lições com `goal` mostram também o objetivo.
+- **Perguntas rápidas** ("Sua vez · sem valer pontos"): depois de cada parte da teoria.
+  Um cartão pode ter a própria pergunta (`check`); os demais recebem automaticamente um
+  verdadeiro/falso ou múltipla escolha da lição que trate claramente daquela parte
+  (`src/engine/teach.js`, que liga exercícios e teoria pelas palavras em comum). Essas
+  questões voltam no fim da prática, depois de um intervalo.
+- **Resumo ativo**: no último cartão, a pessoa tenta lembrar o que cada parte ensinou e
+  toca para conferir.
+- **Teoria sob demanda**: durante a prática, "📖 Ver na teoria" abre a parte da lição que
+  explica a questão (conta como dica). Depois de um erro, "Rever na teoria" faz o mesmo.
+  Nos testes (final, selos, desafios, pular e liberar) só aparece depois de responder.
+- **Erro explicado**: além da resposta e da explicação, o app diz o que significa a opção
+  errada escolhida, quando ela é um termo do glossário ou da base de conhecimento.
+- **Revise o que você errou**: no fim da sessão, as questões erradas ficam listadas para
+  tentar lembrar a resposta antes de abrir, com link para a teoria.
+- **Revisão espaçada**: lições concluídas voltam em 1, 3, 7, 14 e 30 dias, conforme os acertos.
+
+## Corretor inteligente (IA no aparelho)
+
+Respostas escritas passam primeiro pelo corretor comum (`src/engine/exercises/grading.js`):
+ignora maiúsculas, acentos e pontuação, tolera erros de digitação e aceita a resposta dentro
+de uma frase curta. Quando ele recusa, o corretor inteligente (`src/engine/ai/`) dá uma
+segunda olhada, sem internet e sem custo:
+
+- entende sinônimos e palavras da mesma família ("calote" = inadimplência, "checar" = comparar);
+- conhece os opostos da contabilidade (débito × crédito, aumenta × diminui) e as negações
+  ("absoluta não, razoável"), e recusa chutes com dois termos ("fixo ou variável");
+- nas explicações, procura cada ideia da questão também por sinônimos, ancorada na resposta-modelo;
+- entende contraste ("diferente do regime de caixa...", "independentemente de quando...");
+- quando a resposta é outro conceito, explica o que ele significa (glossário do app ou `DEFINITIONS`).
+
+Em geral ele só aceita o que as regras recusaram. Há duas situações em que ele recusa mesmo
+com as palavras-chave certas, porque a resposta afirma algo errado: papéis trocados numa
+pergunta "qual a diferença entre A e B" ("custo é o gasto com vendas e despesa é o da fábrica")
+e o oposto do próprio assunto ("natureza devedora" numa pergunta sobre "aumenta a crédito").
+Quando fica em dúvida, sugere e a pessoa decide ("Minha resposta estava certa" aprende a resposta).
+
+O conhecimento fica em `src/content/lexicon.js`: conceitos com seus sinônimos (um `~` marca
+termo aproximado, que só gera sugestão) e os pares de opostos. Para ampliar, acrescente termos
+ao conceito certo e rode:
+
+```bash
+npm test                         # inclui as garantias da IA (tests/ai.test.js)
+node tests/ai-eval.mjs           # relatório: regras x regras + IA nas respostas de teste
+node tests/ai-holdout-eval.mjs   # respostas escritas sem olhar a base (mede generalização)
+node tests/ai-holdout2-eval.mjs  # terceiro conjunto: papéis trocados, contrastes, gírias
+```
+
+As respostas de teste ficam em `tests/ai-cases.js`, `tests/ai-holdout.js` e `tests/ai-holdout2.js`.
+Nenhuma resposta marcada como errada pode ser aceita ou sugerida, e toda questão escrita ou
+ideia de explicação nova precisa ter conceito na base (o `npm test` avisa).
 
 ## Conta e sincronização
 

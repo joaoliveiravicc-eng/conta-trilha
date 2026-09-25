@@ -211,3 +211,61 @@ body.modal-open{overflow:hidden;}
 .jump-card > span:first-child{font-size:1.3rem;}
 .jump-card strong{display:block;font-size:.88rem;}
 .jump-card span span{display:block;font-size:.76rem;color:var(--muted);}
+/* ---------- ensino: mapa da lição, perguntas rápidas, resumo ativo ---------- */
+.lesson-map{list-style:none;counter-reset:lm;margin:10px 0 12px;padding:0;display:grid;gap:6px;}
+.lesson-map li{counter-increment:lm;display:flex;align-items:baseline;gap:10px;font-size:.92rem;line-height:1.45;color:var(--text);}
+.lesson-map li::before{content:counter(lm);flex:none;width:22px;height:22px;display:inline-grid;place-items:center;border-radius:50%;background:var(--card);border:1px solid color-mix(in srgb,var(--green) 40%,var(--line));font-size:.72rem;font-weight:700;color:var(--green2);}
+.quick-check{border-left:3px solid var(--gold);}
+.quick-check .eyebrow{color:var(--gold2);}
+.quick-check .options{display:grid;gap:8px;}
+.quick-check .options.two{grid-template-columns:1fr 1fr;}
+.quick-check .options.two .opt{justify-content:center;font-weight:700;}
+.quick-feedback{padding:10px 12px;border-radius:12px;color:var(--muted);}
+.quick-feedback.ok{background:var(--greenp);color:var(--text);border-left:3px solid var(--green);}
+.quick-feedback.bad{background:var(--redp);color:var(--text);border-left:3px solid var(--red);}
+.lesson-recap>.small{margin:10px 0;color:var(--text);}
+.recall-list{display:grid;gap:8px;margin:6px 0 14px;}
+.recall{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.recall summary{display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer;list-style:none;min-height:48px;}
+.recall summary::-webkit-details-marker{display:none;}
+.recall .rn{flex:none;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--greenp);color:var(--green2);font-size:.75rem;font-weight:700;}
+.recall .rt{flex:1;font-size:.9rem;font-weight:600;line-height:1.4;}
+.recall .rv{flex:none;font-size:.75rem;font-weight:700;color:var(--green2);}
+.recall[open] .rv{visibility:hidden;}
+.recall[open] summary{border-bottom:1px solid var(--line);}
+.recall .lc{padding:12px 14px 4px;font-size:.9rem;}
+/* ---------- teoria sob demanda (por cima do exercício) ---------- */
+.theory-sheet{text-align:left;}
+.theory-sheet .ts-card h3{font-size:1.2rem;margin:8px 0 12px;}
+.theory-sheet .ts-card .eyebrow{color:var(--green2);}
+.theory-sheet .lc{font-size:.95rem;}
+.ts-nav{display:flex;align-items:center;gap:10px;margin:14px 0 4px;}
+.ts-nav .btn{flex:1;margin:0;padding:10px 8px;font-size:.88rem;}
+.ts-nav .btn:disabled{opacity:.45;}
+.ts-pos{flex:none;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;}
+.theory-sheet>.btn.primary{margin-top:10px;}
+.hintrow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;}
+.hintrow .hintbox{flex-basis:100%;margin-top:0;}
+.theorybtn{background:var(--soft);color:var(--ink2);border:1px solid var(--line);}
+/* ---------- feedback do erro e revisão no fim ---------- */
+.why-not{margin:8px 0 2px;padding:7px 10px;border-radius:10px;background:var(--card);border:1px dashed var(--line);font-size:.85rem;line-height:1.4;color:var(--text);}
+.fb-links{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px;margin-top:6px;}
+.fb-link{padding:8px 0;font-size:.86rem;font-weight:700;background:none;border:0;color:var(--ink2);text-decoration:underline;text-underline-offset:3px;}
+.fb-links .contest{display:inline-block;margin-top:0;color:var(--red);}
+:root[data-theme="dark"] .fb-links .contest{color:var(--red2);}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .fb-links .contest{color:var(--red2);} }
+.mistake-review{margin:22px 0 10px;text-align:left;}
+.mistake-review h2{font-size:1.1rem;margin:0 0 2px;}
+.mistake-review>.small{margin:0 0 10px;}
+.mr{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.mr summary{display:flex;align-items:center;gap:10px;padding:12px;cursor:pointer;list-style:none;}
+.mr summary::-webkit-details-marker{display:none;}
+.mr-q{flex:1;font-size:.88rem;font-weight:600;line-height:1.4;}
+.mr-open{flex:none;font-size:.75rem;font-weight:700;color:var(--ink2);}
+.mr[open] .mr-open{visibility:hidden;}
+.mr-body{padding:0 12px 10px;font-size:.86rem;line-height:1.5;}
+.mr-a{font-weight:700;color:var(--green2);margin-bottom:4px;}
+.mr-e{color:var(--text);}
+/* botões empilhados no rodapé (tela de fim de corações) não encostam um no outro */
+.foot>.btn+.btn{margin-top:10px;}
+#s-fail .center{padding-bottom:260px;}

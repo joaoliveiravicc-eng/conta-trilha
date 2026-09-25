@@ -289,6 +289,7 @@ tr:last-child td{border-bottom:none;}
 .seg button.right{border-color:var(--green); background:var(--green); color:#fff;}
 .seg button.wrong{border-color:var(--red); background:var(--red); color:#fff;}
 .seg.tsseg button{flex:1; padding:12px 6px; font-size:.9rem;}
+.seg.tsseg{margin-bottom:12px;}
 .crow2.r{border-color:var(--green);} .crow2.w{border-color:var(--red);}
 .numwrap{display:flex; align-items:center; gap:10px; background:var(--card); border:2px solid var(--line); border-radius:16px; padding:6px 16px; box-shadow:0 3px 0 var(--line); margin-bottom:10px;}
 .numwrap:focus-within{border-color:var(--ink2);}
@@ -721,3 +722,26 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .result-say::before{content:""; position:absolute; top:-7px; left:50%; width:12px; height:12px; background:var(--card); border-left:1px solid var(--line); border-top:1px solid var(--line); transform:translateX(-50%) rotate(45deg);}
 .result-perfect .bento .b-rig{animation:bhop .55s ease-in-out 4 !important;}
 .result-tough .bento .b-head{transform-box:view-box; transform-origin:680px 700px; animation:btilt 2.4s ease-in-out infinite;}
+
+/* ---------- retorno da resposta ---------- */
+/* Depois de verificar, a questão fica só para leitura: nada no fundo responde ao toque. */
+.qbody.locked{pointer-events:none;}
+.qbody.locked .hintbtn{display:none;}
+/* Painel de retorno com a cor do resultado de ponta a ponta, inclusive o botão
+   (no celular o botão ficava "preso" no estado de hover, verde, sobre o fundo vermelho). */
+.foot.ok{border-top:3px solid var(--green);}
+.foot.bad{border-top:3px solid var(--red);}
+.foot.ok .btn.primary,.foot.ok .btn.primary:hover:not(:disabled),.foot.ok .btn.primary:active:not(:disabled){background:var(--green);color:#10230C;filter:none;box-shadow:0 3px 0 color-mix(in srgb,var(--green) 68%,#174300) !important;}
+.foot.bad .btn.primary,.foot.bad .btn.primary:hover:not(:disabled),.foot.bad .btn.primary:active:not(:disabled){background:var(--red);color:#fff;filter:none;box-shadow:0 3px 0 color-mix(in srgb,var(--red) 70%,#000) !important;}
+:root[data-theme="dark"] .foot.bad .btn.primary{color:#2B0F0B;}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .foot.bad .btn.primary{color:#2B0F0B;} }
+.foot.ok .fb,.foot.bad .fb{animation:fbin .22s ease-out;}
+@keyframes fbin{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.fb-b .contest{display:block;margin-top:8px;padding:6px 0;font-size:.86rem;font-weight:700;color:var(--red);text-decoration:underline;background:none;border:0;}
+.accept-note{margin-top:8px;}
+@media (prefers-reduced-motion: reduce){ .foot.ok .fb,.foot.bad .fb{animation:none;} }
+/* Em telas de toque, o hover não fica grudado nos botões. */
+@media (hover:none){ .btn.primary:hover:not(:disabled){filter:none;transform:none;} }
+/* Nota do corretor inteligente no painel de retorno */
+.ai-note{margin:2px 0 8px;padding:7px 10px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:.86rem;font-weight:600;line-height:1.35;color:var(--text);}
+.ai-note.unsure{border-color:color-mix(in srgb,var(--gold) 60%,var(--line));}

@@ -13,23 +13,31 @@ import { SAY } from '../../content/dialogues.js';
 import { COURSES, EX } from '../../content/index.js';
 import { areaForCourse } from '../../content/areas.js';
 import { checkpointRecord, reviewRecord, challengeRecord } from '../../engine/learning.js';
-import { render, answerText } from './quiz-renderers.js';
+import { render, answerText, reviewAnswer, loadAI } from './quiz-renderers.js';
 import { go, sheet, renderTop } from '../router.js';
 import { openPath } from './path.js';
+import { renderHome } from './home.js';
 import { startLearn } from './learn.js';
 import { renderPractice } from './practice.js';
 import { caseBalanceteHTML } from './cases.js';
+import { openTheory } from './theory.js';
 
 export let SES = null, R = null;
 const PRAISE = ['Muito bem!', 'Isso aí!', 'Correto!', 'Mandou bem!', 'Perfeito!', 'Exato!', 'Excelente!', 'Show de bola!'];
 
-export function startLessonQuiz(l){ startSession({ kind:'lesson', lesson:l, course:l.course, items:l.ex.map(x => ({ key:x.key, x:x })), hearts:99 }); }
+/* later: questões já vistas nas perguntas rápidas da teoria vão para o fim, para que
+   voltem depois de um intervalo (lembrar de novo, mais tarde, fixa melhor). */
+export function startLessonQuiz(l, later = []){
+  const items = l.ex.map(x => ({ key:x.key, x:x })), seen = it => later.includes(it.key);
+  startSession({ kind:'lesson', lesson:l, course:l.course, items:items.filter(it => !seen(it)).concat(items.filter(seen)), hearts:99 });
+}
 export function startFinal(c){
   const pool = []; c.lessons.filter(l => !l.optional).forEach(l => l.ex.forEach(x => { if (['expl'].indexOf(x.t) < 0) pool.push({ key:x.key, x:x }); }));
   startSession({ kind:'final', course:c, items:shuffle(pool).slice(0, 10), hearts:3 });
 }
 export function startSession(o){
   stopClock();
+  loadAI();
   SES = Object.assign({}, o, { queue:o.items.slice(), total:o.items.length, done:0, first:0, combo:0, maxCombo:0, wrong:{}, cleanKeys:[], phase:'answer', maxHearts:o.hearts, usedHint:false });
   if (o.timeLimit){ SES.deadline = Date.now() + o.timeLimit * 1000; CLOCK = setInterval(tick, 250); }
   go('quiz'); renderItem();
@@ -47,11 +55,12 @@ function tick(){
   $('#q-hearts').innerHTML = heartsHtml();
   if (Date.now() >= SES.deadline){ stopClock(); SES.timeout = true; failScreen(); }
 }
+function sessionCount(){ const c = $('#q-body .session-context span:last-child'); if (c) c.textContent = SES.done + ' de ' + SES.total + ' concluídas'; }
 function setBtn(txt, dis){ const b = $('#q-btn'); b.textContent = txt; b.disabled = !!dis; }
 function bentoQuiz(mood){ const w = $('#q-bento'); if (w) w.innerHTML = bento(mood); }
 export function renderItem(){
   const it = SES.queue[0], x = it.x, body = $('#q-body'), foot = $('#q-foot');
-  SES.phase = 'answer'; foot.className = 'foot';
+  SES.phase = 'answer'; foot.className = 'foot'; body.classList.remove('locked'); SES.undo = null;
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
   body.innerHTML = '';
@@ -63,19 +72,39 @@ export function renderItem(){
   const startedHint = S.st.hints; SES.itemHintStart = startedHint;
   R = render(x, mountEl, () => { if (SES.phase === 'answer') $('#q-btn').disabled = !R.ready(); }, () => { if (SES.phase === 'answer') resolve(true); });
   if (SES.noHints) mountEl.querySelectorAll('.hintrow').forEach(h => h.remove());
+  else if (!STRICT.includes(SES.kind)) theoryButton(it, mountEl);
   if (S.st.hints > startedHint) SES.usedHint = true;
   setBtn(R.auto ? 'Forme todos os pares' : 'Verificar', true);
   window.scrollTo(0, 0);
 }
+/* Consultar a teoria antes de responder conta como dica: a questão sai do "de primeira". */
+function theoryButton(it, mountEl){
+  const l = EX[it.key] && EX[it.key].l; if (!l || !l.learn.length) return;
+  let row = $('.hintrow', mountEl); if (!row){ row = el('div', 'hintrow'); mountEl.appendChild(row); }
+  const b = el('button', 'link hintbtn theorybtn', '📖 Ver na teoria');
+  b.onclick = () => { if (!b.dataset.used){ b.dataset.used = '1'; S.st.hints++; } sfx.tap(); openTheory(l, it.x); };
+  row.insertBefore(b, $('.hintbox', row));
+}
 export function primary(){
   if (!SES) return;
-  if (SES.phase === 'answer'){ if (!R.ready()) return; const ok = R.check(); resolve(ok); }
+  if (SES.phase === 'answer'){
+    if (!R.ready()) return;
+    let ok = R.check(), ai = null;
+    /* as regras recusaram uma resposta escrita: o corretor inteligente dá uma segunda olhada */
+    if (R.ai && (!ok || R.canVeto)){
+      ai = R.ai();
+      if (ai && ai.verdict === 'right') ok = true;
+      else if (ai && ai.veto) ok = false;          /* papéis trocados ou oposto do assunto */
+    }
+    resolve(ok, ai);
+  }
   else nextItem();
 }
-function resolve(ok){
+function resolve(ok, ai){
   if (SES.timeout) return;
   const it = SES.queue[0], x = it.x;
-  SES.phase = 'feedback'; R.reveal(ok);
+  SES.phase = 'feedback'; R.reveal(ok, ai);
+  $('#q-body').classList.add('locked');
   const itemHint = S.st.hints > SES.itemHintStart;
   if (itemHint) SES.usedHint = true;
   if (ok){
@@ -88,6 +117,7 @@ function resolve(ok){
     if (x.t === 'wr' || x.t === 'ew' || x.t === 'expl'){ S.st.writes++; mprog('writes', 1); }
     SES.queue.shift(); sfx.ok(); bentoQuiz('happy');
   } else {
+    SES.undo = { wasWrong:!!SES.wrong[it.key], mistakes:S.mistakes[it.key], combo:SES.combo, hearts:SES.hearts, hint:itemHint };
     if (SES.maxHearts < 99) SES.hearts--;
     SES.wrong[it.key] = true;
     S.mistakes[it.key] = (S.mistakes[it.key] || 0) + 1;
@@ -95,6 +125,7 @@ function resolve(ok){
   }
   $('#q-hearts').innerHTML = heartsHtml();
   $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
+  sessionCount();
   const foot = $('#q-foot'); foot.className = 'foot ' + (ok ? 'ok' : 'bad');
   let title = ok ? '✅ ' + pick(PRAISE) : '❌ Não foi dessa vez';
   if (ok && [3, 5, 8, 12].indexOf(SES.combo) >= 0) title = '🔥 ' + SES.combo + ' seguidas! ' + pick(PRAISE);
@@ -102,10 +133,63 @@ function resolve(ok){
   const reaction = bentoReaction(ok, SES.combo, SES.hearts, SES.maxHearts);
   $('#fb-bento').innerHTML = bento(reaction.mood, undefined, 'react');
   $('#fb-say').textContent = reaction.say;
-  $('#fb-b').innerHTML = (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '');
+  const aiNote = ai && ai.note ? '<div class="ai-note' + (ai.verdict === 'unsure' ? ' unsure' : '') + '"><span aria-hidden="true">🤖</span> ' + ai.note + '</div>' : '';
+  /* no erro: o que significa a opção escolhida e o caminho de volta para a teoria */
+  const why = !ok && R.whyNot ? R.whyNot() : null, lesson = EX[it.key] && EX[it.key].l;
+  const def = why ? (/^[A-ZÀ-Ú][a-zà-ú]/.test(why.def) ? why.def[0].toLowerCase() + why.def.slice(1) : why.def) : '';
+  const whyNote = why ? '<div class="why-not"><span aria-hidden="true">🔎</span> Você escolheu <b>' + why.name + '</b>: ' + def + '</div>' : '';
+  const links = !ok ? (lesson && lesson.learn.length ? '<button class="link fb-link" id="fb-theory">📖 Rever na teoria</button>' : '') +
+    (canContest(x) ? '<button class="link fb-link contest" id="fb-contest">' + (ai && ai.verdict === 'unsure' ? 'A IA acha que pode estar certa: contar como certa' : 'Minha resposta estava certa') + '</button>' : '') : '';
+  $('#fb-b').innerHTML = aiNote + (ok ? '' : '<div class="fb-ans">Resposta: ' + answerText(x) + '</div>') + x.e + whyNote + (!ok && SES.hearts > 0 ? '<div class="small muted" style="margin-top:6px">Esta questão volta no final.</div>' : '') +
+    (links ? '<div class="fb-links">' + links + '</div>' : '');
+  const contest = $('#fb-contest'); if (contest) contest.onclick = acceptMine;
+  const theory = $('#fb-theory'); if (theory) theory.onclick = () => { sfx.tap(); openTheory(lesson, x); };
   setBtn('Continuar', false);
   save();
 }
+/* Respostas escritas podem ser contestadas: o corretor automático pode não reconhecer
+   um jeito diferente de dizer a mesma coisa. Nos testes (final, selos, desafios) não. */
+const STRICT = ['final', 'unlock', 'jump', 'checkpoint', 'challenge'];
+function canContest(x){ return ['wr', 'ew', 'expl'].includes(x.t) && !STRICT.includes(SES.kind) && !!R.learn && !!SES.undo; }
+function acceptMine(){
+  const u = SES.undo; if (!u || SES.phase !== 'feedback') return;
+  SES.undo = null;
+  const it = SES.queue.pop(), x = it.x;
+  SES.hearts = u.hearts;
+  if (u.wasWrong) SES.wrong[it.key] = true; else delete SES.wrong[it.key];
+  if (u.mistakes) S.mistakes[it.key] = u.mistakes; else delete S.mistakes[it.key];
+  SES.done++;
+  if (!u.wasWrong && !u.hint){ SES.first++; SES.cleanKeys.push(it.key); }
+  SES.combo = u.combo + 1; SES.maxCombo = Math.max(SES.maxCombo, SES.combo); mprog('combo', SES.combo);
+  if (x.t === 'ew'){ S.st.entries++; mprog('entries', 1); }
+  S.st.writes++; mprog('writes', 1);
+  R.learn();
+  sfx.ok(); bentoQuiz('happy');
+  $('#q-hearts').innerHTML = heartsHtml();
+  $('#q-bar').style.width = (SES.done / SES.total * 100) + '%';
+  sessionCount();
+  $('#q-foot').className = 'foot ok';
+  $('#fb-t').innerHTML = '✅ Combinado: contei como certa';
+  $('#fb-bento').innerHTML = bento('happy', undefined, 'react');
+  $('#fb-say').textContent = x.t === 'expl' ? 'Boa! Compare com a resposta-modelo.' : 'Anotado! Na próxima, aceito essa resposta.';
+  $('#fb-b').innerHTML = '<div class="fb-ans">Resposta de referência: ' + answerText(x) + '</div>' + x.e;
+  save();
+}
+/* Lista das questões erradas na sessão, para revisar com calma no fim. */
+function questionText(x){
+  const t = (x.t === 'tsal' ? 'Qual é o saldo da conta ' + x.name + '?' : String(x.q || 'Ligue os pares.')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  return t.length > 140 ? t.slice(0, 137) + '…' : t;
+}
+function mistakesHtml(s){
+  const keys = new Set(), list = s.items.filter(it => s.wrong[it.key] && !keys.has(it.key) && keys.add(it.key));
+  if (!list.length) return '';
+  return '<section class="mistake-review"><h2>Revise o que você errou</h2><p class="small muted">Tente lembrar a resposta antes de abrir cada questão.</p>' +
+    list.slice(0, 8).map(it => '<details class="mr"><summary><span class="mr-q">' + questionText(it.x) + '</span><span class="mr-open" aria-hidden="true">Ver</span></summary>' +
+      '<div class="mr-body"><div class="mr-a">✓ ' + reviewAnswer(it.x) + '</div><div class="mr-e">' + it.x.e + '</div>' +
+      (EX[it.key] && EX[it.key].l.learn.length ? '<button class="link fb-link" data-act="mrth" data-k="' + it.key + '">📖 Ver na teoria</button>' : '') + '</div></details>').join('') +
+    (list.length > 8 ? '<p class="small muted">E mais ' + (list.length - 8) + '. Todas entram na sua revisão.</p>' : '') + '</section>';
+}
+const mistakeTheory = b => { const e = EX[b.dataset.k]; if (e) openTheory(e.l, e.x); };
 /* O Bento reage a cada resposta: comemora sequências e consola nos erros. */
 const SAY_OK = ['Você está pegando o jeito!', 'Tô gostando de ver!', 'Tronco por tronco, a represa sobe!', 'Esse você dominou!', 'Sabia que você ia acertar!'];
 const SAY_COMBO = ['Que sequência! Você está voando!', 'Ninguém te segura hoje!', 'Isso é que é ritmo!'];
@@ -127,7 +211,8 @@ export function quitQuiz(){
     { quit: () => { const s = SES; stopClock(); SES = null; exitTo(s); } });
 }
 function exitTo(s){
-  if (s && s.course && ['lesson','final','checkpoint','challenge','jump','unlock'].includes(s.kind)) openPath(s.course);
+  if (s && s.kind === 'unlock' && !S.unlocked[s.course.id]){ renderHome(); go('home'); }
+  else if (s && s.course && ['lesson','final','checkpoint','challenge','jump','unlock'].includes(s.kind)) openPath(s.course);
   else { renderPractice(); go('practice'); }
 }
 function finish(){
@@ -218,25 +303,26 @@ function finish(){
     '<div class="rstats"><div class="rs"><div class="rl">XP</div><div class="rv">+' + xp + '</div></div>' +
     '<div class="rs"><div class="rl">Bolotas</div><div class="rv">+' + coins + '' + ACORN + '</div></div>' +
     '<div class="rs"><div class="rl">Sequência</div><div class="rv">🔥' + curStreak() + '</div></div></div>' +
-    caseHtml + extra.map(e => '<div class="note"><span class="ne">' + e[0] + '</span><span>' + e[1] + '</span></div>').join('') +
+    extra.map(e => '<div class="note"><span class="ne">' + e[0] + '</span><span>' + e[1] + '</span></div>').join('') + caseHtml + mistakesHtml(s) +
     (cloudAvailable() && !isLoggedIn() ? '<button class="save-banner" data-act="save"><span aria-hidden="true">☁️</span><span><b>Não perca este progresso</b><small>Crie uma conta grátis para guardar suas lições.</small></span><span class="sb-go" aria-hidden="true">›</span></button>' : '') + '</div>' +
     '<div class="foot"><button class="btn primary" data-act="go">Continuar</button></div>';
   SES = null;
-  bindActs(scr, { save: async () => (await import('./account.js')).openAccount('signup'), go: () => exitTo(s), theory: b => { const l=COURSES.flatMap(c=>c.lessons).find(l=>l.id===b.dataset.id); if(l) startLearn(l,'review'); } });
+  bindActs(scr, { save: async () => (await import('./account.js')).openAccount('signup'), go: () => exitTo(s), theory: b => { const l=COURSES.flatMap(c=>c.lessons).find(l=>l.id===b.dataset.id); if(l) startLearn(l,'review'); }, mrth: mistakeTheory });
   go('result');
   if (s.kind !== 'checkpoint' || s.first / s.total >= 0.8){ sfx.win(); confetti(); }
 }
 export function failScreen(){
   stopClock();
   const s = SES, scr = $('#s-fail');
-  scr.innerHTML = '<div class="center"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento('sad') + '</div></div><h1>' + (s.timeout ? 'O tempo acabou' : 'Acabaram os corações') + '</h1><p class="sub">' + (s.kind === 'challenge' ? 'Desafios são para testar seus limites. Revise as lições da etapa e tente de novo: não há limite de tentativas.' : 'Errar faz parte do aprendizado. As questões que você errou foram para a sua revisão. Revise a teoria e tente de novo.') + '</p></div>' +
+  scr.innerHTML = '<div class="center"><div class="bento-wrap md"><div class="bento-wrap-inner">' + bento('sad') + '</div></div><h1>' + (s.timeout ? 'O tempo acabou' : 'Acabaram os corações') + '</h1><p class="sub">' + (s.kind === 'challenge' ? 'Desafios são para testar seus limites. Revise as lições da etapa e tente de novo: não há limite de tentativas.' : 'Errar faz parte do aprendizado. As questões que você errou foram para a sua revisão. Revise a teoria e tente de novo.') + '</p>' + mistakesHtml(s) + '</div>' +
     '<div class="foot">' + (s.kind === 'lesson' ? '<button class="btn primary" data-act="th">Rever a teoria</button>' : '') +
     '<button class="btn ' + (s.kind === 'lesson' ? 'ghost' : 'primary') + '" data-act="re">Tentar de novo</button><button class="btn ghost" data-act="out">Sair</button></div>';
   SES = null;
   bindActs(scr, {
     th: () => startLearn(s.lesson, 'lesson'),
     re: () => { if (s.kind === 'lesson') startLessonQuiz(s.lesson); else if (s.kind === 'final') startFinal(s.course); else startSession(Object.assign({}, s, { items:shuffle(s.items), hearts:s.maxHearts })); },
-    out: () => exitTo(s)
+    out: () => exitTo(s),
+    mrth: mistakeTheory
   });
   go('fail'); sfx.bad();
 }

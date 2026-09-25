@@ -140,3 +140,28 @@ test('teste para pular sorteia de todas as lições, sem repetir',async()=>{
   for(let i=0;i<40;i++){ const items=sampleItems(lessons,10); assert.equal(items.length,10); assert.equal(new Set(items.map(x=>x.key)).size,10); items.forEach(it=>seen.add(it.key.split('#')[0])); }
   assert.ok(seen.size>=lessons.length-1, 'lições cobertas: '+seen.size);
 });
+
+test('teoria e prática ligadas: cada exercício aponta uma parte da própria lição',async()=>{
+  const { theoryCard, quickChecks } = await import('../src/engine/teach.js');
+  for(const [key,{x,l}] of Object.entries(EX)){
+    const i=theoryCard(l,x);
+    assert.ok(Number.isInteger(i)&&i>=0&&i<l.learn.length, key);
+  }
+  const fjm3=COURSES.flatMap(c=>c.lessons).find(l=>l.id==='fjm3');
+  assert.equal(fjm3.learn[theoryCard(fjm3,EX['fjm3#2'].x)].h,'Despesas compartilhadas');
+  let total=0;
+  for(const c of COURSES) for(const l of c.lessons){
+    const qc=quickChecks(l);
+    for(const [i,ch] of Object.entries(qc)){
+      total++;
+      assert.ok(!l.learn[i].check, l.id+': parte com pergunta própria');
+      assert.equal(EX[ch.key].l,l);
+      assert.ok(ch.a>=0&&ch.a<ch.o.length);
+      assert.doesNotMatch(ch.q,/anterior|mesmos dados/i);
+      const x=EX[ch.key].x;
+      if(x.t==='tf') assert.equal(ch.o[ch.a], x.a?'Verdadeiro':'Falso');
+      else assert.equal(ch.o[ch.a], x.o[x.a]);
+    }
+  }
+  assert.ok(total>=200, 'perguntas rápidas: '+total);
+});

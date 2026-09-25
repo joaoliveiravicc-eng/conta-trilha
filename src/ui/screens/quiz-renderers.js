@@ -5,10 +5,20 @@ import { shuffle } from '../../engine/random.js';
 import { sfx, buzz } from '../components/sound.js';
 import { S } from '../../engine/state.js';
 import { fmt, parseBR } from '../../engine/format.js';
-import { bestMatch, acctMatch, evalExpl } from '../../engine/exercises/grading.js';
+import { bestMatchInfo, acctMatchInfo, acceptNote, evalExpl } from '../../engine/exercises/grading.js';
+/* O corretor inteligente fica num arquivo à parte, carregado quando uma sessão começa. */
+let AI = null;
+export function loadAI(){ return AI ? Promise.resolve(AI) : import('../../engine/ai/review.js').then(m => (AI = m)).catch(() => null); }
 import { T } from '../../content/render-helpers.js';
 
 /* ---------- util de render ---------- */
+/* Respostas que a pessoa marcou como certas ("Minha resposta estava certa"): passam a valer para aquela questão. */
+const learned = id => (id && S.accepted && S.accepted[id]) || [];
+function learn(id, value){
+  const v = String(value || '').trim(); if (!id || !v) return;
+  S.accepted = S.accepted || {}; const list = S.accepted[id] = S.accepted[id] || [];
+  if (!list.includes(v)) list.push(v);
+}
 export function hintRow(x, onUsed){
   if (!x.h) return null;
   const wrap = el('div', 'hintrow');
@@ -29,6 +39,14 @@ export function optionsUI(labels, order, wrapCls, on){
   return { wrap:wrap, btns:btns, get sel(){ return sel; }, lock(){ locked = true; btns.forEach(b => b.disabled = true); } };
 }
 
+/* O que significa a opção errada que a pessoa escolheu (termo do glossário ou da base de
+   conhecimento), para ela perceber a diferença. Só com o corretor inteligente carregado. */
+function meaningOf(chosen, right, context){
+  if (!AI || !AI.meaning) return null;
+  for (const c of chosen){ if (!c || right.includes(c)) continue; const m = AI.meaning(c, context); if (m) return m; }
+  return null;
+}
+
 /* ---------- renderizadores por tipo ---------- */
 export function rMC(x, m, on){
   m.appendChild(el('div', 'qq', x.q));
@@ -38,6 +56,7 @@ export function rMC(x, m, on){
   return {
     ready: () => ui.sel !== null, check: () => ui.sel === x.a,
     reveal(){ ui.lock(); ui.btns.forEach((b, k) => { const oi = order[k]; if (oi === x.a) b.classList.add('right'); else if (oi === ui.sel) b.classList.add('wrong'); }); },
+    whyNot: () => meaningOf([x.o[ui.sel]], [x.o[x.a]], x.q),
     key(n){ if (ui.btns[n - 1]) ui.btns[n - 1].click(); }
   };
 }
@@ -76,7 +95,8 @@ export function rFill(x, m, on){
   return {
     ready: () => filled.every(v => v !== null),
     check: () => filled.every((ci, i) => opts[ci] === x.a[i]),
-    reveal(){ locked = true; chips.forEach(c => c.disabled = true); blanks.forEach((b, i) => b.classList.add(opts[filled[i]] === x.a[i] ? 'right' : 'wrong')); }
+    reveal(){ locked = true; chips.forEach(c => c.disabled = true); blanks.forEach((b, i) => b.classList.add(opts[filled[i]] === x.a[i] ? 'right' : 'wrong')); },
+    whyNot: () => meaningOf(filled.map((ci, i) => opts[ci] === x.a[i] ? null : opts[ci]), x.a, x.q)
   };
 }
 export function rMatch(x, m, on, auto){
@@ -187,14 +207,22 @@ export function rWR(x, m, on){
   m.appendChild(w);
   const hr = hintRow(x); if (hr) m.appendChild(hr);
   setTimeout(() => { try { inp.focus({ preventScroll:true }); } catch (e) {} }, 60);
-  let lvl = 0;
+  let info = { lvl:0 };
   return {
     ready: () => inp.value.trim() !== '',
-    check(){ lvl = bestMatch(inp.value, x.a); return lvl >= 1; },
+    check(){
+      info = bestMatchInfo(inp.value, x.a.concat(learned(x.key)));
+      /* "resposta dentro de uma frase" não vale para chute ("fixo ou variável") nem oposto */
+      if (info.lvl && info.how === 'phrase' && AI && AI.phraseProblem(x, inp.value, learned(x.key))) info = { lvl:0 };
+      return info.lvl >= 1;
+    },
+    ai: () => AI && AI.review(x, inp.value, learned(x.key)),
     reveal(ok){
       inp.disabled = true; w.classList.add(ok ? 'right' : 'wrong');
-      if (ok && lvl === 1) mount(m, el('div', 'small muted', 'Aceitei com uma pequena diferença de digitação. ✓'));
-    }
+      const note = ok && acceptNote(info); if (note) mount(m, el('div', 'small muted accept-note', note));
+    },
+    typed: () => inp.value.trim(),
+    learn(){ learn(x.key, inp.value); w.classList.remove('wrong'); w.classList.add('right'); }
   };
 }
 export function rEW(x, m, on){
@@ -211,14 +239,24 @@ export function rEW(x, m, on){
   const hr = hintRow(x); if (hr) m.appendChild(hr);
   setTimeout(() => { try { rd.inp.focus({ preventScroll:true }); } catch (e) {} }, 60);
   let dOk = false, cOk = false;
+  const side = (inp, canon, id) => {
+    const info = acctMatchInfo(inp.value, canon);
+    return info.lvl >= 1 || learned(id).some(v => acctMatchInfo(inp.value, v).lvl >= 1);
+  };
   return {
     ready: () => rd.inp.value.trim() !== '' && rc.inp.value.trim() !== '',
-    check(){ dOk = acctMatch(rd.inp.value, x.d[0]) >= 1; cOk = acctMatch(rc.inp.value, x.c[0]) >= 1; return dOk && cOk; },
+    check(){ dOk = side(rd.inp, x.d[0], x.key && x.key + '#d'); cOk = side(rc.inp, x.c[0], x.key && x.key + '#c'); return dOk && cOk; },
     reveal(){
       rd.inp.disabled = true; rc.inp.disabled = true;
       rd.box.classList.add(dOk ? 'right' : 'wrong'); rc.box.classList.add(cOk ? 'right' : 'wrong');
       if (!dOk) rd.wrap.appendChild(el('div', 'ewans', 'Resposta: ' + x.d[0]));
       if (!cOk) rc.wrap.appendChild(el('div', 'ewans', 'Resposta: ' + x.c[0]));
+    },
+    typed: () => rd.inp.value.trim() + ' / ' + rc.inp.value.trim(),
+    learn(){
+      if (!dOk && x.key) learn(x.key + '#d', rd.inp.value);
+      if (!cOk && x.key) learn(x.key + '#c', rc.inp.value);
+      [rd.box, rc.box].forEach(b => { b.classList.remove('wrong'); b.classList.add('right'); });
     }
   };
 }
@@ -260,15 +298,24 @@ export function rExpl(x, m, on){
   return {
     ready: () => ta.value.trim().length >= 8,
     check(){ res = evalExpl(ta.value, x); return res.ok; },
-    reveal(){
+    ai: () => AI && AI.review(x, ta.value),
+    canVeto: true,
+    reveal(ok, ai){
       ta.disabled = true;
-      const list = x.k.map((g, i) => '<li class="' + (res.hits[i] ? 'hit' : 'miss') + '">' + (res.hits[i] ? '✅' : '⭕') + ' ' + g[0] + '</li>').join('');
-      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">Ideias identificadas (' + res.n + ' de ' + x.k.length + '):</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
-    }
+      /* ideias que a IA reconheceu com outras palavras também aparecem marcadas */
+      const hits = (ai && ai.hits) || res.hits, n = hits.filter(Boolean).length, vetoed = !!(ai && ai.veto);
+      /* barrada pela IA: as palavras certas aparecem, mas a relação entre elas está errada */
+      const mark = i => vetoed && hits[i] ? '⚠️' : hits[i] ? '✅' : '⭕';
+      const list = x.k.map((g, i) => '<li class="' + (hits[i] && !vetoed ? 'hit' : 'miss') + '">' + mark(i) + ' ' + g[0] + '</li>').join('');
+      const head = vetoed ? 'As ideias aparecem (' + n + ' de ' + x.k.length + '), mas a relação entre elas está errada:' : 'Ideias identificadas (' + n + ' de ' + x.k.length + '):';
+      mount(m, el('div', 'explcheck', '<div class="small muted" style="margin:10px 0 4px">' + head + '</div><ul class="explist">' + list + '</ul><div class="modelans"><b>Uma resposta-modelo:</b> ' + x.model + '</div>'));
+    },
+    typed: () => ta.value.trim(),
+    learn(){}
   };
 }
 export function rTsal(x, m, on){
-  m.appendChild(el('div', 'qq', 'Qual é o saldo desta conta?'));
+  m.appendChild(el('div', 'qq', 'Qual é o saldo desta conta: devedor ou credor, e de quanto?'));
   mount(m, el('div', '', T(x.name, x.deb.map(v => 'R$ ' + fmt(v)), x.cred.map(v => 'R$ ' + fmt(v)))));
   const seg = el('div', 'seg tsseg'); let side = null;
   const bd = el('button', '', 'Devedor'), bc = el('button', '', 'Credor');
@@ -303,6 +350,13 @@ export function answerText(x){
     case 'class': return 'Veja as correções destacadas acima.';
     default: return '';
   }
+}
+
+/* Resposta completa para a revisão no fim da sessão (sem depender da tela da questão). */
+export function reviewAnswer(x){
+  if (x.t === 'class') return x.items.map(it => it[0] + ': ' + x.cats[it[1]]).join(' · ');
+  if (x.t === 'match') return x.pairs.map(p => p[0] + ' → ' + p[1]).join(' · ');
+  return answerText(x);
 }
 
 /* ---------- índice de exercícios (para revisão/prática) já criado em EX na Parte A ---------- */
