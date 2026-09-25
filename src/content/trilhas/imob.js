@@ -48,7 +48,7 @@ export default {
    ],
    ex:[
     {t:"num", q:"Veículo com custo de R$ 70.000 e depreciação acumulada de R$ 42.000. Qual o valor contábil líquido?", a:28000, u:"R$", e:"70.000 − 42.000 = 28.000."},
-    {t:"num", q:"O veículo do exercício anterior (valor contábil de R$ 28.000) é vendido por R$ 33.000. Qual o resultado da venda?", a:5000, u:"R$", e:"33.000 − 28.000 = 5.000 de ganho.", h:"Ganho = valor de venda − valor contábil líquido."},
+    {t:"num", q:"Um veículo com valor contábil líquido de R$ 28.000 é vendido por R$ 33.000. Qual o resultado da venda?", a:5000, u:"R$", e:"33.000 − 28.000 = 5.000 de ganho.", h:"Ganho = valor de venda − valor contábil líquido."},
     {t:"num", q:"Uma máquina com valor contábil de R$ 20.000 é vendida por R$ 14.000. Qual o resultado? (use o sinal de menos para perda)", a:-6000, u:"R$", e:"14.000 − 20.000 = −6.000, uma perda."},
     {t:"mc", q:"Ao baixar um bem vendido, o que sai do Ativo Imobilizado?", o:["O custo do bem e toda a depreciação acumulada dele","Só o custo do bem","Só a depreciação acumulada","Nada sai, só se registra o dinheiro recebido"], a:0, e:"As duas contas relacionadas ao bem são baixadas juntas."},
     {t:"tf", q:"Se o valor de venda for maior que o valor contábil líquido, a empresa reconhece um ganho.", a:true, e:"Vendeu por mais do que o bem valia nos livros: ganho na venda."}

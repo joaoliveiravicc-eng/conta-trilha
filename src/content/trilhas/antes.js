@@ -61,7 +61,7 @@ export default [
  ],
  ex:[
   nu("Juros simples: R$ 2.000 a 3% ao mês por 4 meses. Quanto de juros?",240,"2.000 × 0,03 × 4 = 240.","R$","J = C × i × t."),
-  nu("Qual o montante do exemplo anterior (capital + juros)?",2240,"2.000 + 240 = 2.240.","R$"),
+  nu("Juros simples: R$ 2.000 a 3% ao mês por 4 meses. Qual o montante (capital + juros)?",2240,"Os juros são 2.000 × 3% × 4 = 240. Montante: 2.000 + 240 = 2.240.","R$"),
   nu("Juros compostos: R$ 1.000 a 10% ao mês por 2 meses. Qual o montante?",1210,"1.000 × 1,1 = 1.100; 1.100 × 1,1 = 1.210.","R$","Aplique 10% duas vezes seguidas."),
   mc("Em juros compostos, a taxa incide sobre:",["*O montante acumulado até o período anterior","Sempre o capital inicial","Apenas os juros","Nada"],"É o famoso juros sobre juros."),
   tf("Com mesma taxa e prazo maior que um período, juros compostos rendem mais que juros simples.",true,"Os juros também passam a render juros."),

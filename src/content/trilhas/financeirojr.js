@@ -153,14 +153,14 @@ export default [
  learn:[
   {h:"Por que o Excel aparece em quase toda vaga", b:`<p>O analista júnior passa boa parte do dia organizando, cruzando e conferindo dados em planilhas: extratos, títulos em aberto, relatórios do sistema.</p>` + tbl(['Função','Para que serve'],[['SOMA','Somar uma coluna ou um intervalo'],['SE','Mostrar um resultado conforme uma condição'],['SOMASE','Somar só o que atende a uma condição'],['PROCV / PROCX','Buscar um dado em outra tabela'],['Tabela dinâmica','Resumir uma lista grande por cliente, mês ou categoria']])},
   {h:"PROCV na prática", b:`<p>Você tem a lista de títulos com o código do cliente e quer trazer o nome de cada um de outra tabela:</p>` + eq('=PROCV(A2; Clientes!A:B; 2; 0)') + box('exemplo','Busca o código em A2 na primeira coluna da tabela de clientes e devolve a 2ª coluna (o nome). O 0 exige correspondência exata.')},
-  {h:"SOMASE e SE", b:eq('=SOMASE(C:C; "Vencido"; D:D)') + `<p>Soma os valores da coluna D das linhas em que a coluna C diz “Vencido”.</p>` + eq('=SE(E2<HOJE(); "Vencido"; "A vencer")') + box('dica','Numa entrevista, explicar quando usar cada ferramenta costuma valer mais do que decorar a sintaxe.')}
+  {h:"SOMASE e SE", b:eq('=SOMASE(C:C; "Vencido"; D:D)') + `<p>Soma os valores da coluna D das linhas em que a coluna C diz “Vencido”.</p>` + eq('=SE(E2&lt;HOJE(); "Vencido"; "A vencer")') + box('dica','Numa entrevista, explicar quando usar cada ferramenta costuma valer mais do que decorar a sintaxe.')}
  ],
  ex:[
   mc("Para trazer o nome do cliente a partir do código dele, de outra tabela, você usa:",["*PROCV","SOMA","MÉDIA"],"PROCV (ou PROCX) busca um dado em outra tabela."),
   mc("Para somar só os títulos com status “Vencido”, a função mais direta é:",["*SOMASE","PROCV","CONT.NÚM"],"SOMASE soma apenas o que atende à condição."),
   tf("Uma tabela dinâmica resume uma lista grande de lançamentos por cliente, mês ou categoria sem precisar escrever fórmulas.",true,"É uma das ferramentas mais usadas em relatórios financeiros."),
   fl("No PROCV, o último argumento {0} exige correspondência exata.",["1","2"],"Com 0 (ou FALSO), o Excel só traz o valor se encontrar exatamente o código."),
-  mc("A fórmula =SE(E2<HOJE(); \"Vencido\"; \"A vencer\") mostra “Vencido” quando:",["*A data em E2 já passou","A data em E2 é futura","E2 está vazia"],"Se o vencimento é anterior a hoje, o título está vencido.")
+  mc("A fórmula =SE(E2&lt;HOJE(); \"Vencido\"; \"A vencer\") mostra “Vencido” quando:",["*A data em E2 já passou","A data em E2 é futura","E2 está vazia"],"Se o vencimento é anterior a hoje, o título está vencido.")
  ]},
 {id:"fj13", title:"Tributos e retenções na rotina", icon:"🧮",
  learn:[

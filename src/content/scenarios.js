@@ -1,7 +1,7 @@
 /* Unidades "Na prática": um negócio fictício vive um mês. Cada lição é um episódio com
    fatos do dia; os exercícios (lançamentos, saldos, resultado e balancete do fechamento)
    são montados a partir dos fatos, e os totais são conferidos ao carregar o módulo. */
-import { box, tbl, ol } from './render-helpers.js';
+import { box, tbl, ol, facts } from './render-helpers.js';
 import { mc, tf, en, cl, nu } from '../engine/exercises/factories.js';
 
 const GROUP = {
@@ -49,6 +49,7 @@ function episodeLesson(sc, ep, n, bal){
   const cashAfter = cash(bal), res = result(ep.tx);
   const accts = [...new Set(ep.tx.flatMap(t => t.d.concat(t.c).map(x => x[0])))];
   const others = sc.pool.filter(a => !accts.includes(a));
+  const scene = '<span class="qctx">' + sc.name + ' · ' + ep.title + '. Fatos do episódio:</span>' + facts(ep.tx.map(t => t.f));
   const ex = [];
   ep.tx.forEach((t, i) => {
     if (sc.entries === false){ return; }
@@ -60,13 +61,13 @@ function episodeLesson(sc, ep, n, bal){
   if (sc.entries === false){
     const cats = ['Receita', 'Despesa', 'Nenhum dos dois'];
     const kind = t => t.c.some(([a]) => groupOf(a) === 'REC') ? 0 : t.d.some(([a]) => groupOf(a) === 'DESP') ? 1 : 2;
-    ex.push(cl('Esse fato é receita, despesa ou nenhum dos dois?', cats, ep.tx.map(t => t.short + ':' + kind(t)).join('|'), 'Receita e despesa mudam o resultado. Trocar bens, pagar ou receber dívidas, ou receber adiantado, não.'));
+    ex.push(cl(sc.name + ' · ' + ep.title + ': cada fato é receita, despesa ou nenhum dos dois?', cats, ep.tx.map(t => t.short + ':' + kind(t)).join('|'), 'Receita e despesa mudam o resultado. Trocar bens, pagar ou receber dívidas, ou receber adiantado, não.'));
     ep.tx.forEach(t => { if (t.why) ex.push(t.why); });
   }
-  if (cashAfter !== cashBefore) ex.push(nu('Caixa + Bancos começaram este episódio com ' + money(cashBefore) + '. Quanto têm ao final?', cashAfter, 'Some as entradas e subtraia as saídas de dinheiro: ' + money(cashBefore) + ' → ' + money(cashAfter) + '. Transferências entre caixa e banco não mudam o total.', 'R$'));
-  if (res > 0) ex.push(nu('Qual foi o resultado deste episódio (receitas − custos e despesas)?', res, 'Só receitas, custos e despesas entram na conta do resultado: lucro de ' + money(res) + '.', 'R$'));
-  else if (res < 0) ex.push(nu('Este episódio terminou com prejuízo. De quanto?', -res, 'Receitas menos custos e despesas deram ' + money(res) + ': prejuízo de ' + money(-res) + '. Compras de bens e empréstimos não entram no resultado.', 'R$'));
-  ex.push(...classifyEx(accts, 'Classifique as contas que apareceram:'));
+  if (cashAfter !== cashBefore) ex.push(nu(scene + 'Caixa + Bancos começam o episódio com ' + money(cashBefore) + '. Quanto têm ao final?', cashAfter, 'Some as entradas e subtraia as saídas de dinheiro: ' + money(cashBefore) + ' → ' + money(cashAfter) + '. Transferências entre caixa e banco não mudam o total.', 'R$'));
+  if (res > 0) ex.push(nu(scene + 'Qual foi o resultado do episódio (receitas − custos e despesas)?', res, 'Só receitas, custos e despesas entram na conta do resultado: lucro de ' + money(res) + '.', 'R$'));
+  else if (res < 0) ex.push(nu(scene + 'O episódio terminou com prejuízo. De quanto?', -res, 'Receitas menos custos e despesas deram ' + money(res) + ': prejuízo de ' + money(-res) + '. Compras de bens e empréstimos não entram no resultado.', 'R$'));
+  ex.push(...classifyEx(accts, 'Classifique estas contas de ' + sc.name + ' (' + ep.title + '):'));
   if (ep.extra) ex.push(...ep.extra);
   return {
     id: sc.id + n, title: ep.title, icon: ep.icon || sc.icon,
@@ -90,20 +91,22 @@ function closingLesson(sc, n, bal, lessons){
   const debitRows = rows.filter(([a]) => DEBIT_NATURE.has(groupOf(a))), creditRows = rows.filter(([a]) => !DEBIT_NATURE.has(groupOf(a)));
   const td = debitRows.reduce((s, [, v]) => s + v, 0), tc = creditRows.reduce((s, [, v]) => s + v, 0);
   check(sc, td === tc, 'balancete não fecha');
+  const balancete = tbl(['Conta', 'Devedor', 'Credor'], debitRows.map(([a, v]) => [a, money(v), '']).concat(creditRows.map(([a, v]) => [a, '', money(v)]), [['<b>Total</b>', '<b>' + money(td) + '</b>', '<b>' + money(tc) + '</b>']]));
+  const cena = '<span class="qctx">Balancete do fim do mês de ' + sc.name + ':</span>' + balancete;
   const ex = [
-    nu('Qual o total de receitas do mês?', receitas, 'Somando as contas de receita no balancete: ' + money(receitas) + '.', 'R$'),
-    total >= 0 ? nu('Qual foi o lucro do mês?', total, 'Receitas menos custos e despesas (e redutoras da receita): lucro de ' + money(total) + '.', 'R$')
-               : nu('O mês fechou com prejuízo. De quanto?', -total, 'Receitas menos custos e despesas: prejuízo de ' + money(-total) + '.', 'R$'),
-    nu('Qual o total do Ativo no fim do mês? (desconte as contas redutoras)', ativo, 'Bens e direitos somados, menos a depreciação acumulada: ' + money(ativo) + '.', 'R$'),
-    nu('Qual o patrimônio líquido no fim do mês (capital + resultado do mês)?', pl, 'Capital de ' + money(byGroup('PL')) + (total >= 0 ? ' + lucro de ' : ' − prejuízo de ') + money(Math.abs(total)) + ' = ' + money(pl) + '.', 'R$'),
-    tf('No balancete do fim do mês, o total de saldos devedores é igual ao total de saldos credores.', true, 'Os dois lados somam ' + money(td) + ': todos os lançamentos seguiram as partidas dobradas.'),
+    nu(cena + 'Qual o total de receitas do mês?', receitas, 'Somando as contas de receita no balancete: ' + money(receitas) + '.', 'R$'),
+    total >= 0 ? nu(cena + 'Qual foi o lucro do mês?', total, 'Receitas menos custos e despesas (e redutoras da receita): lucro de ' + money(total) + '.', 'R$')
+               : nu(cena + 'O mês fechou com prejuízo. De quanto?', -total, 'Receitas menos custos e despesas: prejuízo de ' + money(-total) + '.', 'R$'),
+    nu(cena + 'Qual o total do Ativo no fim do mês? (desconte as contas redutoras)', ativo, 'Bens e direitos somados, menos a depreciação acumulada: ' + money(ativo) + '.', 'R$'),
+    nu(cena + 'Qual o patrimônio líquido no fim do mês (capital + resultado do mês)?', pl, 'Capital de ' + money(byGroup('PL')) + (total >= 0 ? ' + lucro de ' : ' − prejuízo de ') + money(Math.abs(total)) + ' = ' + money(pl) + '.', 'R$'),
+    tf('No balancete de ' + sc.name + ', os saldos devedores somam ' + money(td) + '. Se todos os lançamentos seguiram as partidas dobradas, os saldos credores também somam ' + money(td) + '.', true, 'Os dois lados somam ' + money(td) + ': nas partidas dobradas todo débito tem um crédito de igual valor.'),
     mc('Ativo de ' + money(ativo) + ' e passivo de ' + money(passivo) + '. Quanto é o patrimônio líquido?', [ '*' + money(pl), money(ativo + passivo), money(passivo), money(ativo) ].filter((o, i, a) => a.indexOf(o) === i), 'PL = Ativo − Passivo = ' + money(pl) + '.')
   ];
   if (sc.closingExtra) ex.push(...sc.closingExtra);
   return {
     id: sc.id + n, title: 'Fechando o mês', icon: '📒',
     learn: [
-      { h: 'O balancete de ' + sc.name, b: '<p>Depois de todos os episódios, estes são os saldos das contas:</p>' + tbl(['Conta', 'Devedor', 'Credor'], debitRows.map(([a, v]) => [a, money(v), '']).concat(creditRows.map(([a, v]) => [a, '', money(v)]), [['<b>Total</b>', '<b>' + money(td) + '</b>', '<b>' + money(tc) + '</b>']])) },
+      { h: 'O balancete de ' + sc.name, b: '<p>Depois de todos os episódios, estes são os saldos das contas:</p>' + balancete },
       { h: 'Do balancete às demonstrações', b: tbl(['Item', 'Valor'], [['Receitas do mês', money(receitas)], ['Resultado do mês', (total >= 0 ? 'Lucro de ' : 'Prejuízo de ') + money(Math.abs(total))], ['Ativo total', money(ativo)], ['Passivo', money(passivo)], ['Patrimônio líquido', money(pl)]]) + box('regra', 'Ativo = Passivo + Patrimônio líquido: ' + money(ativo) + ' = ' + money(passivo) + ' + ' + money(pl) + '.') }
     ],
     ex
@@ -252,7 +255,7 @@ export const OFICINA = {
       tx('Pagou os R$ 3.000 do fornecedor de peças.', [['Fornecedores',3000]], [['Bancos',3000]], 'Baixa da dívida.')
     ]}
   ],
-  closingExtra:[ tf('O adiantamento da retífica aparece como passivo no fim do mês.', true, 'O serviço ainda não foi feito: a oficina deve ao cliente.') ]
+  closingExtra:[ tf('Um adiantamento recebido de um cliente por um serviço que ainda não foi feito aparece como passivo no fim do mês.', true, 'O serviço ainda não foi feito: a empresa deve o serviço ao cliente.') ]
 };
 
 export const SCENARIO_LESSONS = [PADARIA, LOJA, SALAO, OFICINA].flatMap(buildScenario);

@@ -25,7 +25,7 @@ export default [
    ], ex:[
     mc('Mercadoria adquirida para revenda entra, em geral, em:',['*Estoques','Máquinas e equipamentos','Receita','Empréstimos'],'A finalidade é revenda.'),
     mc('Qual campo ajuda a analisar a área que consumiu o recurso, sem substituir a conta contábil?',['CNPJ do banco','*Centro de custo','Número do navegador'],'Centro de custo é uma dimensão gerencial.'),
-    nu('Máquina de R$ 5.000 mais frete necessário de R$ 200. Qual o custo inicial no exemplo?',5200,'5.000 + 200 = 5.200.','R$'),
+    nu('Máquina de R$ 5.000 mais frete necessário de R$ 200. Qual o custo inicial da máquina?',5200,'5.000 + 200 = 5.200.','R$'),
     tf('Uma regra automática correta hoje pode precisar de revisão quando contrato ou operação mudar.',true,'Mudanças de operação e cadastro podem alterar a classificação.'),
     od('Antes de ativar uma regra para todos os documentos:',['Definir o fato e a conta','Testar um caso comum','Testar uma exceção','Aprovar e documentar a regra'],'Uma exceção testada evita repetir o mesmo erro em escala.')
    ]},

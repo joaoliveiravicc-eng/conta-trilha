@@ -53,5 +53,7 @@ export function planilha(rows, opts){
   return h + '</tbody></table></div>';
 }
 export function download(href, label){ return '<a class="dl-btn" href="' + href + '" download>⬇ ' + label + '</a>'; }
+/* Fatos de um caso dentro do enunciado de uma pergunta: a questão fica completa mesmo fora da lição. */
+export function facts(items){ return '<ul class="facts">' + items.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ul>'; }
 export function ul(items){ return '<ul class="blist">' + items.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ul>'; }
 export function ol(items){ return '<ol class="steps">' + items.map(function(i){ return '<li>' + i + '</li>'; }).join('') + '</ol>'; }

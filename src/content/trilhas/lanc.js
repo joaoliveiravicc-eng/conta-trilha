@@ -132,7 +132,7 @@ export default {
    ],
    ex:[
     {t:"entry", q:"Cliente devolve mercadoria vendida por R$ 500, que havia sido paga em dinheiro. Registre o cancelamento da receita.", accts:["Devolução de vendas","Caixa","Estoques","CMV"], d:["Devolução de vendas"], c:["Caixa"], e:"A devolução reduz a receita (débito) e o dinheiro volta ao cliente (crédito em Caixa)."},
-    {t:"entry", q:"O estoque devolvido no exemplo anterior custava R$ 320. Registre o retorno ao estoque.", accts:["Estoques","CMV","Devolução de vendas","Caixa"], d:["Estoques"], c:["CMV"], e:"O produto volta ao estoque (débito) e o custo que havia ido para o resultado é estornado (crédito em CMV)."},
+    {t:"entry", q:"Um cliente devolveu uma mercadoria que custava R$ 320. Registre o retorno da mercadoria ao estoque.", accts:["Estoques","CMV","Devolução de vendas","Caixa"], d:["Estoques"], c:["CMV"], e:"O produto volta ao estoque (débito) e o custo que havia ido para o resultado é estornado (crédito em CMV)."},
     {t:"tf", q:"Na devolução de vendas, o estoque também retorna para a empresa.", a:true, e:"Diferente do abatimento, na devolução a mercadoria volta fisicamente."},
     {t:"tf", q:"No abatimento sobre vendas, o cliente devolve a mercadoria e recebe o dinheiro de volta.", a:false, e:"No abatimento o cliente fica com a mercadoria; só o preço é reduzido."},
     {t:"mc", q:"Na DRE, devoluções e abatimentos aparecem:", o:["Deduzindo a receita bruta","Somados ao CMV","Como despesa financeira","Não aparecem na DRE"], a:0, e:"Junto com os impostos sobre vendas, formam as deduções da receita bruta."},

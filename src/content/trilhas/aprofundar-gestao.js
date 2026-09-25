@@ -78,7 +78,7 @@ export default [
  ],
  ex:[
   nu("Vendas de 2.000 unidades e ponto de equilíbrio em 1.500. Margem de segurança em unidades?",500,"2.000 − 1.500 = 500.","unidades"),
-  nu("No caso anterior, qual a margem de segurança em %?",25,"500 ÷ 2.000 = 25%.","%"),
+  nu("Vendas de 2.000 unidades e ponto de equilíbrio em 1.500. Qual a margem de segurança em %?",25,"(2.000 − 1.500) ÷ 2.000 = 500 ÷ 2.000 = 25%.","%"),
   tf("Quanto maior a margem de segurança, mais as vendas podem cair antes do prejuízo.",true,"É a folga da operação."),
   nu("Custos fixos de R$ 30.000 e margem de contribuição de R$ 20 por unidade. Qual o ponto de equilíbrio em unidades?",1500,"30.000 ÷ 20 = 1.500.","unidades"),
   mc("Vendas abaixo do ponto de equilíbrio significam:",["*Prejuízo","Lucro","Resultado zero sempre","Margem de segurança positiva"],"Não cobrem os custos fixos."),
@@ -145,7 +145,7 @@ export default [
  ],
  ex:[
   nu("Alíquota fictícia de 10%, não cumulativa. A loja comprou por 2.000 e vendeu por 3.000. Quanto recolhe?",100,"Débito 300 − crédito 200 = 100.","R$"),
-  nu("Mesmo caso, mas cumulativo (sem crédito). Quanto a loja recolhe?",300,"10% de 3.000, sem abater nada.","R$"),
+  nu("Alíquota fictícia de 10%, cumulativa (sem crédito). A loja comprou por 2.000 e vendeu por 3.000. Quanto recolhe?",300,"10% de 3.000, sem abater nada.","R$"),
   tf("Na não cumulatividade, o tributo pago na compra pode virar crédito para abater o da venda.",true,"Essa é a ideia."),
   mc("O efeito 'cascata' é típico de tributos:",["*Cumulativos","Não cumulativos","Sobre o lucro","Sobre a propriedade"],"Imposto sobre imposto em cada etapa."),
   nu("Alíquota fictícia 20%, não cumulativa. Compra de 500, venda de 800. Valor a recolher?",60,"160 − 100 = 60.","R$"),

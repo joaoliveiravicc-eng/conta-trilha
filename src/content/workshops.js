@@ -98,7 +98,7 @@ export const WORKSHOPS = [
    ], ex:[
     nu('Equipamento de R$ 30.000, frete de R$ 2.000 e instalação necessária de R$ 4.000. Sem tributos recuperáveis, qual o custo?',36000,'30.000 + 2.000 + 4.000 = 36.000.','R$'),
     nu('Custo de R$ 36.000, residual de R$ 6.000 e vida útil de 5 anos. Qual a depreciação linear anual?',6000,'(36.000 − 6.000) ÷ 5 = 6.000.','R$'),
-    nu('No equipamento anterior, qual o valor contábil após 2 anos completos, sem outras perdas?',24000,'36.000 − 2 × 6.000 = 24.000.','R$'),
+    nu('Equipamento com custo de R$ 36.000, residual de R$ 6.000 e vida útil de 5 anos (R$ 6.000 de depreciação por ano). Qual o valor contábil após 2 anos completos, sem outras perdas?',24000,'36.000 − 2 × 6.000 = 24.000.','R$'),
     tf('Depreciação mensal exige que saia dinheiro do banco todo mês.',false,'É alocação do custo do ativo; não é um novo pagamento.'),
     mc('A depreciação normalmente começa quando o bem:',['É apenas encomendado','*Está disponível para uso','É totalmente pago'],'A disponibilidade para uso é a referência, não a quitação.'),
     mc('Valor contábil de R$ 24.000 significa que o bem pode ser vendido exatamente por esse valor?',['Sim','*Não'],'Valor contábil e preço de venda são medidas diferentes.')
@@ -116,7 +116,7 @@ export const WORKSHOPS = [
     nu('O controle indica 55 unidades e a contagem confirmada tem 52. Qual a falta?',3,'55 − 52 = 3.','unidades'),
     nu('Uma falta confirmada de 3 unidades com custo de R$ 18 cada gera perda de quanto?',54,'3 × 18 = 54. Use custo, não preço de venda.','R$'),
     nu('Custo de R$ 80, venda estimada de R$ 75 e gastos necessários de venda de R$ 5. Qual o VRL?',70,'75 − 5 = 70. Como é menor que o custo, a redução é de R$ 10.','R$'),
-    mc('Qual valor deve orientar o estoque do exemplo anterior?',['R$ 80','*R$ 70','R$ 75'],'O menor entre custo (80) e VRL (70).'),
+    mc('Estoque com custo de R$ 80, preço de venda estimado de R$ 75 e gastos necessários de venda de R$ 5. Qual valor deve orientar o estoque?',['R$ 80','*R$ 70','R$ 75'],'O VRL é 75 − 5 = 70. Vale o menor entre o custo (80) e o VRL (70).'),
     tf('Qualquer diferença entre contagem e controle comprova furto.',false,'É preciso investigar contagem, corte e documentos antes de concluir a causa.')
    ]},
   {courseId:'demo', id:'oficina-demo', title:'Leia os números e faça perguntas', icon:'📊',
@@ -210,7 +210,7 @@ export const WORKSHOPS = [
    ], ex:[
     mc('O que deve ser verificado antes de cadastrar um contrato como arrendamento?',['Somente se foi assinado digitalmente','*Se existe ativo identificado e a empresa controla o uso no período','Se a parcela cabe no orçamento mensal'],'A análise considera ativo identificado, controle do uso e contraprestação no período.'),
     nu('Qual é o valor presente de 24 parcelas de R$ 1.000 no fim do mês, a 1% ao mês?',21243.39,'1.000 × [1 − (1,01)^−24] ÷ 0,01 ≈ 21.243,39.','R$'),
-    mc('No reconhecimento inicial deste caso, o lançamento geral é:',['D Banco / C Receita','*D Ativo de direito de uso / C Passivo de arrendamento','D Despesa de juros / C Banco'],'O ativo e o passivo são reconhecidos no início, conforme o modelo geral e as hipóteses do caso.'),
+    mc('No reconhecimento inicial de um arrendamento, no modelo geral do arrendatário, o lançamento é:',['D Banco / C Receita','*D Ativo de direito de uso / C Passivo de arrendamento','D Despesa de juros / C Banco'],'O ativo e o passivo são reconhecidos no início, conforme o modelo geral e as hipóteses do caso.'),
     nu('Sobre passivo de R$ 21.243,39, com juros mensais de 1%, quanto são os juros aproximados do primeiro mês?',212.43,'21.243,39 × 0,01 ≈ 212,43.','R$'),
     nu('Na parcela de R$ 1.000, se R$ 212,43 são juros, quanto reduz o passivo?',787.57,'1.000 − 212,43 = 787,57.','R$'),
     nu('Ativo de direito de uso de R$ 21.243,39, depreciado linearmente por 24 meses no exemplo. Qual a depreciação mensal?',885.14,'21.243,39 ÷ 24 ≈ 885,14.','R$'),

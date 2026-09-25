@@ -52,7 +52,7 @@ export default {
  lanc2:[
   ew("Salários do mês a pagar, R$ 8.000.","Despesa com salários","Salários a pagar","Despesa (D) e obrigação (C)."),
   ew("Pagamento dos salários pelo banco, R$ 8.000.","Salários a pagar","Bancos","Quita a obrigação (D) e sai do banco (C)."),
-  wr("Qual o percentual do FGTS sobre a remuneração? (só o número)",["8","8%","oito"],"8%.")
+  wr("Qual o percentual do FGTS sobre a remuneração? (só o número)",["8","8%","oito"],"O FGTS é um depósito mensal de 8% da remuneração, feito pela empresa em conta do trabalhador, além do salário.")
  ],
  lanc3:[
   ew("Empréstimo de R$ 15.000 recebido no banco.","Bancos","Empréstimos a pagar","Bancos (D) e Empréstimos a pagar (C)."),
@@ -95,7 +95,7 @@ export default {
  ],
  cust2:[
   nu("Custo fixo de R$ 12.000, variável de R$ 4 por unidade e produção de 3.000 unidades. Qual o custo total?",24000,"12.000 + 4 × 3.000 = 24.000.","R$"),
-  nu("No mesmo exemplo, qual o custo total por unidade?",8,"24.000 ÷ 3.000 = 8.","R$"),
+  nu("Custo fixo de R$ 12.000 e variável de R$ 4 por unidade, com produção de 3.000 unidades. Qual o custo total por unidade?",8,"24.000 ÷ 3.000 = 8.","R$"),
   wr("Custo que não muda com o volume produzido se chama custo...",["fixo"],"Fixo.")
  ],
  cust3:[

@@ -248,3 +248,7 @@ table.xl td.mk{outline:2px solid var(--green);outline-offset:-2px;background:var
   #s-learn .lbody{padding-left:12px;padding-right:12px;}
   .theory-card,.quick-check{padding:16px 12px;}
 }
+/* contexto embutido nas perguntas (fatos e balancete): a questão vale sozinha em revisões e desafios */
+.qq .qctx{display:block;font-family:var(--fb);font-weight:600;font-size:.85rem;letter-spacing:0;line-height:1.4;color:var(--muted);margin:0 0 6px;}
+.qq .facts{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px;font-family:var(--fb);font-weight:400;font-size:.9rem;letter-spacing:0;line-height:1.4;}
+.qq .facts li{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:8px 10px;}

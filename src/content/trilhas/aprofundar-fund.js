@@ -12,7 +12,7 @@ export default [
  ex:[
   nu("Preço de R$ 100 com aumento de 10% e depois outro de 10%. Novo preço?",121,"100 × 1,1 × 1,1 = 121.","R$"),
   nu("Produto de R$ 500 com 20% de desconto e mais 10% sobre o novo valor. Preço final?",360,"500 × 0,8 = 400; 400 × 0,9 = 360.","R$"),
-  nu("No caso anterior, qual foi o desconto total em %?",28,"360 é 72% de 500: desconto de 28%.","%"),
+  nu("Um produto de R$ 500 recebe 20% de desconto e mais 10% sobre o novo valor, e passa a custar R$ 360. Qual foi o desconto total em %?",28,"360 é 72% de 500: desconto de 28%.","%"),
   tf("Um aumento de 50% seguido de um desconto de 50% devolve o preço original.",false,"100 × 1,5 × 0,5 = 75."),
   mc("Dois aumentos seguidos de 20% equivalem a um aumento de:",["*44%","40%","20%","22%"],"1,2 × 1,2 = 1,44."),
   fl("Percentuais aplicados em sequência se {multiplicam}, não se somam.",["somam","anulam"],"Cada um incide sobre o resultado anterior.")
@@ -174,7 +174,7 @@ export default [
  ex:[
   en("Vendeu R$ 2.000 no cartão; a taxa é de R$ 60; o valor líquido será recebido depois.","Cartões a receber+Despesa com taxas de cartão","Receita de vendas",["Bancos","Clientes"],"Receita pelo valor cheio; taxa é despesa."),
   nu("Venda de R$ 5.000 no cartão com taxa de 3%. Quanto a empresa receberá?",4850,"5.000 − 150 = 4.850.","R$"),
-  nu("No caso anterior, qual a despesa com a taxa?",150,"3% de 5.000 = 150.","R$"),
+  nu("Venda de R$ 5.000 no cartão com taxa de 3%. Qual a despesa com a taxa?",150,"3% de 5.000 = 150.","R$"),
   tf("A receita de uma venda no cartão deve ser registrada já descontada a taxa.",false,"Receita pelo valor da venda; taxa como despesa."),
   en("A administradora depositou R$ 4.850 referentes a vendas já registradas.","Bancos","Cartões a receber",["Receita de vendas","Despesa com taxas de cartão"],"Só troca o direito pelo dinheiro."),
   mc("Cartões a receber é uma conta de:",["*Ativo","Passivo","Receita","Despesa"],"É um direito a receber da administradora.")

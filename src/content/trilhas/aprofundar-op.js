@@ -158,7 +158,7 @@ export default [
  ],
  ex:[
   nu("Custo R$ 2.000; preço de venda estimado R$ 1.800; gastos para vender R$ 100. Qual o VRL?",1700,"1.800 − 100 = 1.700.","R$"),
-  nu("No caso anterior (custo 2.000 e VRL 1.700), qual a perda a reconhecer?",300,"2.000 − 1.700 = 300.","R$"),
+  nu("Estoque com custo de 2.000 e VRL de 1.700. Qual a perda a reconhecer?",300,"2.000 − 1.700 = 300.","R$"),
   nu("Custo R$ 500; preço de venda R$ 800; gastos para vender R$ 60. Por quanto o estoque fica mensurado?",500,"VRL = 740, maior que o custo: fica pelo custo, 500.","R$"),
   tf("Se o VRL for maior que o custo, o estoque é aumentado até o VRL.",false,"Fica pelo custo: o menor dos dois."),
   mc("Mercadorias fora de moda tiveram o preço de venda reduzido abaixo do custo. O que fazer?",["*Reduzir o estoque ao VRL e reconhecer a perda","Manter pelo custo","Aumentar o estoque","Lançar como receita"],"Não se mantém ativo acima do que ele deve render."),

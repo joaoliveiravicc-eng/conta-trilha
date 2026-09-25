@@ -64,8 +64,8 @@ export default [
   {h:"Conferir antes de guardar", b:ol(['Conferir a nota com o pedido.','Contar e ver a validade.','Registrar a entrada no estoque.']) + box('dica','Divergência entre nota e mercadoria se resolve antes de assinar o recebimento.')}
  ],
  ex:[
-  nu("Qual o custo total dos dois lotes de arroz?",4400,"2.000 + 2.400 = 4.400.","R$"),
-  nu("Qual o custo médio por pacote depois dos dois lotes?",22,"4.400 ÷ 200 = 22.","R$"),
+  nu("O supermercado recebeu dois lotes de arroz: 100 pacotes a R$ 20 e 100 pacotes a R$ 24. Qual o custo total dos dois lotes?",4400,"2.000 + 2.400 = 4.400.","R$"),
+  nu("Dois lotes de arroz: 100 pacotes a R$ 20 e 100 pacotes a R$ 24. Qual o custo médio por pacote depois dos dois lotes?",22,"4.400 ÷ 200 = 22.","R$"),
   en("Recebeu o lote de quinta, R$ 2.400, a prazo.","Estoques","Fornecedores",["CMV","Caixa"],"Entra estoque, surge a dívida."),
   tf("A nota dizia 100 pacotes, mas chegaram 95. O certo é assinar e resolver depois.",false,"Divergência se resolve no recebimento."),
   od("Ordene o recebimento:",["Conferir a nota com o pedido","Contar e ver a validade","Registrar a entrada no estoque","Guardar nas prateleiras"],"Conferir antes de registrar."),
@@ -78,7 +78,7 @@ export default [
  ],
  ex:[
   nu("Lotes: 100 a R$ 20 e 100 a R$ 24. Venda de 150 pelo PEPS. CMV?",3200,"100 × 20 + 50 × 24 = 3.200.","R$"),
-  nu("No caso anterior, qual o valor do estoque final?",1200,"50 × 24 = 1.200.","R$"),
+  nu("Lotes de 100 pacotes a R$ 20 e 100 a R$ 24. Vendeu 150 pelo PEPS. Qual o valor do estoque final?",1200,"Sobram 50 pacotes do lote mais novo: 50 × 24 = 1.200.","R$"),
   nu("Venda de 80 pacotes pelo PEPS. CMV?",1600,"80 × 20 = 1.600.","R$"),
   tf("No PEPS, com preços subindo, o estoque final fica avaliado pelos custos mais recentes.",true,"Os mais antigos saem primeiro."),
   en("Baixa do custo das 150 unidades vendidas, R$ 3.200.","CMV","Estoques",["Receita de vendas","Fornecedores"],"Custo do que foi vendido."),
@@ -172,12 +172,12 @@ export default [
   {h:"O que chama atenção", b:ul(['O estoque é o maior ativo: remédio parado é dinheiro parado.','Os convênios pagam depois: surgem valores a receber.','Ativo total = Passivo + PL.'])}
  ],
  ex:[
-  nu("Qual o ativo circulante da farmácia (caixa, clientes e estoques)?",250000,"40 + 60 + 150 = 250 mil.","R$"),
-  nu("Qual o passivo circulante (fornecedores e salários a pagar)?",110000,"90 + 20 = 110 mil.","R$"),
-  nu("Qual a liquidez corrente? (use vírgula)",2.27,"250 ÷ 110 ≈ 2,27.","",undefined,0.01),
-  nu("Qual a liquidez seca (sem os estoques)? (use vírgula)",0.91,"(250 − 150) ÷ 110 ≈ 0,91.","",undefined,0.01),
-  tf("A farmácia depende de vender o estoque para cobrir as dívidas de curto prazo.",true,"A liquidez seca é menor que 1."),
-  mc("Qual item é o maior ativo da farmácia?",["*Estoques","Caixa","Clientes","Imobilizado"],"R$ 150 mil em remédios e produtos.")
+  nu("Farmácia Vida: caixa e bancos R$ 40.000, clientes R$ 60.000, estoques R$ 150.000 e imobilizado líquido R$ 110.000. Qual o ativo circulante (caixa, clientes e estoques)?",250000,"40 + 60 + 150 = 250 mil.","R$"),
+  nu("Farmácia Vida: fornecedores R$ 90.000, salários a pagar R$ 20.000 e empréstimos de longo prazo R$ 100.000. Qual o passivo circulante?",110000,"Passivo circulante = fornecedores + salários a pagar: 90 + 20 = 110 mil. O empréstimo é de longo prazo, fora do circulante.","R$"),
+  nu("Farmácia Vida: ativo circulante de R$ 250.000 e passivo circulante de R$ 110.000. Qual a liquidez corrente? (use vírgula)",2.27,"250 ÷ 110 ≈ 2,27.","",undefined,0.01),
+  nu("Farmácia Vida: ativo circulante de R$ 250.000, dos quais R$ 150.000 são estoques, e passivo circulante de R$ 110.000. Qual a liquidez seca (sem os estoques)? (use vírgula)",0.91,"(250 − 150) ÷ 110 ≈ 0,91.","",undefined,0.01),
+  tf("Uma farmácia com liquidez seca de 0,91 depende de vender o estoque para cobrir as dívidas de curto prazo.",true,"Sem contar os estoques, o ativo circulante não cobre o passivo circulante: a liquidez seca é menor que 1."),
+  mc("Na Farmácia Vida, o caixa e os bancos somam R$ 40 mil, os clientes R$ 60 mil, os estoques R$ 150 mil e o imobilizado R$ 110 mil. Qual é o maior ativo?",["*Estoques","Caixa e bancos","Clientes","Imobilizado"],"R$ 150 mil em remédios e produtos: dinheiro parado nas prateleiras.")
  ]},
 {id:"farmacia2", title:"A DRE da farmácia", icon:"📈",
  learn:[
@@ -186,11 +186,11 @@ export default [
  ],
  ex:[
   nu("Receita líquida 1.200.000 e CMV 840.000. Lucro bruto?",360000,"1.200.000 − 840.000 = 360.000.","R$"),
-  nu("Margem bruta em %?",30,"360 ÷ 1.200 = 30%.","%"),
-  nu("Margem líquida em % (lucro líquido de 60.000)?",5,"60 ÷ 1.200 = 5%.","%"),
+  nu("Receita líquida de R$ 1.200.000 e lucro bruto de R$ 360.000. Qual a margem bruta em %?",30,"360 ÷ 1.200 = 30%.","%"),
+  nu("Receita líquida de R$ 1.200.000 e lucro líquido de R$ 60.000. Qual a margem líquida em %?",5,"60 ÷ 1.200 = 5%.","%"),
   nu("ROE com lucro de 60.000 e PL de 150.000, em %?",40,"60 ÷ 150 = 40%.","%"),
   tf("Uma margem líquida de 5% significa R$ 5 de lucro a cada R$ 100 vendidos.",true,"Leitura da margem."),
-  mc("Se a farmácia negociar desconto com fornecedores, qual margem melhora primeiro?",["*A margem bruta","Nenhuma","Só a liquidez","O capital social"],"CMV menor, lucro bruto maior.")
+  mc("Se uma farmácia negociar desconto com os fornecedores, qual margem melhora primeiro?",["*A margem bruta","Nenhuma","Só a liquidez","O capital social"],"CMV menor, lucro bruto maior.")
  ]},
 {id:"farmacia3", title:"Prazos: estoque, convênio e fornecedor", icon:"⏱️",
  learn:[

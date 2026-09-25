@@ -314,7 +314,7 @@ export default [
   mc("Qual fórmula traz o realizado do centro em A2, pronta para copiar para baixo?",["*=SOMASES(Notas!$D:$D;Notas!$C:$C;A2)","=SOMASES(Notas!$C:$C;Notas!$D:$D;A2)","=SOMASE(Notas!$D:$D;A2;Notas!$C:$C)","=PROCV(A2;Notas!$C:$D;2;FALSO)"],"Somar a coluna de valor com o critério do centro de custo. PROCV traria só a primeira nota."),
   nu("Qual o realizado de Marketing?" + notas(),5000,"Só a nota 1004, de R$ 5.000."),
   nu("Qual a variação de Marketing (realizado − previsto de R$ 4.000)?",1000,"5.000 − 4.000 = 1.000.","R$"),
-  nu("Qual a variação percentual de Marketing?",25,"1.000 ÷ 4.000 = 25%.","%"),
+  nu("Marketing: previsto de R$ 4.000 e realizado de R$ 5.000. Qual a variação percentual?",25,"1.000 ÷ 4.000 = 25%.","%"),
   mc("Marketing gastou 25% acima do previsto. Para uma despesa, isso é:",["*Desfavorável","Favorável","Neutro","Impossível"],"Gastou mais do que o planejado."),
   mc("O total previsto (R$ 12.000) é igual ao realizado (R$ 12.000). Conclusão:",["*Não basta: Marketing estourou e outros centros ficaram abaixo","Está tudo sob controle","O orçamento está errado","Não precisa de análise"],"Variações opostas se compensam no total. Analise por centro."),
   tf("A variação percentual se calcula dividindo a variação pelo previsto.",true,"% = (Realizado − Previsto) ÷ Previsto.")
