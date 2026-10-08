@@ -1,0 +1,99 @@
+ContaTrilha Live — demonstração local (banco: 127.0.0.1:54329/contalive_demo)
+Todos os nomes abaixo são fictícios. Conteúdo NÃO homologado por professor (D8).
+
+━━ 1. Professora cria a atividade (formativa) a partir de 6 questões do catálogo
+  Q1 [mc] Qual é o principal objetivo da Contabilidade?   (origem base1#0)
+  Q2 [mc] Qual destes é um fato que a Contabilidade registra?   (origem base1#5)
+  Q3 [tf] Um banco que analisa um pedido de empréstimo é um usuário da informação contábil.   (origem base1#1)
+  Q4 [tf] Pagar a conta de luz da casa do dono com o dinheiro da empresa está correto, afinal o d…   (origem base1#3)
+  Q5 [num] Uma empresa tem Ativo de R$ 100.000 e Passivo de R$ 40.000. Qual é o Patrimônio Líquido?   (origem base3#0)
+  Q6 [num] Ativo de R$ 250.000 e PL de R$ 90.000. Quanto é o Passivo?   (origem base3#2)
+
+━━ 2. Abre a sala
+  código da sala: VHDT8R   (expira em 2 h, até 30 participantes)
+
+━━ 3. Cinco alunos entram pelo código (um digita em minúsculas, com hífen)
+  Ana    → entrou  | materiais: calculadora, rascunho
+  Bruno  → entrou  | materiais: calculadora, rascunho
+  Carla  → entrou  | materiais: calculadora, rascunho
+  Diego  → entrou  | materiais: calculadora, rascunho
+  Elisa  → entrou  | materiais: calculadora, rascunho
+  Intruso com código errado → {"ok":false,"error":"invalid_code"}
+
+━━ 4. Lobby: o que a professora vê e o que um aluno vê
+  professora: Ana, Bruno, Carla, Diego, Elisa (5)
+  Ana: só vê a contagem (5) e o status "lobby"; enunciados ainda ocultos: true
+
+━━ 5.1 Questão 1 (mc): professora abre por 60 s
+  respostas recebidas: 5/5
+
+━━ 5.2 Questão 2 (mc): professora abre por 60 s
+  respostas recebidas: 5/5
+
+━━    Teste de privacidade durante a questão 2 (Bruno tenta espiar)
+  Bruno lê live_answers             → 0 linhas
+  Bruno lê live_activity_item_keys  → 0 linhas
+  Bruno lê live_activity_items      → 0 linhas
+  Bruno lê live_rooms               → 0 linhas
+  snapshot de Bruno: questões ainda não reveladas que expõem gabarito/explicação: nenhuma; campo "tol" presente: false; resposta de outro aluno visível: false
+  (a Q1 já foi revelada pela professora, então o gabarito dela aparece, como deve: true)
+  Bruno tenta inserir resposta direto na tabela → permission denied for table live_answers
+  Intruso (fora da sala) pede o snapshot → not_member
+
+━━ 5.3 Questão 3 (tf): professora abre por 60 s
+  Diego: enviou, perdeu a confirmação, reenviou → accepted / replayed (uma só resposta gravada)
+  respostas recebidas: 4/5
+  Elisa tenta responder a Q3 depois do fechamento → item_not_open
+
+━━ 5.4 Questão 4 (tf): professora abre por 60 s
+  respostas recebidas: 5/5
+
+━━ 5.5 Questão 5 (num): professora abre por 60 s
+  respostas recebidas: 5/5
+
+━━ 5.6 Questão 6 (num): professora abre por 60 s
+  respostas recebidas: 5/5
+
+━━ 6. Reconexão: Diego "abre em outro aparelho" no meio da aula
+  Diego recupera 6 respostas já gravadas e vê o gabarito das questões reveladas (Q1: opção 0).
+
+━━ 7. Resultado da turma (agregado) e quadro por aluno — só a professora vê
+  nota oficial: false  (atividade formativa, sem nota)
+  Q1 mc  respostas 5/5  corretas 4  distribuição {"0":4,"1":1}
+  Q2 mc  respostas 5/5  corretas 4  distribuição {"0":1,"3":4}
+  Q3 tf  respostas 4/5  corretas 3  distribuição {"true":3,"false":1}
+  Q4 tf  respostas 5/5  corretas 5  distribuição {"false":5}
+  Q5 num respostas 5/5  corretas 2  distribuição {}
+  Q6 num respostas 5/5  corretas 3  distribuição {}
+
+  aluno   Q1  Q2  Q3  Q4  Q5  Q6
+  Ana     ✓   ✓   ✓   ✓   ✓   ✓ 
+  Bruno   ✗   ✓   ✗   ✓   ✗   ✗ 
+  Carla   ✓   ✓   ✓   ✓   ✗   ✓ 
+  Diego   ✓   ✓   ✓   ✓   ✗   ✗ 
+  Elisa   ✓   ✗   —   ✓   ✓   ✓ 
+  conferência no banco: 29 respostas gravadas, 21 corretas (nenhuma duplicada)
+
+━━ 8. Auditoria da professora
+  · room_created
+  · room_started
+  · item_opened
+  · item_closed
+  · item_revealed
+  · item_opened
+  · item_closed
+  · item_revealed
+  · item_opened
+  · item_closed
+  · item_revealed
+  · item_opened
+  · item_closed
+  · item_revealed
+  · item_opened
+  · item_closed
+  · item_revealed
+  · item_opened
+  · item_closed
+  · item_revealed
+  · room_closed
+
